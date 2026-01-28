@@ -729,7 +729,7 @@
             load: async () => {
                 const list = document.getElementById('schoolList');
                 list.innerHTML = '';
-                const defaults = ["SMAN 20 Batam", "MTsN 1 Batam", "MIN 1 Batam", "SDN 006 Sei Beduk", "SMP Al-Azhar Batam", "SMAN 3 Batam", "SMK Kartini Batam"];
+                const defaults = ["SMAN 20 Batam", "MTsN 1 Batam", "MIN 1 Batam", "SDN 006 Sei Beduk", "SMP Al-Azhar Batam", "SMAN 3 Batam", "MTsN 2 Batam"];
                 
                 try {
                     const snap = await getDocs(collection(db, "schools"));
@@ -828,4 +828,5 @@
     </script>
 </body>
 </html>
+
 
