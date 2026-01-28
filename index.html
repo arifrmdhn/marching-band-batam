@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PT. SVM - Pusat Marching Band & Drumband Terbaik Batam</title>
+    <title>Jual Alat Marching Band & Drumband Batam - PT. SVM</title>
     
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="PT. Svara Vanguard Management (SVM). Pusat jual alat marching band, drumband sekolah, dan jasa pelatihan profesional di Batam & Kepri. Distributor resmi & bergaransi.">
-    <meta name="keywords" content="alat marching band batam, toko drumband batam, pelatih marching band batam, service alat musik batam, color guard batam">
+    <!-- SEO Meta Tags Lengkap -->
+    <meta name="description" content="Pusat pengadaan alat marching band terlengkap sekota Batam. Distributor resmi alat drumband sekolah, jasa pelatih profesional, dan konveksi kostum juara. Bergaransi & Legalitas PT Lengkap.">
+    <meta name="keywords" content="alat marching band batam, toko drumband batam, jual alat drumband kepri, pelatih marching band batam, service alat musik batam, color guard batam, distributor hts batam, pengadaan alat sekolah batam">
+    <meta name="author" content="PT. Svara Vanguard Management">
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -15,40 +16,71 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- SweetAlert2 (Popup Cantik) -->
+    <!-- SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+
+    <!-- CSS Konfigurasi -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                        heading: ['Oswald', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            blue: '#2563eb', // Blue 600
+                            dark: '#0f172a', // Slate 900
+                            gold: '#ca8a04'  // Yellow 600
+                        }
+                    }
+                }
+            }
+        }
+    </script>
 
     <style>
-        body { font-family: 'Poppins', sans-serif; }
-        .editable-active { border: 2px dashed #2563eb; background-color: #eff6ff; padding: 2px; cursor: text; }
-        .loader { border-top-color: #3498db; -webkit-animation: spinner 1.5s linear infinite; animation: spinner 1.5s linear infinite; }
-        @keyframes spinner { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        /* Animasi & Utilitas */
+        .fade-in { animation: fadeIn 0.5s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         
-        /* Hero Pattern */
+        .active-tab { border-bottom: 3px solid #2563eb; color: #2563eb; background-color: #eff6ff; }
+        
+        /* Admin Editable Styles */
+        .editable-highlight { border: 2px dashed #facc15; position: relative; cursor: text; transition: all 0.2s; background: rgba(250, 204, 21, 0.1); }
+        .editable-highlight:hover::after {
+            content: '✎ Edit Teks'; position: absolute; top: -25px; right: 0; background: #facc15; color: black; font-size: 10px; padding: 2px 8px; border-radius: 4px; font-weight: bold; pointer-events: none; z-index: 50;
+        }
+
+        /* Hero Pattern sesuai request awal */
         .hero-bg {
-            background: linear-gradient(rgba(17, 24, 39, 0.8), rgba(17, 24, 39, 0.9)), url('https://images.unsplash.com/photo-1511192336575-5a79af67a629?q=80&w=2000&auto=format&fit=crop');
+            background: linear-gradient(rgba(17, 24, 39, 0.85), rgba(17, 24, 39, 0.95)), url('https://images.unsplash.com/photo-1511192336575-5a79af67a629?q=80&w=2000&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
         }
-        
-        .gradient-text {
-            background: linear-gradient(to right, #60a5fa, #3b82f6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+
+        /* Floating Admin Toolbar */
+        #adminToolbar { transition: transform 0.3s ease-in-out; }
+        #adminToolbar.hidden-bar { transform: translateY(150%); }
+
+        /* Drag n Drop Zone */
+        .drop-zone { border: 2px dashed #cbd5e1; transition: all 0.3s; }
+        .drop-zone.dragover { border-color: #3b82f6; background-color: #eff6ff; }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800">
+<body class="bg-slate-50 text-slate-800 font-sans overflow-x-hidden">
 
-    <!-- NAVBAR -->
-    <nav class="bg-white/95 backdrop-blur-md shadow-md fixed w-full top-0 z-40 transition-all duration-300">
+    <!-- NAVBAR (Sticky) -->
+    <nav class="bg-white/95 backdrop-blur-md shadow-md fixed w-full top-0 z-50 transition-all">
         <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
-            <div class="flex items-center gap-3">
-                <div class="bg-blue-600 text-white p-2 rounded-lg">
+            <!-- Logo Original -->
+            <div class="flex items-center gap-3 cursor-pointer" onclick="router.navigate('home')">
+                <div class="bg-brand-blue text-white p-2 rounded-lg shadow-lg">
                     <i class="fa-solid fa-music text-xl"></i>
                 </div>
                 <div>
@@ -57,597 +89,742 @@
                 </div>
             </div>
             
-            <div class="hidden md:flex space-x-8 text-sm font-semibold">
-                <a href="#home" class="text-slate-600 hover:text-blue-600 transition">Beranda</a>
-                <a href="#keunggulan" class="text-slate-600 hover:text-blue-600 transition">Kenapa Kami?</a>
-                <a href="#katalog" class="text-slate-600 hover:text-blue-600 transition">Produk</a>
-                <a href="#layanan" class="text-slate-600 hover:text-blue-600 transition">Layanan & Pelatihan</a>
-                <a href="#lokasi" class="text-slate-600 hover:text-blue-600 transition">Lokasi</a>
+            <!-- Menu Desktop -->
+            <div class="hidden md:flex space-x-2">
+                <button onclick="router.navigate('home')" class="nav-btn px-4 py-2 rounded-full text-sm font-semibold text-slate-600 hover:text-brand-blue hover:bg-blue-50 transition">Beranda</button>
+                <button onclick="router.navigate('training')" class="nav-btn px-4 py-2 rounded-full text-sm font-semibold text-slate-600 hover:text-brand-blue hover:bg-blue-50 transition">Layanan & Pelatihan</button>
+                <button onclick="router.navigate('catalog')" class="nav-btn px-4 py-2 rounded-full text-sm font-semibold text-slate-600 hover:text-brand-blue hover:bg-blue-50 transition">Katalog Produk</button>
             </div>
 
-            <div>
-                <button id="btnLogin" onclick="showLoginModal()" class="text-xs font-bold text-slate-400 hover:text-blue-600 border border-slate-200 px-3 py-1 rounded-full transition">
-                    <i class="fa-solid fa-lock mr-1"></i> Admin Area
+            <!-- Login / Admin Status -->
+            <div class="flex items-center gap-2">
+                <button id="waButton" onclick="window.open('https://wa.me/6283812113160', '_blank')" class="hidden md:flex items-center gap-2 bg-green-500 text-white px-4 py-2 rounded-full text-xs font-bold hover:bg-green-600 transition shadow-md">
+                    <i class="fa-brands fa-whatsapp text-lg"></i> Konsultasi
                 </button>
-                <button id="btnLogout" onclick="logout()" class="hidden text-xs font-bold text-red-500 hover:text-red-700 px-3 py-1">
-                    <i class="fa-solid fa-right-from-bracket"></i> Logout
+                <button id="btnLogin" onclick="ui.showLoginModal()" class="text-slate-400 hover:text-brand-blue p-2 transition text-xs border rounded-full px-3" title="Admin Area">
+                    <i class="fa-solid fa-lock mr-1"></i> Admin
                 </button>
+                <div id="adminBadge" class="hidden flex items-center gap-2 bg-red-100 text-red-600 px-3 py-1 rounded-full text-xs font-bold border border-red-200">
+                    <span class="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span> GOD MODE
+                </div>
             </div>
+        </div>
+        
+        <!-- Mobile Menu (Simple) -->
+        <div class="md:hidden flex justify-around border-t py-2 text-xs bg-slate-50 fixed bottom-0 w-full z-40 shadow-[0_-2px_10px_rgba(0,0,0,0.1)]">
+            <button onclick="router.navigate('home')" class="flex flex-col items-center text-slate-600 p-2"><i class="fa-solid fa-home mb-1 text-lg"></i> Beranda</button>
+            <button onclick="router.navigate('training')" class="flex flex-col items-center text-slate-600 p-2"><i class="fa-solid fa-chalkboard-user mb-1 text-lg"></i> Pelatihan</button>
+            <button onclick="router.navigate('catalog')" class="flex flex-col items-center text-slate-600 p-2"><i class="fa-solid fa-store mb-1 text-lg"></i> Katalog</button>
         </div>
     </nav>
 
-    <!-- HERO SECTION (High Impact) -->
-    <section id="home" class="hero-bg min-h-screen flex items-center justify-center text-center pt-20 px-4">
-        <div class="max-w-5xl mx-auto text-white">
-            <div class="inline-flex items-center gap-2 bg-blue-600/20 border border-blue-500/30 text-blue-300 px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest mb-6 backdrop-blur-sm">
-                <i class="fa-solid fa-trophy"></i> Juara Umum MIMAC Malaysia 2024
-            </div>
-            
-            <h2 id="heroTitle" class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight editable-text drop-shadow-lg" data-field="heroTitle">
-                Solusi Lengkap <span class="text-blue-400">Marching Band Sekolah</span> & Pelatihan Juara
-            </h2>
-            
-            <p id="heroDesc" class="text-lg md:text-xl text-slate-300 mb-10 max-w-3xl mx-auto leading-relaxed editable-text" data-field="heroDesc">
-                PT. Svara Vanguard Management hadir untuk sekolah yang lelah dengan alat murahan. Kami menyediakan alat drumband berkualitas, legalitas resmi, hingga pendampingan pelatih berstandar internasional.
-            </p>
-            
-            <!-- Admin Save Button -->
-            <button id="btnSaveHero" onclick="saveHeroConfig()" class="hidden bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-full font-bold shadow-lg mb-6 transform hover:scale-105 transition">
-                <i class="fa-solid fa-save"></i> Simpan Perubahan Teks
-            </button>
+    <!-- CONTENT CONTAINER -->
+    <main id="app" class="pt-16 min-h-screen pb-16 md:pb-0">
+        
+        <!-- PAGE 1: BERANDA (Original Style) -->
+        <div id="page-home" class="page-section fade-in">
+            <!-- Hero Section -->
+            <section class="hero-bg min-h-[90vh] flex items-center justify-center text-center px-4 relative">
+                <div class="max-w-5xl mx-auto text-white z-10">
+                    <div class="inline-flex items-center gap-2 bg-blue-600/30 border border-blue-500/50 text-blue-200 px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest mb-6 backdrop-blur-sm">
+                        <i class="fa-solid fa-trophy text-yellow-400"></i> Juara Umum MIMAC Malaysia 2024
+                    </div>
+                    
+                    <h1 class="editable text-4xl md:text-6xl font-extrabold mb-6 leading-tight drop-shadow-lg" id="home-title">
+                        Solusi Lengkap <span class="text-blue-400">Marching Band Sekolah</span> & Pelatihan Juara
+                    </h1>
+                    
+                    <p class="editable text-lg md:text-xl text-slate-300 mb-10 max-w-3xl mx-auto leading-relaxed" id="home-desc">
+                        PT. Svara Vanguard Management hadir sebagai <strong>Pusat Pengadaan Alat Marching Band Terlengkap Sekota Batam</strong>. Kami menyediakan alat drumband berkualitas, legalitas resmi, hingga pendampingan pelatih berstandar internasional.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row justify-center gap-4">
+                        <button onclick="router.navigate('catalog')" class="bg-blue-600 text-white px-8 py-4 rounded-full font-bold shadow-xl hover:bg-blue-500 hover:shadow-2xl hover:-translate-y-1 transition duration-300 flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-bag-shopping"></i> Lihat Katalog & Harga
+                        </button>
+                        <button onclick="router.navigate('training')" class="bg-white/10 backdrop-blur-sm border border-white/20 text-white px-8 py-4 rounded-full font-bold hover:bg-white/20 transition duration-300">
+                            Info Pelatihan
+                        </button>
+                    </div>
 
-            <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="https://wa.me/6283812113160?text=Halo%20PT.SVM%2C%20saya%20mau%20konsultasi%20pengadaan%20alat%20marching%20band" class="bg-blue-600 text-white px-8 py-4 rounded-full font-bold shadow-xl hover:bg-blue-500 hover:shadow-2xl hover:-translate-y-1 transition duration-300 flex items-center justify-center gap-2">
-                    <i class="fa-brands fa-whatsapp text-xl"></i> Konsultasi Gratis
-                </a>
-                <a href="#katalog" class="bg-white/10 backdrop-blur-sm border border-white/20 text-white px-8 py-4 rounded-full font-bold hover:bg-white/20 transition duration-300">
-                    Lihat Katalog Produk
-                </a>
-            </div>
-
-            <!-- Trust Badge -->
-            <div class="mt-12 pt-8 border-t border-white/10 grid grid-cols-2 md:grid-cols-4 gap-6 text-slate-400 text-sm font-semibold uppercase tracking-wider">
-                <div><i class="fa-solid fa-building-columns mr-2 text-blue-500"></i> Legalitas PT Resmi</div>
-                <div><i class="fa-solid fa-wrench mr-2 text-blue-500"></i> Garansi Service</div>
-                <div><i class="fa-solid fa-truck-fast mr-2 text-blue-500"></i> Pengiriman Cepat</div>
-                <div><i class="fa-solid fa-medal mr-2 text-blue-500"></i> Kualitas Kontes</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- MASALAH & SOLUSI (Psychological Trigger) -->
-    <section id="keunggulan" class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="flex flex-col md:flex-row gap-12 items-center">
-                <div class="md:w-1/2">
-                    <h3 class="text-blue-600 font-bold uppercase tracking-wide text-sm mb-2">Masalah Sekolah</h3>
-                    <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-6">Pernah Mengalami Ini di Sekolah Anda?</h2>
-                    <ul class="space-y-4">
-                        <li class="flex items-start bg-red-50 p-4 rounded-lg border-l-4 border-red-500">
-                            <i class="fa-solid fa-xmark text-red-500 mt-1 mr-3 text-lg"></i>
-                            <div>
-                                <h4 class="font-bold text-red-700">Alat Cepat Rusak</h4>
-                                <p class="text-sm text-red-600/80">Baru beli satu semester, snare drum sudah jebol dan brass berkarat.</p>
-                            </div>
-                        </li>
-                        <li class="flex items-start bg-red-50 p-4 rounded-lg border-l-4 border-red-500">
-                            <i class="fa-solid fa-xmark text-red-500 mt-1 mr-3 text-lg"></i>
-                            <div>
-                                <h4 class="font-bold text-red-700">Harga Mahal, Kualitas Rendah</h4>
-                                <p class="text-sm text-red-600/80">Anggaran sekolah besar, tapi barang yang datang tidak sesuai spesifikasi.</p>
-                            </div>
-                        </li>
-                        <li class="flex items-start bg-red-50 p-4 rounded-lg border-l-4 border-red-500">
-                            <i class="fa-solid fa-xmark text-red-500 mt-1 mr-3 text-lg"></i>
-                            <div>
-                                <h4 class="font-bold text-red-700">Bingung Cari Pelatih</h4>
-                                <p class="text-sm text-red-600/80">Punya alat bagus tapi tidak ada yang bisa melatih siswa dengan benar.</p>
-                            </div>
-                        </li>
-                    </ul>
+                    <!-- Trust Badge -->
+                    <div class="mt-12 pt-8 border-t border-white/10 grid grid-cols-2 md:grid-cols-4 gap-6 text-slate-400 text-sm font-semibold uppercase tracking-wider">
+                        <div><i class="fa-solid fa-building-columns mr-2 text-blue-500"></i> Legalitas PT Resmi</div>
+                        <div><i class="fa-solid fa-wrench mr-2 text-blue-500"></i> Garansi Service</div>
+                        <div><i class="fa-solid fa-truck-fast mr-2 text-blue-500"></i> Pengiriman Cepat</div>
+                        <div><i class="fa-solid fa-medal mr-2 text-blue-500"></i> Kualitas Kontes</div>
+                    </div>
                 </div>
-                <div class="md:w-1/2 relative">
-                    <div class="absolute -inset-4 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-2xl opacity-20 blur-lg transform rotate-2"></div>
-                    <div class="relative bg-white p-8 rounded-2xl shadow-xl border border-slate-100">
-                        <h3 class="text-2xl font-bold text-slate-900 mb-6">PT. SVM Hadir Sebagai Solusi</h3>
-                        <p class="text-slate-600 mb-6">Kami bukan sekadar penjual, kami adalah praktisi marching band yang mengerti kebutuhan sekolah.</p>
+            </section>
+
+            <!-- TESTIMONI / SOCIAL PROOF (New Section) -->
+            <section class="py-20 bg-white">
+                <div class="max-w-7xl mx-auto px-4">
+                    <div class="text-center mb-12">
+                        <h2 class="text-3xl font-bold text-slate-900">Apa Kata Mereka?</h2>
+                        <p class="text-slate-500 mt-2">Sekolah-sekolah di Batam yang telah mempercayakan prestasinya pada PT. SVM</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <!-- Review 1 -->
+                        <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition">
+                            <div class="flex items-center mb-4 text-yellow-400 text-sm">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="text-slate-600 italic mb-6">"Akhirnya nemu tempat beli alat drumband di Batam yang barangnya beneran original. Pelatihnya juga disiplin banget, anak-anak jadi juara."</p>
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-bold">KS</div>
+                                <div>
+                                    <h4 class="font-bold text-sm">Bpk. Kepala Sekolah</h4>
+                                    <p class="text-xs text-slate-500">SMAN X Batam</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Review 2 -->
+                        <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition">
+                            <div class="flex items-center mb-4 text-yellow-400 text-sm">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="text-slate-600 italic mb-6">"Awalnya ragu mau beli online dari Jawa, untung ada PT. SVM di Batam. Bisa cek fisik alat langsung, garansi service-nya jelas. Mantap!"</p>
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center text-purple-600 font-bold">GS</div>
+                                <div>
+                                    <h4 class="font-bold text-sm">Ibu Guru Seni</h4>
+                                    <p class="text-xs text-slate-500">SMP Swasta Y Batam</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Review 3 -->
+                        <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition">
+                            <div class="flex items-center mb-4 text-yellow-400 text-sm">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="text-slate-600 italic mb-6">"Lengkap banget, mulai dari Snare HTS sampai kostum Color Guard ada semua. Konsultasi anggarannya juga enak."</p>
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center text-green-600 font-bold">P</div>
+                                <div>
+                                    <h4 class="font-bold text-sm">Pelatih Unit</h4>
+                                    <p class="text-xs text-slate-500">Universitas di Kepri</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- PAGE 2: PELATIHAN & SEKOLAH (Detail Kerjasama) -->
+        <div id="page-training" class="page-section hidden fade-in">
+            <section class="bg-brand-dark text-white py-20 px-4 relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-64 h-64 bg-blue-600 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
+                <div class="absolute -bottom-8 -left-8 w-64 h-64 bg-purple-600 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
+                
+                <div class="max-w-5xl mx-auto text-center relative z-10">
+                    <h2 class="font-heading text-4xl md:text-5xl font-bold mb-6 text-yellow-400">Divisi Pendidikan & Kepelatihan</h2>
+                    <p class="editable text-lg text-slate-300 mb-8 max-w-3xl mx-auto leading-relaxed" id="training-hero-text">
+                        Membangun unit Marching Band bukan hanya soal membeli alat, tapi membangun sistem. PT. SVM menyediakan kurikulum terstruktur mulai dari dasar (Basic) hingga level Kompetisi (Advance). Kami telah mencetak berbagai unit juara di Batam.
+                    </p>
+                </div>
+            </section>
+
+            <section class="py-16 max-w-7xl mx-auto px-4">
+                <div class="flex flex-col md:flex-row gap-12">
+                    <div class="md:w-1/2">
+                        <h3 class="text-2xl font-bold text-brand-blue mb-6 border-l-4 border-yellow-500 pl-4">Kurikulum SVM Academy</h3>
                         
-                        <div class="space-y-4">
-                            <div class="flex items-center">
-                                <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-green-600 mr-4 font-bold"><i class="fa-solid fa-check"></i></div>
-                                <span class="font-semibold text-slate-700">Barang Original & Tahan Lama</span>
+                        <div class="space-y-8 editable" id="training-curriculum">
+                            <div class="flex gap-5">
+                                <div class="font-heading font-bold text-5xl text-slate-200">01</div>
+                                <div>
+                                    <h4 class="font-bold text-xl mb-2 text-slate-800">Basic Fundamental</h4>
+                                    <p class="text-slate-600 text-sm leading-relaxed">Fokus pada pembentukan fisik, pengenalan not balok, teknik dasar memegang alat (grip), dan baris-berbaris dasar (PBB). Pondasi utama kedisiplinan siswa.</p>
+                                </div>
                             </div>
-                            <div class="flex items-center">
-                                <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-green-600 mr-4 font-bold"><i class="fa-solid fa-check"></i></div>
-                                <span class="font-semibold text-slate-700">Harga Kompetitif Institusi Pendidikan</span>
+                            <div class="flex gap-5">
+                                <div class="font-heading font-bold text-5xl text-slate-200">02</div>
+                                <div>
+                                    <h4 class="font-bold text-xl mb-2 text-slate-800">Sectional Mastery</h4>
+                                    <p class="text-slate-600 text-sm leading-relaxed">Pematangan teknik per seksi (Battery, Brass, Pit, Guard). Memastikan setiap pemain menguasai alatnya untuk harmonisasi suara (Intonation & Tuning).</p>
+                                </div>
                             </div>
-                            <div class="flex items-center">
-                                <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-green-600 mr-4 font-bold"><i class="fa-solid fa-check"></i></div>
-                                <span class="font-semibold text-slate-700">Paket Dukungan Pelatih Profesional</span>
-                            </div>
-                            <div class="flex items-center">
-                                <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-green-600 mr-4 font-bold"><i class="fa-solid fa-check"></i></div>
-                                <span class="font-semibold text-slate-700">Layanan Service Cepat di Batam</span>
-                            </div>
-                        </div>
-
-                        <div class="mt-8 p-4 bg-blue-50 rounded-lg text-center">
-                            <p class="text-sm font-semibold text-blue-800">"Kualitas alat menentukan 50% kemenangan kompetisi."</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- TRUST & CLIENTS (Authority) -->
-    <section class="py-12 bg-slate-900 text-white overflow-hidden">
-        <div class="max-w-7xl mx-auto px-4 text-center">
-            <h3 class="text-slate-400 font-bold uppercase text-sm tracking-widest mb-8">Dipercaya Oleh Sekolah & Institusi Terbaik</h3>
-            <div class="flex flex-wrap justify-center gap-4 md:gap-8 opacity-70">
-                <!-- List Klien dari File -->
-                <span class="px-4 py-2 border border-slate-700 rounded-full">SMAN 20 BATAM</span>
-                <span class="px-4 py-2 border border-slate-700 rounded-full">MTsN 1 BATAM</span>
-                <span class="px-4 py-2 border border-slate-700 rounded-full">MIN 1 BATAM</span>
-                <span class="px-4 py-2 border border-slate-700 rounded-full">SVMC</span>
-                <span class="px-4 py-2 border border-slate-700 rounded-full">SDN 006 SEI BEDUK</span>
-                <span class="px-4 py-2 border border-slate-700 rounded-full">SMP AL-AZHAR BATAM</span>
-            </div>
-            
-            <div class="mt-10 bg-gradient-to-r from-yellow-600 to-yellow-500 inline-block px-6 py-2 rounded-lg shadow-lg transform rotate-1 hover:rotate-0 transition">
-                <i class="fa-solid fa-star text-yellow-100 mr-2"></i>
-                <span class="font-bold text-white">Prestasi: Juara Umum MIMAC Malaysia & Kompetisi Nasional Indonesia</span>
-            </div>
-        </div>
-    </section>
-
-    <!-- KATALOG PRODUK -->
-    <section id="katalog" class="py-20 bg-slate-50">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-12">
-                <div class="md:w-2/3">
-                    <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">Katalog Produk Resmi</h2>
-                    <p class="text-slate-600">Menyediakan segala kebutuhan mulai dari <span class="font-semibold text-blue-600">Brass, Percussion, Color Guard,</span> hingga Seragam. Semua produk dapat disesuaikan dengan budget sekolah.</p>
-                </div>
-                <!-- Tombol Tambah Produk (Hanya Admin) -->
-                <button id="btnAddProduct" onclick="showAddProductModal()" class="hidden mt-4 md:mt-0 bg-blue-600 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-blue-700 transition">
-                    <i class="fa-solid fa-plus mr-2"></i> Tambah Produk Baru
-                </button>
-            </div>
-
-            <!-- Loading Spinner -->
-            <div id="loading" class="text-center py-20">
-                <div class="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-16 w-16 mb-4 mx-auto"></div>
-                <h2 class="text-center text-gray-500 text-xl font-semibold">Sedang Mengambil Data Produk...</h2>
-            </div>
-
-            <!-- Grid Produk -->
-            <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                <!-- Produk akan muncul di sini secara otomatis dari Database Firebase -->
-            </div>
-            
-            <div class="mt-12 text-center">
-                 <p class="text-slate-500 italic mb-4">Tidak menemukan yang Anda cari? Kami bisa pesankan khusus!</p>
-                 <a href="https://wa.me/6283812113160" class="inline-block text-blue-600 font-bold hover:underline">Hubungi Admin untuk Custom Order <i class="fa-solid fa-arrow-right ml-1"></i></a>
-            </div>
-        </div>
-    </section>
-
-    <!-- LAYANAN & PELATIHAN -->
-    <section id="layanan" class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-12">Layanan Profesional SVM</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Layanan 1 -->
-                <div class="group p-8 border border-slate-100 rounded-2xl hover:shadow-2xl transition duration-300 hover:-translate-y-2 bg-slate-50 hover:bg-white">
-                    <div class="w-16 h-16 bg-blue-100 rounded-xl flex items-center justify-center text-blue-600 text-2xl mb-6 group-hover:bg-blue-600 group-hover:text-white transition">
-                        <i class="fa-solid fa-chalkboard-user"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">Pelatihan & Coaching</h3>
-                    <p class="text-slate-600 text-sm mb-4">Kami menyediakan pelatih bersertifikat untuk Brass, Percussion, dan Color Guard. Kurikulum standar kompetisi nasional & internasional.</p>
-                </div>
-
-                <!-- Layanan 2 -->
-                <div class="group p-8 border border-slate-100 rounded-2xl hover:shadow-2xl transition duration-300 hover:-translate-y-2 bg-slate-50 hover:bg-white">
-                    <div class="w-16 h-16 bg-orange-100 rounded-xl flex items-center justify-center text-orange-600 text-2xl mb-6 group-hover:bg-orange-600 group-hover:text-white transition">
-                        <i class="fa-solid fa-screwdriver-wrench"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">Service & Reparasi</h3>
-                    <p class="text-slate-600 text-sm mb-4">Jangan buang alat rusak Anda! Tim teknisi kami bisa memperbaiki drum jebol, brass penyok, atau sparepart yang hilang.</p>
-                </div>
-
-                <!-- Layanan 3 -->
-                <div class="group p-8 border border-slate-100 rounded-2xl hover:shadow-2xl transition duration-300 hover:-translate-y-2 bg-slate-50 hover:bg-white">
-                    <div class="w-16 h-16 bg-purple-100 rounded-xl flex items-center justify-center text-purple-600 text-2xl mb-6 group-hover:bg-purple-600 group-hover:text-white transition">
-                        <i class="fa-solid fa-shirt"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">Konveksi Seragam</h3>
-                    <p class="text-slate-600 text-sm mb-4">Pembuatan seragam pasukan dan color guard dengan desain custom yang modern, bahan nyaman, dan harga terjangkau.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- INSPIRASI & ARTIKEL (Sales Booster) -->
-    <section class="py-20 bg-gradient-to-b from-slate-50 to-white border-t border-slate-200">
-        <div class="max-w-4xl mx-auto px-4 text-center">
-            <h2 class="text-3xl font-bold mb-8">Pojok Inspirasi & Edukasi</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
-                <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-blue-500">
-                    <h3 class="font-bold text-lg mb-2">Mengapa Marching Band Penting?</h3>
-                    <p class="text-slate-600 text-sm">Marching band melatih kedisiplinan, kerja sama tim (korps), dan musikalitas siswa secara bersamaan. Ini adalah ekstrakurikuler terlengkap untuk pembentukan karakter.</p>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-yellow-500">
-                    <h3 class="font-bold text-lg mb-2">Tips Merawat Brass</h3>
-                    <p class="text-slate-600 text-sm">Selalu bersihkan valve dengan minyak khusus setelah latihan. Udara lembab Batam musuh utama alat tiup, pastikan disimpan di case kering.</p>
-                </div>
-            </div>
-            
-            <div class="mt-10 p-6 bg-blue-900 rounded-2xl text-white relative overflow-hidden">
-                <div class="relative z-10">
-                    <h3 class="text-2xl font-bold mb-2">Ingin Sekolah Anda Berprestasi?</h3>
-                    <p class="mb-4 text-blue-200">Jangan biarkan bakat siswa terhambat alat yang buruk. Konsultasikan kebutuhan Anda sekarang.</p>
-                    <a href="https://wa.me/6283812113160" class="inline-block bg-white text-blue-900 px-6 py-2 rounded-lg font-bold hover:bg-blue-100 transition">Chat via WhatsApp</a>
-                </div>
-                <!-- Decorative Circle -->
-                <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-blue-500 rounded-full opacity-30"></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- LOKASI & KONTAK (Updated Address) -->
-    <section id="lokasi" class="py-12 bg-slate-900 text-slate-300">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-                <div>
-                    <h2 class="text-2xl font-bold text-white mb-6">Hubungi Kami</h2>
-                    <div class="space-y-4">
-                        <div class="flex items-start">
-                            <i class="fa-solid fa-map-location-dot mt-1 mr-4 text-blue-500 text-xl"></i>
-                            <div>
-                                <h4 class="text-white font-bold">Alamat Kantor & Toko</h4>
-                                <p>Komplek YKB Blok A No. 11, RT 02 / RW 11,<br>Kec. Bengkong, Kota Batam, Kepulauan Riau 29458</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fa-brands fa-whatsapp mt-1 mr-4 text-green-500 text-xl"></i>
-                            <div>
-                                <h4 class="text-white font-bold">WhatsApp / Telepon</h4>
-                                <p>0838-1211-3160 (Bpk. Arif)</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fa-solid fa-envelope mt-1 mr-4 text-yellow-500 text-xl"></i>
-                            <div>
-                                <h4 class="text-white font-bold">Email Resmi</h4>
-                                <p>svaravanguardmanagement@gmail.com</p>
+                            <div class="flex gap-5">
+                                <div class="font-heading font-bold text-5xl text-slate-200">03</div>
+                                <div>
+                                    <h4 class="font-bold text-xl mb-2 text-slate-800">Show Design & Display</h4>
+                                    <p class="text-slate-600 text-sm leading-relaxed">Penyusunan lagu aransemen, drill display (formasi lapangan), koreografi color guard, dan general effect untuk persiapan lomba tingkat Nasional/Internasional.</p>
+                                </div>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="mt-8 flex gap-4">
-                        <a href="https://www.instagram.com/svm_marching" target="_blank" class="w-10 h-10 rounded-full bg-pink-600 flex items-center justify-center text-white hover:scale-110 transition"><i class="fa-brands fa-instagram"></i></a>
-                        <a href="https://www.youtube.com/channel/UCQpNg7I_p_ExSOvW2ufq4Hg" target="_blank" class="w-10 h-10 rounded-full bg-red-600 flex items-center justify-center text-white hover:scale-110 transition"><i class="fa-brands fa-youtube"></i></a>
+                    <div class="md:w-1/2">
+                        <div class="bg-white p-8 rounded-2xl shadow-lg border border-slate-200 sticky top-24">
+                            <div class="flex justify-between items-center mb-6">
+                                <div>
+                                    <h3 class="text-xl font-bold text-slate-900"><i class="fa-solid fa-school mr-2 text-blue-600"></i> Sekolah Binaan Kami</h3>
+                                    <p class="text-xs text-slate-400">Track record pelatihan di Batam</p>
+                                </div>
+                                <button onclick="admin.addSchool()" class="admin-only hidden text-xs bg-blue-600 text-white px-3 py-1 rounded-full hover:bg-blue-700 shadow">+ Tambah</button>
+                            </div>
+                            
+                            <ul id="schoolList" class="space-y-4 max-h-[400px] overflow-y-auto pr-2">
+                                <!-- List Sekolah akan di-load dari JS -->
+                            </ul>
+
+                            <div class="mt-8 p-4 bg-blue-50 rounded-lg border border-blue-100 text-center">
+                                <p class="text-sm text-blue-800 font-semibold mb-2">Ingin sekolah Anda dilatih oleh tim profesional kami?</p>
+                                <button onclick="window.open('https://wa.me/6283812113160?text=Halo%20SVM,%20saya%20tertarik%20kerjasama%20pelatih', '_blank')" class="w-full bg-blue-600 text-white py-2 rounded-lg font-bold hover:bg-blue-700 transition">Ajukan Proposal Kerjasama</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
+            </section>
+        </div>
+
+        <!-- PAGE 3: KATALOG PRODUK (Auto-Filled) -->
+        <div id="page-catalog" class="page-section hidden fade-in bg-slate-50 pb-20">
+            <!-- Header Katalog -->
+            <div class="bg-white shadow-sm pt-8 pb-4 px-4 sticky top-16 z-30 border-b border-slate-200">
+                <div class="max-w-7xl mx-auto">
+                    <div class="flex flex-col md:flex-row justify-between items-end mb-4">
+                        <div>
+                            <h2 class="text-2xl font-bold text-slate-900">Katalog Resmi SVM</h2>
+                            <p class="text-sm text-slate-500">Harga terbaik untuk pengadaan sekolah & instansi.</p>
+                        </div>
+                        <div class="mt-2 md:mt-0">
+                             <input type="text" id="searchCatalog" onkeyup="catalog.search()" placeholder="Cari nama alat..." class="border border-slate-300 rounded-full px-4 py-1 text-sm focus:outline-none focus:border-blue-500 w-full md:w-64">
+                        </div>
+                    </div>
+                    
+                    <!-- Tab Navigation -->
+                    <div class="flex overflow-x-auto gap-2 pb-2 scrollbar-hide" id="catalogTabs">
+                        <button onclick="catalog.filter('all')" class="tab-btn active-tab px-5 py-2 rounded-full text-xs font-bold whitespace-nowrap transition border border-transparent hover:bg-blue-50 hover:text-blue-600 bg-white shadow-sm">Semua</button>
+                        <button onclick="catalog.filter('paket')" class="tab-btn px-5 py-2 rounded-full text-xs font-bold whitespace-nowrap transition border border-transparent hover:bg-blue-50 hover:text-blue-600 bg-white shadow-sm">Paket Lengkap</button>
+                        <button onclick="catalog.filter('perkusi')" class="tab-btn px-5 py-2 rounded-full text-xs font-bold whitespace-nowrap transition border border-transparent hover:bg-blue-50 hover:text-blue-600 bg-white shadow-sm">Alat Perkusi</button>
+                        <button onclick="catalog.filter('brass')" class="tab-btn px-5 py-2 rounded-full text-xs font-bold whitespace-nowrap transition border border-transparent hover:bg-blue-50 hover:text-blue-600 bg-white shadow-sm">Brass & Tiup</button>
+                        <button onclick="catalog.filter('pit')" class="tab-btn px-5 py-2 rounded-full text-xs font-bold whitespace-nowrap transition border border-transparent hover:bg-blue-50 hover:text-blue-600 bg-white shadow-sm">Pitch Percussion</button>
+                        <button onclick="catalog.filter('colorguard')" class="tab-btn px-5 py-2 rounded-full text-xs font-bold whitespace-nowrap transition border border-transparent hover:bg-blue-50 hover:text-blue-600 bg-white shadow-sm">Color Guard</button>
+                        <button onclick="catalog.filter('kostum')" class="tab-btn px-5 py-2 rounded-full text-xs font-bold whitespace-nowrap transition border border-transparent hover:bg-blue-50 hover:text-blue-600 bg-white shadow-sm">Kostum</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Grid Produk -->
+            <div class="max-w-7xl mx-auto px-4 mt-8">
+                <!-- Tombol Admin Tambah Produk -->
+                <button onclick="ui.showProductModal()" class="admin-only hidden w-full mb-6 border-2 border-dashed border-blue-300 text-blue-500 py-4 rounded-xl font-bold hover:bg-blue-50 transition flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-plus-circle text-2xl"></i> Tambah Produk Baru ke Katalog
+                </button>
+
+                <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    <!-- Produk di-render via JS -->
+                </div>
                 
-                <div class="rounded-xl overflow-hidden border-2 border-slate-700 h-64 md:h-auto">
-                    <!-- Google Maps Embed yang Mengarah ke Alamat SVM -->
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.0375686523956!2d104.0326290749661!3d1.1584169988307223!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31d9899709923831%3A0x633f814988771489!2sSVM%20Svara%20Vanguard%20Management!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                <div class="mt-12 p-8 bg-blue-900 rounded-2xl text-center text-white relative overflow-hidden">
+                    <div class="relative z-10">
+                        <h3 class="text-2xl font-bold mb-2">Tidak menemukan alat yang dicari?</h3>
+                        <p class="mb-6 text-blue-200">Kami bisa memesankan (Pre-Order) alat spesifik seperti Marimba 5 Octave, Vibraphone, atau Tuba Contra.</p>
+                        <a href="https://wa.me/6283812113160" class="inline-block bg-white text-blue-900 px-6 py-3 rounded-full font-bold hover:bg-blue-50 transition shadow-lg">Hubungi Admin Pengadaan</a>
+                    </div>
+                    <!-- Decorative -->
+                    <i class="fa-solid fa-drum text-9xl absolute -bottom-10 -right-10 text-white opacity-10 rotate-12"></i>
                 </div>
             </div>
-            
-            <div class="border-t border-slate-800 mt-12 pt-8 text-center text-sm">
-                <p>&copy; 2026 PT. Svara Vanguard Management. All Rights Reserved.</p>
-                <p class="text-xs text-slate-600 mt-1">Website Developed for MarchingBatam.web.id</p>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-900 text-white pt-16 pb-8 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+            <div>
+                <h3 class="font-heading text-2xl font-bold mb-4 text-blue-500">MarchingBatam<span class="text-white">.web.id</span></h3>
+                <p class="text-slate-400 text-sm leading-relaxed mb-4">
+                    PT. Svara Vanguard Management. Partner resmi sekolah-sekolah di Batam dan Kepulauan Riau untuk kemajuan seni Marching Band. Kami memadukan kualitas alat dengan kualitas SDM.
+                </p>
+                <div class="flex gap-4">
+                    <a href="https://instagram.com" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-pink-600 transition"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://youtube.com" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-red-600 transition"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="https://facebook.com" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-blue-600 transition"><i class="fa-brands fa-facebook"></i></a>
+                </div>
+            </div>
+            <div>
+                <h4 class="font-bold text-lg mb-4 text-white">Layanan Kami</h4>
+                <ul class="space-y-2 text-slate-400 text-sm">
+                    <li><button onclick="router.navigate('catalog')" class="hover:text-blue-400 transition"><i class="fa-solid fa-angle-right mr-2"></i>Jual Alat Marching Band</button></li>
+                    <li><button onclick="router.navigate('catalog')" class="hover:text-blue-400 transition"><i class="fa-solid fa-angle-right mr-2"></i>Konveksi Seragam Drumband</button></li>
+                    <li><button onclick="router.navigate('training')" class="hover:text-blue-400 transition"><i class="fa-solid fa-angle-right mr-2"></i>Jasa Pelatih Profesional</button></li>
+                    <li><button onclick="router.navigate('training')" class="hover:text-blue-400 transition"><i class="fa-solid fa-angle-right mr-2"></i>Service & Reparasi Alat</button></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold text-lg mb-4 text-white">Hubungi Kami</h4>
+                <div class="space-y-3">
+                    <p class="text-slate-400 text-sm flex items-start"><i class="fa-solid fa-location-dot w-6 text-blue-500 mt-1"></i> Komplek YKB Blok A No. 11, Bengkong, Batam, Kepri 29458</p>
+                    <p class="text-slate-400 text-sm flex items-center"><i class="fa-brands fa-whatsapp w-6 text-green-500 text-lg"></i> 0838-1211-3160 (Admin)</p>
+                    <p class="text-slate-400 text-sm flex items-center"><i class="fa-solid fa-envelope w-6 text-yellow-500"></i> svara.vanguard@gmail.com</p>
+                    <p class="text-slate-400 text-sm flex items-center"><i class="fa-solid fa-clock w-6 text-slate-500"></i> Senin - Sabtu (08.00 - 17.00)</p>
+                </div>
             </div>
         </div>
-    </section>
+        <div class="text-center text-slate-600 text-xs pt-8 border-t border-slate-800">
+            &copy; 2026 PT. Svara Vanguard Management. All Rights Reserved. <br> Website Developed for MarchingBatam.web.id
+        </div>
+    </footer>
 
-    <!-- MODAL LOGIN ADMIN -->
-    <div id="loginModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden items-center justify-center z-50 transition-opacity">
-        <div class="bg-white p-8 rounded-2xl shadow-2xl w-96 border border-slate-200">
+    <!-- === ADMIN TOOLS & MODALS === -->
+
+    <!-- Floating Toolbar (Hanya muncul saat Login) -->
+    <div id="adminToolbar" class="fixed bottom-20 md:bottom-6 left-1/2 transform -translate-x-1/2 bg-slate-900 text-white px-6 py-3 rounded-full shadow-2xl z-50 flex items-center gap-4 hidden-bar border border-slate-700 w-max max-w-[90%] overflow-x-auto">
+        <span class="text-xs font-bold text-yellow-500 uppercase tracking-widest mr-2 hidden md:block">Admin Tools</span>
+        <div class="h-6 w-px bg-slate-700 hidden md:block"></div>
+        <button onclick="admin.saveAllChanges()" class="hover:text-green-400 flex flex-col items-center text-[10px] gap-1 px-2">
+            <i class="fa-solid fa-save text-lg"></i> Simpan
+        </button>
+        <div class="h-6 w-px bg-slate-700"></div>
+        <div class="relative group">
+            <button class="hover:text-blue-400 flex flex-col items-center text-[10px] gap-1 px-2">
+                <i class="fa-solid fa-palette text-lg"></i> Warna
+            </button>
+            <div class="absolute bottom-full left-0 mb-2 hidden group-hover:flex bg-white p-2 rounded shadow-lg gap-2">
+                <button onclick="document.execCommand('foreColor', false, '#2563eb')" class="w-6 h-6 rounded-full bg-blue-600 border"></button>
+                <button onclick="document.execCommand('foreColor', false, '#ca8a04')" class="w-6 h-6 rounded-full bg-yellow-600 border"></button>
+                <button onclick="document.execCommand('foreColor', false, '#dc2626')" class="w-6 h-6 rounded-full bg-red-600 border"></button>
+                <button onclick="document.execCommand('foreColor', false, '#000000')" class="w-6 h-6 rounded-full bg-black border"></button>
+            </div>
+        </div>
+        <button onclick="document.execCommand('bold')" class="hover:text-white flex flex-col items-center text-[10px] gap-1 font-bold px-2">
+            <span class="text-lg">B</span> Bold
+        </button>
+        <button onclick="ui.showProductModal()" class="hover:text-yellow-400 flex flex-col items-center text-[10px] gap-1 px-2">
+            <i class="fa-solid fa-plus text-lg"></i> Produk
+        </button>
+        <div class="h-6 w-px bg-slate-700"></div>
+        <button onclick="auth.logout()" class="hover:text-red-500 flex flex-col items-center text-[10px] gap-1 px-2">
+            <i class="fa-solid fa-power-off text-lg"></i> Keluar
+        </button>
+    </div>
+
+    <!-- Modal Login -->
+    <div id="loginModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden items-center justify-center z-50 p-4">
+        <div class="bg-white p-8 rounded-2xl w-full max-w-sm animate-bounce-in shadow-2xl">
             <div class="text-center mb-6">
-                <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 text-blue-600 text-2xl">
-                    <i class="fa-solid fa-user-shield"></i>
-                </div>
-                <h2 class="text-2xl font-bold text-slate-900">Login Admin</h2>
-                <p class="text-sm text-slate-500">Masuk untuk mengelola produk & konten.</p>
+                <i class="fa-solid fa-user-shield text-4xl text-blue-600 mb-2"></i>
+                <h2 class="text-2xl font-bold">Login Admin</h2>
+                <p class="text-sm text-slate-500">Khusus pengelola PT. SVM</p>
             </div>
-            <input type="email" id="email" placeholder="Email Admin" class="w-full p-3 border border-slate-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500">
-            <input type="password" id="password" placeholder="Password" class="w-full p-3 border border-slate-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <input type="email" id="email" class="w-full border border-slate-300 p-3 rounded-lg mb-3 focus:ring-2 focus:ring-blue-500 outline-none" placeholder="Email Admin">
+            <input type="password" id="password" class="w-full border border-slate-300 p-3 rounded-lg mb-6 focus:ring-2 focus:ring-blue-500 outline-none" placeholder="Password">
             <div class="flex justify-end gap-2">
-                <button onclick="closeModal('loginModal')" class="px-4 py-2 text-slate-500 hover:text-slate-800 font-semibold">Batal</button>
-                <button onclick="login()" class="px-6 py-2 bg-blue-600 text-white rounded-lg font-bold hover:bg-blue-700 shadow-lg transition">Masuk</button>
+                <button onclick="ui.closeModal('loginModal')" class="px-4 py-2 text-slate-500 hover:text-slate-800">Batal</button>
+                <button onclick="auth.login()" class="px-6 py-2 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 shadow-lg">Masuk</button>
             </div>
         </div>
     </div>
 
-    <!-- MODAL TAMBAH/EDIT PRODUK -->
-    <div id="productModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden items-center justify-center z-50">
-        <div class="bg-white p-6 rounded-2xl shadow-2xl w-full max-w-md max-h-[90vh] overflow-y-auto">
+    <!-- Modal Produk (Drag n Drop Enhanced) -->
+    <div id="productModal" class="fixed inset-0 bg-black/80 hidden items-center justify-center z-50 p-4 backdrop-blur-sm">
+        <div class="bg-white p-6 rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl">
             <div class="flex justify-between items-center mb-6 border-b pb-4">
-                <h2 id="modalTitle" class="text-xl font-bold text-slate-900">Kelola Produk</h2>
-                <button onclick="closeModal('productModal')" class="text-slate-400 hover:text-red-500"><i class="fa-solid fa-xmark text-xl"></i></button>
+                <h2 class="text-xl font-bold text-slate-900">Editor Produk Katalog</h2>
+                <button onclick="ui.closeModal('productModal')" class="text-slate-400 hover:text-red-500"><i class="fa-solid fa-times text-xl"></i></button>
             </div>
             
-            <input type="hidden" id="editDocId">
+            <input type="hidden" id="prodId">
             
-            <label class="block text-sm font-bold mb-2 text-slate-700">Nama Produk</label>
-            <input type="text" id="prodName" class="w-full p-3 border border-slate-300 rounded-lg mb-4 focus:ring-2 focus:ring-blue-500 focus:outline-none" placeholder="Contoh: Snare Drum HTS Pearl">
-            
-            <label class="block text-sm font-bold mb-2 text-slate-700">Kategori</label>
-            <select id="prodCategory" class="w-full p-3 border border-slate-300 rounded-lg mb-4 bg-white">
-                <option value="Brass">Brass (Tiup Logam)</option>
-                <option value="Percussion">Percussion (Drum)</option>
-                <option value="ColorGuard">Color Guard (Bendera/Senapan)</option>
-                <option value="Uniform">Seragam / Aksesoris</option>
-            </select>
-            
-            <label class="block text-sm font-bold mb-2 text-slate-700">Harga (Rp)</label>
-            <input type="text" id="prodPrice" class="w-full p-3 border border-slate-300 rounded-lg mb-4" placeholder="Contoh: 3.500.000">
-            
-            <label class="block text-sm font-bold mb-2 text-slate-700">Deskripsi Singkat</label>
-            <textarea id="prodDesc" class="w-full p-3 border border-slate-300 rounded-lg mb-4" rows="3" placeholder="Spesifikasi alat..."></textarea>
-            
-            <label class="block text-sm font-bold mb-2 text-slate-700">Link Gambar (URL)</label>
-            <input type="text" id="prodImg" class="w-full p-3 border border-slate-300 rounded-lg mb-2" placeholder="https://...">
-            <p class="text-xs text-blue-500 mb-4 bg-blue-50 p-2 rounded">Tips: Upload foto ke Google Photos/Imgur, lalu copy link gambarnya ke sini.</p>
-            
-            <button onclick="saveProduct()" class="w-full py-3 bg-blue-600 text-white rounded-lg font-bold hover:bg-blue-700 shadow-lg transition">Simpan Produk</button>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <!-- Image Upload Zone -->
+                    <label class="block text-sm font-bold mb-2 text-slate-700">Foto Produk</label>
+                    <div id="dropZone" class="drop-zone h-56 rounded-xl flex flex-col items-center justify-center cursor-pointer text-slate-400 hover:text-blue-500 relative overflow-hidden bg-slate-50 border-2 border-dashed border-slate-300">
+                        <img id="imgPreview" class="absolute inset-0 w-full h-full object-contain hidden z-10 bg-white p-2">
+                        <i class="fa-solid fa-cloud-arrow-up text-4xl mb-3"></i>
+                        <p class="text-sm text-center px-4 font-semibold">Drag gambar ke sini</p>
+                        <p class="text-xs text-center text-slate-400">atau klik untuk upload (Max 500KB)</p>
+                        <input type="file" id="fileInput" class="absolute inset-0 opacity-0 cursor-pointer z-20" accept="image/*">
+                    </div>
+                    <input type="hidden" id="prodImageBase64">
+                    <p class="text-[10px] text-blue-500 mt-2 flex items-center"><i class="fa-solid fa-circle-info mr-1"></i> Gunakan rasio 1:1 (kotak) agar rapi.</p>
+                </div>
+                
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-1">Nama Produk</label>
+                        <input type="text" id="prodName" class="w-full border border-slate-300 p-2 rounded focus:ring-2 focus:ring-blue-500 outline-none font-semibold" placeholder="Contoh: Snare HTS Pearl">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-1">Harga (Rp)</label>
+                        <input type="text" id="prodPrice" class="w-full border border-slate-300 p-2 rounded focus:ring-2 focus:ring-blue-500 outline-none" placeholder="Contoh: 5.500.000">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-1">Kategori</label>
+                        <select id="prodCategory" class="w-full border border-slate-300 p-2 rounded bg-white focus:ring-2 focus:ring-blue-500 outline-none">
+                            <option value="paket">Paket Lengkap</option>
+                            <option value="perkusi">Alat Perkusi</option>
+                            <option value="brass">Brass / Tiup</option>
+                            <option value="pit">Pitch Percussion</option>
+                            <option value="colorguard">Color Guard</option>
+                            <option value="kostum">Kostum & Seragam</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-1">Deskripsi Spesifikasi</label>
+                        <textarea id="prodDesc" rows="3" class="w-full border border-slate-300 p-2 rounded focus:ring-2 focus:ring-blue-500 outline-none text-sm" placeholder="Shell maple 7-ply, hardware aluminium..."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <button onclick="catalog.saveProduct()" class="w-full mt-8 py-3 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 shadow-lg transform active:scale-95 transition">Simpan Produk</button>
         </div>
     </div>
 
-    <!-- FIREBASE & LOGIC SCRIPT -->
+    <!-- JAVASCRIPT LOGIC -->
     <script type="module">
-        // --- 1. KONFIGURASI FIREBASE ---
-        // PENTING: Paste ulang kode Firebase Config Anda di bawah ini!
+        // --- FIREBASE CONFIG ---
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-        import { getFirestore, collection, getDocs, addDoc, deleteDoc, doc, updateDoc, getDoc, setDoc, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getFirestore, collection, getDocs, addDoc, deleteDoc, doc, updateDoc, setDoc, query, orderBy, where } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-        // --- PASTE FIREBASE CONFIG DISINI ---
-        const firebaseConfig = {apiKey: "AIzaSyAo_DL6ge2m7KXz67vcDA4fA4LabqE00uk",
-  authDomain: "marchingbatam.firebaseapp.com",
-  projectId: "marchingbatam",
-  storageBucket: "marchingbatam.firebasestorage.app",
-  messagingSenderId: "597539177591",
-  appId: "1:597539177591:web:8fe5b34422d792b40c3272"
+        // CONFIG: Pastikan ini sesuai project Anda
+        const firebaseConfig = {
+            apiKey: "AIzaSyAo_DL6ge2m7KXz67vcDA4fA4LabqE00uk",
+            authDomain: "marchingbatam.firebaseapp.com",
+            projectId: "marchingbatam",
+            storageBucket: "marchingbatam.firebasestorage.app",
+            messagingSenderId: "597539177591",
+            appId: "1:597539177591:web:8fe5b34422d792b40c3272"
         };
-        // ------------------------------------
 
-        // Initialize Firebase
         let app, auth, db;
         try {
             app = initializeApp(firebaseConfig);
             auth = getAuth(app);
             db = getFirestore(app);
-        } catch (e) {
-            console.error("Firebase belum disetting! Pastikan config sudah dicopy.", e);
-        }
+        } catch(e) { console.error("Firebase Error:", e); }
 
-        // --- 2. LOGIC APLIKASI ---
-        const productGrid = document.getElementById('productGrid');
-        const loading = document.getElementById('loading');
-        let isAdmin = false;
+        // --- GLOBAL STATE ---
+        let currentUser = null;
+        let productsCache = [];
 
-        // Cek Status Login
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                isAdmin = true;
-                document.getElementById('btnLogin').classList.add('hidden');
-                document.getElementById('btnLogout').classList.remove('hidden');
-                document.getElementById('btnAddProduct').classList.remove('hidden');
-                document.getElementById('btnSaveHero').classList.remove('hidden');
-                enableHeroEditing(true);
-                loadProducts(); 
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Selamat Datang Admin!',
-                    text: 'Anda sekarang bisa mengedit teks & produk.',
-                    toast: true, position: 'top-end', showConfirmButton: false, timer: 3000
-                });
-            } else {
-                isAdmin = false;
-                document.getElementById('btnLogin').classList.remove('hidden');
-                document.getElementById('btnLogout').classList.add('hidden');
-                document.getElementById('btnAddProduct').classList.add('hidden');
-                document.getElementById('btnSaveHero').classList.add('hidden');
-                enableHeroEditing(false);
-                loadProducts();
+        // --- DATA KATALOG DEFAULT (HARDCODED UNTUK PREVIEW LANGSUNG) ---
+        // Ini memastikan katalog TIDAK KOSONG saat pertama kali dibuka user
+        const defaultCatalog = [
+            { id: "d1", name: "Snare HTS Premium 14 Inch", category: "perkusi", price: "Rp. 5.500.000", description: "High Tension Snare. Shell Maple 7-ply. Include Carrier Airframe & Stick. Suara tajam & presisi.", image: "https://images.unsplash.com/photo-1519892300165-cb5542fb47c7?q=80&w=500" },
+            { id: "d2", name: "Bass Drum Marching 24\"", category: "perkusi", price: "Rp. 3.800.000", description: "Bass drum ukuran standard SMP/SMA. Ringan, suara bulat (Deep Sound). Bonus pemukul busa.", image: "https://images.unsplash.com/photo-1524230659092-07f99a75c013?q=80&w=500" },
+            { id: "d3", name: "Marching Bell / Lyra 32 Keys", category: "perkusi", price: "Rp. 1.850.000", description: "Bilah aluminium alloy tebal. Nada standard A=440Hz. Frame kokoh lapis powder coating.", image: "https://images.unsplash.com/photo-1596277277873-1991873322d6?q=80&w=500" },
+            { id: "d4", name: "Quint Tom / Tenor Drum (6,8,10,12,13)", category: "perkusi", price: "Rp. 6.200.000", description: "Set 5 drum (Quint). Potongan shell 'Scallop' untuk proyeksi suara maksimal. Head pinstripe.", image: "https://images.unsplash.com/photo-1576723616616-56886e068289?q=80&w=500" },
+            { id: "d5", name: "Trumpet Bb Gold Lacquer", category: "brass", price: "Rp. 4.500.000", description: "Trumpet siswa menengah. Valve stainless steel responsif. Finishing gold lacquer tahan karat.", image: "https://images.unsplash.com/photo-1573871669414-010dbf73ca84?q=80&w=500" },
+            { id: "d6", name: "Mellophone F Key Silver", category: "brass", price: "Rp. 8.500.000", description: "Suara Alto yang tebal. Bore besar untuk outdoor. Silver plated finish yang elegan.", image: "https://images.unsplash.com/photo-1511192336575-5a79af67a629?q=80&w=500" },
+            { id: "d7", name: "Baritone Marching Bb", category: "brass", price: "Rp. 12.000.000", description: "Suara Baritone yang hangat dan powerful. Desain ergonomis seimbang di tangan.", image: "https://images.unsplash.com/photo-1460039230329-eb070fc6c77c?q=80&w=500" },
+            { id: "d8", name: "Bendera Color Guard Digital Printing", category: "colorguard", price: "Rp. 185.000", description: "Bahan satin silk flowy. Motif custom sesuai tema (Galaxy, Fire, Abstract). Full color.", image: "https://images.unsplash.com/photo-1532986409605-7284cc37482f?q=80&w=500" },
+            { id: "d9", name: "Rifle Kayu 36 Inch", category: "colorguard", price: "Rp. 350.000", description: "Senapan kayu mahoni solid. Balance point sempurna untuk lemparan (Toss). Taped handle.", image: "https://images.unsplash.com/photo-1623947493774-c3e070d6911c?q=80&w=500" },
+            { id: "d10", name: "Seragam Pasukan Custom", category: "kostum", price: "Rp. 650.000", description: "Full set: Topi Shako + Bulu, Baju, Celana, Sepatu, Sarung Tangan. Bahan Drill/Satin Premium.", image: "https://images.unsplash.com/photo-1599827823348-132d2df26c5a?q=80&w=500" },
+            { id: "d11", name: "Paket Pemula SD (30 Personel)", category: "paket", price: "Rp. 45.000.000", description: "Paket hemat: 6 Snare, 4 Tenor, 3 Bass, 8 Bell, 2 Cymbal, 6 Guard + 1 Mayoret. Siap main!", image: "https://images.unsplash.com/photo-1543598587-57351dfd2940?q=80&w=500" },
+            { id: "d12", name: "Xylophone 3.5 Octave", category: "pit", price: "Rp. 15.000.000", description: "Kayu Rosewood sintetis tahan cuaca. Frame besi kokoh dengan roda pneumatic.", image: "https://images.unsplash.com/photo-1595186985472-7a2e2d832c32?q=80&w=500" }
+        ];
+
+        // --- ROUTING ---
+        window.router = {
+            navigate: (pageId) => {
+                document.querySelectorAll('.page-section').forEach(el => el.classList.add('hidden'));
+                document.getElementById(`page-${pageId}`).classList.remove('hidden');
+                window.scrollTo(0,0);
             }
+        };
+
+        // --- AUTH ---
+        window.auth = {
+            login: async () => {
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                try {
+                    await signInWithEmailAndPassword(auth, email, password);
+                    ui.closeModal('loginModal');
+                    Swal.fire({ icon: 'success', title: 'Berhasil Masuk', showConfirmButton: false, timer: 1500 });
+                } catch (error) {
+                    Swal.fire('Gagal', 'Email atau Password salah', 'error');
+                }
+            },
+            logout: async () => {
+                await signOut(auth);
+                location.reload();
+            }
+        };
+
+        onAuthStateChanged(auth, (user) => {
+            currentUser = user;
+            if (user) {
+                document.body.classList.add('admin-mode');
+                document.getElementById('btnLogin').classList.add('hidden');
+                document.getElementById('adminBadge').classList.remove('hidden');
+                document.getElementById('adminBadge').classList.add('flex');
+                document.getElementById('adminToolbar').classList.remove('hidden-bar');
+                
+                // Enable Editing Text
+                document.querySelectorAll('.editable').forEach(el => {
+                    el.contentEditable = true;
+                    el.classList.add('editable-highlight');
+                });
+                // Show Admin Buttons
+                document.querySelectorAll('.admin-only').forEach(el => el.classList.remove('hidden'));
+            } else {
+                document.body.classList.remove('admin-mode');
+                document.getElementById('btnLogin').classList.remove('hidden');
+                document.getElementById('adminBadge').classList.add('hidden');
+                document.getElementById('adminBadge').classList.remove('flex');
+                document.getElementById('adminToolbar').classList.add('hidden-bar');
+            }
+            catalog.load();
+            schools.load();
+            admin.loadTextConfig();
         });
 
-        // Load Produk dari Database
-        async function loadProducts() {
-            productGrid.innerHTML = '';
-            loading.style.display = 'block';
-            
-            try {
-                // Ambil produk (kalau mau urut, nanti bisa tambah orderBy di firebase console index)
-                const querySnapshot = await getDocs(collection(db, "products"));
-                loading.style.display = 'none';
+        // --- CATALOG SYSTEM ---
+        window.catalog = {
+            load: async () => {
+                const grid = document.getElementById('productGrid');
+                grid.innerHTML = '<div class="col-span-full text-center py-20"><i class="fa-solid fa-circle-notch fa-spin text-4xl text-blue-500"></i></div>';
                 
-                if (querySnapshot.empty) {
-                    // TAMPILAN JIKA PRODUK KOSONG (Default Mockup)
-                    productGrid.innerHTML = `
-                        <div class="col-span-full text-center text-slate-400 py-10">
-                            <i class="fa-solid fa-box-open text-4xl mb-4"></i>
-                            <p>Belum ada produk di database. Login Admin untuk menambahkan.</p>
-                        </div>
-                    `;
+                try {
+                    // 1. Coba ambil dari Firestore
+                    const snapshot = await getDocs(collection(db, "products"));
+                    
+                    if (!snapshot.empty) {
+                        productsCache = [];
+                        snapshot.forEach(doc => productsCache.push({ id: doc.id, ...doc.data() }));
+                    } else {
+                        // 2. Jika Firestore kosong, pakai Data Default (Hardcoded)
+                        console.log("Database kosong, menggunakan data default.");
+                        productsCache = defaultCatalog;
+                    }
+                } catch(e) {
+                    console.log("Offline mode atau error db, menggunakan data default.");
+                    productsCache = defaultCatalog;
+                }
+
+                catalog.render(productsCache);
+            },
+            
+            render: (products) => {
+                const grid = document.getElementById('productGrid');
+                grid.innerHTML = '';
+                
+                if (products.length === 0) {
+                    grid.innerHTML = `<div class="col-span-full text-center py-10 text-slate-400">Belum ada produk.</div>`;
                     return;
                 }
 
-                querySnapshot.forEach((doc) => {
-                    const data = doc.data();
-                    const adminButtons = isAdmin ? `
-                        <div class="absolute top-3 right-3 flex gap-2 z-10">
-                            <button onclick="window.editProduct('${doc.id}')" class="bg-white/90 text-yellow-600 p-2 rounded-full shadow hover:bg-yellow-500 hover:text-white transition"><i class="fa-solid fa-pen"></i></button>
-                            <button onclick="window.deleteProduct('${doc.id}')" class="bg-white/90 text-red-600 p-2 rounded-full shadow hover:bg-red-500 hover:text-white transition"><i class="fa-solid fa-trash"></i></button>
+                products.forEach(p => {
+                    const adminBtns = currentUser ? `
+                        <div class="absolute top-2 right-2 flex gap-1 z-10 opacity-0 group-hover:opacity-100 transition duration-300">
+                            <button onclick="catalog.edit('${p.id}')" class="bg-yellow-400 text-slate-900 p-2 rounded-full shadow-lg hover:bg-yellow-300"><i class="fa-solid fa-pen"></i></button>
+                            <button onclick="catalog.delete('${p.id}')" class="bg-red-600 text-white p-2 rounded-full shadow-lg hover:bg-red-500"><i class="fa-solid fa-trash"></i></button>
                         </div>
                     ` : '';
 
-                    const categoryBadge = data.category ? `<span class="absolute top-3 left-3 bg-blue-600 text-white text-[10px] font-bold px-2 py-1 rounded-md uppercase tracking-wide">${data.category}</span>` : '';
+                    // Badge Kategori Warna-Warni
+                    let badgeColor = "bg-slate-700";
+                    if(p.category === 'perkusi') badgeColor = "bg-orange-600";
+                    if(p.category === 'brass') badgeColor = "bg-yellow-600";
+                    if(p.category === 'colorguard') badgeColor = "bg-pink-600";
+                    if(p.category === 'paket') badgeColor = "bg-purple-600";
 
-                    const html = `
-                        <div class="bg-white rounded-2xl shadow-sm hover:shadow-xl transition duration-300 border border-slate-100 overflow-hidden group relative">
-                            ${adminButtons}
-                            ${categoryBadge}
-                            <div class="h-56 bg-gray-100 overflow-hidden relative">
-                                <img src="${data.image || 'https://placehold.co/400x300?text=Produk+SVM'}" alt="${data.name}" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
-                                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition"></div>
+                    const card = `
+                        <div class="bg-white rounded-2xl shadow-sm hover:shadow-2xl transition duration-300 border border-slate-100 overflow-hidden group flex flex-col h-full transform hover:-translate-y-1">
+                            ${adminBtns}
+                            <div class="h-48 overflow-hidden relative bg-slate-100">
+                                <img src="${p.image || 'https://placehold.co/400x400?text=No+Image'}" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                                <div class="absolute top-3 left-3 ${badgeColor} text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wide shadow-md">
+                                    ${p.category}
+                                </div>
                             </div>
-                            <div class="p-6">
-                                <h3 class="text-lg font-bold text-slate-900 mb-1 leading-tight">${data.name}</h3>
-                                <p class="text-blue-600 font-extrabold text-xl mb-3">${data.price}</p>
-                                <p class="text-slate-500 text-sm mb-4 line-clamp-2 h-10">${data.description}</p>
-                                <a href="https://wa.me/6283812113160?text=Halo%20SVM%2C%20saya%20tertarik%20produk%3A%20${encodeURIComponent(data.name)}" target="_blank" class="block w-full py-3 bg-slate-900 text-white text-center rounded-xl font-bold hover:bg-blue-600 transition shadow-lg transform active:scale-95">
-                                    <i class="fa-brands fa-whatsapp mr-1"></i> Pesan Sekarang
+                            <div class="p-5 flex flex-col flex-grow">
+                                <h3 class="font-bold text-slate-900 text-lg leading-tight mb-2 line-clamp-2">${p.name}</h3>
+                                <p class="text-blue-600 font-extrabold text-xl mb-3">${p.price}</p>
+                                <div class="w-full h-px bg-slate-100 mb-3"></div>
+                                <p class="text-slate-500 text-xs mb-4 flex-grow line-clamp-3 leading-relaxed">${p.description}</p>
+                                <a href="https://wa.me/6283812113160?text=Halo%20SVM,%20saya%20tertarik%20produk%20${encodeURIComponent(p.name)}" target="_blank" class="mt-auto w-full py-2.5 bg-slate-900 text-white rounded-xl font-bold hover:bg-blue-600 transition flex items-center justify-center gap-2 shadow-lg group-hover:shadow-blue-500/30">
+                                    <i class="fa-brands fa-whatsapp"></i> Order / Nego
                                 </a>
                             </div>
                         </div>
                     `;
-                    productGrid.innerHTML += html;
+                    grid.innerHTML += card;
                 });
-            } catch (error) {
-                console.error("Error loading products:", error);
-                loading.innerHTML = '<p class="text-red-500">Gagal memuat data. Cek koneksi internet/konfigurasi.</p>';
-            }
-        }
+            },
 
-        // Fungsi Simpan/Tambah Produk
-        window.saveProduct = async () => {
-            const id = document.getElementById('editDocId').value;
-            const name = document.getElementById('prodName').value;
-            const category = document.getElementById('prodCategory').value;
-            const price = document.getElementById('prodPrice').value;
-            const desc = document.getElementById('prodDesc').value;
-            const img = document.getElementById('prodImg').value;
+            filter: (category) => {
+                document.querySelectorAll('.tab-btn').forEach(btn => {
+                    btn.classList.remove('active-tab', 'bg-blue-50', 'text-blue-600');
+                    btn.classList.add('bg-white');
+                });
+                event.target.classList.add('active-tab', 'bg-blue-50', 'text-blue-600');
+                event.target.classList.remove('bg-white');
+                
+                const filtered = category === 'all' ? productsCache : productsCache.filter(p => p.category === category);
+                catalog.render(filtered);
+            },
+            
+            search: () => {
+                const keyword = document.getElementById('searchCatalog').value.toLowerCase();
+                const filtered = productsCache.filter(p => p.name.toLowerCase().includes(keyword));
+                catalog.render(filtered);
+            },
 
-            if (!name || !price) {
-                Swal.fire('Eits!', 'Nama dan Harga wajib diisi ya.', 'warning');
-                return;
-            }
-
-            const productData = { name, category, price, description: desc, image: img };
-
-            try {
-                if (id) {
-                    await updateDoc(doc(db, "products", id), productData);
-                    Swal.fire('Berhasil!', 'Produk berhasil diperbarui.', 'success');
-                } else {
-                    await addDoc(collection(db, "products"), productData);
-                    Swal.fire('Mantap!', 'Produk baru ditambahkan ke katalog.', 'success');
+            edit: (id) => {
+                const p = productsCache.find(x => x.id === id);
+                document.getElementById('prodId').value = id;
+                document.getElementById('prodName').value = p.name;
+                document.getElementById('prodPrice').value = p.price;
+                document.getElementById('prodCategory').value = p.category;
+                document.getElementById('prodDesc').value = p.description;
+                if (p.image) {
+                    document.getElementById('imgPreview').src = p.image;
+                    document.getElementById('imgPreview').classList.remove('hidden');
+                    document.getElementById('prodImageBase64').value = p.image;
                 }
-                closeModal('productModal');
-                loadProducts();
-            } catch (e) {
-                console.error(e);
-                Swal.fire('Error', 'Gagal menyimpan data.', 'error');
-            }
-        }
+                ui.showProductModal();
+            },
 
-        // Fungsi Hapus Produk
-        window.deleteProduct = async (id) => {
-            const result = await Swal.fire({
-                title: 'Hapus produk ini?',
-                text: "Data akan hilang selamanya loh.",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#d33',
-                confirmButtonText: 'Ya, Hapus!'
-            });
+            delete: async (id) => {
+                // Prevent deleting hardcoded default data to avoid errors if not logged in database
+                if(!id.startsWith("d") && confirm('Hapus permanen?')) {
+                    await deleteDoc(doc(db, "products", id));
+                    catalog.load();
+                } else if (id.startsWith("d")) {
+                    Swal.fire('Info', 'Data default tidak bisa dihapus, hanya data database.', 'info');
+                }
+            },
 
-            if (result.isConfirmed) {
-                await deleteDoc(doc(db, "products", id));
-                Swal.fire('Terhapus!', 'Produk sudah dihapus.', 'success');
-                loadProducts();
-            }
-        }
+            saveProduct: async () => {
+                const id = document.getElementById('prodId').value;
+                const data = {
+                    name: document.getElementById('prodName').value,
+                    price: document.getElementById('prodPrice').value,
+                    category: document.getElementById('prodCategory').value,
+                    description: document.getElementById('prodDesc').value,
+                    image: document.getElementById('prodImageBase64').value
+                };
 
-        // Fungsi Edit Produk (Populate Modal)
-        window.editProduct = async (id) => {
-            const docSnap = await getDoc(doc(db, "products", id));
-            if (docSnap.exists()) {
-                const data = docSnap.data();
-                document.getElementById('editDocId').value = id;
-                document.getElementById('prodName').value = data.name;
-                document.getElementById('prodCategory').value = data.category || 'Brass';
-                document.getElementById('prodPrice').value = data.price;
-                document.getElementById('prodDesc').value = data.description;
-                document.getElementById('prodImg').value = data.image;
-                document.getElementById('modalTitle').innerText = "Edit Produk";
-                document.getElementById('productModal').classList.remove('hidden');
-                document.getElementById('productModal').classList.add('flex');
+                if(!data.name) return Swal.fire('Gagal', 'Nama Produk wajib diisi', 'warning');
+
+                try {
+                    // Check if it's default data being edited -> Create new entry instead
+                    if (id && !id.startsWith("d")) {
+                        await updateDoc(doc(db, "products", id), data);
+                    } else {
+                        await addDoc(collection(db, "products"), data);
+                    }
+                    ui.closeModal('productModal');
+                    catalog.load();
+                    Swal.fire('Sukses', 'Produk tersimpan!', 'success');
+                } catch (e) { Swal.fire('Error', e.message, 'error'); }
             }
         };
 
-        // --- HERO EDITING ---
-        async function loadHeroConfig() {
-            try {
-                const docSnap = await getDoc(doc(db, "config", "hero"));
-                if (docSnap.exists()) {
-                    const data = docSnap.data();
-                    if(data.title) document.getElementById('heroTitle').innerHTML = data.title;
-                    if(data.desc) document.getElementById('heroDesc').innerText = data.desc;
+        // --- SCHOOL SYSTEM ---
+        window.schools = {
+            load: async () => {
+                const list = document.getElementById('schoolList');
+                list.innerHTML = '';
+                const defaults = ["SMAN 20 Batam", "MTsN 1 Batam", "MIN 1 Batam", "SDN 006 Sei Beduk", "SMP Al-Azhar Batam", "SMAN 3 Batam", "SMK Kartini Batam"];
+                
+                try {
+                    const snap = await getDocs(collection(db, "schools"));
+                    if(snap.empty) defaults.forEach(s => schools.appendHTML(s));
+                    else snap.forEach(doc => schools.appendHTML(doc.data().name, doc.id));
+                } catch(e) { defaults.forEach(s => schools.appendHTML(s)); }
+            },
+            appendHTML: (name, id = null) => {
+                const btn = currentUser && id ? `<button onclick="schools.remove('${id}')" class="text-red-400 ml-auto text-xs hover:text-red-600"><i class="fa-solid fa-trash"></i></button>` : '';
+                document.getElementById('schoolList').innerHTML += `<li class="flex items-center text-slate-600 bg-slate-50 p-3 rounded-lg border-l-4 border-blue-500 text-sm font-semibold hover:bg-white hover:shadow-md transition"><i class="fa-solid fa-check-circle text-green-500 mr-3"></i> ${name} ${btn}</li>`;
+            },
+            remove: async (id) => {
+                if(confirm('Hapus sekolah ini?')) {
+                    await deleteDoc(doc(db, "schools", id));
+                    schools.load();
                 }
-            } catch (e) { console.log("Config hero belum ada, pakai default."); }
-        }
-        loadHeroConfig();
-
-        function enableHeroEditing(enable) {
-            const elements = document.querySelectorAll('.editable-text');
-            elements.forEach(el => {
-                el.contentEditable = enable;
-                if(enable) el.classList.add('editable-active');
-                else el.classList.remove('editable-active');
-            });
-        }
-
-        window.saveHeroConfig = async () => {
-            const title = document.getElementById('heroTitle').innerHTML;
-            const desc = document.getElementById('heroDesc').innerText;
-            try {
-                await setDoc(doc(db, "config", "hero"), { title, desc });
-                Swal.fire('Tersimpan', 'Teks halaman depan berhasil diupdate!', 'success');
-            } catch (e) { Swal.fire('Gagal', e.message, 'error'); }
-        }
-
-        // --- AUTH FUNCTIONS ---
-        window.login = async () => {
-            const email = document.getElementById('email').value;
-            const pass = document.getElementById('password').value;
-            try {
-                await signInWithEmailAndPassword(auth, email, pass);
-                closeModal('loginModal');
-            } catch (error) {
-                Swal.fire('Login Gagal', 'Email atau Password salah.', 'error');
             }
+        };
+
+        // --- ADMIN CONFIG TEXT ---
+        window.admin = {
+            saveAllChanges: async () => {
+                const updates = {};
+                document.querySelectorAll('.editable').forEach(el => updates[el.id] = el.innerHTML);
+                try {
+                    await setDoc(doc(db, "config", "content"), updates);
+                    Swal.fire('Tersimpan', 'Perubahan teks berhasil disimpan!', 'success');
+                } catch(e) { Swal.fire('Error', 'Gagal menyimpan config.', 'error'); }
+            },
+            loadTextConfig: async () => {
+                try {
+                    const docSnap = await getDoc(doc(db, "config", "content"));
+                    if(docSnap.exists()) {
+                        const data = docSnap.data();
+                        for (const [key, val] of Object.entries(data)) {
+                            const el = document.getElementById(key);
+                            if(el) el.innerHTML = val;
+                        }
+                    }
+                } catch(e) {}
+            },
+            addSchool: async () => {
+                const { value: name } = await Swal.fire({ input: 'text', inputLabel: 'Nama Sekolah', showCancelButton: true });
+                if (name) {
+                    await addDoc(collection(db, "schools"), { name });
+                    schools.load();
+                }
+            }
+        };
+
+        // --- UI UTILS & DRAG DROP ---
+        window.ui = {
+            showLoginModal: () => document.getElementById('loginModal').classList.remove('hidden'),
+            showProductModal: () => document.getElementById('productModal').classList.remove('hidden'),
+            closeModal: (id) => {
+                document.getElementById(id).classList.add('hidden');
+                if(id === 'productModal') {
+                    document.getElementById('prodId').value = '';
+                    document.getElementById('prodName').value = '';
+                    document.getElementById('prodPrice').value = '';
+                    document.getElementById('prodDesc').value = '';
+                    document.getElementById('imgPreview').classList.add('hidden');
+                    document.getElementById('prodImageBase64').value = '';
+                }
+            }
+        };
+
+        const dropZone = document.getElementById('dropZone');
+        const fileInput = document.getElementById('fileInput');
+
+        dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('dragover'); });
+        dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('dragover');
+            handleFile(e.dataTransfer.files[0]);
+        });
+        fileInput.addEventListener('change', (e) => handleFile(e.target.files[0]));
+
+        function handleFile(file) {
+            if (!file || !file.type.startsWith('image/')) return Swal.fire('Error', 'File harus gambar!', 'error');
+            if (file.size > 500000) return Swal.fire('Size Limit', 'Gambar terlalu besar! Max 500KB.', 'warning');
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                document.getElementById('imgPreview').src = e.target.result;
+                document.getElementById('imgPreview').classList.remove('hidden');
+                document.getElementById('prodImageBase64').value = e.target.result;
+            };
+            reader.readAsDataURL(file);
         }
 
-        window.logout = () => signOut(auth);
+        // START APP
+        router.navigate('home');
 
-        // --- UI HELPERS ---
-        window.showLoginModal = () => {
-            document.getElementById('loginModal').classList.remove('hidden');
-            document.getElementById('loginModal').classList.add('flex');
-        }
-        window.showAddProductModal = () => {
-            document.getElementById('editDocId').value = '';
-            document.getElementById('prodName').value = '';
-            document.getElementById('prodPrice').value = '';
-            document.getElementById('prodDesc').value = '';
-            document.getElementById('prodImg').value = '';
-            document.getElementById('modalTitle').innerText = "Tambah Produk Baru";
-            document.getElementById('productModal').classList.remove('hidden');
-            document.getElementById('productModal').classList.add('flex');
-        }
-        window.closeModal = (id) => {
-            document.getElementById(id).classList.add('hidden');
-            document.getElementById(id).classList.remove('flex');
-        }
     </script>
 </body>
 </html>
-
