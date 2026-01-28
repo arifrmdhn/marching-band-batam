@@ -3,362 +3,650 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PT. SVM - Pusat Marching Band & Drumband Terbaik Batam</title>
     
-    <!-- SEO UTAMA: TARGET "ALAT MUSIK BATAM" -->
-    <title>Toko Alat Musik Batam & Marching Band Terlengkap - Pusat Drumband Kepri</title>
-    <meta name="description" content="Pusat jual alat musik Batam, marching band, drumband sekolah, dan alat tiup terlengkap di Kepulauan Riau. Harga distributor, kualitas terbaik, garansi resmi.">
-    <meta name="keywords" content="alat musik batam, toko alat musik batam, jual marching band batam, drumband batam, alat musik sekolah batam, toko gitar batam">
-    <meta name="author" content="Marching Band Batam Official">
-    <meta name="robots" content="index, follow">
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="PT. Svara Vanguard Management (SVM). Pusat jual alat marching band, drumband sekolah, dan jasa pelatihan profesional di Batam & Kepri. Distributor resmi & bergaransi.">
+    <meta name="keywords" content="alat marching band batam, toko drumband batam, pelatih marching band batam, service alat musik batam, color guard batam">
 
-    <!-- Open Graph untuk Social Media -->
-    <meta property="og:title" content="Toko Alat Musik Batam & Marching Band Terlengkap">
-    <meta property="og:description" content="Supplier resmi alat marching band dan drumband sekolah di Batam. Cek katalog kami sekarang!">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://marchingbandbatam.com">
-    <meta property="og:image" content="https://via.placeholder.com/1200x630/2563eb/ffffff?text=Alat+Musik+Batam">
-
-    <!-- Tailwind CSS (via CDN untuk demo, production gunakan build process) -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Font Awesome untuk Ikon -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- SweetAlert2 (Popup Cantik) -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
     <style>
-        body { font-family: 'Inter', sans-serif; }
-        .hero-pattern {
-            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%232563eb' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        body { font-family: 'Poppins', sans-serif; }
+        .editable-active { border: 2px dashed #2563eb; background-color: #eff6ff; padding: 2px; cursor: text; }
+        .loader { border-top-color: #3498db; -webkit-animation: spinner 1.5s linear infinite; animation: spinner 1.5s linear infinite; }
+        @keyframes spinner { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        
+        /* Hero Pattern */
+        .hero-bg {
+            background: linear-gradient(rgba(17, 24, 39, 0.8), rgba(17, 24, 39, 0.9)), url('https://images.unsplash.com/photo-1511192336575-5a79af67a629?q=80&w=2000&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
         }
-        .whatsapp-float {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 100;
-            animation: pulse 2s infinite;
-        }
-        @keyframes pulse {
-            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
-            70% { transform: scale(1.1); box-shadow: 0 0 0 10px rgba(37, 211, 102, 0); }
-            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        
+        .gradient-text {
+            background: linear-gradient(to right, #60a5fa, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
     </style>
-
-    <!-- SCHEMA MARKUP: LOCAL BUSINESS (WAJIB UNTUK LOCAL SEO) -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "MusicStore",
-      "name": "Pusat Alat Marching Band Batam",
-      "image": "https://via.placeholder.com/800x600",
-      "@id": "https://marchingbandbatam.com",
-      "url": "https://marchingbandbatam.com",
-      "telephone": "+6281234567890",
-      "priceRange": "$$",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Ruko Batam Center Blok A No. 1",
-        "addressLocality": "Batam Kota",
-        "addressRegion": "Kepulauan Riau",
-        "postalCode": "29444",
-        "addressCountry": "ID"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 1.1301,
-        "longitude": 104.0529
-      },
-      "openingHoursSpecification": {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday"
-        ],
-        "opens": "09:00",
-        "closes": "17:00"
-      },
-      "sameAs": [
-        "https://www.facebook.com/namatoko",
-        "https://www.instagram.com/namatoko"
-      ]
-    }
-    </script>
 </head>
 <body class="bg-slate-50 text-slate-800">
 
-    <!-- HEADER / NAVIGASI -->
-    <nav class="bg-white shadow-md fixed w-full top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16">
-                <div class="flex items-center">
-                    <i class="fa-solid fa-drum text-blue-600 text-2xl mr-2"></i>
-                    <span class="font-bold text-xl text-slate-900 tracking-tight">MarchingBatam<span class="text-blue-600">WEB.ID</span></span>
+    <!-- NAVBAR -->
+    <nav class="bg-white/95 backdrop-blur-md shadow-md fixed w-full top-0 z-40 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="bg-blue-600 text-white p-2 rounded-lg">
+                    <i class="fa-solid fa-music text-xl"></i>
                 </div>
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="#home" class="text-slate-600 hover:text-blue-600 font-medium">Beranda</a>
-                    <a href="#katalog" class="text-slate-600 hover:text-blue-600 font-medium">Katalog Marching</a>
-                    <a href="#sekolah" class="text-slate-600 hover:text-blue-600 font-medium">Alat Sekolah</a>
-                    <a href="#lokasi" class="text-slate-600 hover:text-blue-600 font-medium">Lokasi</a>
-                    <a href="#blog" class="text-slate-600 hover:text-blue-600 font-medium">Artikel</a>
+                <div>
+                    <h1 class="font-extrabold text-lg leading-tight tracking-tight text-slate-900">MarchingBatam<span class="text-blue-600">.web.id</span></h1>
+                    <p class="text-[10px] text-slate-500 font-semibold tracking-wider">BY PT. SVARA VANGUARD MANAGEMENT</p>
                 </div>
-                <div class="flex items-center">
-                    <a href="https://wa.me/6281234567890?text=Halo%2C%20saya%20tertarik%20dengan%20alat%20marching%20band" class="bg-blue-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-700 transition shadow-lg">
-                        <i class="fa-brands fa-whatsapp mr-1"></i> Pesan
-                    </a>
-                </div>
+            </div>
+            
+            <div class="hidden md:flex space-x-8 text-sm font-semibold">
+                <a href="#home" class="text-slate-600 hover:text-blue-600 transition">Beranda</a>
+                <a href="#keunggulan" class="text-slate-600 hover:text-blue-600 transition">Kenapa Kami?</a>
+                <a href="#katalog" class="text-slate-600 hover:text-blue-600 transition">Produk</a>
+                <a href="#layanan" class="text-slate-600 hover:text-blue-600 transition">Layanan & Pelatihan</a>
+                <a href="#lokasi" class="text-slate-600 hover:text-blue-600 transition">Lokasi</a>
+            </div>
+
+            <div>
+                <button id="btnLogin" onclick="showLoginModal()" class="text-xs font-bold text-slate-400 hover:text-blue-600 border border-slate-200 px-3 py-1 rounded-full transition">
+                    <i class="fa-solid fa-lock mr-1"></i> Admin Area
+                </button>
+                <button id="btnLogout" onclick="logout()" class="hidden text-xs font-bold text-red-500 hover:text-red-700 px-3 py-1">
+                    <i class="fa-solid fa-right-from-bracket"></i> Logout
+                </button>
             </div>
         </div>
     </nav>
 
-    <!-- HERO SECTION: KEYWORD UTAMA -->
-    <section id="home" class="pt-24 pb-12 md:pt-32 md:pb-20 bg-white hero-pattern">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center">
-            <div class="md:w-1/2 mb-10 md:mb-0">
-                <div class="inline-block bg-blue-100 text-blue-800 py-1 px-3 rounded-full text-sm font-semibold mb-4">
-                    📍 Pusat Alat Musik No. 1 di Batam
-                </div>
-                <!-- H1 WAJIB MENGANDUNG KEYWORD -->
-                <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 leading-tight mb-6">
-                    Distributor <span class="text-blue-600">Alat Musik & Marching Band</span> Terlengkap di Batam
-                </h1>
-                <p class="text-lg text-slate-600 mb-8 leading-relaxed">
-                    Menyediakan paket lengkap drumband sekolah, alat tiup, dan perkusi kualitas impor. Harga distributor khusus untuk sekolah dan instansi di Batam & Kepulauan Riau.
-                </p>
-                <div class="flex flex-col sm:flex-row gap-4">
-                    <a href="#katalog" class="px-8 py-3 bg-blue-600 text-white rounded-lg font-bold shadow-lg hover:bg-blue-700 text-center transition">
-                        Lihat Katalog Produk
-                    </a>
-                    <a href="#lokasi" class="px-8 py-3 bg-white border-2 border-slate-200 text-slate-700 rounded-lg font-bold hover:border-blue-600 hover:text-blue-600 text-center transition">
-                        Kunjungi Toko Kami
-                    </a>
-                </div>
+    <!-- HERO SECTION (High Impact) -->
+    <section id="home" class="hero-bg min-h-screen flex items-center justify-center text-center pt-20 px-4">
+        <div class="max-w-5xl mx-auto text-white">
+            <div class="inline-flex items-center gap-2 bg-blue-600/20 border border-blue-500/30 text-blue-300 px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest mb-6 backdrop-blur-sm">
+                <i class="fa-solid fa-trophy"></i> Juara Umum MIMAC Malaysia 2024
             </div>
-            <div class="md:w-1/2 md:pl-10">
-                <!-- Placeholder Image (Gunakan gambar asli produk nanti) -->
-                <div class="relative rounded-2xl overflow-hidden shadow-2xl">
-                    <img src="https://via.placeholder.com/600x400/1e293b/ffffff?text=Alat+Marching+Band+Batam" alt="Toko Alat Musik Marching Band di Batam" class="w-full h-auto object-cover transform hover:scale-105 transition duration-500">
-                    <div class="absolute bottom-0 left-0 bg-black/60 w-full p-4">
-                        <p class="text-white font-semibold"><i class="fa-solid fa-check-circle text-green-400 mr-2"></i> Ready Stock di Batam Center</p>
+            
+            <h2 id="heroTitle" class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight editable-text drop-shadow-lg" data-field="heroTitle">
+                Solusi Lengkap <span class="text-blue-400">Marching Band Sekolah</span> & Pelatihan Juara
+            </h2>
+            
+            <p id="heroDesc" class="text-lg md:text-xl text-slate-300 mb-10 max-w-3xl mx-auto leading-relaxed editable-text" data-field="heroDesc">
+                PT. Svara Vanguard Management hadir untuk sekolah yang lelah dengan alat murahan. Kami menyediakan alat drumband berkualitas, legalitas resmi, hingga pendampingan pelatih berstandar internasional.
+            </p>
+            
+            <!-- Admin Save Button -->
+            <button id="btnSaveHero" onclick="saveHeroConfig()" class="hidden bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-full font-bold shadow-lg mb-6 transform hover:scale-105 transition">
+                <i class="fa-solid fa-save"></i> Simpan Perubahan Teks
+            </button>
+
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="https://wa.me/6283812113160?text=Halo%20PT.SVM%2C%20saya%20mau%20konsultasi%20pengadaan%20alat%20marching%20band" class="bg-blue-600 text-white px-8 py-4 rounded-full font-bold shadow-xl hover:bg-blue-500 hover:shadow-2xl hover:-translate-y-1 transition duration-300 flex items-center justify-center gap-2">
+                    <i class="fa-brands fa-whatsapp text-xl"></i> Konsultasi Gratis
+                </a>
+                <a href="#katalog" class="bg-white/10 backdrop-blur-sm border border-white/20 text-white px-8 py-4 rounded-full font-bold hover:bg-white/20 transition duration-300">
+                    Lihat Katalog Produk
+                </a>
+            </div>
+
+            <!-- Trust Badge -->
+            <div class="mt-12 pt-8 border-t border-white/10 grid grid-cols-2 md:grid-cols-4 gap-6 text-slate-400 text-sm font-semibold uppercase tracking-wider">
+                <div><i class="fa-solid fa-building-columns mr-2 text-blue-500"></i> Legalitas PT Resmi</div>
+                <div><i class="fa-solid fa-wrench mr-2 text-blue-500"></i> Garansi Service</div>
+                <div><i class="fa-solid fa-truck-fast mr-2 text-blue-500"></i> Pengiriman Cepat</div>
+                <div><i class="fa-solid fa-medal mr-2 text-blue-500"></i> Kualitas Kontes</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MASALAH & SOLUSI (Psychological Trigger) -->
+    <section id="keunggulan" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex flex-col md:flex-row gap-12 items-center">
+                <div class="md:w-1/2">
+                    <h3 class="text-blue-600 font-bold uppercase tracking-wide text-sm mb-2">Masalah Sekolah</h3>
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-6">Pernah Mengalami Ini di Sekolah Anda?</h2>
+                    <ul class="space-y-4">
+                        <li class="flex items-start bg-red-50 p-4 rounded-lg border-l-4 border-red-500">
+                            <i class="fa-solid fa-xmark text-red-500 mt-1 mr-3 text-lg"></i>
+                            <div>
+                                <h4 class="font-bold text-red-700">Alat Cepat Rusak</h4>
+                                <p class="text-sm text-red-600/80">Baru beli satu semester, snare drum sudah jebol dan brass berkarat.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start bg-red-50 p-4 rounded-lg border-l-4 border-red-500">
+                            <i class="fa-solid fa-xmark text-red-500 mt-1 mr-3 text-lg"></i>
+                            <div>
+                                <h4 class="font-bold text-red-700">Harga Mahal, Kualitas Rendah</h4>
+                                <p class="text-sm text-red-600/80">Anggaran sekolah besar, tapi barang yang datang tidak sesuai spesifikasi.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start bg-red-50 p-4 rounded-lg border-l-4 border-red-500">
+                            <i class="fa-solid fa-xmark text-red-500 mt-1 mr-3 text-lg"></i>
+                            <div>
+                                <h4 class="font-bold text-red-700">Bingung Cari Pelatih</h4>
+                                <p class="text-sm text-red-600/80">Punya alat bagus tapi tidak ada yang bisa melatih siswa dengan benar.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="md:w-1/2 relative">
+                    <div class="absolute -inset-4 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-2xl opacity-20 blur-lg transform rotate-2"></div>
+                    <div class="relative bg-white p-8 rounded-2xl shadow-xl border border-slate-100">
+                        <h3 class="text-2xl font-bold text-slate-900 mb-6">PT. SVM Hadir Sebagai Solusi</h3>
+                        <p class="text-slate-600 mb-6">Kami bukan sekadar penjual, kami adalah praktisi marching band yang mengerti kebutuhan sekolah.</p>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-green-600 mr-4 font-bold"><i class="fa-solid fa-check"></i></div>
+                                <span class="font-semibold text-slate-700">Barang Original & Tahan Lama</span>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-green-600 mr-4 font-bold"><i class="fa-solid fa-check"></i></div>
+                                <span class="font-semibold text-slate-700">Harga Kompetitif Institusi Pendidikan</span>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-green-600 mr-4 font-bold"><i class="fa-solid fa-check"></i></div>
+                                <span class="font-semibold text-slate-700">Paket Dukungan Pelatih Profesional</span>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-green-600 mr-4 font-bold"><i class="fa-solid fa-check"></i></div>
+                                <span class="font-semibold text-slate-700">Layanan Service Cepat di Batam</span>
+                            </div>
+                        </div>
+
+                        <div class="mt-8 p-4 bg-blue-50 rounded-lg text-center">
+                            <p class="text-sm font-semibold text-blue-800">"Kualitas alat menentukan 50% kemenangan kompetisi."</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- WHY US: TRUST SIGNAL -->
-    <section class="py-12 bg-slate-50 border-y border-slate-200">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
-                <div class="p-4">
-                    <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 text-blue-600 text-xl">
-                        <i class="fa-solid fa-truck-fast"></i>
-                    </div>
-                    <h3 class="font-bold text-lg mb-2">Pengiriman Cepat</h3>
-                    <p class="text-sm text-slate-600">ongkir ringan area Batam Kota untuk pembelian paket sekolah.</p>
+    <!-- TRUST & CLIENTS (Authority) -->
+    <section class="py-12 bg-slate-900 text-white overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <h3 class="text-slate-400 font-bold uppercase text-sm tracking-widest mb-8">Dipercaya Oleh Sekolah & Institusi Terbaik</h3>
+            <div class="flex flex-wrap justify-center gap-4 md:gap-8 opacity-70">
+                <!-- List Klien dari File -->
+                <span class="px-4 py-2 border border-slate-700 rounded-full">SMAN 20 BATAM</span>
+                <span class="px-4 py-2 border border-slate-700 rounded-full">MTsN 1 BATAM</span>
+                <span class="px-4 py-2 border border-slate-700 rounded-full">MIN 1 BATAM</span>
+                <span class="px-4 py-2 border border-slate-700 rounded-full">SMPN 56 BATAM</span>
+                <span class="px-4 py-2 border border-slate-700 rounded-full">SDN 008 SEI BEDUK</span>
+                <span class="px-4 py-2 border border-slate-700 rounded-full">SMP AL-AZHAR BATAM</span>
+            </div>
+            
+            <div class="mt-10 bg-gradient-to-r from-yellow-600 to-yellow-500 inline-block px-6 py-2 rounded-lg shadow-lg transform rotate-1 hover:rotate-0 transition">
+                <i class="fa-solid fa-star text-yellow-100 mr-2"></i>
+                <span class="font-bold text-white">Prestasi: Juara Umum MIMAC Malaysia & Langgam Indonesia</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- KATALOG PRODUK -->
+    <section id="katalog" class="py-20 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12">
+                <div class="md:w-2/3">
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">Katalog Produk Resmi</h2>
+                    <p class="text-slate-600">Menyediakan segala kebutuhan mulai dari <span class="font-semibold text-blue-600">Brass, Percussion, Color Guard,</span> hingga Seragam. Semua produk dapat disesuaikan dengan budget sekolah.</p>
                 </div>
-                <div class="p-4">
-                    <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 text-blue-600 text-xl">
-                        <i class="fa-solid fa-medal"></i>
+                <!-- Tombol Tambah Produk (Hanya Admin) -->
+                <button id="btnAddProduct" onclick="showAddProductModal()" class="hidden mt-4 md:mt-0 bg-blue-600 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-blue-700 transition">
+                    <i class="fa-solid fa-plus mr-2"></i> Tambah Produk Baru
+                </button>
+            </div>
+
+            <!-- Loading Spinner -->
+            <div id="loading" class="text-center py-20">
+                <div class="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-16 w-16 mb-4 mx-auto"></div>
+                <h2 class="text-center text-gray-500 text-xl font-semibold">Sedang Mengambil Data Produk...</h2>
+            </div>
+
+            <!-- Grid Produk -->
+            <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- Produk akan muncul di sini secara otomatis dari Database Firebase -->
+            </div>
+            
+            <div class="mt-12 text-center">
+                 <p class="text-slate-500 italic mb-4">Tidak menemukan yang Anda cari? Kami bisa pesankan khusus!</p>
+                 <a href="https://wa.me/6283812113160" class="inline-block text-blue-600 font-bold hover:underline">Hubungi Admin untuk Custom Order <i class="fa-solid fa-arrow-right ml-1"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- LAYANAN & PELATIHAN -->
+    <section id="layanan" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">Layanan Profesional SVM</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Layanan 1 -->
+                <div class="group p-8 border border-slate-100 rounded-2xl hover:shadow-2xl transition duration-300 hover:-translate-y-2 bg-slate-50 hover:bg-white">
+                    <div class="w-16 h-16 bg-blue-100 rounded-xl flex items-center justify-center text-blue-600 text-2xl mb-6 group-hover:bg-blue-600 group-hover:text-white transition">
+                        <i class="fa-solid fa-chalkboard-user"></i>
                     </div>
-                    <h3 class="font-bold text-lg mb-2">Kualitas Impor</h3>
-                    <p class="text-sm text-slate-600">Barang original dengan standar kompetisi nasional.</p>
+                    <h3 class="text-xl font-bold mb-3">Pelatihan & Coaching</h3>
+                    <p class="text-slate-600 text-sm mb-4">Kami menyediakan pelatih bersertifikat untuk Brass, Percussion, dan Color Guard. Kurikulum standar kompetisi nasional & internasional.</p>
                 </div>
-                <div class="p-4">
-                    <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 text-blue-600 text-xl">
+
+                <!-- Layanan 2 -->
+                <div class="group p-8 border border-slate-100 rounded-2xl hover:shadow-2xl transition duration-300 hover:-translate-y-2 bg-slate-50 hover:bg-white">
+                    <div class="w-16 h-16 bg-orange-100 rounded-xl flex items-center justify-center text-orange-600 text-2xl mb-6 group-hover:bg-orange-600 group-hover:text-white transition">
                         <i class="fa-solid fa-screwdriver-wrench"></i>
                     </div>
-                    <h3 class="font-bold text-lg mb-2">Service Center</h3>
-                    <p class="text-sm text-slate-600">Terima perbaikan alat musik drumband di Batam.</p>
-                </div>
-                <div class="p-4">
-                    <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 text-blue-600 text-xl">
-                        <i class="fa-solid fa-file-invoice"></i>
-                    </div>
-                    <h3 class="font-bold text-lg mb-2">Legalitas Lengkap</h3>
-                    <p class="text-sm text-slate-600">Menerima pengadaan via SIPLAH atau faktur resmi sekolah.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- KATALOG UTAMA (SEO PRODUCTS) -->
-    <section id="katalog" class="py-16 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-slate-900 mb-4">Katalog Alat Musik Terlaris</h2>
-                <p class="text-slate-600 max-w-2xl mx-auto">Kami menyediakan berbagai kebutuhan alat musik untuk TK, SD, SMP, SMA hingga Universitas di Batam.</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Product 1 -->
-                <div class="group bg-white rounded-xl shadow-lg hover:shadow-xl transition border border-slate-100 overflow-hidden">
-                    <div class="h-48 bg-slate-200 relative overflow-hidden">
-                        <img src="https://lh3.googleusercontent.com/sitesv/APaQ0SRTayrs_K8BxxMjG2C5aIUVJ86Y2ZTh-xGauIWlckHbPqNRr4BHsGYtUjDKH0wE2A5q8a193-QdJc2GKy2EMqeWXHYAS_jCeB7FR3DPw16t9Wkvt9A5o5BOoWfTM1xhCc8463X5T7_Ym2G6p54xbVzePGzDuroyi7EH8dKHS9wiOhL2UyabbIoKj0_7KPDAHH4-3kzg0sPC7it5DoFijySje6a1Sv3rqSoNaas=w1280" alt="Jual Snare Drum HTS Batam" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-                        <div class="absolute top-2 right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">Best Seller</div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2 text-slate-900">Paket Lengkap Alat Drumband SD-SMP-SMA</h3>
-                        <p class="text-slate-500 text-sm mb-4">1 set lengkap untuk kebutuhan band anda.</p>
-                        <ul class="text-sm text-slate-600 mb-4 space-y-1">
-                            <li><i class="fa-solid fa-check text-blue-500 mr-2"></i>gratis konsultasi</li>
-                            <li><i class="fa-solid fa-check text-blue-500 mr-2"></i>penawaran menguntungkan</li>
-                            <li><i class="fa-solid fa-check text-blue-500 mr-2"></i>Garansi 1 Tahun</li>
-                        </ul>
-                        <a href="https://wa.me/6283812113160?text=Info%20paket%20Drumband%20min" class="block w-full py-2 bg-slate-900 text-white text-center rounded font-semibold hover:bg-slate-800 transition">
-                            Cek Harga WhatsApp
-                        </a>
-                    </div>
+                    <h3 class="text-xl font-bold mb-3">Service & Reparasi</h3>
+                    <p class="text-slate-600 text-sm mb-4">Jangan buang alat rusak Anda! Tim teknisi kami bisa memperbaiki drum jebol, brass penyok, atau sparepart yang hilang.</p>
                 </div>
 
-                <!-- Product 2 -->
-                <div class="group bg-white rounded-xl shadow-lg hover:shadow-xl transition border border-slate-100 overflow-hidden">
-                    <div class="h-48 bg-slate-200 relative overflow-hidden">
-                        <img src="https://via.placeholder.com/400x300?text=Paket+Drumband+SD" alt="Paket Drumband SD Batam" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                <!-- Layanan 3 -->
+                <div class="group p-8 border border-slate-100 rounded-2xl hover:shadow-2xl transition duration-300 hover:-translate-y-2 bg-slate-50 hover:bg-white">
+                    <div class="w-16 h-16 bg-purple-100 rounded-xl flex items-center justify-center text-purple-600 text-2xl mb-6 group-hover:bg-purple-600 group-hover:text-white transition">
+                        <i class="fa-solid fa-shirt"></i>
                     </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2 text-slate-900">Paket Lengkap Drumband SD</h3>
-                        <p class="text-slate-500 text-sm mb-4">1 Set lengkap (30 Personil). Snare, Tenor, Bass, Cymbal, Trio, dan Stick Major.</p>
-                        <ul class="text-sm text-slate-600 mb-4 space-y-1">
-                            <li><i class="fa-solid fa-check text-blue-500 mr-2"></i>Bonus Seragam Mayoret</li>
-                            <li><i class="fa-solid fa-check text-blue-500 mr-2"></i>Gratis Ongkir Batam</li>
-                        </ul>
-                        <a href="https://wa.me/6281234567890?text=Info%20Paket%20Drumband%20SD" class="block w-full py-2 bg-slate-900 text-white text-center rounded font-semibold hover:bg-slate-800 transition">
-                            Minta Penawaran
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Product 3 -->
-                <div class="group bg-white rounded-xl shadow-lg hover:shadow-xl transition border border-slate-100 overflow-hidden">
-                    <div class="h-48 bg-slate-200 relative overflow-hidden">
-                        <img src="https://via.placeholder.com/400x300?text=Pianika+Yamaha" alt="Toko Pianika Batam" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2 text-slate-900">Alat Musik Sekolah (Pianika/Gitar)</h3>
-                        <p class="text-slate-500 text-sm mb-4">Sedia Pianika, Gitar Akustik, Rekorder, dan Angklung untuk praktek seni budaya.</p>
-                        <ul class="text-sm text-slate-600 mb-4 space-y-1">
-                            <li><i class="fa-solid fa-check text-blue-500 mr-2"></i>Harga Grosir Sekolah</li>
-                            <li><i class="fa-solid fa-check text-blue-500 mr-2"></i>Original Brand</li>
-                        </ul>
-                        <a href="https://wa.me/6281234567890?text=Info%20Alat%20Musik%20Sekolah" class="block w-full py-2 bg-slate-900 text-white text-center rounded font-semibold hover:bg-slate-800 transition">
-                            Tanya Stok
-                        </a>
-                    </div>
+                    <h3 class="text-xl font-bold mb-3">Konveksi Seragam</h3>
+                    <p class="text-slate-600 text-sm mb-4">Pembuatan seragam pasukan dan color guard dengan desain custom yang modern, bahan nyaman, dan harga terjangkau.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SEO ARTICLE SNIPPET -->
-    <section id="blog" class="py-16 bg-slate-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl font-bold text-slate-900 mb-8">Tips & Artikel Musik</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <article class="bg-white p-6 rounded-lg shadow-sm">
-                    <h3 class="text-xl font-bold text-blue-600 mb-2">Cara Merawat Alat Marching Band Agar Awet di Iklim Batam</h3>
-                    <p class="text-slate-600 mb-4 text-sm">Udara laut Batam yang lembab bisa membuat alat musik cepat berkarat. Simak tips perawatan snare drum dan cymbal berikut ini...</p>
-                    <a href="#" class="text-sm font-bold text-slate-900 hover:text-blue-600 underline">Baca Selengkapnya</a>
-                </article>
-                <article class="bg-white p-6 rounded-lg shadow-sm">
-                    <h3 class="text-xl font-bold text-blue-600 mb-2">Daftar Harga Drumband Sekolah di Batam Tahun 2024</h3>
-                    <p class="text-slate-600 mb-4 text-sm">Sedang menyusun RAB sekolah? Berikut adalah estimasi harga paket drumband TK, SD, hingga SMA untuk wilayah Kepulauan Riau...</p>
-                    <a href="#" class="text-sm font-bold text-slate-900 hover:text-blue-600 underline">Baca Selengkapnya</a>
-                </article>
+    <!-- INSPIRASI & ARTIKEL (Sales Booster) -->
+    <section class="py-20 bg-gradient-to-b from-slate-50 to-white border-t border-slate-200">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-8">Pojok Inspirasi & Edukasi</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
+                <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-blue-500">
+                    <h3 class="font-bold text-lg mb-2">Mengapa Marching Band Penting?</h3>
+                    <p class="text-slate-600 text-sm">Marching band melatih kedisiplinan, kerja sama tim (korps), dan musikalitas siswa secara bersamaan. Ini adalah ekstrakurikuler terlengkap untuk pembentukan karakter.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md border-l-4 border-yellow-500">
+                    <h3 class="font-bold text-lg mb-2">Tips Merawat Brass</h3>
+                    <p class="text-slate-600 text-sm">Selalu bersihkan valve dengan minyak khusus setelah latihan. Udara lembab Batam musuh utama alat tiup, pastikan disimpan di case kering.</p>
+                </div>
+            </div>
+            
+            <div class="mt-10 p-6 bg-blue-900 rounded-2xl text-white relative overflow-hidden">
+                <div class="relative z-10">
+                    <h3 class="text-2xl font-bold mb-2">Ingin Sekolah Anda Berprestasi?</h3>
+                    <p class="mb-4 text-blue-200">Jangan biarkan bakat siswa terhambat alat yang buruk. Konsultasikan kebutuhan Anda sekarang.</p>
+                    <a href="https://wa.me/6283812113160" class="inline-block bg-white text-blue-900 px-6 py-2 rounded-lg font-bold hover:bg-blue-100 transition">Chat via WhatsApp</a>
+                </div>
+                <!-- Decorative Circle -->
+                <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-blue-500 rounded-full opacity-30"></div>
             </div>
         </div>
     </section>
 
-    <!-- LOCAL SEO & CONTACT -->
-    <section id="lokasi" class="py-16 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row bg-slate-900 rounded-2xl overflow-hidden shadow-2xl text-white">
-                <div class="md:w-1/2 p-10 flex flex-col justify-center">
-                    <h2 class="text-3xl font-bold mb-6">Kunjungi Toko Kami di Batam</h2>
+    <!-- LOKASI & KONTAK (Updated Address) -->
+    <section id="lokasi" class="py-12 bg-slate-900 text-slate-300">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div>
+                    <h2 class="text-2xl font-bold text-white mb-6">Hubungi Kami</h2>
                     <div class="space-y-4">
                         <div class="flex items-start">
-                            <i class="fa-solid fa-location-dot mt-1 mr-4 text-blue-400"></i>
-                            <p>Komplek Ykb no 11 blok A, RT 2 RW 11(BENGKONG LAUT), Kota batam, Kepulauan Riau</p>
+                            <i class="fa-solid fa-map-location-dot mt-1 mr-4 text-blue-500 text-xl"></i>
+                            <div>
+                                <h4 class="text-white font-bold">Alamat Kantor & Toko</h4>
+                                <p>Komplek YKB Blok A No. 11, RT 02 / RW 11,<br>Kec. Bengkong, Kota Batam, Kepulauan Riau 29458</p>
+                            </div>
                         </div>
                         <div class="flex items-center">
-                            <i class="fa-brands fa-whatsapp mt-1 mr-4 text-blue-400"></i>
-                            <p>083812113160 (Arif)</p>
+                            <i class="fa-brands fa-whatsapp mt-1 mr-4 text-green-500 text-xl"></i>
+                            <div>
+                                <h4 class="text-white font-bold">WhatsApp / Telepon</h4>
+                                <p>0838-1211-3160 (Bpk. Arif)</p>
+                            </div>
                         </div>
                         <div class="flex items-center">
-                            <i class="fa-solid fa-envelope mt-1 mr-4 text-blue-400"></i>
-                            <p>svaravanguardmanagement@gmail.com</p>
+                            <i class="fa-solid fa-envelope mt-1 mr-4 text-yellow-500 text-xl"></i>
+                            <div>
+                                <h4 class="text-white font-bold">Email Resmi</h4>
+                                <p>svaravanguardmanagement@gmail.com</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="mt-8">
-                        <a href="https://maps.app.goo.gl/qSqUiwgfbGRfaPPU8">
-                            <i class="fa-solid fa-map mr-2"></i> Buka Google Maps
-                        </a>
+                    
+                    <div class="mt-8 flex gap-4">
+                        <a href="https://www.instagram.com/svm_marching" target="_blank" class="w-10 h-10 rounded-full bg-pink-600 flex items-center justify-center text-white hover:scale-110 transition"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://www.youtube.com/channel/UCQpNg7I_p_ExSOvW2ufq4Hg" target="_blank" class="w-10 h-10 rounded-full bg-red-600 flex items-center justify-center text-white hover:scale-110 transition"><i class="fa-brands fa-youtube"></i></a>
                     </div>
                 </div>
-                <!-- Embed Map Placeholder (Ganti src iframe dengan Google Maps Embed asli Anda) -->
-                <div class="md:w-1/2 h-80 md:h-auto bg-slate-700 relative">
-                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.002879220142!2d104.03262877496546!3d1.1584165988305037!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31d9896471d9bf61%3A0x3ba836b339405c33!2sSVM%20Svara%20Vanguard%20Management!5e0!3m2!1sid!2sid!4v1769590606508!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                
+                <div class="rounded-xl overflow-hidden border-2 border-slate-700 h-64 md:h-auto">
+                    <!-- Google Maps Embed yang Mengarah ke Alamat SVM -->
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.0375686523956!2d104.0326290749661!3d1.1584169988307223!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31d9899709923831%3A0x633f814988771489!2sSVM%20Svara%20Vanguard%20Management!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                 </div>
+            </div>
+            
+            <div class="border-t border-slate-800 mt-12 pt-8 text-center text-sm">
+                <p>&copy; 2026 PT. Svara Vanguard Management. All Rights Reserved.</p>
+                <p class="text-xs text-slate-600 mt-1">Website Developed for MarchingBatam.web.id</p>
             </div>
         </div>
     </section>
 
-    <!-- FAQ SECTION (SCHEMA READY) -->
-    <section class="py-12 bg-slate-50">
-        <div class="max-w-4xl mx-auto px-4">
-            <h2 class="text-2xl font-bold text-center mb-8">Pertanyaan Umum (FAQ)</h2>
-            <div class="space-y-4">
-                <details class="bg-white p-4 rounded shadow cursor-pointer">
-                    <summary class="font-bold">Apakah bisa kirim ke Tanjung Pinang atau Bintan?</summary>
-                    <p class="mt-2 text-slate-600">Sangat bisa! Kami melayani pengiriman ke seluruh wilayah Kepulauan Riau termasuk Tanjung Pinang, Bintan, Karimun, hingga Natuna menggunakan ekspedisi kapal roro atau kargo.</p>
-                </details>
-                <details class="bg-white p-4 rounded shadow cursor-pointer">
-                    <summary class="font-bold">Apakah menerima pembayaran via SIPLAH?</summary>
-                    <p class="mt-2 text-slate-600">Ya, toko kami sudah terdaftar sebagai rekanan SIPLAH. Silakan hubungi admin untuk link toko SIPLAH kami.</p>
-                </details>
-                <details class="bg-white p-4 rounded shadow cursor-pointer">
-                    <summary class="font-bold">Di mana alamat lengkap toko alat musik di Batam ini?</summary>
-                    <p class="mt-2 text-slate-600">Kami berlokasi di Batam. Silakan cek Google Maps di bagian Lokasi halaman ini.</p>
-                </details>
+    <!-- MODAL LOGIN ADMIN -->
+    <div id="loginModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden items-center justify-center z-50 transition-opacity">
+        <div class="bg-white p-8 rounded-2xl shadow-2xl w-96 border border-slate-200">
+            <div class="text-center mb-6">
+                <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 text-blue-600 text-2xl">
+                    <i class="fa-solid fa-user-shield"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-slate-900">Login Admin</h2>
+                <p class="text-sm text-slate-500">Masuk untuk mengelola produk & konten.</p>
+            </div>
+            <input type="email" id="email" placeholder="Email Admin" class="w-full p-3 border border-slate-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <input type="password" id="password" placeholder="Password" class="w-full p-3 border border-slate-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <div class="flex justify-end gap-2">
+                <button onclick="closeModal('loginModal')" class="px-4 py-2 text-slate-500 hover:text-slate-800 font-semibold">Batal</button>
+                <button onclick="login()" class="px-6 py-2 bg-blue-600 text-white rounded-lg font-bold hover:bg-blue-700 shadow-lg transition">Masuk</button>
             </div>
         </div>
-    </section>
+    </div>
 
-    <!-- FOOTER -->
-    <footer class="bg-slate-900 text-slate-400 py-8">
-        <div class="max-w-7xl mx-auto px-4 text-center text-sm">
-            <p>&copy; 2024 Toko Alat Musik & Marching Band Batam. All Rights Reserved.</p>
-            <div class="mt-2 space-x-4">
-                <a href="#" class="hover:text-white">Alat Musik Batam</a>
-                <a href="#" class="hover:text-white">Jual Drumband</a>
-                <a href="#" class="hover:text-white">Service Alat Musik</a>
+    <!-- MODAL TAMBAH/EDIT PRODUK -->
+    <div id="productModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm hidden items-center justify-center z-50">
+        <div class="bg-white p-6 rounded-2xl shadow-2xl w-full max-w-md max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-6 border-b pb-4">
+                <h2 id="modalTitle" class="text-xl font-bold text-slate-900">Kelola Produk</h2>
+                <button onclick="closeModal('productModal')" class="text-slate-400 hover:text-red-500"><i class="fa-solid fa-xmark text-xl"></i></button>
             </div>
+            
+            <input type="hidden" id="editDocId">
+            
+            <label class="block text-sm font-bold mb-2 text-slate-700">Nama Produk</label>
+            <input type="text" id="prodName" class="w-full p-3 border border-slate-300 rounded-lg mb-4 focus:ring-2 focus:ring-blue-500 focus:outline-none" placeholder="Contoh: Snare Drum HTS Pearl">
+            
+            <label class="block text-sm font-bold mb-2 text-slate-700">Kategori</label>
+            <select id="prodCategory" class="w-full p-3 border border-slate-300 rounded-lg mb-4 bg-white">
+                <option value="Brass">Brass (Tiup Logam)</option>
+                <option value="Percussion">Percussion (Drum)</option>
+                <option value="ColorGuard">Color Guard (Bendera/Senapan)</option>
+                <option value="Uniform">Seragam / Aksesoris</option>
+            </select>
+            
+            <label class="block text-sm font-bold mb-2 text-slate-700">Harga (Rp)</label>
+            <input type="text" id="prodPrice" class="w-full p-3 border border-slate-300 rounded-lg mb-4" placeholder="Contoh: 3.500.000">
+            
+            <label class="block text-sm font-bold mb-2 text-slate-700">Deskripsi Singkat</label>
+            <textarea id="prodDesc" class="w-full p-3 border border-slate-300 rounded-lg mb-4" rows="3" placeholder="Spesifikasi alat..."></textarea>
+            
+            <label class="block text-sm font-bold mb-2 text-slate-700">Link Gambar (URL)</label>
+            <input type="text" id="prodImg" class="w-full p-3 border border-slate-300 rounded-lg mb-2" placeholder="https://...">
+            <p class="text-xs text-blue-500 mb-4 bg-blue-50 p-2 rounded">Tips: Upload foto ke Google Photos/Imgur, lalu copy link gambarnya ke sini.</p>
+            
+            <button onclick="saveProduct()" class="w-full py-3 bg-blue-600 text-white rounded-lg font-bold hover:bg-blue-700 shadow-lg transition">Simpan Produk</button>
         </div>
-    </footer>
+    </div>
 
-    <!-- FLOAT WA BUTTON -->
-    <a href="https://wa.me/6281234567890" class="whatsapp-float bg-green-500 text-white w-14 h-14 rounded-full flex items-center justify-center text-3xl shadow-lg hover:bg-green-600 transition">
-        <i class="fa-brands fa-whatsapp"></i>
-    </a>
+    <!-- FIREBASE & LOGIC SCRIPT -->
+    <script type="module">
+        // --- 1. KONFIGURASI FIREBASE ---
+        // PENTING: Paste ulang kode Firebase Config Anda di bawah ini!
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        import { getFirestore, collection, getDocs, addDoc, deleteDoc, doc, updateDoc, getDoc, setDoc, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-    <script>
-        // Simple logic untuk smooth scroll (opsional karena CSS scroll-behavior:smooth sudah ada di modern browser)
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
+        // --- PASTE FIREBASE CONFIG DISINI ---
+        const firebaseConfig = {apiKey: "AIzaSyAo_DL6ge2m7KXz67vcDA4fA4LabqE00uk",
+  authDomain: "marchingbatam.firebaseapp.com",
+  projectId: "marchingbatam",
+  storageBucket: "marchingbatam.firebasestorage.app",
+  messagingSenderId: "597539177591",
+  appId: "1:597539177591:web:8fe5b34422d792b40c3272"
+        };
+        // ------------------------------------
+
+        // Initialize Firebase
+        let app, auth, db;
+        try {
+            app = initializeApp(firebaseConfig);
+            auth = getAuth(app);
+            db = getFirestore(app);
+        } catch (e) {
+            console.error("Firebase belum disetting! Pastikan config sudah dicopy.", e);
+        }
+
+        // --- 2. LOGIC APLIKASI ---
+        const productGrid = document.getElementById('productGrid');
+        const loading = document.getElementById('loading');
+        let isAdmin = false;
+
+        // Cek Status Login
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                isAdmin = true;
+                document.getElementById('btnLogin').classList.add('hidden');
+                document.getElementById('btnLogout').classList.remove('hidden');
+                document.getElementById('btnAddProduct').classList.remove('hidden');
+                document.getElementById('btnSaveHero').classList.remove('hidden');
+                enableHeroEditing(true);
+                loadProducts(); 
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Selamat Datang Admin!',
+                    text: 'Anda sekarang bisa mengedit teks & produk.',
+                    toast: true, position: 'top-end', showConfirmButton: false, timer: 3000
                 });
-            });
+            } else {
+                isAdmin = false;
+                document.getElementById('btnLogin').classList.remove('hidden');
+                document.getElementById('btnLogout').classList.add('hidden');
+                document.getElementById('btnAddProduct').classList.add('hidden');
+                document.getElementById('btnSaveHero').classList.add('hidden');
+                enableHeroEditing(false);
+                loadProducts();
+            }
         });
+
+        // Load Produk dari Database
+        async function loadProducts() {
+            productGrid.innerHTML = '';
+            loading.style.display = 'block';
+            
+            try {
+                // Ambil produk (kalau mau urut, nanti bisa tambah orderBy di firebase console index)
+                const querySnapshot = await getDocs(collection(db, "products"));
+                loading.style.display = 'none';
+                
+                if (querySnapshot.empty) {
+                    // TAMPILAN JIKA PRODUK KOSONG (Default Mockup)
+                    productGrid.innerHTML = `
+                        <div class="col-span-full text-center text-slate-400 py-10">
+                            <i class="fa-solid fa-box-open text-4xl mb-4"></i>
+                            <p>Belum ada produk di database. Login Admin untuk menambahkan.</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                querySnapshot.forEach((doc) => {
+                    const data = doc.data();
+                    const adminButtons = isAdmin ? `
+                        <div class="absolute top-3 right-3 flex gap-2 z-10">
+                            <button onclick="window.editProduct('${doc.id}')" class="bg-white/90 text-yellow-600 p-2 rounded-full shadow hover:bg-yellow-500 hover:text-white transition"><i class="fa-solid fa-pen"></i></button>
+                            <button onclick="window.deleteProduct('${doc.id}')" class="bg-white/90 text-red-600 p-2 rounded-full shadow hover:bg-red-500 hover:text-white transition"><i class="fa-solid fa-trash"></i></button>
+                        </div>
+                    ` : '';
+
+                    const categoryBadge = data.category ? `<span class="absolute top-3 left-3 bg-blue-600 text-white text-[10px] font-bold px-2 py-1 rounded-md uppercase tracking-wide">${data.category}</span>` : '';
+
+                    const html = `
+                        <div class="bg-white rounded-2xl shadow-sm hover:shadow-xl transition duration-300 border border-slate-100 overflow-hidden group relative">
+                            ${adminButtons}
+                            ${categoryBadge}
+                            <div class="h-56 bg-gray-100 overflow-hidden relative">
+                                <img src="${data.image || 'https://placehold.co/400x300?text=Produk+SVM'}" alt="${data.name}" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition"></div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-lg font-bold text-slate-900 mb-1 leading-tight">${data.name}</h3>
+                                <p class="text-blue-600 font-extrabold text-xl mb-3">${data.price}</p>
+                                <p class="text-slate-500 text-sm mb-4 line-clamp-2 h-10">${data.description}</p>
+                                <a href="https://wa.me/6283812113160?text=Halo%20SVM%2C%20saya%20tertarik%20produk%3A%20${encodeURIComponent(data.name)}" target="_blank" class="block w-full py-3 bg-slate-900 text-white text-center rounded-xl font-bold hover:bg-blue-600 transition shadow-lg transform active:scale-95">
+                                    <i class="fa-brands fa-whatsapp mr-1"></i> Pesan Sekarang
+                                </a>
+                            </div>
+                        </div>
+                    `;
+                    productGrid.innerHTML += html;
+                });
+            } catch (error) {
+                console.error("Error loading products:", error);
+                loading.innerHTML = '<p class="text-red-500">Gagal memuat data. Cek koneksi internet/konfigurasi.</p>';
+            }
+        }
+
+        // Fungsi Simpan/Tambah Produk
+        window.saveProduct = async () => {
+            const id = document.getElementById('editDocId').value;
+            const name = document.getElementById('prodName').value;
+            const category = document.getElementById('prodCategory').value;
+            const price = document.getElementById('prodPrice').value;
+            const desc = document.getElementById('prodDesc').value;
+            const img = document.getElementById('prodImg').value;
+
+            if (!name || !price) {
+                Swal.fire('Eits!', 'Nama dan Harga wajib diisi ya.', 'warning');
+                return;
+            }
+
+            const productData = { name, category, price, description: desc, image: img };
+
+            try {
+                if (id) {
+                    await updateDoc(doc(db, "products", id), productData);
+                    Swal.fire('Berhasil!', 'Produk berhasil diperbarui.', 'success');
+                } else {
+                    await addDoc(collection(db, "products"), productData);
+                    Swal.fire('Mantap!', 'Produk baru ditambahkan ke katalog.', 'success');
+                }
+                closeModal('productModal');
+                loadProducts();
+            } catch (e) {
+                console.error(e);
+                Swal.fire('Error', 'Gagal menyimpan data.', 'error');
+            }
+        }
+
+        // Fungsi Hapus Produk
+        window.deleteProduct = async (id) => {
+            const result = await Swal.fire({
+                title: 'Hapus produk ini?',
+                text: "Data akan hilang selamanya loh.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                confirmButtonText: 'Ya, Hapus!'
+            });
+
+            if (result.isConfirmed) {
+                await deleteDoc(doc(db, "products", id));
+                Swal.fire('Terhapus!', 'Produk sudah dihapus.', 'success');
+                loadProducts();
+            }
+        }
+
+        // Fungsi Edit Produk (Populate Modal)
+        window.editProduct = async (id) => {
+            const docSnap = await getDoc(doc(db, "products", id));
+            if (docSnap.exists()) {
+                const data = docSnap.data();
+                document.getElementById('editDocId').value = id;
+                document.getElementById('prodName').value = data.name;
+                document.getElementById('prodCategory').value = data.category || 'Brass';
+                document.getElementById('prodPrice').value = data.price;
+                document.getElementById('prodDesc').value = data.description;
+                document.getElementById('prodImg').value = data.image;
+                document.getElementById('modalTitle').innerText = "Edit Produk";
+                document.getElementById('productModal').classList.remove('hidden');
+                document.getElementById('productModal').classList.add('flex');
+            }
+        };
+
+        // --- HERO EDITING ---
+        async function loadHeroConfig() {
+            try {
+                const docSnap = await getDoc(doc(db, "config", "hero"));
+                if (docSnap.exists()) {
+                    const data = docSnap.data();
+                    if(data.title) document.getElementById('heroTitle').innerHTML = data.title;
+                    if(data.desc) document.getElementById('heroDesc').innerText = data.desc;
+                }
+            } catch (e) { console.log("Config hero belum ada, pakai default."); }
+        }
+        loadHeroConfig();
+
+        function enableHeroEditing(enable) {
+            const elements = document.querySelectorAll('.editable-text');
+            elements.forEach(el => {
+                el.contentEditable = enable;
+                if(enable) el.classList.add('editable-active');
+                else el.classList.remove('editable-active');
+            });
+        }
+
+        window.saveHeroConfig = async () => {
+            const title = document.getElementById('heroTitle').innerHTML;
+            const desc = document.getElementById('heroDesc').innerText;
+            try {
+                await setDoc(doc(db, "config", "hero"), { title, desc });
+                Swal.fire('Tersimpan', 'Teks halaman depan berhasil diupdate!', 'success');
+            } catch (e) { Swal.fire('Gagal', e.message, 'error'); }
+        }
+
+        // --- AUTH FUNCTIONS ---
+        window.login = async () => {
+            const email = document.getElementById('email').value;
+            const pass = document.getElementById('password').value;
+            try {
+                await signInWithEmailAndPassword(auth, email, pass);
+                closeModal('loginModal');
+            } catch (error) {
+                Swal.fire('Login Gagal', 'Email atau Password salah.', 'error');
+            }
+        }
+
+        window.logout = () => signOut(auth);
+
+        // --- UI HELPERS ---
+        window.showLoginModal = () => {
+            document.getElementById('loginModal').classList.remove('hidden');
+            document.getElementById('loginModal').classList.add('flex');
+        }
+        window.showAddProductModal = () => {
+            document.getElementById('editDocId').value = '';
+            document.getElementById('prodName').value = '';
+            document.getElementById('prodPrice').value = '';
+            document.getElementById('prodDesc').value = '';
+            document.getElementById('prodImg').value = '';
+            document.getElementById('modalTitle').innerText = "Tambah Produk Baru";
+            document.getElementById('productModal').classList.remove('hidden');
+            document.getElementById('productModal').classList.add('flex');
+        }
+        window.closeModal = (id) => {
+            document.getElementById(id).classList.add('hidden');
+            document.getElementById(id).classList.remove('flex');
+        }
     </script>
 </body>
-
 </html>
-
-
