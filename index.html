@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jual Alat Marching Band & Drumband Batam - PT. SVM</title>
     
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="Distributor resmi alat marching band & drumband di Batam. Melayani pengadaan SIPLAH, Alat marching batam, Alat drumband Batam, Marching Batam, SVM batam, E-Catalog, dan pelatihan profesional. PT. Svara Vanguard Management.">
+    <!-- SEO Meta Tags Lengkap -->
+    <meta name="description" content="Pusat alat marching band & drumband Batam. Jual alat drumband, seragam, dan sparepart. Distributor resmi HTS & Brass Batam. Melayani SIPLAH & E-Catalog.">
+    <meta name="keywords" content="alat marching band batam, toko drumband batam, jual alat drumband batam, supplier marching band kepri, toko alat musik batam, service drumband batam, harga alat drumband sd smp sma batam">
     <meta name="author" content="PT. Svara Vanguard Management">
 
     <!-- Tailwind CSS -->
@@ -68,10 +69,10 @@
 
         /* Glass Utility */
         .glass-panel {
-            background: rgba(255, 255, 255, 0.7);
+            background: rgba(255, 255, 255, 0.8);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.5);
         }
         
         .active-tab { background-color: #0f172a; color: white; }
@@ -81,33 +82,38 @@
         
         /* Text Editing */
         body.admin-mode .editable {
-            border: 1px dashed rgba(59, 130, 246, 0.3);
+            border: 1px dashed rgba(59, 130, 246, 0.5);
             cursor: text;
         }
         body.admin-mode .editable:focus {
-            background: rgba(59, 130, 246, 0.05);
+            background: rgba(59, 130, 246, 0.1);
             border-color: #3b82f6;
             box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
         }
         body.admin-mode .editable:hover::after {
-            content: '✎ Edit Teks'; position: absolute; top: -15px; right: 0; background: #0f172a; color: white; font-size: 9px; padding: 2px 6px; border-radius: 4px; pointer-events: none; z-index: 50; opacity: 0.8;
+            content: '✎ Edit'; position: absolute; top: -15px; right: 0; background: #0f172a; color: white; font-size: 9px; padding: 2px 6px; border-radius: 4px; pointer-events: none; z-index: 50; opacity: 0.8;
         }
 
-        /* Image Editing */
+        /* Image Editing - Jauh lebih responsif */
         body.admin-mode .editable-img {
             cursor: pointer;
-            border: 2px dashed #fbbf24;
+            border: 4px solid #fbbf24 !important; /* Border kuning tebal saat mode admin */
             position: relative;
+            z-index: 10;
         }
         body.admin-mode .editable-img:hover {
-            opacity: 0.7;
+            opacity: 0.8;
+            transform: scale(1.02);
+            transition: all 0.3s;
         }
-        /* Tooltip for images using CSS trick */
+        
+        /* Container Tooltip */
         body.admin-mode .img-container { position: relative; }
-        body.admin-mode .img-container:hover::after {
-            content: '📸 Ganti Foto';
+        body.admin-mode .img-container:hover::before {
+            content: '📸 KLIK GANTI FOTO';
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            background: rgba(0,0,0,0.7); color: white; padding: 5px 10px; border-radius: 5px; font-size: 10px; pointer-events: none; z-index: 10;
+            background: rgba(0,0,0,0.8); color: #fbbf24; padding: 8px 12px; border-radius: 8px; 
+            font-size: 12px; font-weight: bold; pointer-events: none; z-index: 20; white-space: nowrap;
         }
 
         /* Hide Admin Toolbar by default */
@@ -126,7 +132,7 @@
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans overflow-x-hidden selection:bg-blue-200 selection:text-blue-900">
 
-    <!-- NAVBAR (Future Glass) -->
+    <!-- NAVBAR -->
     <nav class="fixed w-full top-4 z-50 px-4">
         <div class="max-w-7xl mx-auto glass-panel rounded-full px-6 py-3 shadow-lg shadow-slate-200/50 flex justify-between items-center transition-all duration-300">
             <!-- Logo -->
@@ -168,10 +174,10 @@
         <!-- === PAGE 1: BERANDA === -->
         <div id="page-home" class="page-section fade-in">
             
-            <!-- Hero Section -->
+            <!-- Hero Section (Background Editable) -->
             <section class="relative px-4 mb-20">
-                <div class="max-w-7xl mx-auto rounded-[3rem] bg-slate-900 overflow-hidden relative min-h-[600px] flex items-center text-white shadow-2xl shadow-blue-900/20 group">
-                    <!-- Background -->
+                <div class="max-w-7xl mx-auto rounded-[3rem] bg-slate-900 overflow-hidden relative min-h-[600px] flex items-center text-white shadow-2xl shadow-blue-900/20 group img-container">
+                    <!-- Background Image (Editable) -->
                     <div class="absolute inset-0 z-0">
                         <img id="hero-bg-img" src="https://images.unsplash.com/photo-1544279762-2b638c4c3e80?q=80&w=2000" class="w-full h-full object-cover opacity-40 mix-blend-overlay group-hover:scale-105 transition duration-[2000ms] editable-img">
                         <div class="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/90 to-transparent pointer-events-none"></div>
@@ -183,7 +189,7 @@
                             <i class="fa-solid fa-certificate"></i> <span class="editable" id="hero-badge">Official Distributor & Training Center</span>
                         </div>
                         <h1 class="editable font-display text-5xl md:text-7xl font-bold leading-tight mb-8" id="home-title">
-                            Masa Depan <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">Marching Band</span> <br>Dimulai Di Sini.
+                            Distributor Alat <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">Marching Band</span> <br>Terlengkap Batam.
                         </h1>
                         <p class="editable text-lg text-slate-300 mb-10 leading-relaxed max-w-xl" id="home-desc">
                             PT. SVM menyatukan teknologi pengadaan modern (SIPLAH) dengan kurikulum pelatihan berstandar internasional. Solusi satu atap untuk sekolah juara di Kepri.
@@ -200,7 +206,7 @@
                 </div>
             </section>
 
-            <!-- SIPLAH & PARTNERSHIP -->
+            <!-- SIPLAH & PARTNERSHIP (Images Editable) -->
             <section id="siplah-section" class="max-w-7xl mx-auto px-4 mb-24">
                 <div class="text-center mb-12">
                     <h2 class="editable font-display text-3xl font-bold text-slate-900" id="siplah-title">Jalur Pengadaan Resmi</h2>
@@ -209,20 +215,20 @@
                 
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
                     <!-- Siplah Item 1 -->
-                    <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 flex items-center justify-center grayscale hover:grayscale-0 transition duration-500 h-24 img-container">
-                        <img id="siplah-img-1" src="https://siplah.kemdikbud.go.id/assets/img/logo-siplah-kemdikbud.png" alt="SIPLAH Kemdikbud" class="h-10 object-contain editable-img">
+                    <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 flex items-center justify-center grayscale hover:grayscale-0 transition duration-500 h-28 img-container">
+                        <img id="siplah-img-1" src="https://siplah.kemdikbud.go.id/assets/img/logo-siplah-kemdikbud.png" alt="SIPLAH Kemdikbud" class="h-12 object-contain editable-img">
                     </div>
                     <!-- Siplah Item 2 -->
-                    <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 flex items-center justify-center grayscale hover:grayscale-0 transition duration-500 h-24 img-container">
-                        <img id="siplah-img-2" src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/mlogo/SKU-logo-12093-blibli-mitra-maret-2022.jpg" alt="Blibli SIPLAH" class="h-12 object-contain editable-img">
+                    <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 flex items-center justify-center grayscale hover:grayscale-0 transition duration-500 h-28 img-container">
+                        <img id="siplah-img-2" src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/mlogo/SKU-logo-12093-blibli-mitra-maret-2022.jpg" alt="Blibli SIPLAH" class="h-14 object-contain editable-img">
                     </div>
                     <!-- Siplah Item 3 -->
-                    <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 flex items-center justify-center grayscale hover:grayscale-0 transition duration-500 h-24 img-container">
-                        <img id="siplah-img-3" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Logo_LPSE.png/1200px-Logo_LPSE.png" alt="LPSE" class="h-12 object-contain editable-img">
+                    <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 flex items-center justify-center grayscale hover:grayscale-0 transition duration-500 h-28 img-container">
+                        <img id="siplah-img-3" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Logo_LPSE.png/1200px-Logo_LPSE.png" alt="LPSE" class="h-14 object-contain editable-img">
                     </div>
                     <!-- Siplah Item 4 -->
-                    <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 flex items-center justify-center grayscale hover:grayscale-0 transition duration-500 h-24 img-container">
-                        <img id="siplah-img-4" src="https://katalog.lkpp.go.id/public/images/logo_lkpp.png" alt="E-Catalog" class="h-10 object-contain editable-img">
+                    <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 flex items-center justify-center grayscale hover:grayscale-0 transition duration-500 h-28 img-container">
+                        <img id="siplah-img-4" src="https://katalog.lkpp.go.id/public/images/logo_lkpp.png" alt="E-Catalog" class="h-12 object-contain editable-img">
                     </div>
                 </div>
 
@@ -235,7 +241,7 @@
                         </div>
                         <h3 class="editable font-display text-xl font-bold mb-4" id="title-point-1">1. Pengadaan Terintegrasi</h3>
                         <p class="text-slate-600 text-sm leading-relaxed editable" id="desc-point-1">
-                            PT. SVM mempermudah sekolah dalam proses administrasi pembelian. Kami terdaftar resmi di SIPLAH Blibli dan E-Catalog Pemerintah, sehingga SPJ (Surat Pertanggungjawaban) sekolah menjadi aman, transparan, dan bebas pungli. Dokumen legalitas perusahaan kami lengkap untuk kebutuhan tender instansi.
+                            PT. SVM mempermudah sekolah dalam proses administrasi pembelian. Kami terdaftar resmi di SIPLAH Blibli dan E-Catalog Pemerintah, sehingga SPJ (Surat Pertanggungjawaban) sekolah menjadi aman, transparan, dan bebas pungli.
                         </p>
                     </div>
                     <!-- Point 2 -->
@@ -246,7 +252,7 @@
                         </div>
                         <h3 class="editable font-display text-xl font-bold mb-4" id="title-point-2">2. Standarisasi Alat Juara</h3>
                         <p class="text-slate-300 text-sm leading-relaxed editable" id="desc-point-2">
-                            Kami tidak sekadar menjual alat, kami menjual kualitas suara. Seluruh alat (Snare HTS, Brass, Percussion) telah melalui Quality Control ketat oleh praktisi marching band profesional. Kami menjamin spesifikasi teknis sesuai untuk kebutuhan kompetisi tingkat Nasional maupun Internasional (AMBC/GPMB).
+                            Kami tidak sekadar menjual alat, kami menjual kualitas suara. Seluruh alat (Snare HTS, Brass, Percussion) telah melalui Quality Control ketat oleh praktisi marching band profesional.
                         </p>
                     </div>
                     <!-- Point 3 -->
@@ -256,7 +262,7 @@
                         </div>
                         <h3 class="editable font-display text-xl font-bold mb-4" id="title-point-3">3. Program Berkelanjutan</h3>
                         <p class="text-slate-600 text-sm leading-relaxed editable" id="desc-point-3">
-                            Pembelian alat di SVM adalah awal dari kemitraan panjang. Setiap paket pembelian unit lengkap mencakup konsultasi kurikulum pelatihan gratis selama 3 bulan pertama. Kami memastikan alat yang dibeli benar-benar dimainkan dengan teknik yang benar oleh siswa, didukung layanan purna jual (service) di Batam.
+                            Pembelian alat di SVM adalah awal dari kemitraan panjang. Paket pembelian unit lengkap mencakup konsultasi kurikulum pelatihan gratis selama 3 bulan pertama.
                         </p>
                     </div>
                 </div>
@@ -289,9 +295,10 @@
 
         <!-- === PAGE 2: PELATIHAN === -->
         <div id="page-training" class="page-section hidden fade-in">
-            <!-- Header -->
-            <div class="bg-slate-900 text-white pt-24 pb-12 px-4 rounded-b-[3rem]">
-                <div class="max-w-5xl mx-auto text-center">
+            <!-- Header (Background Editable) -->
+            <div class="bg-slate-900 text-white pt-24 pb-12 px-4 rounded-b-[3rem] relative overflow-hidden img-container">
+                <img id="training-bg-img" src="https://images.unsplash.com/photo-1511192336575-5a79af67a629?q=80&w=2000" class="absolute inset-0 w-full h-full object-cover opacity-20 editable-img">
+                <div class="max-w-5xl mx-auto text-center relative z-10">
                     <span class="text-blue-400 font-bold tracking-widest text-xs uppercase mb-2 block">SVM Academy</span>
                     <h2 class="editable font-display text-4xl md:text-5xl font-bold mb-6" id="training-title">Mencetak Generasi Juara</h2>
                     <p class="text-slate-400 max-w-2xl mx-auto text-lg editable" id="training-desc">
@@ -374,15 +381,30 @@
 
     </main>
 
-    <!-- FOOTER -->
+    <!-- FOOTER (Updated with Maps & WA Link) -->
     <footer class="bg-white border-t border-slate-200 pt-16 pb-8">
         <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-            <div class="col-span-1 md:col-span-2">
+            <!-- Kolom 1: Peta -->
+            <div class="col-span-1 md:col-span-1">
+                <h4 class="font-bold mb-4">Lokasi Kami</h4>
+                <div class="rounded-2xl overflow-hidden shadow-lg border border-slate-100 h-48 w-full">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.002879220142!2d104.03262877496546!3d1.1584165988305037!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31d9896471d9bf61%3A0x3ba836b339405c33!2smarching%20band%20batam%20SVM!5e0!3m2!1sid!2sid!4v1769697318186!5m2!1sid!2sid" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+
+            <!-- Kolom 2: Brand -->
+            <div class="col-span-1 md:col-span-1">
                 <h3 class="font-display font-bold text-2xl mb-4">SVM <span class="text-blue-600">CORP.</span></h3>
-                <p class="editable text-slate-500 text-sm leading-relaxed mb-6 max-w-sm" id="footer-desc">
+                <p class="editable text-slate-500 text-sm leading-relaxed mb-6" id="footer-desc">
                     Mitra terpercaya sekolah di Batam & Kepulauan Riau. Kami menghadirkan standar internasional dalam pengadaan alat dan sistem pelatihan marching band.
                 </p>
+                <div class="flex gap-3">
+                    <a href="https://wa.me/6283812113160" class="w-10 h-10 rounded-full bg-green-100 text-green-600 flex items-center justify-center hover:bg-green-600 hover:text-white transition"><i class="fa-brands fa-whatsapp text-lg"></i></a>
+                    <a href="https://instagram.com" class="w-10 h-10 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center hover:bg-slate-900 hover:text-white transition"><i class="fa-brands fa-instagram text-lg"></i></a>
+                </div>
             </div>
+
+            <!-- Kolom 3: Menu -->
             <div>
                 <h4 class="font-bold mb-4">Menu</h4>
                 <ul class="space-y-2 text-sm text-slate-500">
@@ -391,17 +413,19 @@
                     <li><button onclick="router.navigate('training')" class="hover:text-blue-600">Program Pelatihan</button></li>
                 </ul>
             </div>
+
+            <!-- Kolom 4: Kontak Editable -->
             <div>
                 <h4 class="font-bold mb-4">Kontak</h4>
                 <ul class="space-y-3 text-sm text-slate-500">
                     <li class="flex gap-3"><i class="fa-solid fa-location-dot mt-1 text-blue-600"></i> <span class="editable" id="footer-addr">Bengkong, Batam, Kepri</span></li>
-                    <li class="flex gap-3"><i class="fa-brands fa-whatsapp mt-1 text-green-500"></i> 0838-1211-3160</li>
-                    <li class="flex gap-3"><i class="fa-solid fa-envelope mt-1 text-slate-400"></i> svara.vanguard@gmail.com</li>
+                    <li class="flex gap-3"><i class="fa-brands fa-whatsapp mt-1 text-green-500"></i> <span class="editable" id="footer-wa">0838-1211-3160</span></li>
+                    <li class="flex gap-3"><i class="fa-solid fa-envelope mt-1 text-slate-400"></i> <span class="editable" id="footer-email">svara.vanguard@gmail.com</span></li>
                 </ul>
             </div>
         </div>
         <div class="text-center text-xs text-slate-400 pt-8 border-t border-slate-100">
-            &copy; 2027 PT. Svara Vanguard Management. Designed with Vision.
+            &copy; 2026 PT. Svara Vanguard Management.
         </div>
     </footer>
 
@@ -411,8 +435,9 @@
     <div id="adminToolbar" class="fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-slate-900 text-white px-5 py-3 rounded-full shadow-2xl z-50 items-center gap-6 hidden border border-slate-700">
         <span class="text-[10px] font-bold text-yellow-500 uppercase tracking-widest">ADMIN</span>
         <div class="h-4 w-px bg-slate-700"></div>
+        <button onclick="admin.createLink()" class="hover:text-blue-400 text-xl transition transform hover:scale-110" title="Buat Link (WA/Web)"><i class="fa-solid fa-link"></i></button>
         <button onclick="ui.showVideoModal()" class="hover:text-red-400 text-xl transition transform hover:scale-110" title="Youtube Manager"><i class="fa-brands fa-youtube"></i></button>
-        <button onclick="ui.showAiModal()" class="hover:text-blue-400 text-xl transition transform hover:scale-110" title="AI Writer"><i class="fa-solid fa-wand-magic-sparkles"></i></button>
+        <button onclick="ui.showAiModal()" class="hover:text-purple-400 text-xl transition transform hover:scale-110" title="AI Writer"><i class="fa-solid fa-wand-magic-sparkles"></i></button>
         <button onclick="admin.saveAllChanges()" class="hover:text-green-400 text-xl transition transform hover:scale-110" title="Simpan Teks"><i class="fa-solid fa-save"></i></button>
         <button onclick="ui.showProductModal()" class="hover:text-yellow-400 text-xl transition transform hover:scale-110" title="Tambah Produk"><i class="fa-solid fa-plus-circle"></i></button>
         <div class="h-4 w-px bg-slate-700"></div>
@@ -600,7 +625,11 @@
                 
                 grid.innerHTML = '';
                 vidData.forEach(v => {
-                    const videoId = v.url.split('v=')[1] ? v.url.split('v=')[1].split('&')[0] : 'dQw4w9WgXcQ';
+                    // Extract Video ID properly handling full URL
+                    let videoId = 'dQw4w9WgXcQ'; // Default fallback
+                    if (v.url.includes('youtu.be/')) videoId = v.url.split('youtu.be/')[1].split('?')[0];
+                    else if (v.url.includes('v=')) videoId = v.url.split('v=')[1].split('&')[0];
+                    
                     const thumb = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
                     const delBtn = currentUser ? `<button onclick="videos.delete('${v.id}')" class="absolute top-2 right-2 bg-red-600 text-white w-8 h-8 rounded-full shadow-lg z-20 hover:bg-red-700 transition"><i class="fa-solid fa-trash"></i></button>` : '';
                     
@@ -616,8 +645,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <h3 class="mt-4 font-bold text-lg text-white group-hover:text-blue-400 transition">${v.title}</h3>
-                                <p class="text-sm text-slate-400">${v.desc}</p>
+                                <h3 class="mt-4 font-bold text-lg text-slate-800 group-hover:text-blue-600 transition">${v.title}</h3>
+                                <p class="text-sm text-slate-500">${v.desc}</p>
                             </a>
                         </div>
                     `;
@@ -644,13 +673,25 @@
         window.images = {
             currentId: null,
             init: () => {
-                // Load saved images from config
+                // Load saved images
                 admin.loadImages();
-                // Add click listeners to all .editable-img if admin
+                
+                // Add listeners
                 if(currentUser) {
                     document.querySelectorAll('.editable-img').forEach(img => {
-                        img.addEventListener('click', function() {
+                        // Remove old listeners to avoid duplicates if re-init
+                        const newImg = img.cloneNode(true);
+                        img.parentNode.replaceChild(newImg, img);
+                        
+                        newImg.addEventListener('click', function(e) {
+                            e.preventDefault(); // Prevent linking if wrapped in <a>
+                            e.stopPropagation();
                             window.images.currentId = this.id;
+                            if(!window.images.currentId) {
+                                Swal.fire('Error', 'ID Gambar tidak ditemukan. Hubungi developer.', 'error');
+                                return;
+                            }
+                            console.log("Editing Image:", window.images.currentId);
                             document.getElementById('editImgPreview').classList.add('hidden');
                             ui.showImageModal();
                         });
@@ -659,22 +700,36 @@
             },
             save: async () => {
                 const file = document.getElementById('imgFileInput').files[0];
-                if(!file) return Swal.fire('Error', 'Pilih gambar dulu', 'error');
+                const targetId = window.images.currentId;
                 
+                if(!file) return Swal.fire('Error', 'Pilih gambar dulu', 'error');
+                if(!targetId) return Swal.fire('Error', 'Target ID hilang. Refresh halaman.', 'error');
+                
+                // Show loading
+                Swal.fire({title: 'Menyimpan...', didOpen: () => Swal.showLoading()});
+
                 const reader = new FileReader();
                 reader.onload = async (e) => {
                     const base64 = e.target.result;
-                    const id = window.images.currentId;
                     
                     // Update DOM immediately
-                    document.getElementById(id).src = base64;
+                    const imgEl = document.getElementById(targetId);
+                    if(imgEl) imgEl.src = base64;
                     
-                    // Save to Firestore Config
+                    // NEW STRATEGY: SAVE PER IMAGE ID TO AVOID 1MB DOC LIMIT
                     try {
-                        await setDoc(doc(db, 'config', 'images'), { [id]: base64 }, { merge: true });
+                        // Save to "site_images" collection, document ID = element ID
+                        await setDoc(doc(db, 'site_images', targetId), { 
+                            base64: base64, 
+                            updatedAt: new Date() 
+                        });
+                        
                         ui.closeModal('imageModal');
-                        Swal.fire('Tersimpan', 'Gambar berhasil diganti!', 'success');
-                    } catch(err) { Swal.fire('Gagal', err.message, 'error'); }
+                        Swal.fire('Berhasil', 'Gambar tersimpan permanen!', 'success');
+                    } catch(err) { 
+                        console.error(err);
+                        Swal.fire('Gagal', 'File terlalu besar atau koneksi buruk.', 'error'); 
+                    }
                 };
                 reader.readAsDataURL(file);
             }
@@ -769,18 +824,34 @@
             },
             loadImages: async () => {
                 try {
-                    const d = await getDoc(doc(db, "config", "images"));
-                    if(d.exists()) {
-                        Object.entries(d.data()).forEach(([id, base64]) => {
-                            const img = document.getElementById(id);
-                            if(img) img.src = base64;
-                        });
-                    }
-                } catch {}
+                    // NEW STRATEGY: Load individual docs from 'site_images'
+                    const snap = await getDocs(collection(db, "site_images"));
+                    snap.forEach(doc => {
+                        const img = document.getElementById(doc.id);
+                        if(img && doc.data().base64) img.src = doc.data().base64;
+                    });
+                } catch(e) { console.log("No custom images loaded", e); }
             },
             addSchool: async () => {
                 const {value:name} = await Swal.fire({input:'text', title:'Tambah Sekolah'});
                 if(name) { await addDoc(collection(db,"schools"),{name}); schools.load(); }
+            },
+            createLink: async () => {
+                if(!activeEditableElement) return Swal.fire('Pilih Teks', 'Klik teks yang ingin dijadikan link dulu.', 'warning');
+                
+                const { value: url } = await Swal.fire({
+                    input: 'url',
+                    inputLabel: 'Masukkan Link URL',
+                    inputPlaceholder: 'https://wa.me/62...',
+                    showCancelButton: true
+                });
+
+                if (url) {
+                    const text = activeEditableElement.innerText;
+                    activeEditableElement.innerHTML = `<a href="${url}" target="_blank" class="text-blue-600 hover:underline">${text}</a>`;
+                    // Trigger save capability
+                    Swal.fire('Sukses', 'Link dibuat! Jangan lupa klik tombol Simpan.', 'success');
+                }
             }
         };
 
@@ -872,8 +943,8 @@
                 });
                 document.querySelectorAll('.admin-only').forEach(el => el.classList.remove('hidden'));
                 
-                // Re-init images to attach listeners
-                images.init(); 
+                // Re-init images to attach listeners explicitly
+                setTimeout(images.init, 1000); 
             } else {
                 document.body.classList.remove('admin-mode');
                 document.getElementById('btnLogin').classList.remove('hidden');
