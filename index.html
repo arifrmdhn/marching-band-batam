@@ -76,10 +76,10 @@
         
         .active-tab { background-color: #0f172a; color: white; }
         
-        /* ADMIN MODE ONLY STYLES */
+        /* ADMIN MODE STYLES */
         .editable { outline: none; transition: all 0.2s; border-radius: 4px; }
         
-        /* Only when body has .admin-mode class */
+        /* Text Editing */
         body.admin-mode .editable {
             border: 1px dashed rgba(59, 130, 246, 0.3);
             cursor: text;
@@ -90,18 +90,24 @@
             box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
         }
         body.admin-mode .editable:hover::after {
-            content: '✎ Edit';
-            position: absolute;
-            top: -15px;
-            right: 0;
-            background: #0f172a;
-            color: white;
-            font-size: 9px;
-            padding: 2px 6px;
-            border-radius: 4px;
-            pointer-events: none;
-            z-index: 50;
+            content: '✎ Edit Teks'; position: absolute; top: -15px; right: 0; background: #0f172a; color: white; font-size: 9px; padding: 2px 6px; border-radius: 4px; pointer-events: none; z-index: 50; opacity: 0.8;
+        }
+
+        /* Image Editing */
+        body.admin-mode .editable-img {
+            cursor: pointer;
+            border: 2px dashed #fbbf24;
+            position: relative;
+        }
+        body.admin-mode .editable-img:hover {
             opacity: 0.7;
+        }
+        /* Tooltip for images using CSS trick */
+        body.admin-mode .img-container { position: relative; }
+        body.admin-mode .img-container:hover::after {
+            content: '📸 Ganti Foto';
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.7); color: white; padding: 5px 10px; border-radius: 5px; font-size: 10px; pointer-events: none; z-index: 10;
         }
 
         /* Hide Admin Toolbar by default */
@@ -167,8 +173,8 @@
                 <div class="max-w-7xl mx-auto rounded-[3rem] bg-slate-900 overflow-hidden relative min-h-[600px] flex items-center text-white shadow-2xl shadow-blue-900/20 group">
                     <!-- Background -->
                     <div class="absolute inset-0 z-0">
-                        <img src="https://images.unsplash.com/photo-1544279762-2b638c4c3e80?q=80&w=2000" class="w-full h-full object-cover opacity-40 mix-blend-overlay group-hover:scale-105 transition duration-[2000ms]">
-                        <div class="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/90 to-transparent"></div>
+                        <img id="hero-bg-img" src="https://images.unsplash.com/photo-1544279762-2b638c4c3e80?q=80&w=2000" class="w-full h-full object-cover opacity-40 mix-blend-overlay group-hover:scale-105 transition duration-[2000ms] editable-img">
+                        <div class="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/90 to-transparent pointer-events-none"></div>
                     </div>
                     
                     <!-- Content -->
@@ -202,23 +208,27 @@
                 </div>
                 
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
-                    <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 flex items-center justify-center grayscale hover:grayscale-0 transition duration-500 h-24">
-                        <img src="https://siplah.kemdikbud.go.id/assets/img/logo-siplah-kemdikbud.png" alt="SIPLAH Kemdikbud" class="h-10 object-contain">
+                    <!-- Siplah Item 1 -->
+                    <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 flex items-center justify-center grayscale hover:grayscale-0 transition duration-500 h-24 img-container">
+                        <img id="siplah-img-1" src="https://siplah.kemdikbud.go.id/assets/img/logo-siplah-kemdikbud.png" alt="SIPLAH Kemdikbud" class="h-10 object-contain editable-img">
                     </div>
-                    <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 flex items-center justify-center grayscale hover:grayscale-0 transition duration-500 h-24">
-                        <img src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/mlogo/SKU-logo-12093-blibli-mitra-maret-2022.jpg" alt="Blibli SIPLAH" class="h-12 object-contain">
+                    <!-- Siplah Item 2 -->
+                    <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 flex items-center justify-center grayscale hover:grayscale-0 transition duration-500 h-24 img-container">
+                        <img id="siplah-img-2" src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/mlogo/SKU-logo-12093-blibli-mitra-maret-2022.jpg" alt="Blibli SIPLAH" class="h-12 object-contain editable-img">
                     </div>
-                    <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 flex items-center justify-center grayscale hover:grayscale-0 transition duration-500 h-24">
-                        <span class="font-bold text-xl text-slate-700">E-CATALOG</span>
+                    <!-- Siplah Item 3 -->
+                    <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 flex items-center justify-center grayscale hover:grayscale-0 transition duration-500 h-24 img-container">
+                        <img id="siplah-img-3" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Logo_LPSE.png/1200px-Logo_LPSE.png" alt="LPSE" class="h-12 object-contain editable-img">
                     </div>
-                    <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 flex items-center justify-center grayscale hover:grayscale-0 transition duration-500 h-24">
-                        <span class="font-bold text-xl text-slate-700">LPSE</span>
+                    <!-- Siplah Item 4 -->
+                    <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 flex items-center justify-center grayscale hover:grayscale-0 transition duration-500 h-24 img-container">
+                        <img id="siplah-img-4" src="https://katalog.lkpp.go.id/public/images/logo_lkpp.png" alt="E-Catalog" class="h-10 object-contain editable-img">
                     </div>
                 </div>
 
                 <!-- 3 Detailed Points (Editable) -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <!-- Point 1: Pengadaan -->
+                    <!-- Point 1 -->
                     <div class="bg-slate-50 p-8 rounded-[2rem] hover:bg-white hover:shadow-xl transition duration-300 border border-slate-200">
                         <div class="w-14 h-14 bg-blue-100 rounded-2xl flex items-center justify-center text-blue-600 text-2xl mb-6">
                             <i class="fa-solid fa-file-contract"></i>
@@ -228,8 +238,7 @@
                             PT. SVM mempermudah sekolah dalam proses administrasi pembelian. Kami terdaftar resmi di SIPLAH Blibli dan E-Catalog Pemerintah, sehingga SPJ (Surat Pertanggungjawaban) sekolah menjadi aman, transparan, dan bebas pungli. Dokumen legalitas perusahaan kami lengkap untuk kebutuhan tender instansi.
                         </p>
                     </div>
-
-                    <!-- Point 2: Kualitas -->
+                    <!-- Point 2 -->
                     <div class="bg-slate-900 text-white p-8 rounded-[2rem] hover:shadow-2xl hover:shadow-blue-900/30 transition duration-300 relative overflow-hidden">
                         <div class="absolute top-0 right-0 w-32 h-32 bg-blue-600 rounded-full mix-blend-overlay filter blur-3xl opacity-50"></div>
                         <div class="w-14 h-14 bg-white/10 backdrop-blur-sm rounded-2xl flex items-center justify-center text-yellow-400 text-2xl mb-6 border border-white/10">
@@ -240,8 +249,7 @@
                             Kami tidak sekadar menjual alat, kami menjual kualitas suara. Seluruh alat (Snare HTS, Brass, Percussion) telah melalui Quality Control ketat oleh praktisi marching band profesional. Kami menjamin spesifikasi teknis sesuai untuk kebutuhan kompetisi tingkat Nasional maupun Internasional (AMBC/GPMB).
                         </p>
                     </div>
-
-                    <!-- Point 3: Kerjasama -->
+                    <!-- Point 3 -->
                     <div class="bg-slate-50 p-8 rounded-[2rem] hover:bg-white hover:shadow-xl transition duration-300 border border-slate-200">
                         <div class="w-14 h-14 bg-green-100 rounded-2xl flex items-center justify-center text-green-600 text-2xl mb-6">
                             <i class="fa-solid fa-handshake-simple"></i>
@@ -265,49 +273,15 @@
                             <h2 class="editable font-display text-3xl font-bold" id="yt-title">SVM Activity</h2>
                             <p class="editable text-slate-400" id="yt-desc">Liputan kegiatan, latihan, dan kompetisi di YouTube.</p>
                         </div>
-                        <a href="https://www.youtube.com/results?search_query=marching+band+batam" target="_blank" class="px-6 py-2 border border-white/30 rounded-full hover:bg-white hover:text-slate-900 transition text-sm">Lihat Channel</a>
+                        <div class="flex gap-2">
+                            <button onclick="ui.showVideoModal()" class="admin-only hidden px-6 py-2 bg-red-600 text-white rounded-full hover:bg-red-700 transition text-sm font-bold shadow-lg"><i class="fa-brands fa-youtube mr-2"></i>+ Video</button>
+                            <a href="https://www.youtube.com/results?search_query=marching+band+batam" target="_blank" class="px-6 py-2 border border-white/30 rounded-full hover:bg-white hover:text-slate-900 transition text-sm">Lihat Channel</a>
+                        </div>
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <!-- Video Item 1 -->
-                        <a href=https://photos.app.goo.gl/j4TN4ZEGQ66mC9MJ8" target="_blank" class="group block">
-                            <div class="relative rounded-2xl overflow-hidden aspect-video shadow-lg bg-slate-800">
-                                <img src="https://photos.app.goo.gl/RjcAPffg8ZkZBBfk6" class="w-full h-full object-cover opacity-80 group-hover:scale-110 transition duration-700">
-                                <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
-                                    <div class="w-14 h-14 bg-red-600 rounded-full flex items-center justify-center text-white shadow-xl group-hover:scale-110 transition">
-                                        <i class="fa-solid fa-play ml-1"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <h3 class="editable mt-4 font-bold text-lg group-hover:text-blue-400 transition" id="vid-1-title">Svara Vanguard Marching Community di MIMAC 2025</h3>
-                            <p class="editable text-sm text-slate-400" id="vid-1-desc">Tim Binaan SVM meraih Gold Medal.</p>
-                        </a>
-                        <!-- Video Item 2 -->
-                        <a href="https://www.youtube.com/watch?v=UpHlfNtCm7M" target="_blank" class="group block">
-                            <div class="relative rounded-2xl overflow-hidden aspect-video shadow-lg bg-slate-800">
-                                <img src="https://images.unsplash.com/photo-1543598587-57351dfd2940?q=80&w=600" class="w-full h-full object-cover opacity-80 group-hover:scale-110 transition duration-700">
-                                <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
-                                    <div class="w-14 h-14 bg-red-600 rounded-full flex items-center justify-center text-white shadow-xl group-hover:scale-110 transition">
-                                        <i class="fa-solid fa-play ml-1"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <h3 class="editable mt-4 font-bold text-lg group-hover:text-blue-400 transition" id="vid-2-title">Review Alat Snare HTS</h3>
-                            <p class="editable text-sm text-slate-400" id="vid-2-desc">Cek sound kualitas barang masuk.</p>
-                        </a>
-                        <!-- Video Item 3 -->
-                        <a href="https://www.youtube.com/watch?v=example3" target="_blank" class="group block">
-                            <div class="relative rounded-2xl overflow-hidden aspect-video shadow-lg bg-slate-800">
-                                <img src="https://images.unsplash.com/photo-1460039230329-eb070fc6c77c?q=80&w=600" class="w-full h-full object-cover opacity-80 group-hover:scale-110 transition duration-700">
-                                <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
-                                    <div class="w-14 h-14 bg-red-600 rounded-full flex items-center justify-center text-white shadow-xl group-hover:scale-110 transition">
-                                        <i class="fa-solid fa-play ml-1"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <h3 class="editable mt-4 font-bold text-lg group-hover:text-blue-400 transition" id="vid-3-title">Proses Latihan Brass</h3>
-                            <p class="editable text-sm text-slate-400" id="vid-3-desc">Teknik dasar pernapasan & fingering.</p>
-                        </a>
+                    <div id="videoGrid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- Video Cards akan di-render di sini via JS -->
+                        <div class="col-span-full text-center text-slate-500 italic">Memuat video...</div>
                     </div>
                 </div>
             </section>
@@ -431,56 +405,83 @@
         </div>
     </footer>
 
-    <!-- === ADMIN TOOLS (SECURE & HIDDEN) === -->
+    <!-- === ADMIN TOOLS === -->
     
     <!-- Floating Toolbar -->
     <div id="adminToolbar" class="fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-slate-900 text-white px-5 py-3 rounded-full shadow-2xl z-50 items-center gap-6 hidden border border-slate-700">
         <span class="text-[10px] font-bold text-yellow-500 uppercase tracking-widest">ADMIN</span>
         <div class="h-4 w-px bg-slate-700"></div>
-        <button onclick="ui.showAiModal()" class="hover:text-blue-400 text-xl transition transform hover:scale-110" title="SVM AI Assistant (Gemini)"><i class="fa-solid fa-wand-magic-sparkles"></i></button>
+        <button onclick="ui.showVideoModal()" class="hover:text-red-400 text-xl transition transform hover:scale-110" title="Youtube Manager"><i class="fa-brands fa-youtube"></i></button>
+        <button onclick="ui.showAiModal()" class="hover:text-blue-400 text-xl transition transform hover:scale-110" title="AI Writer"><i class="fa-solid fa-wand-magic-sparkles"></i></button>
         <button onclick="admin.saveAllChanges()" class="hover:text-green-400 text-xl transition transform hover:scale-110" title="Simpan Teks"><i class="fa-solid fa-save"></i></button>
         <button onclick="ui.showProductModal()" class="hover:text-yellow-400 text-xl transition transform hover:scale-110" title="Tambah Produk"><i class="fa-solid fa-plus-circle"></i></button>
         <div class="h-4 w-px bg-slate-700"></div>
         <button onclick="auth.logout()" class="hover:text-red-500 text-xl transition transform hover:scale-110" title="Keluar"><i class="fa-solid fa-power-off"></i></button>
     </div>
 
-    <!-- AI WRITER MODAL (GEMINI UI) -->
+    <!-- AI WRITER MODAL -->
     <div id="aiModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-md hidden items-center justify-center z-[70] p-4">
         <div class="bg-slate-900 border border-slate-700 p-8 rounded-3xl w-full max-w-lg shadow-2xl animate-float relative overflow-hidden">
-            <!-- decorative glow -->
-            <div class="absolute top-0 right-0 w-32 h-32 bg-blue-600 rounded-full mix-blend-overlay filter blur-3xl opacity-20"></div>
-
             <div class="flex items-center gap-3 mb-6">
-                <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-blue-500 to-purple-500 flex items-center justify-center text-white">
-                    <i class="fa-solid fa-sparkles"></i>
-                </div>
-                <div>
-                    <h2 class="text-xl font-bold text-white font-display">SVM AI Writer</h2>
-                    <p class="text-xs text-slate-400">Powered by Gemini (Simulation)</p>
-                </div>
+                <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-blue-500 to-purple-500 flex items-center justify-center text-white"><i class="fa-solid fa-sparkles"></i></div>
+                <div><h2 class="text-xl font-bold text-white">SVM AI Writer</h2></div>
             </div>
-
             <div class="mb-4">
                 <label class="text-xs font-bold text-slate-400 uppercase mb-2 block">Teks Saat Ini:</label>
-                <div id="aiCurrentText" class="w-full bg-slate-800 p-3 rounded-xl text-slate-300 text-sm italic border border-slate-700 h-20 overflow-y-auto mb-4">
-                    Pilih teks di halaman terlebih dahulu...
-                </div>
-
-                <label class="text-xs font-bold text-slate-400 uppercase mb-2 block">Instruksi AI:</label>
+                <div id="aiCurrentText" class="w-full bg-slate-800 p-3 rounded-xl text-slate-300 text-sm italic border border-slate-700 h-20 overflow-y-auto mb-4">Pilih teks terlebih dahulu...</div>
                 <div class="grid grid-cols-3 gap-2 mb-3">
-                    <button onclick="gemini.setPrompt('make_pro')" class="bg-slate-800 hover:bg-slate-700 text-white py-2 rounded-lg text-xs transition border border-slate-700">Lebih Profesional</button>
-                    <button onclick="gemini.setPrompt('make_exciting')" class="bg-slate-800 hover:bg-slate-700 text-white py-2 rounded-lg text-xs transition border border-slate-700">Lebih Menarik</button>
-                    <button onclick="gemini.setPrompt('fix_grammar')" class="bg-slate-800 hover:bg-slate-700 text-white py-2 rounded-lg text-xs transition border border-slate-700">Perbaiki Ejaan</button>
+                    <button onclick="gemini.setPrompt('make_pro')" class="bg-slate-800 hover:bg-slate-700 text-white py-2 rounded-lg text-xs">Lebih Profesional</button>
+                    <button onclick="gemini.setPrompt('make_exciting')" class="bg-slate-800 hover:bg-slate-700 text-white py-2 rounded-lg text-xs">Lebih Menarik</button>
+                    <button onclick="gemini.setPrompt('fix_grammar')" class="bg-slate-800 hover:bg-slate-700 text-white py-2 rounded-lg text-xs">Perbaiki Ejaan</button>
                 </div>
-                <textarea id="aiPrompt" rows="2" class="w-full bg-slate-800 border border-slate-700 p-3 rounded-xl text-white text-sm outline-none focus:border-blue-500" placeholder="Atau ketik perintah manual..."></textarea>
+                <textarea id="aiPrompt" rows="2" class="w-full bg-slate-800 border border-slate-700 p-3 rounded-xl text-white text-sm" placeholder="Atau ketik manual..."></textarea>
             </div>
+            <div class="flex gap-3">
+                <button onclick="ui.closeModal('aiModal')" class="flex-1 py-3 rounded-xl text-slate-400 hover:bg-slate-800">Batal</button>
+                <button onclick="gemini.generate()" class="flex-1 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-bold">Generate</button>
+            </div>
+        </div>
+    </div>
 
-            <div class="flex gap-3 mt-6">
-                <button onclick="ui.closeModal('aiModal')" class="flex-1 py-3 rounded-xl text-slate-400 hover:bg-slate-800 transition">Batal</button>
-                <button onclick="gemini.generate()" class="flex-1 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-bold hover:shadow-lg hover:shadow-blue-500/20 transition flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-wand-magic-sparkles"></i> Generate
-                </button>
+    <!-- GENERIC IMAGE UPLOAD MODAL -->
+    <div id="imageModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-md hidden items-center justify-center z-[80] p-4">
+        <div class="bg-white p-6 rounded-3xl w-full max-w-sm shadow-2xl">
+            <h2 class="text-lg font-bold mb-4 text-center">Ganti Gambar</h2>
+            <div id="imgDropZone" class="h-40 rounded-xl border-2 border-dashed border-blue-300 flex flex-col items-center justify-center cursor-pointer hover:bg-blue-50 transition relative overflow-hidden">
+                <img id="editImgPreview" class="absolute inset-0 w-full h-full object-contain hidden bg-white p-2">
+                <i class="fa-solid fa-cloud-arrow-up text-3xl text-blue-400 mb-2"></i>
+                <p class="text-xs text-slate-400">Drag & Drop Gambar Disini</p>
+                <input type="file" id="imgFileInput" class="absolute inset-0 opacity-0 cursor-pointer" accept="image/*">
             </div>
+            <input type="hidden" id="targetImgId">
+            <button onclick="images.save()" class="w-full mt-4 py-2 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700">Simpan Perubahan</button>
+            <button onclick="ui.closeModal('imageModal')" class="w-full mt-2 py-2 text-slate-400 hover:text-slate-600 text-sm">Batal</button>
+        </div>
+    </div>
+
+    <!-- VIDEO MANAGER MODAL -->
+    <div id="videoModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-md hidden items-center justify-center z-[80] p-4">
+        <div class="bg-white p-6 rounded-3xl w-full max-w-md shadow-2xl">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-lg font-bold"><i class="fa-brands fa-youtube text-red-600 mr-2"></i>Tambah Video</h2>
+                <button onclick="ui.closeModal('videoModal')" class="text-slate-400 hover:text-red-500"><i class="fa-solid fa-times"></i></button>
+            </div>
+            <div class="space-y-3">
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 mb-1">Judul Video</label>
+                    <input type="text" id="vidTitle" class="w-full border p-2 rounded-lg text-sm" placeholder="Contoh: Juara Umum 2025">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 mb-1">Link YouTube</label>
+                    <input type="text" id="vidUrl" class="w-full border p-2 rounded-lg text-sm" placeholder="https://www.youtube.com/watch?v=...">
+                    <p class="text-[10px] text-blue-500 mt-1">*Thumbnail akan otomatis diambil dari link</p>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 mb-1">Deskripsi Singkat</label>
+                    <input type="text" id="vidDesc" class="w-full border p-2 rounded-lg text-sm" placeholder="Contoh: Dokumentasi lomba...">
+                </div>
+            </div>
+            <button onclick="videos.add()" class="w-full mt-6 py-3 bg-red-600 text-white rounded-xl font-bold hover:bg-red-700 shadow-lg">Tambah Video</button>
         </div>
     </div>
 
@@ -559,7 +560,7 @@
 
         let currentUser = null;
         let productsCache = [];
-        let activeEditableElement = null; // Track element for AI editing
+        let activeEditableElement = null; 
         
         const defaultCatalog = [
             { id: "d1", name: "Snare HTS Premium 14\"", category: "perkusi", price: "Rp. 5.500.000", description: "Shell Maple 7-ply. Include Carrier. Suara tajam.", image: "https://images.unsplash.com/photo-1519892300165-cb5542fb47c7?q=80&w=400" },
@@ -569,65 +570,13 @@
              { id: "d11", name: "Paket Pemula (30 Orang)", category: "paket", price: "Rp. 45.000.000", description: "Lengkap alat tiup, pukul, dan seragam.", image: "https://images.unsplash.com/photo-1543598587-57351dfd2940?q=80&w=500" }
         ];
 
-        // --- GEMINI AI SIMULATION ---
-        window.gemini = {
-            setPrompt: (type) => {
-                const map = {
-                    'make_pro': 'Ubah menjadi lebih profesional dan meyakinkan.',
-                    'make_exciting': 'Gunakan bahasa yang semangat dan energik!',
-                    'fix_grammar': 'Perbaiki tata bahasa dan ejaan.'
-                };
-                document.getElementById('aiPrompt').value = map[type];
-            },
-            generate: async () => {
-                if(!activeEditableElement) {
-                    Swal.fire('Info', 'Silakan klik teks yang ingin diedit dulu di halaman utama.', 'info');
-                    ui.closeModal('aiModal');
-                    return;
-                }
-                
-                // Simulation Loading
-                const btn = event.currentTarget;
-                const oldContent = btn.innerHTML;
-                btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Thinking...';
-                
-                setTimeout(() => {
-                    // Logic Simulation (In real app, call API here)
-                    const prompt = document.getElementById('aiPrompt').value;
-                    const original = activeEditableElement.innerText;
-                    
-                    let result = original;
-                    if(prompt.includes('profesional')) result = "Kami menghadirkan standar ekselen dalam pengadaan instrumen marching band. PT. SVM berkomitmen penuh pada kualitas dan integritas.";
-                    else if(prompt.includes('semangat')) result = "Rasakan energi juara! Alat marching band terbaik di Batam siap membawa tim Anda menuju podium kemenangan!";
-                    else if(prompt.includes('ejaan')) result = original; // No change for demo
-                    else result = original + " (Disempurnakan oleh AI)";
+        const defaultVideos = [
+            { id: "dv1", title: "Dokumentasi Kejuaraan", url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", desc: "Tim Binaan SVM meraih Gold Medal." },
+            { id: "dv2", title: "Review Alat Snare HTS", url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", desc: "Cek sound kualitas barang masuk." },
+            { id: "dv3", title: "Proses Latihan Brass", url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", desc: "Teknik dasar pernapasan & fingering." }
+        ];
 
-                    activeEditableElement.innerText = result;
-                    activeEditableElement.classList.add('animate-pulse'); // Visual feedback
-                    setTimeout(()=>activeEditableElement.classList.remove('animate-pulse'), 1000);
-                    
-                    btn.innerHTML = oldContent;
-                    ui.closeModal('aiModal');
-                    Swal.fire({
-                        title: 'Selesai!',
-                        text: 'Teks telah diperbarui oleh AI.',
-                        icon: 'success',
-                        toast: true,
-                        position: 'top-end',
-                        showConfirmButton: false,
-                        timer: 3000
-                    });
-                }, 1500);
-            }
-        };
-
-        window.router = {
-            navigate: (pageId) => {
-                document.querySelectorAll('.page-section').forEach(el => el.classList.add('hidden'));
-                document.getElementById(`page-${pageId}`).classList.remove('hidden');
-                window.scrollTo(0,0);
-            }
-        };
+        // --- CORE MODULES ---
 
         window.auth = {
             login: async () => {
@@ -640,38 +589,96 @@
             logout: async () => { await signOut(auth); location.reload(); }
         };
 
-        onAuthStateChanged(auth, (user) => {
-            currentUser = user;
-            if (user) {
-                document.body.classList.add('admin-mode');
-                document.getElementById('btnLogin').classList.add('hidden');
-                document.getElementById('adminBadge').classList.remove('hidden');
-                document.getElementById('adminBadge').classList.add('flex');
+        window.videos = {
+            load: async () => {
+                const grid = document.getElementById('videoGrid');
+                let vidData = [];
+                try {
+                    const snap = await getDocs(collection(db, "videos"));
+                    vidData = snap.empty ? defaultVideos : snap.docs.map(d => ({id: d.id, ...d.data()}));
+                } catch(e) { vidData = defaultVideos; }
                 
-                document.querySelectorAll('.editable').forEach(el => {
-                    el.contentEditable = "true";
-                    // Listen for click to set active element for AI
-                    el.addEventListener('click', function() {
-                        activeEditableElement = this;
-                        // Visual border
-                        document.querySelectorAll('.editable').forEach(e => e.style.borderColor = '');
-                        this.style.borderColor = '#3b82f6';
-                    });
+                grid.innerHTML = '';
+                vidData.forEach(v => {
+                    const videoId = v.url.split('v=')[1] ? v.url.split('v=')[1].split('&')[0] : 'dQw4w9WgXcQ';
+                    const thumb = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+                    const delBtn = currentUser ? `<button onclick="videos.delete('${v.id}')" class="absolute top-2 right-2 bg-red-600 text-white w-8 h-8 rounded-full shadow-lg z-20 hover:bg-red-700 transition"><i class="fa-solid fa-trash"></i></button>` : '';
+                    
+                    grid.innerHTML += `
+                        <div class="relative group block">
+                            ${delBtn}
+                            <a href="${v.url}" target="_blank">
+                                <div class="relative rounded-2xl overflow-hidden aspect-video shadow-lg bg-slate-800 border border-slate-700">
+                                    <img src="${thumb}" class="w-full h-full object-cover opacity-80 group-hover:scale-110 transition duration-700">
+                                    <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+                                        <div class="w-14 h-14 bg-red-600 rounded-full flex items-center justify-center text-white shadow-xl group-hover:scale-110 transition">
+                                            <i class="fa-solid fa-play ml-1"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <h3 class="mt-4 font-bold text-lg text-white group-hover:text-blue-400 transition">${v.title}</h3>
+                                <p class="text-sm text-slate-400">${v.desc}</p>
+                            </a>
+                        </div>
+                    `;
                 });
-                document.querySelectorAll('.admin-only').forEach(el => el.classList.remove('hidden'));
-            } else {
-                document.body.classList.remove('admin-mode');
-                document.getElementById('btnLogin').classList.remove('hidden');
-                document.getElementById('adminBadge').classList.add('hidden');
-                document.getElementById('adminBadge').classList.remove('flex');
-                
-                document.querySelectorAll('.editable').forEach(el => el.contentEditable = "false");
-                document.querySelectorAll('.admin-only').forEach(el => el.classList.add('hidden'));
+            },
+            add: async () => {
+                const data = {
+                    title: document.getElementById('vidTitle').value,
+                    url: document.getElementById('vidUrl').value,
+                    desc: document.getElementById('vidDesc').value
+                };
+                if(data.url) {
+                    await addDoc(collection(db, "videos"), data);
+                    ui.closeModal('videoModal');
+                    videos.load();
+                    Swal.fire('Sukses', 'Video berhasil ditambahkan', 'success');
+                }
+            },
+            delete: async (id) => {
+                if(confirm('Hapus video ini?')) { await deleteDoc(doc(db, "videos", id)); videos.load(); }
             }
-            catalog.load();
-            schools.load();
-            admin.loadTextConfig();
-        });
+        };
+
+        window.images = {
+            currentId: null,
+            init: () => {
+                // Load saved images from config
+                admin.loadImages();
+                // Add click listeners to all .editable-img if admin
+                if(currentUser) {
+                    document.querySelectorAll('.editable-img').forEach(img => {
+                        img.addEventListener('click', function() {
+                            window.images.currentId = this.id;
+                            document.getElementById('editImgPreview').classList.add('hidden');
+                            ui.showImageModal();
+                        });
+                    });
+                }
+            },
+            save: async () => {
+                const file = document.getElementById('imgFileInput').files[0];
+                if(!file) return Swal.fire('Error', 'Pilih gambar dulu', 'error');
+                
+                const reader = new FileReader();
+                reader.onload = async (e) => {
+                    const base64 = e.target.result;
+                    const id = window.images.currentId;
+                    
+                    // Update DOM immediately
+                    document.getElementById(id).src = base64;
+                    
+                    // Save to Firestore Config
+                    try {
+                        await setDoc(doc(db, 'config', 'images'), { [id]: base64 }, { merge: true });
+                        ui.closeModal('imageModal');
+                        Swal.fire('Tersimpan', 'Gambar berhasil diganti!', 'success');
+                    } catch(err) { Swal.fire('Gagal', err.message, 'error'); }
+                };
+                reader.readAsDataURL(file);
+            }
+        };
 
         window.catalog = {
             load: async () => {
@@ -760,42 +767,137 @@
                     if(d.exists()) Object.entries(d.data()).forEach(([k,v]) => { if(document.getElementById(k)) document.getElementById(k).innerHTML = v; });
                 } catch {}
             },
+            loadImages: async () => {
+                try {
+                    const d = await getDoc(doc(db, "config", "images"));
+                    if(d.exists()) {
+                        Object.entries(d.data()).forEach(([id, base64]) => {
+                            const img = document.getElementById(id);
+                            if(img) img.src = base64;
+                        });
+                    }
+                } catch {}
+            },
             addSchool: async () => {
                 const {value:name} = await Swal.fire({input:'text', title:'Tambah Sekolah'});
                 if(name) { await addDoc(collection(db,"schools"),{name}); schools.load(); }
             }
         };
 
+        // --- GEMINI AI (SIMULATION) ---
+        window.gemini = {
+            setPrompt: (type) => {
+                const map = {'make_pro': 'Ubah menjadi lebih profesional.', 'make_exciting': 'Lebih semangat!', 'fix_grammar': 'Perbaiki ejaan.'};
+                document.getElementById('aiPrompt').value = map[type];
+            },
+            generate: async () => {
+                if(!activeEditableElement) {
+                    Swal.fire('Info', 'Klik teks dulu.', 'info');
+                    ui.closeModal('aiModal'); return;
+                }
+                const btn = event.currentTarget;
+                const oldHTML = btn.innerHTML;
+                btn.innerHTML = '<i class="fa-solid fa-spin fa-spinner"></i>';
+                setTimeout(() => {
+                    const prompt = document.getElementById('aiPrompt').value;
+                    const original = activeEditableElement.innerText;
+                    activeEditableElement.innerText = original + " (AI Updated)";
+                    activeEditableElement.classList.add('animate-pulse');
+                    setTimeout(()=>activeEditableElement.classList.remove('animate-pulse'),1000);
+                    btn.innerHTML = oldHTML;
+                    ui.closeModal('aiModal');
+                }, 1500);
+            }
+        };
+
         window.ui = {
             showLoginModal: () => document.getElementById('loginModal').classList.remove('hidden'),
             showProductModal: () => document.getElementById('productModal').classList.remove('hidden'),
+            showVideoModal: () => document.getElementById('videoModal').classList.remove('hidden'),
+            showImageModal: () => document.getElementById('imageModal').classList.remove('hidden'),
             showAiModal: () => {
-                if(!activeEditableElement) return Swal.fire('Pilih Teks', 'Klik salah satu teks di halaman web terlebih dahulu.', 'warning');
+                if(!activeEditableElement) return Swal.fire('Pilih Teks', 'Klik teks dulu.', 'warning');
                 document.getElementById('aiCurrentText').innerText = activeEditableElement.innerText;
                 document.getElementById('aiModal').classList.remove('hidden');
             },
             closeModal: (id) => document.getElementById(id).classList.add('hidden')
         };
 
-        // File Handler
-        const dz = document.getElementById('dropZone');
-        const fi = document.getElementById('fileInput');
-        dz.onclick = () => fi.click();
-        fi.onchange = (e) => handleFile(e.target.files[0]);
-        function handleFile(f) {
-            const r = new FileReader();
-            r.onload = (e) => {
-                document.getElementById('imgPreview').src = e.target.result;
-                document.getElementById('imgPreview').classList.remove('hidden');
-                document.getElementById('prodImageBase64').value = e.target.result;
-            };
-            if(f) r.readAsDataURL(f);
+        // File Handler Logic (Generic)
+        function setupDropZone(dzId, inputId, previewId, valInputId) {
+            const dz = document.getElementById(dzId);
+            const fi = document.getElementById(inputId);
+            if(!dz || !fi) return;
+            dz.onclick = () => fi.click();
+            fi.onchange = (e) => processFile(e.target.files[0], previewId, valInputId);
+            
+            dz.addEventListener('dragover', (e)=>{e.preventDefault(); dz.classList.add('bg-blue-50')});
+            dz.addEventListener('dragleave', ()=>{dz.classList.remove('bg-blue-50')});
+            dz.addEventListener('drop', (e)=>{
+                e.preventDefault(); dz.classList.remove('bg-blue-50');
+                processFile(e.dataTransfer.files[0], previewId, valInputId);
+            });
         }
 
+        function processFile(f, previewId, valInputId) {
+            if(!f || !f.type.startsWith('image/')) return;
+            const r = new FileReader();
+            r.onload = (e) => {
+                const img = document.getElementById(previewId);
+                img.src = e.target.result;
+                img.classList.remove('hidden');
+                if(valInputId) document.getElementById(valInputId).value = e.target.result; // For Product Modal
+            };
+            r.readAsDataURL(f);
+        }
+
+        setupDropZone('dropZone', 'fileInput', 'imgPreview', 'prodImageBase64');
+        setupDropZone('imgDropZone', 'imgFileInput', 'editImgPreview', null); // For Image Modal
+
+        onAuthStateChanged(auth, (user) => {
+            currentUser = user;
+            if (user) {
+                document.body.classList.add('admin-mode');
+                document.getElementById('btnLogin').classList.add('hidden');
+                document.getElementById('adminBadge').classList.remove('hidden');
+                document.getElementById('adminBadge').classList.add('flex');
+                
+                document.querySelectorAll('.editable').forEach(el => {
+                    el.contentEditable = "true";
+                    el.addEventListener('click', function() {
+                        activeEditableElement = this;
+                        document.querySelectorAll('.editable').forEach(e => e.style.borderColor = '');
+                        this.style.borderColor = '#3b82f6';
+                    });
+                });
+                document.querySelectorAll('.admin-only').forEach(el => el.classList.remove('hidden'));
+                
+                // Re-init images to attach listeners
+                images.init(); 
+            } else {
+                document.body.classList.remove('admin-mode');
+                document.getElementById('btnLogin').classList.remove('hidden');
+                document.getElementById('adminBadge').classList.add('hidden');
+                document.getElementById('adminBadge').classList.remove('flex');
+                document.querySelectorAll('.editable').forEach(el => el.contentEditable = "false");
+                document.querySelectorAll('.admin-only').forEach(el => el.classList.add('hidden'));
+            }
+            catalog.load();
+            videos.load();
+            schools.load();
+            admin.loadTextConfig();
+            admin.loadImages();
+        });
+
+        window.router = {
+            navigate: (pageId) => {
+                document.querySelectorAll('.page-section').forEach(el => el.classList.add('hidden'));
+                document.getElementById(`page-${pageId}`).classList.remove('hidden');
+                window.scrollTo(0,0);
+            }
+        };
+        
         router.navigate('home');
     </script>
 </body>
 </html>
-
-
-
