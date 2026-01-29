@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jual Alat Marching Band & Drumband Batam - PT. SVM</title>
     
-    <!-- SEO Meta Tags Lengkap -->
+    <!-- SEO Meta Tags Lengkap & Spesifik -->
     <meta name="description" content="Pusat alat marching band & drumband Batam. Jual alat drumband, seragam, dan sparepart. Distributor resmi HTS & Brass Batam. Melayani SIPLAH & E-Catalog.">
-    <meta name="keywords" content="alat marching band batam, toko drumband batam, jual alat drumband batam, supplier marching band kepri, toko alat musik batam, service drumband batam, harga alat drumband sd smp sma batam">
+    <meta name="keywords" content="alat marching band batam, alat drumband batam, toko marching band batam, supplier alat marching band batam, jual snare hts batam, seragam drumband batam, pelatih drumband batam">
     <meta name="author" content="PT. Svara Vanguard Management">
 
     <!-- Tailwind CSS -->
@@ -468,7 +468,7 @@
         </div>
     </div>
 
-    <!-- GENERIC IMAGE UPLOAD MODAL -->
+    <!-- GENERIC IMAGE UPLOAD MODAL (FIXED) -->
     <div id="imageModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-md hidden items-center justify-center z-[80] p-4">
         <div class="bg-white p-6 rounded-3xl w-full max-w-sm shadow-2xl">
             <h2 class="text-lg font-bold mb-4 text-center">Ganti Gambar</h2>
@@ -476,6 +476,7 @@
                 <img id="editImgPreview" class="absolute inset-0 w-full h-full object-contain hidden bg-white p-2">
                 <i class="fa-solid fa-cloud-arrow-up text-3xl text-blue-400 mb-2"></i>
                 <p class="text-xs text-slate-400">Drag & Drop Gambar Disini</p>
+                <!-- File input is handled by JS -->
                 <input type="file" id="imgFileInput" class="absolute inset-0 opacity-0 cursor-pointer" accept="image/*">
             </div>
             <input type="hidden" id="targetImgId">
@@ -625,8 +626,7 @@
                 
                 grid.innerHTML = '';
                 vidData.forEach(v => {
-                    // Extract Video ID properly handling full URL
-                    let videoId = 'dQw4w9WgXcQ'; // Default fallback
+                    let videoId = 'dQw4w9WgXcQ';
                     if (v.url.includes('youtu.be/')) videoId = v.url.split('youtu.be/')[1].split('?')[0];
                     else if (v.url.includes('v=')) videoId = v.url.split('v=')[1].split('&')[0];
                     
@@ -672,58 +672,50 @@
 
         window.images = {
             currentId: null,
+            pendingFile: null, // NEW: Menyimpan file yang di-drop
             init: () => {
-                // Load saved images
                 admin.loadImages();
-                
-                // Add listeners
                 if(currentUser) {
                     document.querySelectorAll('.editable-img').forEach(img => {
-                        // Remove old listeners to avoid duplicates if re-init
                         const newImg = img.cloneNode(true);
                         img.parentNode.replaceChild(newImg, img);
-                        
                         newImg.addEventListener('click', function(e) {
-                            e.preventDefault(); // Prevent linking if wrapped in <a>
+                            e.preventDefault(); 
                             e.stopPropagation();
                             window.images.currentId = this.id;
-                            if(!window.images.currentId) {
-                                Swal.fire('Error', 'ID Gambar tidak ditemukan. Hubungi developer.', 'error');
-                                return;
-                            }
-                            console.log("Editing Image:", window.images.currentId);
+                            // Reset state modal
                             document.getElementById('editImgPreview').classList.add('hidden');
+                            document.getElementById('editImgPreview').src = '';
+                            document.getElementById('imgFileInput').value = '';
+                            window.images.pendingFile = null;
+                            
+                            if(!window.images.currentId) return Swal.fire('Error', 'ID Gambar hilang.', 'error');
                             ui.showImageModal();
                         });
                     });
                 }
             },
             save: async () => {
-                const file = document.getElementById('imgFileInput').files[0];
+                // Prioritize dropped file, else fallback to input
+                const file = window.images.pendingFile || document.getElementById('imgFileInput').files[0];
                 const targetId = window.images.currentId;
                 
-                if(!file) return Swal.fire('Error', 'Pilih gambar dulu', 'error');
+                if(!file) return Swal.fire('Error', 'Pilih gambar dulu (Klik atau Drop)', 'warning');
                 if(!targetId) return Swal.fire('Error', 'Target ID hilang. Refresh halaman.', 'error');
                 
-                // Show loading
                 Swal.fire({title: 'Menyimpan...', didOpen: () => Swal.showLoading()});
 
                 const reader = new FileReader();
                 reader.onload = async (e) => {
                     const base64 = e.target.result;
-                    
-                    // Update DOM immediately
                     const imgEl = document.getElementById(targetId);
                     if(imgEl) imgEl.src = base64;
                     
-                    // NEW STRATEGY: SAVE PER IMAGE ID TO AVOID 1MB DOC LIMIT
                     try {
-                        // Save to "site_images" collection, document ID = element ID
                         await setDoc(doc(db, 'site_images', targetId), { 
                             base64: base64, 
                             updatedAt: new Date() 
                         });
-                        
                         ui.closeModal('imageModal');
                         Swal.fire('Berhasil', 'Gambar tersimpan permanen!', 'success');
                     } catch(err) { 
@@ -824,7 +816,6 @@
             },
             loadImages: async () => {
                 try {
-                    // NEW STRATEGY: Load individual docs from 'site_images'
                     const snap = await getDocs(collection(db, "site_images"));
                     snap.forEach(doc => {
                         const img = document.getElementById(doc.id);
@@ -838,34 +829,22 @@
             },
             createLink: async () => {
                 if(!activeEditableElement) return Swal.fire('Pilih Teks', 'Klik teks yang ingin dijadikan link dulu.', 'warning');
-                
-                const { value: url } = await Swal.fire({
-                    input: 'url',
-                    inputLabel: 'Masukkan Link URL',
-                    inputPlaceholder: 'https://wa.me/62...',
-                    showCancelButton: true
-                });
-
+                const { value: url } = await Swal.fire({ input: 'url', inputLabel: 'Masukkan Link URL', inputPlaceholder: 'https://wa.me/62...', showCancelButton: true });
                 if (url) {
                     const text = activeEditableElement.innerText;
                     activeEditableElement.innerHTML = `<a href="${url}" target="_blank" class="text-blue-600 hover:underline">${text}</a>`;
-                    // Trigger save capability
                     Swal.fire('Sukses', 'Link dibuat! Jangan lupa klik tombol Simpan.', 'success');
                 }
             }
         };
 
-        // --- GEMINI AI (SIMULATION) ---
         window.gemini = {
             setPrompt: (type) => {
                 const map = {'make_pro': 'Ubah menjadi lebih profesional.', 'make_exciting': 'Lebih semangat!', 'fix_grammar': 'Perbaiki ejaan.'};
                 document.getElementById('aiPrompt').value = map[type];
             },
             generate: async () => {
-                if(!activeEditableElement) {
-                    Swal.fire('Info', 'Klik teks dulu.', 'info');
-                    ui.closeModal('aiModal'); return;
-                }
+                if(!activeEditableElement) { Swal.fire('Info', 'Klik teks dulu.', 'info'); ui.closeModal('aiModal'); return; }
                 const btn = event.currentTarget;
                 const oldHTML = btn.innerHTML;
                 btn.innerHTML = '<i class="fa-solid fa-spin fa-spinner"></i>';
@@ -894,36 +873,50 @@
             closeModal: (id) => document.getElementById(id).classList.add('hidden')
         };
 
-        // File Handler Logic (Generic)
-        function setupDropZone(dzId, inputId, previewId, valInputId) {
+        // UNIFIED FILE HANDLER (Handles Drag&Drop for both Catalog & General Images)
+        function setupDropZone(dzId, inputId, previewId, valInputId, isGeneralImage = false) {
             const dz = document.getElementById(dzId);
             const fi = document.getElementById(inputId);
             if(!dz || !fi) return;
-            dz.onclick = () => fi.click();
-            fi.onchange = (e) => processFile(e.target.files[0], previewId, valInputId);
             
+            // Click Handler
+            dz.onclick = () => fi.click();
+            
+            // File Input Change
+            fi.onchange = (e) => processFile(e.target.files[0], previewId, valInputId, isGeneralImage);
+            
+            // Drag Events
             dz.addEventListener('dragover', (e)=>{e.preventDefault(); dz.classList.add('bg-blue-50')});
             dz.addEventListener('dragleave', ()=>{dz.classList.remove('bg-blue-50')});
             dz.addEventListener('drop', (e)=>{
                 e.preventDefault(); dz.classList.remove('bg-blue-50');
-                processFile(e.dataTransfer.files[0], previewId, valInputId);
+                processFile(e.dataTransfer.files[0], previewId, valInputId, isGeneralImage);
             });
         }
 
-        function processFile(f, previewId, valInputId) {
+        function processFile(f, previewId, valInputId, isGeneralImage) {
             if(!f || !f.type.startsWith('image/')) return;
+            
+            // Logic for General Image Modal (SIPLAH etc)
+            if(isGeneralImage) {
+                window.images.pendingFile = f; // Store file for save() logic
+            }
+
             const r = new FileReader();
             r.onload = (e) => {
                 const img = document.getElementById(previewId);
                 img.src = e.target.result;
                 img.classList.remove('hidden');
-                if(valInputId) document.getElementById(valInputId).value = e.target.result; // For Product Modal
+                
+                // Logic for Product Modal (Hidden Input)
+                if(valInputId) document.getElementById(valInputId).value = e.target.result; 
             };
             r.readAsDataURL(f);
         }
 
-        setupDropZone('dropZone', 'fileInput', 'imgPreview', 'prodImageBase64');
-        setupDropZone('imgDropZone', 'imgFileInput', 'editImgPreview', null); // For Image Modal
+        // Setup Dropzones
+        setupDropZone('dropZone', 'fileInput', 'imgPreview', 'prodImageBase64', false); // Product Modal
+        setupDropZone('imgDropZone', 'imgFileInput', 'editImgPreview', null, true);   // Image Modal (True = isGeneral)
 
         onAuthStateChanged(auth, (user) => {
             currentUser = user;
@@ -942,8 +935,6 @@
                     });
                 });
                 document.querySelectorAll('.admin-only').forEach(el => el.classList.remove('hidden'));
-                
-                // Re-init images to attach listeners explicitly
                 setTimeout(images.init, 1000); 
             } else {
                 document.body.classList.remove('admin-mode');
