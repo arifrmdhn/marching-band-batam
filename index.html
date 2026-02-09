@@ -961,7 +961,7 @@
             load: async () => {
                 const list = document.getElementById('schoolList');
                 list.innerHTML = '';
-                const defaults = ["SMAN 20 Batam (Binaan)", "MTsN 1 Batam (Juara MIMAC)", "MIN 1 Batam", "SMPN 56 Batam", "SDN 06 Sei Beduk"];
+                const defaults = ["SMAN 20 Batam (Binaan)", "MTsN 1 Batam (Juara MIMAC)", "MIN 1 Batam", "SDN 06 Sei Beduk"];
                 try {
                     const snap = await getDocs(collection(db, "schools"));
                     if(snap.empty) defaults.forEach(s => schools.appendHTML(s));
@@ -1149,3 +1149,4 @@
     </script>
 </body>
 </html>
+
