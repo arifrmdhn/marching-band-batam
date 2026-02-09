@@ -24,7 +24,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
 
     <!-- Config -->
     <script>
@@ -34,6 +34,7 @@
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
                         serif: ['Playfair Display', 'serif'],
+                        display: ['Oswald', 'sans-serif'],
                     },
                     colors: {
                         svm: {
@@ -41,6 +42,20 @@
                             navy: '#151E2E',
                             gold: '#C5A059', 
                             goldlight: '#E5C585',
+                            red: '#D90429'
+                        }
+                    },
+                    backgroundImage: {
+                        'music-pattern': "url('https://www.transparenttextures.com/patterns/cubes.png')",
+                    },
+                    animation: {
+                        'float-slow': 'float 8s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
                         }
                     }
                 }
@@ -52,12 +67,12 @@
         /* Modern Scrollbar */
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: #0B0F19; }
-        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: #C5A059; }
+        ::-webkit-scrollbar-thumb { background: #C5A059; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #E5C585; }
 
         body { background-color: #F8FAFC; color: #1E293B; }
 
-        /* Glassmorphism */
+        /* Glassmorphism Navigation */
         .glass-nav {
             background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(16px);
@@ -65,15 +80,22 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.5);
         }
         
+        /* Musical Wave Animation Background */
+        .wave-bg {
+            background: radial-gradient(circle at 50% 50%, rgba(197, 160, 89, 0.1) 0%, transparent 50%);
+            animation: pulse-slow 5s infinite;
+        }
+
         .active-tab { 
-            background: linear-gradient(135deg, #0B0F19 0%, #1e293b 100%); 
+            background: #0B0F19; 
             color: #C5A059; 
-            box-shadow: 0 4px 15px -3px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 15px -3px rgba(0, 0, 0, 0.3);
+            border: 1px solid #C5A059;
         }
 
         /* Text Gradients */
         .text-gradient-gold {
-            background: linear-gradient(to right, #C5A059, #E5C585, #C5A059);
+            background: linear-gradient(to right, #C5A059, #FDE68A, #C5A059);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-size: 200% auto;
@@ -82,18 +104,18 @@
         @keyframes shine { to { background-position: 200% center; } }
         
         /* ADMIN MODE STYLES */
-        .editable { outline: none; transition: all 0.2s; position: relative; }
-        body.admin-mode .editable { border: 1px dashed rgba(197, 160, 89, 0.5); cursor: text; padding: 2px; border-radius: 4px; }
+        .editable { outline: none; transition: all 0.2s; position: relative; border-radius: 4px; }
+        body.admin-mode .editable { border: 1px dashed rgba(197, 160, 89, 0.5); cursor: text; padding: 2px; }
         body.admin-mode .editable:hover::after {
             content: '✎ Edit'; position: absolute; top: -15px; right: 0; background: #C5A059; color: white; font-size: 9px; padding: 2px 6px; border-radius: 2px; pointer-events: none; z-index: 50;
         }
         
-        /* Image Editing */
+        /* Image Editing & Files */
         body.admin-mode .editable-img { cursor: pointer; border: 3px solid #C5A059 !important; z-index: 10; }
         body.admin-mode .img-container:hover::before {
-            content: '📸 GANTI'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            content: '📸 GANTI FILE/FOTO'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
             background: rgba(0,0,0,0.8); color: #C5A059; padding: 8px 12px; border-radius: 8px; 
-            font-size: 12px; font-weight: bold; pointer-events: none; z-index: 20;
+            font-size: 10px; font-weight: bold; pointer-events: none; z-index: 20; text-align: center;
         }
 
         /* Link Editing Button */
@@ -102,42 +124,47 @@
 
         #adminToolbar { display: none !important; }
         body.admin-mode #adminToolbar { display: flex !important; }
+
+        /* Responsive Fixes */
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2.5rem !important; line-height: 1.1 !important; }
+            .section-padding { padding-top: 3rem; padding-bottom: 3rem; }
+        }
     </style>
 </head>
-<body class="font-sans antialiased overflow-x-hidden">
+<body class="font-sans antialiased overflow-x-hidden bg-slate-50">
 
     <!-- NAVBAR -->
-    <nav id="navbar" class="fixed w-full top-0 z-50 transition-all duration-300 py-4">
+    <nav id="navbar" class="fixed w-full top-0 z-50 transition-all duration-300 py-2 md:py-4">
         <div class="max-w-7xl mx-auto px-4 md:px-8">
-            <div class="glass-nav rounded-2xl px-6 py-3 flex justify-between items-center shadow-lg shadow-gray-200/50">
+            <div class="glass-nav rounded-full px-4 md:px-6 py-2 md:py-3 flex justify-between items-center shadow-lg shadow-gray-200/50">
                 <!-- Logo -->
                 <div class="flex items-center gap-3 cursor-pointer group" onclick="router.navigate('home')">
-                    <div class="bg-svm-dark text-svm-gold p-2.5 rounded-xl group-hover:rotate-12 transition duration-300">
-                        <i class="fa-solid fa-crown text-xl"></i>
+                    <div class="bg-svm-dark text-svm-gold p-2 rounded-full group-hover:rotate-12 transition duration-300">
+                        <i class="fa-solid fa-music text-lg"></i>
                     </div>
                     <div>
-                        <h1 class="font-serif font-bold text-xl leading-none tracking-tight text-svm-dark">SVM<span class="text-svm-gold">.CORP</span></h1>
-                        <p class="text-[9px] text-slate-400 font-medium tracking-widest uppercase">Since 2017</p>
+                        <h1 class="font-display font-bold text-lg md:text-xl leading-none tracking-tight text-svm-dark">SVM<span class="text-svm-gold">.ID</span></h1>
                     </div>
                 </div>
                 
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex items-center gap-1 bg-slate-100/50 rounded-full p-1 border border-white">
-                    <button onclick="router.navigate('home')" class="px-6 py-2 rounded-full text-xs font-bold text-slate-600 hover:bg-white hover:text-svm-dark transition uppercase tracking-wide">Beranda</button>
-                    <button onclick="router.navigate('training')" class="px-6 py-2 rounded-full text-xs font-bold text-slate-600 hover:bg-white hover:text-svm-dark transition uppercase tracking-wide">Academy</button>
-                    <button onclick="router.navigate('catalog')" class="px-6 py-2 rounded-full text-xs font-bold text-slate-600 hover:bg-white hover:text-svm-dark transition uppercase tracking-wide">Katalog</button>
+                    <button onclick="router.navigate('home')" class="px-5 py-2 rounded-full text-xs font-bold text-slate-600 hover:bg-white hover:text-svm-dark transition uppercase tracking-wide">Beranda</button>
+                    <button onclick="router.navigate('training')" class="px-5 py-2 rounded-full text-xs font-bold text-slate-600 hover:bg-white hover:text-svm-dark transition uppercase tracking-wide">Pelatihan</button>
+                    <button onclick="router.navigate('catalog')" class="px-5 py-2 rounded-full text-xs font-bold text-slate-600 hover:bg-white hover:text-svm-dark transition uppercase tracking-wide">Katalog</button>
                 </div>
 
                 <!-- Action -->
-                <div class="flex items-center gap-3">
-                    <button onclick="window.open('https://wa.me/6283812113160', '_blank')" class="hidden md:flex bg-svm-dark hover:bg-slate-800 text-white px-6 py-2.5 rounded-xl text-xs font-bold transition shadow-lg items-center gap-2">
-                        <span>Hubungi Kami</span> <i class="fa-solid fa-arrow-right"></i>
+                <div class="flex items-center gap-2 md:gap-3">
+                    <button onclick="window.open('https://wa.me/6283812113160', '_blank')" class="hidden md:flex bg-svm-dark hover:bg-slate-800 text-white px-5 py-2 rounded-full text-xs font-bold transition shadow-lg items-center gap-2">
+                        <span>Konsultasi</span> <i class="fa-solid fa-whatsapp"></i>
                     </button>
-                    <button id="btnLogin" onclick="ui.showLoginModal()" class="w-9 h-9 flex items-center justify-center rounded-full text-slate-400 hover:text-svm-dark transition" title="Admin">
+                    <button id="btnLogin" onclick="ui.showLoginModal()" class="w-8 h-8 flex items-center justify-center rounded-full text-slate-400 hover:text-svm-dark transition" title="Admin">
                         <i class="fa-solid fa-lock text-xs"></i>
                     </button>
                     <div id="adminBadge" class="hidden items-center gap-2 bg-red-600 text-white px-3 py-1 rounded-full text-[10px] font-bold shadow-lg cursor-default tracking-wider">
-                        ADMIN MODE
+                        ADMIN
                     </div>
                 </div>
             </div>
@@ -145,69 +172,72 @@
     </nav>
 
     <!-- MAIN APP CONTAINER -->
-    <main id="app" class="min-h-screen">
+    <main id="app" class="min-h-screen pb-20 md:pb-0">
 
         <!-- === PAGE 1: BERANDA === -->
         <div id="page-home" class="page-section">
             
-            <!-- Hero Section Elite -->
-            <section class="relative pt-32 pb-20 px-4 overflow-hidden">
-                <!-- Background Blob -->
-                <div class="absolute top-0 right-0 w-[800px] h-[800px] bg-gradient-radial from-blue-100 to-transparent opacity-50 blur-3xl -z-10 translate-x-1/3 -translate-y-1/3"></div>
+            <!-- Hero Section -->
+            <section class="relative pt-28 md:pt-36 pb-10 md:pb-20 px-4 overflow-hidden">
+                <!-- Background Accents -->
+                <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-svm-gold/10 rounded-full blur-3xl -z-10 translate-x-1/3 -translate-y-1/3 animate-pulse-slow"></div>
+                <div class="absolute bottom-0 left-0 w-[300px] h-[300px] bg-blue-100 rounded-full blur-3xl -z-10 -translate-x-1/3 translate-y-1/3"></div>
                 
                 <div class="max-w-7xl mx-auto">
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                        <div data-aos="fade-right" data-aos-duration="1000">
-                            <div class="inline-flex items-center gap-2 bg-white border border-slate-200 px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest mb-8 text-svm-gold shadow-sm">
-                                <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                                <span class="editable" id="hero-badge">Official Distributor & Training Center</span>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
+                        <div class="order-2 lg:order-1 text-center lg:text-left" data-aos="fade-up">
+                            <div class="inline-flex items-center gap-2 bg-white border border-slate-200 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest mb-6 text-svm-gold shadow-sm">
+                                <i class="fa-solid fa-star animate-spin-slow"></i>
+                                <span class="editable" id="hero-badge">Distributor & Pelatih Resmi</span>
                             </div>
-                            <h1 class="font-serif text-5xl md:text-7xl font-bold leading-tight mb-6 text-svm-dark">
-                                <span class="editable" id="home-title-1">Ekselensi</span> <br>
-                                <span class="text-gradient-gold editable" id="home-title-2">Marching Arts</span> <br>
+                            <h1 class="hero-title font-serif text-4xl md:text-7xl font-bold leading-tight mb-4 text-svm-dark">
+                                <span class="editable" id="home-title-1">Harmoni</span> <br>
+                                <span class="text-gradient-gold editable" id="home-title-2">Juara</span> <br>
                                 <span class="editable" id="home-title-3">Kepulauan Riau.</span>
                             </h1>
-                            <p class="editable text-lg text-slate-500 mb-10 leading-relaxed max-w-lg font-light" id="home-desc">
-                                PT. SVM menghadirkan standar internasional untuk sekolah Anda. Solusi pengadaan alat, kurikulum pelatihan juara, dan legalitas terjamin.
+                            <p class="editable text-sm md:text-lg text-slate-500 mb-8 leading-relaxed font-light" id="home-desc">
+                                Jangan biarkan talenta siswa terpendam karena alat rusak. Kami hadirkan solusi alat marching band berstandar internasional dengan garansi servis penuh.
                             </p>
-                            <div class="flex flex-wrap gap-4">
-                                <button onclick="router.navigate('catalog')" class="bg-svm-dark hover:bg-slate-800 text-white px-8 py-4 rounded-xl font-bold transition shadow-xl shadow-slate-900/20 flex items-center gap-3">
-                                    <span>Lihat Koleksi</span> 
-                                </button>
-                                <button onclick="document.getElementById('legal-section').scrollIntoView()" class="bg-white border border-slate-200 text-slate-600 px-8 py-4 rounded-xl font-bold transition hover:bg-slate-50">
-                                    Legalitas & Dokumen
-                                </button>
-                            </div>
                             
-                            <!-- Mini Stats -->
-                            <div class="mt-12 flex gap-8 border-t border-slate-200 pt-8">
-                                <div>
-                                    <h4 class="font-serif text-3xl font-bold text-svm-dark">8+</h4>
-                                    <p class="text-xs text-slate-400 uppercase tracking-widest mt-1">Tahun Pengalaman</p>
+                            <!-- DAILY MOTIVATION (AI) -->
+                            <div class="bg-gradient-to-r from-svm-dark to-slate-900 p-4 rounded-xl mb-8 shadow-xl text-white relative overflow-hidden group">
+                                <div class="absolute top-0 right-0 text-6xl text-white/5 font-serif italic pr-4">"</div>
+                                <p id="dailyQuote" class="text-xs md:text-sm font-medium italic relative z-10 leading-relaxed">
+                                    "Investasi alat musik adalah investasi karakter. Jadikan sekolah Anda pusat kreativitas Batam hari ini."
+                                </p>
+                                <div class="mt-2 flex justify-between items-center">
+                                    <span class="text-[10px] text-svm-gold uppercase tracking-widest font-bold">Motivation of the Day</span>
+                                    <button onclick="aiHelper.generateQuote()" class="admin-only hidden text-[10px] bg-white/10 hover:bg-white/20 px-2 py-1 rounded transition"><i class="fa-solid fa-wand-magic-sparkles text-yellow-400 mr-1"></i> AI Magic</button>
                                 </div>
-                                <div>
-                                    <h4 class="font-serif text-3xl font-bold text-svm-dark">1st</h4>
-                                    <p class="text-xs text-slate-400 uppercase tracking-widest mt-1">Winner MIMAC 2024</p>
-                                </div>
-                                <div>
-                                    <h4 class="font-serif text-3xl font-bold text-svm-dark">100%</h4>
-                                    <p class="text-xs text-slate-400 uppercase tracking-widest mt-1">Official Guarantee</p>
-                                </div>
+                            </div>
+
+                            <div class="flex flex-wrap justify-center lg:justify-start gap-3">
+                                <button onclick="router.navigate('catalog')" class="bg-svm-dark hover:bg-slate-800 text-white px-6 py-3 rounded-full font-bold transition shadow-lg shadow-slate-900/20 flex items-center gap-2 text-sm">
+                                    <span>Cek Katalog</span> <i class="fa-solid fa-arrow-right"></i>
+                                </button>
+                                <button onclick="document.getElementById('legal-section').scrollIntoView()" class="bg-white border border-slate-200 text-slate-600 px-6 py-3 rounded-full font-bold transition hover:bg-slate-50 text-sm flex items-center gap-2">
+                                    <i class="fa-solid fa-shield-halved text-svm-gold"></i> Legalitas
+                                </button>
                             </div>
                         </div>
                         
                         <!-- Hero Image Frame -->
-                        <div class="relative group" data-aos="fade-left" data-aos-duration="1200">
-                            <div class="absolute inset-0 bg-svm-gold rounded-[3rem] rotate-6 opacity-20 blur-lg group-hover:rotate-3 transition duration-700"></div>
-                            <div class="relative rounded-[3rem] overflow-hidden shadow-2xl border-4 border-white img-container h-[500px] md:h-[600px]">
-                                <img id="hero-main-img" src="https://images.unsplash.com/photo-1544279762-2b638c4c3e80?q=80&w=1000" class="w-full h-full object-cover editable-img transform group-hover:scale-105 transition duration-1000">
-                                <!-- Float Card -->
-                                <div class="absolute bottom-8 left-8 bg-white/90 backdrop-blur-md p-4 rounded-2xl shadow-lg max-w-xs border border-white/50">
-                                    <div class="flex items-center gap-3 mb-2">
-                                        <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-green-600"><i class="fa-solid fa-check"></i></div>
-                                        <p class="text-xs font-bold text-svm-dark">Terdaftar SIPLAH & E-Catalog</p>
+                        <div class="order-1 lg:order-2 relative" data-aos="zoom-in" data-aos-duration="1000">
+                            <div class="absolute inset-0 bg-svm-gold rounded-[2rem] rotate-3 opacity-20 blur-lg"></div>
+                            <div class="relative rounded-[2rem] overflow-hidden shadow-2xl border-4 border-white img-container h-[300px] md:h-[500px]">
+                                <img id="hero-main-img" src="https://images.unsplash.com/photo-1544279762-2b638c4c3e80?q=80&w=1000" class="w-full h-full object-cover editable-img transform hover:scale-105 transition duration-1000">
+                                
+                                <!-- Float Player -->
+                                <div class="absolute bottom-4 right-4 bg-white/90 backdrop-blur-md p-3 rounded-xl shadow-lg flex items-center gap-3 animate-float-slow max-w-[200px]">
+                                    <div class="w-8 h-8 bg-svm-dark rounded-full flex items-center justify-center text-white text-xs">
+                                        <i class="fa-solid fa-music"></i>
                                     </div>
-                                    <p class="text-[10px] text-slate-500 leading-relaxed">Kami mendukung transparansi pengadaan barang dan jasa sekolah melalui jalur resmi pemerintah.</p>
+                                    <div>
+                                        <p class="text-[10px] font-bold text-svm-dark">Sound of Victory</p>
+                                        <div class="w-20 h-1 bg-gray-200 rounded-full mt-1 overflow-hidden">
+                                            <div class="w-2/3 h-full bg-svm-gold rounded-full"></div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -216,135 +246,104 @@
             </section>
 
             <!-- Marquee Clients -->
-            <div class="bg-svm-dark py-4 overflow-hidden mb-20">
-                <div class="max-w-7xl mx-auto px-4 flex justify-between items-center text-slate-500 text-sm font-bold uppercase tracking-[0.2em] opacity-50">
-                    <span>SMAN 20 Batam</span>
-                    <span class="hidden md:inline">•</span>
-                    <span>MTsN 1 Batam</span>
-                    <span class="hidden md:inline">•</span>
-                    <span>MIN 1 Batam</span>
-                    <span class="hidden md:inline">•</span>
-                    <span>MIMAC International Champion</span>
+            <div class="bg-svm-dark py-3 overflow-hidden mb-12 transform -skew-y-1">
+                <div class="max-w-7xl mx-auto px-4 flex justify-between items-center text-slate-400 text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] whitespace-nowrap gap-8 overflow-x-auto scrollbar-hide">
+                    <span><i class="fa-solid fa-star text-svm-gold mr-1"></i> SMAN 20 Batam</span>
+                    <span><i class="fa-solid fa-star text-svm-gold mr-1"></i> MTsN 1 Batam</span>
+                    <span><i class="fa-solid fa-star text-svm-gold mr-1"></i> MIN 1 Batam</span>
+                    <span><i class="fa-solid fa-trophy text-svm-gold mr-1"></i> MIMAC Champion</span>
                 </div>
             </div>
 
-            <!-- LEGALITAS & DOKUMEN (Fitur Link PDF) -->
-            <section id="legal-section" class="max-w-7xl mx-auto px-4 mb-32">
-                <div class="text-center mb-16" data-aos="fade-up">
-                    <h2 class="font-serif text-3xl md:text-4xl font-bold text-svm-dark mb-4 editable" id="legal-title">Legalitas & Sertifikasi</h2>
-                    <p class="text-slate-500 max-w-2xl mx-auto editable" id="legal-sub">Transparansi dokumen legalitas perusahaan dan sertifikasi kompetensi pelatih kami. Klik pada kartu untuk melihat dokumen asli (PDF/Drive).</p>
+            <!-- LEGALITAS & DOKUMEN (Thumbnails + Link) -->
+            <section id="legal-section" class="max-w-7xl mx-auto px-4 mb-20">
+                <div class="text-center mb-10" data-aos="fade-up">
+                    <h2 class="font-serif text-2xl md:text-3xl font-bold text-svm-dark mb-2 editable" id="legal-title">Legalitas & Kompetensi</h2>
+                    <p class="text-xs md:text-sm text-slate-500 max-w-xl mx-auto editable" id="legal-sub">Transparansi dokumen legalitas perusahaan. Klik gambar untuk melihat file asli (PDF/Drive).</p>
                 </div>
                 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <!-- Card 1: Legalitas -->
-                    <div class="relative group" data-aos="fade-up" data-aos-delay="100">
-                        <button onclick="admin.editLink('cert-link-1')" class="edit-link-btn absolute top-2 right-2 z-30 bg-red-600 text-white text-[10px] px-2 py-1 rounded shadow-md hover:bg-red-700"><i class="fa-solid fa-file-pdf mr-1"></i> Edit Link PDF</button>
-                        <a href="#" id="cert-link-1" target="_blank" class="block h-full bg-white p-6 rounded-3xl shadow-lg border border-slate-100 hover:shadow-2xl hover:border-svm-gold transition duration-500">
-                            <div class="h-48 rounded-2xl overflow-hidden mb-6 bg-slate-50 img-container relative">
-                                <div class="absolute inset-0 flex items-center justify-center bg-svm-dark/50 opacity-0 group-hover:opacity-100 transition z-20">
-                                    <span class="bg-white text-svm-dark px-4 py-2 rounded-full text-xs font-bold shadow-lg">Buka Dokumen PDF <i class="fa-solid fa-arrow-up-right-from-square ml-1"></i></span>
-                                </div>
-                                <img id="cert-img-1" src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?q=80&w=800" class="w-full h-full object-cover editable-img">
-                            </div>
-                            <h4 class="font-serif text-xl font-bold text-svm-dark mb-2 editable" id="cert-title-1">Izin Usaha (NIB)</h4>
-                            <p class="text-sm text-slate-500 leading-relaxed editable" id="cert-desc-1">Dokumen Resmi Kemenkumham & OSS. Klik untuk verifikasi legalitas perusahaan kami.</p>
-                        </a>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+                    <!-- Doc 1 -->
+                    <div class="group relative bg-white p-3 md:p-4 rounded-2xl shadow-sm hover:shadow-xl border border-slate-100 transition duration-300" data-aos="fade-up" data-aos-delay="100">
+                        <div class="h-32 md:h-48 rounded-xl overflow-hidden mb-3 bg-slate-50 img-container relative border border-slate-100">
+                            <!-- Link Handler -->
+                            <a href="#" id="cert-link-1" target="_blank" class="absolute inset-0 z-10 flex items-center justify-center bg-svm-dark/0 group-hover:bg-svm-dark/40 transition">
+                                <span class="opacity-0 group-hover:opacity-100 bg-white text-svm-dark px-3 py-1 rounded-full text-[10px] font-bold shadow-lg transform scale-90 group-hover:scale-100 transition"><i class="fa-solid fa-eye"></i> Lihat PDF</span>
+                            </a>
+                            <img id="cert-img-1" src="https://via.placeholder.com/400x300.png?text=Preview+Izin+Usaha" class="w-full h-full object-cover editable-img">
+                        </div>
+                        <h4 class="font-bold text-sm md:text-base text-svm-dark editable" id="cert-title-1">Izin Usaha (NIB)</h4>
+                        <p class="text-[10px] text-slate-500 editable truncate" id="cert-desc-1">Resmi Kemenkumham & OSS</p>
+                        <button onclick="admin.editLink('cert-link-1')" class="admin-only hidden w-full mt-2 text-[10px] bg-slate-100 text-slate-600 py-1 rounded hover:bg-slate-200"><i class="fa-solid fa-link"></i> Edit Link PDF</button>
                     </div>
 
-                    <!-- Card 2: Sertifikat Pelatih -->
-                    <div class="relative group" data-aos="fade-up" data-aos-delay="200">
-                        <button onclick="admin.editLink('cert-link-2')" class="edit-link-btn absolute top-2 right-2 z-30 bg-red-600 text-white text-[10px] px-2 py-1 rounded shadow-md hover:bg-red-700"><i class="fa-solid fa-file-pdf mr-1"></i> Edit Link PDF</button>
-                        <a href="#" id="cert-link-2" target="_blank" class="block h-full bg-svm-dark p-6 rounded-3xl shadow-2xl relative overflow-hidden text-white hover:scale-105 transition duration-500">
-                            <div class="absolute top-0 right-0 w-64 h-64 bg-svm-gold rounded-full mix-blend-overlay filter blur-3xl opacity-20"></div>
-                            <div class="h-48 rounded-2xl overflow-hidden mb-6 bg-slate-800 img-container border border-white/10 relative">
-                                <div class="absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 group-hover:opacity-100 transition z-20">
-                                    <span class="bg-svm-gold text-white px-4 py-2 rounded-full text-xs font-bold shadow-lg">Lihat Sertifikat PDF <i class="fa-solid fa-arrow-up-right-from-square ml-1"></i></span>
-                                </div>
-                                <img id="cert-img-2" src="https://images.unsplash.com/photo-1551818255-e6e10975bc17?q=80&w=800" class="w-full h-full object-cover editable-img opacity-80 group-hover:opacity-100">
-                            </div>
-                            <h4 class="font-serif text-xl font-bold mb-2 text-svm-gold editable" id="cert-title-2">Lisensi Pelatih</h4>
-                            <p class="text-sm text-slate-300 leading-relaxed editable" id="cert-desc-2">Sertifikasi kepelatihan internasional dan penghargaan MIMAC Malaysia 2024.</p>
-                        </a>
+                    <!-- Doc 2 -->
+                    <div class="group relative bg-white p-3 md:p-4 rounded-2xl shadow-sm hover:shadow-xl border border-slate-100 transition duration-300" data-aos="fade-up" data-aos-delay="200">
+                        <div class="h-32 md:h-48 rounded-xl overflow-hidden mb-3 bg-slate-50 img-container relative border border-slate-100">
+                            <a href="#" id="cert-link-2" target="_blank" class="absolute inset-0 z-10 flex items-center justify-center bg-svm-dark/0 group-hover:bg-svm-dark/40 transition">
+                                <span class="opacity-0 group-hover:opacity-100 bg-white text-svm-dark px-3 py-1 rounded-full text-[10px] font-bold shadow-lg transform scale-90 group-hover:scale-100 transition"><i class="fa-solid fa-eye"></i> Lihat PDF</span>
+                            </a>
+                            <img id="cert-img-2" src="https://via.placeholder.com/400x300.png?text=Preview+Sertifikat+Pelatih" class="w-full h-full object-cover editable-img">
+                        </div>
+                        <h4 class="font-bold text-sm md:text-base text-svm-dark editable" id="cert-title-2">Sertifikat Pelatih</h4>
+                        <p class="text-[10px] text-slate-500 editable truncate" id="cert-desc-2">Lisensi Internasional & MIMAC</p>
+                        <button onclick="admin.editLink('cert-link-2')" class="admin-only hidden w-full mt-2 text-[10px] bg-slate-100 text-slate-600 py-1 rounded hover:bg-slate-200"><i class="fa-solid fa-link"></i> Edit Link PDF</button>
                     </div>
 
-                    <!-- Card 3: Distributor -->
-                    <div class="relative group" data-aos="fade-up" data-aos-delay="300">
-                        <button onclick="admin.editLink('cert-link-3')" class="edit-link-btn absolute top-2 right-2 z-30 bg-red-600 text-white text-[10px] px-2 py-1 rounded shadow-md hover:bg-red-700"><i class="fa-solid fa-file-pdf mr-1"></i> Edit Link PDF</button>
-                        <a href="#" id="cert-link-3" target="_blank" class="block h-full bg-white p-6 rounded-3xl shadow-lg border border-slate-100 hover:shadow-2xl hover:border-svm-gold transition duration-500">
-                            <div class="h-48 rounded-2xl overflow-hidden mb-6 bg-slate-50 img-container relative">
-                                <div class="absolute inset-0 flex items-center justify-center bg-svm-dark/50 opacity-0 group-hover:opacity-100 transition z-20">
-                                    <span class="bg-white text-svm-dark px-4 py-2 rounded-full text-xs font-bold shadow-lg">Lihat Surat PDF <i class="fa-solid fa-arrow-up-right-from-square ml-1"></i></span>
-                                </div>
-                                <img id="cert-img-3" src="https://images.unsplash.com/photo-1635350645063-47a2569c7668?q=80&w=800" class="w-full h-full object-cover editable-img">
-                            </div>
-                            <h4 class="font-serif text-xl font-bold text-svm-dark mb-2 editable" id="cert-title-3">Surat Penunjukan</h4>
-                            <p class="text-sm text-slate-500 leading-relaxed editable" id="cert-desc-3">Surat resmi penunjukan sebagai distributor resmi alat musik dari prinsipal.</p>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- DOWNLOAD AREA -->
-                <div class="mt-12 bg-slate-50 rounded-2xl p-8 border border-slate-200">
-                    <h4 class="font-bold text-svm-dark mb-4 flex items-center gap-2"><i class="fa-solid fa-folder-open text-svm-gold"></i> Arsip Dokumen Publik</h4>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <a href="#" id="doc-link-1" class="flex items-center gap-4 bg-white p-4 rounded-xl border border-slate-200 hover:border-svm-gold hover:shadow-md transition group">
-                            <div class="w-10 h-10 bg-red-100 text-red-600 rounded-lg flex items-center justify-center shrink-0"><i class="fa-solid fa-file-pdf text-xl"></i></div>
-                            <div>
-                                <h5 class="font-bold text-sm text-svm-dark group-hover:text-svm-gold transition">Company Profile SVM.pdf</h5>
-                                <p class="text-[10px] text-slate-400">Klik untuk download/lihat</p>
-                            </div>
-                            <button onclick="event.preventDefault(); admin.editLink('doc-link-1')" class="edit-link-btn ml-auto bg-slate-200 p-1 rounded hover:bg-slate-300 text-xs"><i class="fa-solid fa-pen"></i></button>
-                        </a>
-                        <a href="#" id="doc-link-2" class="flex items-center gap-4 bg-white p-4 rounded-xl border border-slate-200 hover:border-svm-gold hover:shadow-md transition group">
-                            <div class="w-10 h-10 bg-red-100 text-red-600 rounded-lg flex items-center justify-center shrink-0"><i class="fa-solid fa-file-pdf text-xl"></i></div>
-                            <div>
-                                <h5 class="font-bold text-sm text-svm-dark group-hover:text-svm-gold transition">Katalog Produk 2026.pdf</h5>
-                                <p class="text-[10px] text-slate-400">Klik untuk download/lihat</p>
-                            </div>
-                            <button onclick="event.preventDefault(); admin.editLink('doc-link-2')" class="edit-link-btn ml-auto bg-slate-200 p-1 rounded hover:bg-slate-300 text-xs"><i class="fa-solid fa-pen"></i></button>
-                        </a>
+                    <!-- Doc 3 -->
+                    <div class="group relative bg-white p-3 md:p-4 rounded-2xl shadow-sm hover:shadow-xl border border-slate-100 transition duration-300" data-aos="fade-up" data-aos-delay="300">
+                        <div class="h-32 md:h-48 rounded-xl overflow-hidden mb-3 bg-slate-50 img-container relative border border-slate-100">
+                            <a href="#" id="cert-link-3" target="_blank" class="absolute inset-0 z-10 flex items-center justify-center bg-svm-dark/0 group-hover:bg-svm-dark/40 transition">
+                                <span class="opacity-0 group-hover:opacity-100 bg-white text-svm-dark px-3 py-1 rounded-full text-[10px] font-bold shadow-lg transform scale-90 group-hover:scale-100 transition"><i class="fa-solid fa-eye"></i> Lihat PDF</span>
+                            </a>
+                            <img id="cert-img-3" src="https://via.placeholder.com/400x300.png?text=Preview+Distributor" class="w-full h-full object-cover editable-img">
+                        </div>
+                        <h4 class="font-bold text-sm md:text-base text-svm-dark editable" id="cert-title-3">Surat Distributor</h4>
+                        <p class="text-[10px] text-slate-500 editable truncate" id="cert-desc-3">Penunjukan Resmi Pabrikan</p>
+                        <button onclick="admin.editLink('cert-link-3')" class="admin-only hidden w-full mt-2 text-[10px] bg-slate-100 text-slate-600 py-1 rounded hover:bg-slate-200"><i class="fa-solid fa-link"></i> Edit Link PDF</button>
                     </div>
                 </div>
             </section>
 
-            <!-- WHY US (Accordian Style) -->
-            <section class="bg-white py-20 border-y border-slate-100">
-                <div class="max-w-7xl mx-auto px-4">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+            <!-- WHY US -->
+            <section class="bg-slate-900 py-16 text-white relative overflow-hidden">
+                <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-20"></div>
+                <div class="max-w-7xl mx-auto px-4 relative z-10">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
                         <div data-aos="fade-right">
-                            <h2 class="font-serif text-3xl font-bold text-svm-dark mb-6">Mengapa Sekolah Memilih Kami?</h2>
-                            <p class="text-slate-500 mb-8 leading-relaxed">Banyak sekolah menghadapi masalah alat yang cepat rusak, harga markup yang tidak wajar, dan ketiadaan layanan purna jual. SVM hadir sebagai antitesis dari masalah tersebut.</p>
+                            <h2 class="font-serif text-2xl md:text-4xl font-bold mb-4">Mengapa Sekolah <br><span class="text-svm-gold">Memilih SVM?</span></h2>
+                            <p class="text-slate-400 text-sm mb-8 leading-relaxed">Kami memahami bahwa sekolah membutuhkan alat yang awet dan layanan purna jual yang jelas, bukan sekadar barang murah yang cepat rusak.</p>
                             
-                            <div class="space-y-4">
-                                <div class="flex gap-4">
-                                    <div class="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 shrink-0"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+                            <ul class="space-y-4 text-sm">
+                                <li class="flex gap-3">
+                                    <i class="fa-solid fa-check-circle text-svm-gold mt-1"></i>
                                     <div>
-                                        <h4 class="font-bold text-svm-dark text-lg">Lifetime Support Teknisi</h4>
-                                        <p class="text-sm text-slate-500">Alat rusak? Teknisi kami siap datang memperbaiki. Investasi sekolah aman jangka panjang.</p>
+                                        <strong class="block text-white">Lifetime Support Teknisi</strong>
+                                        <span class="text-slate-500 text-xs">Rusak? Teknisi kami datang ke sekolah.</span>
                                     </div>
-                                </div>
-                                <div class="flex gap-4">
-                                    <div class="w-12 h-12 rounded-full bg-orange-50 flex items-center justify-center text-orange-600 shrink-0"><i class="fa-solid fa-hand-holding-dollar"></i></div>
+                                </li>
+                                <li class="flex gap-3">
+                                    <i class="fa-solid fa-check-circle text-svm-gold mt-1"></i>
                                     <div>
-                                        <h4 class="font-bold text-svm-dark text-lg">Harga Jujur & Transparan</h4>
-                                        <p class="text-sm text-slate-500">Harga paket khusus institusi pendidikan. Bisa disesuaikan dengan RAPBS sekolah.</p>
+                                        <strong class="block text-white">Harga Nego & Transparan</strong>
+                                        <span class="text-slate-500 text-xs">Sesuai RAPBS sekolah & administrasi pajak beres.</span>
                                     </div>
-                                </div>
-                                <div class="flex gap-4">
-                                    <div class="w-12 h-12 rounded-full bg-purple-50 flex items-center justify-center text-purple-600 shrink-0"><i class="fa-solid fa-graduation-cap"></i></div>
+                                </li>
+                                <li class="flex gap-3">
+                                    <i class="fa-solid fa-check-circle text-svm-gold mt-1"></i>
                                     <div>
-                                        <h4 class="font-bold text-svm-dark text-lg">Kurikulum Juara</h4>
-                                        <p class="text-sm text-slate-500">Gratis konsultasi kurikulum pelatihan selama 3 bulan pertama pembelian unit.</p>
+                                        <strong class="block text-white">Kurikulum Juara</strong>
+                                        <span class="text-slate-500 text-xs">Gratis konsultasi materi pelatihan 3 bulan pertama.</span>
                                     </div>
-                                </div>
-                            </div>
+                                </li>
+                            </ul>
                         </div>
-                        <div class="relative h-[500px] rounded-[3rem] overflow-hidden img-container" data-aos="fade-left">
+                        <div class="h-64 md:h-80 rounded-2xl overflow-hidden border-2 border-svm-gold/30 relative img-container" data-aos="fade-left">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-60 z-10"></div>
                             <img id="feature-img" src="https://images.unsplash.com/photo-1514525253440-b393452e8d26?q=80&w=800" class="w-full h-full object-cover editable-img">
-                            <div class="absolute inset-0 bg-gradient-to-t from-svm-dark to-transparent opacity-80"></div>
-                            <div class="absolute bottom-10 left-10 text-white">
-                                <p class="font-serif text-2xl italic">"Musik membangun karakter disiplin dan kerjasama tim yang kuat bagi siswa."</p>
-                                <p class="mt-4 font-bold text-svm-gold text-sm uppercase tracking-widest">- Arif, Founder PT. SVM</p>
+                            <div class="absolute bottom-6 left-6 z-20">
+                                <p class="font-serif text-xl italic text-white">"Musik adalah investasi karakter."</p>
+                                <p class="text-[10px] text-svm-gold font-bold mt-1 uppercase tracking-widest">- Arif, Founder</p>
                             </div>
                         </div>
                     </div>
@@ -352,86 +351,79 @@
             </section>
 
             <!-- YOUTUBE & ACTIVITIES -->
-            <section class="py-20 bg-slate-50 relative overflow-hidden">
-                <div class="max-w-7xl mx-auto px-4 relative z-10">
-                    <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
-                        <div data-aos="fade-right">
-                            <h2 class="font-serif text-3xl font-bold text-svm-dark mb-2 editable" id="yt-title">SVM Activity</h2>
-                            <p class="editable text-slate-500" id="yt-desc">Dokumentasi latihan, kompetisi MIMAC 2024, dan GPMB.</p>
+            <section class="py-16 bg-white relative">
+                <div class="max-w-7xl mx-auto px-4">
+                    <div class="flex justify-between items-end mb-8">
+                        <div>
+                            <h2 class="font-serif text-2xl font-bold text-svm-dark mb-1 editable" id="yt-title">Galeri Kegiatan</h2>
+                            <p class="text-xs text-slate-500 editable" id="yt-desc">Latihan & Kompetisi.</p>
                         </div>
-                        <div class="flex gap-2">
-                            <button onclick="ui.showVideoModal()" class="admin-only hidden px-6 py-2 bg-red-600 text-white rounded-full hover:bg-red-700 transition text-sm font-bold shadow-lg"><i class="fa-brands fa-youtube mr-2"></i>+ Video</button>
-                            <a href="https://www.youtube.com/channel/UCQpNg7I_p_ExSOvW2ufq4Hg" target="_blank" class="px-6 py-2 border border-slate-300 rounded-full hover:bg-white hover:text-red-600 transition text-sm font-bold text-slate-600">Lihat YouTube</a>
-                        </div>
+                        <button onclick="ui.showVideoModal()" class="admin-only hidden bg-red-600 text-white rounded-full w-8 h-8 hover:bg-red-700 transition flex items-center justify-center shadow-lg"><i class="fa-solid fa-plus text-xs"></i></button>
                     </div>
-                    <div id="videoGrid" class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        <div class="col-span-full text-center text-slate-500 italic">Memuat video...</div>
+                    <div id="videoGrid" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <!-- JS Loaded -->
                     </div>
                 </div>
             </section>
         </div>
 
         <!-- === PAGE 2: PELATIHAN === -->
-        <div id="page-training" class="page-section hidden fade-in">
-            <!-- Header Image -->
-            <div class="h-[60vh] relative img-container">
-                <div class="absolute inset-0 bg-svm-dark/60 z-10"></div>
+        <div id="page-training" class="page-section hidden fade-in bg-white">
+            <div class="h-[50vh] relative img-container">
+                <div class="absolute inset-0 bg-svm-dark/70 z-10"></div>
                 <img id="training-bg-img" src="https://images.unsplash.com/photo-1511192336575-5a79af67a629?q=80&w=2000" class="w-full h-full object-cover editable-img">
                 <div class="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-4" data-aos="zoom-in">
-                    <span class="text-svm-gold font-bold tracking-[0.3em] text-xs uppercase mb-4 border border-svm-gold/30 px-4 py-2 rounded-full backdrop-blur-sm">SVM Academy</span>
-                    <h2 class="font-serif text-5xl md:text-7xl font-bold text-white mb-6 editable" id="training-title">School of Champions</h2>
-                    <p class="text-slate-200 max-w-xl text-lg font-light leading-relaxed editable" id="training-desc">Membentuk karakter pemenang melalui kedisiplinan marching band.</p>
+                    <span class="text-svm-gold font-bold tracking-[0.2em] text-[10px] uppercase mb-2 border border-svm-gold/30 px-3 py-1 rounded-full backdrop-blur-sm">SVM Academy</span>
+                    <h2 class="font-serif text-4xl md:text-6xl font-bold text-white mb-4 editable" id="training-title">School of Champions</h2>
+                    <p class="text-slate-300 max-w-md text-sm md:text-base font-light leading-relaxed editable" id="training-desc">Membentuk karakter pemenang melalui kedisiplinan.</p>
                 </div>
             </div>
 
-            <section class="max-w-7xl mx-auto px-4 py-20">
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+            <section class="max-w-7xl mx-auto px-4 py-16">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <!-- Curriculum -->
-                    <div class="lg:col-span-2 space-y-6">
-                        <h3 class="font-serif text-2xl font-bold text-svm-dark mb-8">Kurikulum Berjenjang</h3>
+                    <div class="md:col-span-2 space-y-4">
+                        <h3 class="font-display text-xl font-bold text-svm-dark mb-4 border-l-4 border-svm-gold pl-3">Kurikulum Berjenjang</h3>
                         
-                        <div class="group bg-white p-8 rounded-3xl border border-slate-100 hover:border-svm-gold transition duration-300 shadow-sm" data-aos="fade-up">
-                            <div class="flex gap-6">
-                                <div class="font-serif text-4xl font-bold text-slate-200 group-hover:text-svm-gold transition">01</div>
+                        <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 hover:border-svm-gold transition duration-300 group">
+                            <div class="flex gap-4">
+                                <div class="font-display text-3xl font-bold text-slate-200 group-hover:text-svm-gold transition">01</div>
                                 <div>
-                                    <h4 class="font-bold text-xl mb-2 text-svm-dark editable" id="curr-1-title">Basic Fundamental</h4>
-                                    <p class="text-slate-600 text-sm leading-relaxed editable" id="curr-1-desc">Pondasi utama. Fokus pada fisik, baris-berbaris (PBB), dan teknik dasar memegang alat untuk pemula.</p>
+                                    <h4 class="font-bold text-sm md:text-base text-svm-dark editable" id="curr-1-title">Basic Fundamental</h4>
+                                    <p class="text-xs text-slate-500 leading-relaxed mt-1 editable" id="curr-1-desc">Pondasi utama. Fokus pada fisik, PBB, dan teknik dasar.</p>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="group bg-white p-8 rounded-3xl border border-slate-100 hover:border-svm-gold transition duration-300 shadow-sm" data-aos="fade-up" data-aos-delay="100">
-                            <div class="flex gap-6">
-                                <div class="font-serif text-4xl font-bold text-slate-200 group-hover:text-svm-gold transition">02</div>
+                        <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 hover:border-svm-gold transition duration-300 group">
+                            <div class="flex gap-4">
+                                <div class="font-display text-3xl font-bold text-slate-200 group-hover:text-svm-gold transition">02</div>
                                 <div>
-                                    <h4 class="font-bold text-xl mb-2 text-svm-dark editable" id="curr-2-title">Music & Harmony</h4>
-                                    <p class="text-slate-600 text-sm leading-relaxed editable" id="curr-2-desc">Membaca not balok dan penguasaan lagu. Sectional practice untuk menyamakan intonasi dan tuning presisi.</p>
+                                    <h4 class="font-bold text-sm md:text-base text-svm-dark editable" id="curr-2-title">Music & Harmony</h4>
+                                    <p class="text-xs text-slate-500 leading-relaxed mt-1 editable" id="curr-2-desc">Not balok, lagu, intonasi dan tuning presisi.</p>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="group bg-white p-8 rounded-3xl border border-slate-100 hover:border-svm-gold transition duration-300 shadow-sm" data-aos="fade-up" data-aos-delay="200">
-                            <div class="flex gap-6">
-                                <div class="font-serif text-4xl font-bold text-slate-200 group-hover:text-svm-gold transition">03</div>
+                        <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 hover:border-svm-gold transition duration-300 group">
+                            <div class="flex gap-4">
+                                <div class="font-display text-3xl font-bold text-slate-200 group-hover:text-svm-gold transition">03</div>
                                 <div>
-                                    <h4 class="font-bold text-xl mb-2 text-svm-dark editable" id="curr-3-title">Display & Visual Effect</h4>
-                                    <p class="text-slate-600 text-sm leading-relaxed editable" id="curr-3-desc">Pembuatan formasi lapangan (drill), koreografi color guard, dan integrasi musik dengan gerakan visual.</p>
+                                    <h4 class="font-bold text-sm md:text-base text-svm-dark editable" id="curr-3-title">Display & Visual</h4>
+                                    <p class="text-xs text-slate-500 leading-relaxed mt-1 editable" id="curr-3-desc">Formasi lapangan (drill) dan koreografi color guard.</p>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Schools List -->
-                    <div class="bg-svm-navy text-white p-10 rounded-3xl relative overflow-hidden" data-aos="fade-left">
+                    <div class="bg-svm-navy text-white p-6 rounded-2xl relative overflow-hidden h-fit">
                         <div class="absolute top-0 right-0 w-32 h-32 bg-svm-gold rounded-full mix-blend-overlay filter blur-3xl opacity-20"></div>
-                        <div class="flex justify-between items-center mb-8 relative z-10">
-                            <h3 class="font-serif text-xl font-bold text-svm-gold">Sekolah Binaan</h3>
-                            <button onclick="admin.addSchool()" class="admin-only hidden text-xs bg-white text-svm-dark px-3 py-1 rounded-full hover:bg-slate-200">+ Edit</button>
+                        <div class="flex justify-between items-center mb-6 relative z-10">
+                            <h3 class="font-display text-lg font-bold text-svm-gold">Sekolah Binaan</h3>
+                            <button onclick="admin.addSchool()" class="admin-only hidden text-[10px] bg-white text-svm-dark px-2 py-1 rounded hover:bg-slate-200">+ Edit</button>
                         </div>
-                        <ul id="schoolList" class="space-y-4 relative z-10 text-sm font-light text-slate-300"><!-- JS Generated --></ul>
-                        <div class="mt-8 pt-6 border-t border-white/10 text-xs text-slate-400 italic">
-                            * Kami membatasi jumlah sekolah binaan per tahun untuk menjaga fokus prestasi.
-                        </div>
+                        <ul id="schoolList" class="space-y-3 relative z-10 text-xs font-light text-slate-300"><!-- JS Generated --></ul>
                     </div>
                 </div>
             </section>
@@ -439,242 +431,178 @@
 
         <!-- === PAGE 3: KATALOG === -->
         <div id="page-catalog" class="page-section hidden fade-in bg-white">
-            <div class="pt-32 pb-12 bg-slate-50 px-4 mb-12">
+            <div class="pt-28 pb-8 bg-slate-50 px-4 mb-4">
                 <div class="max-w-7xl mx-auto text-center">
-                    <h2 class="font-serif text-4xl font-bold text-svm-dark mb-4">Katalog Premium</h2>
-                    <p class="text-slate-500">Alat berkualitas standar kompetisi nasional & internasional.</p>
+                    <h2 class="font-serif text-2xl md:text-4xl font-bold text-svm-dark mb-2">Katalog Premium</h2>
+                    <p class="text-xs text-slate-500">Standar kompetisi nasional & internasional.</p>
                 </div>
             </div>
 
-            <div class="sticky top-20 z-30 bg-white/90 backdrop-blur-md border-b border-slate-100 py-4 px-4 mb-12">
-                <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="sticky top-16 md:top-20 z-30 bg-white/90 backdrop-blur-md border-b border-slate-100 py-3 px-4 mb-8">
+                <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-3">
                     <div class="flex overflow-x-auto gap-2 w-full md:w-auto pb-1 scrollbar-hide" id="catalogTabs">
-                        <button onclick="catalog.filter('all')" class="active-tab px-6 py-2 rounded-full text-xs font-bold transition border border-slate-200 whitespace-nowrap">Semua</button>
-                        <button onclick="catalog.filter('paket')" class="bg-white text-slate-600 px-6 py-2 rounded-full text-xs font-bold transition border border-slate-200 hover:border-slate-400 whitespace-nowrap">Paket</button>
-                        <button onclick="catalog.filter('perkusi')" class="bg-white text-slate-600 px-6 py-2 rounded-full text-xs font-bold transition border border-slate-200 hover:border-slate-400 whitespace-nowrap">Perkusi</button>
-                        <button onclick="catalog.filter('brass')" class="bg-white text-slate-600 px-6 py-2 rounded-full text-xs font-bold transition border border-slate-200 hover:border-slate-400 whitespace-nowrap">Brass</button>
-                        <button onclick="catalog.filter('colorguard')" class="bg-white text-slate-600 px-6 py-2 rounded-full text-xs font-bold transition border border-slate-200 hover:border-slate-400 whitespace-nowrap">Guard</button>
+                        <button onclick="catalog.filter('all')" class="active-tab px-4 py-1.5 rounded-full text-[10px] font-bold transition border whitespace-nowrap">Semua</button>
+                        <button onclick="catalog.filter('paket')" class="bg-white text-slate-600 px-4 py-1.5 rounded-full text-[10px] font-bold transition border border-slate-200 whitespace-nowrap">Paket</button>
+                        <button onclick="catalog.filter('perkusi')" class="bg-white text-slate-600 px-4 py-1.5 rounded-full text-[10px] font-bold transition border border-slate-200 whitespace-nowrap">Perkusi</button>
+                        <button onclick="catalog.filter('brass')" class="bg-white text-slate-600 px-4 py-1.5 rounded-full text-[10px] font-bold transition border border-slate-200 whitespace-nowrap">Brass</button>
                     </div>
-                    <div class="relative w-full md:w-64">
-                        <i class="fa-solid fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400 text-xs"></i>
-                        <input type="text" id="searchCatalog" onkeyup="catalog.search()" placeholder="Cari alat (ex: Snare)..." class="bg-slate-100 border-none rounded-full pl-10 pr-4 py-2.5 text-xs w-full focus:ring-2 focus:ring-svm-dark transition">
+                    <div class="relative w-full md:w-48">
+                        <i class="fa-solid fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 text-xs"></i>
+                        <input type="text" id="searchCatalog" onkeyup="catalog.search()" placeholder="Cari alat..." class="bg-slate-100 border-none rounded-full pl-8 pr-4 py-2 text-xs w-full focus:ring-1 focus:ring-svm-gold transition">
                     </div>
                 </div>
             </div>
 
-            <div class="max-w-7xl mx-auto px-4 pb-20">
-                <button onclick="ui.showProductModal()" class="admin-only hidden w-full py-6 border-2 border-dashed border-slate-200 rounded-2xl text-slate-400 font-bold mb-12 hover:border-svm-gold hover:text-svm-gold transition bg-slate-50 group">
-                    <span class="group-hover:scale-110 inline-block transition">+ Tambah Produk Baru</span>
+            <div class="max-w-7xl mx-auto px-4 pb-24">
+                <button onclick="ui.showProductModal()" class="admin-only hidden w-full py-4 border-2 border-dashed border-slate-200 rounded-xl text-slate-400 font-bold mb-8 hover:border-svm-gold hover:text-svm-gold transition bg-slate-50 text-xs">
+                    + Tambah Produk Baru
                 </button>
-                <div id="productGrid" class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10"><!-- JS Rendered --></div>
+                <div id="productGrid" class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6"><!-- JS Rendered --></div>
             </div>
         </div>
 
     </main>
 
-    <!-- FOOTER -->
-    <footer class="bg-svm-dark text-white pt-20 pb-8 border-t-4 border-svm-gold">
-        <!-- SIPLAH & PARTNERS FOOTER -->
-        <div class="max-w-7xl mx-auto px-4 mb-16 border-b border-white/10 pb-12">
-            <h4 class="text-center text-xs font-bold text-svm-gold uppercase tracking-[0.3em] mb-8">Partner Pengadaan Resmi</h4>
-            <div class="flex flex-wrap justify-center items-center gap-12 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition duration-500">
-                 <!-- Partner 1 -->
-                 <div class="h-10 img-container bg-white/10 p-2 rounded-lg backdrop-blur-sm">
-                    <img id="partner-img-1" src="https://siplah.kemdikbud.go.id/assets/img/logo-siplah-kemdikbud.png" class="h-full object-contain editable-img">
-                </div>
-                <!-- Partner 2 -->
-                <div class="h-12 img-container bg-white/10 p-2 rounded-lg backdrop-blur-sm">
-                    <img id="partner-img-2" src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/mlogo/SKU-logo-12093-blibli-mitra-maret-2022.jpg" class="h-full object-contain editable-img">
-                </div>
-                <!-- Partner 3 -->
-                <div class="h-10 img-container bg-white/10 p-2 rounded-lg backdrop-blur-sm">
-                    <img id="partner-img-3" src="https://katalog.lkpp.go.id/public/images/logo_lkpp.png" class="h-full object-contain editable-img">
-                </div>
-            </div>
-        </div>
+    <!-- FOOTER (Bottom Nav for Mobile) -->
+    <div class="md:hidden fixed bottom-0 w-full bg-white/90 backdrop-blur-md border-t border-slate-200 flex justify-around py-3 z-40 text-[10px] font-bold text-slate-400 safe-area-pb">
+        <button onclick="router.navigate('home')" class="flex flex-col items-center gap-1 active:text-svm-gold"><i class="fa-solid fa-home text-lg"></i> Home</button>
+        <button onclick="router.navigate('training')" class="flex flex-col items-center gap-1 active:text-svm-gold"><i class="fa-solid fa-graduation-cap text-lg"></i> Academy</button>
+        <button onclick="router.navigate('catalog')" class="flex flex-col items-center gap-1 active:text-svm-gold"><i class="fa-solid fa-store text-lg"></i> Shop</button>
+    </div>
 
-        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
-            <!-- Kolom 1 -->
+    <!-- MAIN FOOTER -->
+    <footer class="bg-svm-dark text-white pt-16 pb-24 md:pb-8 border-t-4 border-svm-gold">
+        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8 mb-12 text-center md:text-left">
             <div class="md:col-span-1">
-                <h3 class="font-serif font-bold text-2xl mb-6">SVM <span class="text-svm-gold">CORP.</span></h3>
-                <p class="editable text-slate-400 text-sm leading-relaxed mb-6 font-light" id="footer-desc">Mitra terpercaya sekolah di Batam & Kepulauan Riau sejak 2017. Memberikan solusi alat musik & pelatihan terbaik.</p>
-                <div class="flex gap-3">
-                    <a href="https://wa.me/6283812113160" target="_blank" class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-green-600 hover:border-green-600 transition text-white"><i class="fa-brands fa-whatsapp"></i></a>
-                    <a href="https://www.instagram.com/svm_marching" class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-pink-600 hover:border-pink-600 transition text-white"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="https://www.youtube.com/channel/UCQpNg7I_p_ExSOvW2ufq4Hg" class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-red-600 hover:border-red-600 transition text-white"><i class="fa-brands fa-youtube"></i></a>
+                <h3 class="font-display font-bold text-2xl mb-4">SVM <span class="text-svm-gold">CORP.</span></h3>
+                <p class="editable text-slate-400 text-xs leading-relaxed mb-6 font-light" id="footer-desc">Solusi alat musik & pelatihan terbaik di Kepulauan Riau.</p>
+                <div class="flex justify-center md:justify-start gap-3">
+                    <a href="https://wa.me/6283812113160" class="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center hover:bg-green-600 transition text-white text-xs"><i class="fa-brands fa-whatsapp"></i></a>
+                    <a href="#" class="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center hover:bg-pink-600 transition text-white text-xs"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center hover:bg-red-600 transition text-white text-xs"><i class="fa-brands fa-youtube"></i></a>
                 </div>
             </div>
             
-            <!-- Kolom 2: Maps -->
             <div class="md:col-span-1">
-                <h4 class="font-bold mb-6 text-sm uppercase tracking-wider text-svm-gold">Lokasi Kami</h4>
-                <div class="rounded-xl overflow-hidden shadow-lg border border-white/20 h-40 w-full bg-slate-800 grayscale hover:grayscale-0 transition duration-500">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.002879220142!2d104.03262877496546!3d1.1584165988305037!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31d9896471d9bf61%3A0x3ba836b339405c33!2smarching%20band%20batam%20SVM!5e0!3m2!1sid!2sid!4v1769697318186!5m2!1sid!2sid" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                <h4 class="font-bold mb-4 text-xs uppercase tracking-wider text-svm-gold">Lokasi</h4>
+                <div class="rounded-xl overflow-hidden border border-white/20 h-32 w-full bg-slate-800">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.002879220142!2d104.03262877496546!3d1.1584165988305037!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31d9896471d9bf61%3A0x3ba836b339405c33!2smarching%20band%20batam%20SVM!5e0!3m2!1sid!2sid" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                 </div>
             </div>
 
-            <!-- Kolom 3: Nav -->
             <div>
-                <h4 class="font-bold mb-6 text-sm uppercase tracking-wider text-svm-gold">Navigasi</h4>
-                <ul class="space-y-3 text-sm text-slate-400 font-light">
-                    <li><button onclick="router.navigate('home')" class="hover:text-white transition">Beranda</button></li>
-                    <li><button onclick="router.navigate('catalog')" class="hover:text-white transition">Katalog Premium</button></li>
-                    <li><button onclick="router.navigate('training')" class="hover:text-white transition">Sekolah Juara</button></li>
-                </ul>
-            </div>
-
-            <!-- Kolom 4: Contact -->
-            <div>
-                <h4 class="font-bold mb-6 text-sm uppercase tracking-wider text-svm-gold">Hubungi Kami</h4>
-                <ul class="space-y-4 text-sm text-slate-400 font-light">
-                    <li class="flex gap-4 items-start">
-                        <i class="fa-solid fa-location-dot mt-1 text-svm-gold"></i> 
-                        <span class="editable leading-relaxed" id="footer-addr">Komplek YKB Blok A No 11, Bengkong, Batam, Kepri</span>
-                    </li>
-                    <li class="flex gap-4">
-                        <i class="fa-brands fa-whatsapp mt-1 text-svm-gold"></i> 
-                        <span class="editable" id="footer-wa">0838-1211-3160 (Arif)</span>
-                    </li>
-                    <li class="flex gap-4 break-all">
-                        <i class="fa-solid fa-envelope mt-1 text-svm-gold"></i> 
-                        <span class="editable" id="footer-email">svaravanguardmanagement@gmail.com</span>
-                    </li>
+                <h4 class="font-bold mb-4 text-xs uppercase tracking-wider text-svm-gold">Kontak</h4>
+                <ul class="space-y-3 text-xs text-slate-400 font-light">
+                    <li class="flex gap-3 justify-center md:justify-start"><i class="fa-solid fa-location-dot mt-1 text-svm-gold"></i> <span class="editable" id="footer-addr">Bengkong, Batam, Kepri</span></li>
+                    <li class="flex gap-3 justify-center md:justify-start"><i class="fa-brands fa-whatsapp mt-1 text-svm-gold"></i> <span class="editable" id="footer-wa">0838-1211-3160</span></li>
                 </ul>
             </div>
         </div>
-        <div class="text-center text-[10px] text-slate-600 pt-8 border-t border-white/5 uppercase tracking-widest">&copy; 2026 PT. Svara Vanguard Management. All Rights Reserved.</div>
+        <div class="text-center text-[10px] text-slate-600 pt-6 border-t border-white/5 uppercase tracking-widest">&copy; 2026 PT. SVM.</div>
     </footer>
 
-    <!-- === MODALS & TOOLS === -->
+    <!-- === MODALS === -->
     
     <!-- Admin Toolbar -->
-    <div id="adminToolbar" class="fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-svm-dark text-white px-6 py-3 rounded-full shadow-2xl z-50 items-center gap-6 hidden border border-white/20 backdrop-blur-md">
-        <span class="text-[10px] font-bold text-svm-gold uppercase tracking-widest">ADMIN</span>
+    <div id="adminToolbar" class="fixed bottom-20 md:bottom-6 left-1/2 transform -translate-x-1/2 bg-svm-dark/90 backdrop-blur-md text-white px-4 py-2 rounded-full shadow-2xl z-50 items-center gap-4 hidden border border-white/20">
+        <span class="text-[10px] font-bold text-svm-gold">ADMIN</span>
         <div class="h-4 w-px bg-white/20"></div>
-        <button onclick="admin.createLink()" class="hover:text-blue-400 text-xl transition transform hover:scale-110 tooltip" title="Link WA"><i class="fa-solid fa-link"></i></button>
-        <button onclick="ui.showVideoModal()" class="hover:text-red-400 text-xl transition transform hover:scale-110 tooltip" title="YouTube"><i class="fa-brands fa-youtube"></i></button>
-        <button onclick="admin.saveAllChanges()" class="hover:text-green-400 text-xl transition transform hover:scale-110 tooltip" title="Save Text"><i class="fa-solid fa-save"></i></button>
-        <button onclick="ui.showProductModal()" class="hover:text-yellow-400 text-xl transition transform hover:scale-110 tooltip" title="Add Product"><i class="fa-solid fa-plus-circle"></i></button>
+        <button onclick="admin.createLink()" class="hover:text-blue-400 text-lg transition" title="Link WA"><i class="fa-solid fa-link"></i></button>
+        <button onclick="ui.showVideoModal()" class="hover:text-red-400 text-lg transition" title="YouTube"><i class="fa-brands fa-youtube"></i></button>
+        <button onclick="admin.saveAllChanges()" class="hover:text-green-400 text-lg transition" title="Save Text"><i class="fa-solid fa-save"></i></button>
+        <button onclick="ui.showProductModal()" class="hover:text-yellow-400 text-lg transition" title="Add Product"><i class="fa-solid fa-plus-circle"></i></button>
+        <button onclick="aiHelper.generateQuote()" class="hover:text-purple-400 text-lg transition" title="AI Assistant"><i class="fa-solid fa-wand-magic-sparkles"></i></button>
         <div class="h-4 w-px bg-white/20"></div>
-        <button onclick="auth.logout()" class="hover:text-red-500 text-xl transition transform hover:scale-110 tooltip" title="Logout"><i class="fa-solid fa-power-off"></i></button>
+        <button onclick="auth.logout()" class="hover:text-red-500 text-lg transition" title="Logout"><i class="fa-solid fa-power-off"></i></button>
     </div>
 
-    <!-- Image Upload Modal -->
-    <div id="imageModal" class="fixed inset-0 bg-svm-dark/80 backdrop-blur-md hidden items-center justify-center z-[80] p-4 transition-all duration-300">
-        <div class="bg-white p-8 rounded-3xl w-full max-w-sm shadow-2xl scale-100">
-            <h2 class="text-xl font-serif font-bold mb-6 text-center text-svm-dark">Ganti Gambar</h2>
-            <div id="imgDropZone" class="h-40 rounded-2xl border-2 border-dashed border-svm-gold bg-svm-gold/5 flex flex-col items-center justify-center cursor-pointer hover:bg-svm-gold/10 transition relative overflow-hidden mb-4">
-                <img id="editImgPreview" class="absolute inset-0 w-full h-full object-contain hidden bg-white p-2">
-                <i class="fa-solid fa-cloud-arrow-up text-4xl text-svm-gold mb-3"></i>
-                <p class="text-xs text-slate-500 text-center px-4 font-bold">Drop File Disini (Auto Save)</p>
+    <!-- Image Upload Modal (AUTO SAVE) -->
+    <div id="imageModal" class="fixed inset-0 bg-svm-dark/80 backdrop-blur-md hidden items-center justify-center z-[80] p-4">
+        <div class="bg-white p-6 rounded-3xl w-full max-w-sm shadow-2xl relative overflow-hidden">
+            <button onclick="ui.closeModal('imageModal')" class="absolute top-4 right-4 text-slate-300 hover:text-red-500"><i class="fa-solid fa-times"></i></button>
+            <h2 class="text-lg font-display font-bold mb-4 text-center text-svm-dark">Update File / Foto</h2>
+            
+            <div id="imgDropZone" class="h-32 rounded-xl border-2 border-dashed border-svm-gold bg-yellow-50/50 flex flex-col items-center justify-center cursor-pointer hover:bg-yellow-50 transition mb-4 relative">
+                <img id="editImgPreview" class="absolute inset-0 w-full h-full object-contain hidden bg-white p-2 rounded-xl">
+                <i class="fa-solid fa-cloud-arrow-up text-3xl text-svm-gold mb-2"></i>
+                <p class="text-[10px] text-slate-500 font-bold uppercase tracking-wide">Pilih File dari HP/Laptop</p>
                 <input type="file" id="imgFileInput" class="absolute inset-0 opacity-0 cursor-pointer" accept="image/*">
             </div>
             
-            <div class="relative flex py-2 items-center">
-                <div class="flex-grow border-t border-gray-300"></div>
-                <span class="flex-shrink-0 mx-4 text-gray-400 text-xs uppercase">ATAU Link URL</span>
-                <div class="flex-grow border-t border-gray-300"></div>
-            </div>
-
-            <input type="text" id="imgUrlInput" class="w-full bg-slate-50 border border-slate-300 p-3 rounded-xl text-xs focus:ring-2 focus:ring-svm-gold mb-4" placeholder="Tempel Link Gambar (Auto Save)...">
-
+            <div class="text-center text-[10px] text-slate-400 mb-2 font-bold">- ATAU TEMPEL LINK -</div>
+            
+            <input type="text" id="imgUrlInput" class="w-full bg-slate-50 border border-slate-200 p-3 rounded-xl text-xs focus:ring-2 focus:ring-svm-gold outline-none mb-2" placeholder="Paste Link Google Drive / Gambar disini...">
+            
             <input type="hidden" id="targetImgId">
-            
-            <!-- STATUS TEXT (REPLACED BUTTON) -->
-            <p id="saveStatus" class="text-xs text-center text-slate-400 mt-2 font-bold min-h-[20px]"></p>
-            
-            <button onclick="ui.closeModal('imageModal')" class="w-full mt-4 py-2 text-slate-400 hover:text-slate-600 text-xs uppercase tracking-widest font-bold border border-slate-200 rounded-xl hover:bg-slate-50">Tutup</button>
+            <p id="saveStatus" class="text-[10px] text-center text-slate-400 font-bold h-4"></p>
         </div>
     </div>
 
-    <!-- Video Modal -->
+    <!-- Video & Product Modals (Simplified for brevity but fully functional) -->
     <div id="videoModal" class="fixed inset-0 bg-svm-dark/80 backdrop-blur-md hidden items-center justify-center z-[80] p-4">
-        <div class="bg-white p-8 rounded-3xl w-full max-w-md shadow-2xl">
-            <div class="flex justify-between items-center mb-6">
-                <h2 class="text-lg font-bold font-serif"><i class="fa-brands fa-youtube text-red-600 mr-2"></i>Tambah Video</h2>
-                <button onclick="ui.closeModal('videoModal')" class="text-slate-400 hover:text-red-500"><i class="fa-solid fa-times"></i></button>
+        <div class="bg-white p-6 rounded-3xl w-full max-w-sm shadow-2xl">
+            <h2 class="text-lg font-bold mb-4">Tambah Video Youtube</h2>
+            <input type="text" id="vidTitle" class="w-full border p-2 rounded-lg text-xs mb-2" placeholder="Judul">
+            <input type="text" id="vidUrl" class="w-full border p-2 rounded-lg text-xs mb-2" placeholder="Link Youtube">
+            <input type="text" id="vidDesc" class="w-full border p-2 rounded-lg text-xs mb-4" placeholder="Deskripsi">
+            <button onclick="videos.add()" class="w-full bg-red-600 text-white py-2 rounded-lg font-bold text-xs">Simpan Video</button>
+            <button onclick="ui.closeModal('videoModal')" class="w-full mt-2 text-slate-400 text-xs">Batal</button>
+        </div>
+    </div>
+
+    <div id="productModal" class="fixed inset-0 bg-svm-dark/80 backdrop-blur-md hidden items-center justify-center z-[80] p-4">
+        <div class="bg-white p-6 rounded-3xl w-full max-w-md max-h-[90vh] overflow-y-auto shadow-2xl">
+            <h2 class="text-lg font-bold mb-4">Edit Katalog</h2>
+            <input type="hidden" id="prodId">
+            <div class="grid grid-cols-2 gap-4">
+                <div id="dropZone" class="h-32 border-2 border-dashed border-slate-300 rounded-xl flex items-center justify-center relative bg-slate-50 cursor-pointer">
+                    <p class="text-[10px] text-slate-400">Upload Foto</p>
+                    <img id="imgPreview" class="absolute inset-0 w-full h-full object-contain hidden bg-white p-1">
+                    <input type="file" id="fileInput" class="absolute inset-0 opacity-0 cursor-pointer" accept="image/*">
+                    <input type="hidden" id="prodImageBase64">
+                </div>
+                <div class="space-y-2">
+                    <input type="text" id="prodName" class="w-full border p-2 rounded-lg text-xs" placeholder="Nama Produk">
+                    <input type="text" id="prodPrice" class="w-full border p-2 rounded-lg text-xs" placeholder="Harga">
+                    <select id="prodCategory" class="w-full border p-2 rounded-lg text-xs">
+                        <option value="paket">Paket Sekolah</option>
+                        <option value="perkusi">Perkusi</option>
+                        <option value="brass">Brass</option>
+                        <option value="colorguard">Color Guard</option>
+                    </select>
+                </div>
             </div>
-            <div class="space-y-4">
-                <input type="text" id="vidTitle" class="w-full border border-slate-200 p-3 rounded-xl text-sm focus:border-svm-gold outline-none" placeholder="Judul Video">
-                <input type="text" id="vidUrl" class="w-full border border-slate-200 p-3 rounded-xl text-sm focus:border-svm-gold outline-none" placeholder="Link YouTube (ex: https://youtube.com...)">
-                <input type="text" id="vidDesc" class="w-full border border-slate-200 p-3 rounded-xl text-sm focus:border-svm-gold outline-none" placeholder="Deskripsi Singkat">
+            <textarea id="prodDesc" class="w-full border p-2 rounded-lg text-xs mt-2" rows="2" placeholder="Deskripsi"></textarea>
+            <div class="flex items-center gap-2 mt-2">
+                <input type="checkbox" id="prodBest"> <label for="prodBest" class="text-xs">Best Seller?</label>
             </div>
-            <button onclick="videos.add()" class="w-full mt-8 py-3 bg-red-600 text-white rounded-xl font-bold hover:bg-red-700 shadow-lg transition">Tambah Video</button>
+            <button onclick="catalog.saveProduct()" class="w-full bg-svm-dark text-white py-2 rounded-lg font-bold text-xs mt-4">Simpan Produk</button>
+            <button onclick="ui.closeModal('productModal')" class="w-full mt-2 text-slate-400 text-xs">Batal</button>
         </div>
     </div>
 
     <!-- Login Modal -->
     <div id="loginModal" class="fixed inset-0 bg-svm-dark/90 backdrop-blur-sm hidden items-center justify-center z-[60] p-4">
-        <div class="bg-white p-10 rounded-3xl w-full max-w-sm shadow-2xl border border-white/10">
-            <div class="text-center mb-8">
-                <i class="fa-solid fa-shield-cat text-4xl text-svm-gold mb-4"></i>
-                <h2 class="text-2xl font-serif font-bold text-svm-dark">Admin Access</h2>
-            </div>
-            <input type="email" id="email" class="w-full bg-slate-50 border border-slate-200 p-4 rounded-xl mb-4 text-sm outline-none focus:ring-2 focus:ring-svm-gold" placeholder="Email">
-            <input type="password" id="password" class="w-full bg-slate-50 border border-slate-200 p-4 rounded-xl mb-8 text-sm outline-none focus:ring-2 focus:ring-svm-gold" placeholder="Password">
-            <div class="flex gap-3">
-                <button onclick="ui.closeModal('loginModal')" class="flex-1 py-3 rounded-xl text-slate-500 hover:bg-slate-100 font-bold transition">Batal</button>
-                <button onclick="auth.login()" class="flex-1 py-3 bg-svm-dark text-white rounded-xl hover:bg-slate-800 font-bold shadow-lg transition">Masuk</button>
+        <div class="bg-white p-8 rounded-3xl w-full max-w-sm shadow-2xl animate-float">
+            <h2 class="text-xl font-bold mb-6 text-center">Admin Access</h2>
+            <input type="email" id="email" class="w-full border p-3 rounded-xl mb-3 text-sm" placeholder="Email">
+            <input type="password" id="password" class="w-full border p-3 rounded-xl mb-6 text-sm" placeholder="Password">
+            <div class="flex gap-2">
+                <button onclick="ui.closeModal('loginModal')" class="flex-1 py-2 text-slate-500 text-sm">Batal</button>
+                <button onclick="auth.login()" class="flex-1 py-2 bg-svm-dark text-white rounded-xl font-bold text-sm">Masuk</button>
             </div>
         </div>
     </div>
 
-    <!-- Product Modal -->
-    <div id="productModal" class="fixed inset-0 bg-svm-dark/80 backdrop-blur-sm hidden items-center justify-center z-[60] p-4">
-        <div class="bg-white p-8 rounded-3xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl">
-            <div class="flex justify-between items-center mb-8">
-                <h2 class="text-2xl font-serif font-bold text-svm-dark">Edit Katalog</h2>
-                <button onclick="ui.closeModal('productModal')" class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center hover:bg-red-100 hover:text-red-500"><i class="fa-solid fa-times"></i></button>
-            </div>
-            <input type="hidden" id="prodId">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div>
-                    <div id="dropZone" class="h-64 rounded-2xl border-2 border-dashed border-slate-300 flex flex-col items-center justify-center cursor-pointer hover:border-svm-gold hover:bg-yellow-50 bg-slate-50 relative overflow-hidden transition">
-                        <img id="imgPreview" class="absolute inset-0 w-full h-full object-contain hidden bg-white p-2">
-                        <i class="fa-solid fa-camera text-3xl text-slate-300 mb-2"></i>
-                        <p class="text-xs text-slate-400">Upload Foto Produk</p>
-                        <input type="file" id="fileInput" class="absolute inset-0 opacity-0 cursor-pointer" accept="image/*">
-                    </div>
-                    <input type="hidden" id="prodImageBase64">
-                </div>
-                <div class="space-y-4">
-                    <input type="text" id="prodName" class="w-full bg-slate-50 border border-slate-200 p-3 rounded-xl text-sm focus:border-svm-gold outline-none" placeholder="Nama Produk">
-                    <input type="text" id="prodPrice" class="w-full bg-slate-50 border border-slate-200 p-3 rounded-xl text-sm focus:border-svm-gold outline-none" placeholder="Harga (ex: Rp 5.000.000)">
-                    <select id="prodCategory" class="w-full bg-slate-50 border border-slate-200 p-3 rounded-xl text-sm focus:border-svm-gold outline-none">
-                        <option value="paket">Paket Sekolah</option>
-                        <option value="perkusi">Perkusi (Drumline)</option>
-                        <option value="brass">Alat Tiup (Brass)</option>
-                        <option value="colorguard">Color Guard</option>
-                    </select>
-                    <textarea id="prodDesc" rows="3" class="w-full bg-slate-50 border border-slate-200 p-3 rounded-xl text-sm focus:border-svm-gold outline-none" placeholder="Deskripsi Singkat..."></textarea>
-                    <div class="flex items-center gap-3 p-3 bg-yellow-50 rounded-xl border border-yellow-100">
-                        <input type="checkbox" id="prodBest" class="w-5 h-5 rounded text-svm-gold focus:ring-svm-gold">
-                        <label for="prodBest" class="text-sm font-bold text-yellow-800">Tandai sebagai Best Seller?</label>
-                    </div>
-                </div>
-            </div>
-            <button onclick="catalog.saveProduct()" class="w-full mt-8 py-4 bg-svm-dark text-white rounded-xl font-bold hover:bg-slate-800 shadow-xl transition">Simpan Data Produk</button>
-        </div>
-    </div>
-
-    <!-- Mobile Menu -->
-    <div class="md:hidden fixed bottom-0 w-full bg-white/90 backdrop-blur-md border-t border-slate-200 flex justify-around py-3 z-40 text-[10px] font-bold text-slate-400 safe-area-pb">
-        <button onclick="router.navigate('home')" class="flex flex-col items-center gap-1 active:text-svm-dark"><i class="fa-solid fa-home text-lg"></i> Home</button>
-        <button onclick="router.navigate('training')" class="flex flex-col items-center gap-1 active:text-svm-dark"><i class="fa-solid fa-graduation-cap text-lg"></i> Academy</button>
-        <button onclick="router.navigate('catalog')" class="flex flex-col items-center gap-1 active:text-svm-dark"><i class="fa-solid fa-store text-lg"></i> Shop</button>
-    </div>
-
-    <!-- SCRIPTS -->
+    <!-- LOGIC -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
         import { getFirestore, collection, getDocs, addDoc, deleteDoc, doc, updateDoc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-        // INIT ANIMATION
-        AOS.init({ once: true, offset: 50, duration: 800 });
+        AOS.init({ once: true, offset: 20, duration: 600 });
 
-        // CONFIG
         const firebaseConfig = {
             apiKey: "AIzaSyAo_DL6ge2m7KXz67vcDA4fA4LabqE00uk",
             authDomain: "marchingbatam.firebaseapp.com",
@@ -690,8 +618,38 @@
         let currentUser = null;
         let productsCache = [];
         let activeEditableElement = null;
-        
-        // --- HELPERS: IMAGE COMPRESSION ---
+
+        // --- AI HELPER (MOTIVATION) ---
+        const quotes = [
+            "Investasi alat musik adalah investasi karakter. Jadikan sekolah Anda pusat kreativitas Batam hari ini.",
+            "Marching Band bukan sekadar musik, tapi tentang kedisiplinan dan kebanggaan sekolah.",
+            "Alat berkualitas menciptakan harmoni yang sempurna. Upgrade unit Anda bersama SVM.",
+            "Prestasi lahir dari persiapan yang matang. Lengkapi fasilitas sekolah Anda sekarang.",
+            "Musik menyatukan perbedaan. Biarkan siswa Anda bersinar di panggung kompetisi."
+        ];
+
+        window.aiHelper = {
+            init: () => {
+                // Auto rotate daily based on date
+                const today = new Date().getDate();
+                const quoteIndex = today % quotes.length;
+                const quoteEl = document.getElementById('dailyQuote');
+                if(quoteEl) quoteEl.innerText = `"${quotes[quoteIndex]}"`;
+            },
+            generateQuote: () => {
+                // Admin can random regenerate
+                if(!currentUser) return;
+                const random = Math.floor(Math.random() * quotes.length);
+                const quoteEl = document.getElementById('dailyQuote');
+                if(quoteEl) {
+                    quoteEl.innerText = `"${quotes[random]}"`;
+                    // Optional: Save to DB logic here if needed
+                    Swal.fire({icon: 'success', title: 'Kata Motivasi Diperbarui!', timer: 1000, showConfirmButton: false});
+                }
+            }
+        };
+
+        // --- COMPRESSION ---
         const compressImage = async (file) => {
             return new Promise((resolve) => {
                 const reader = new FileReader();
@@ -713,22 +671,20 @@
             });
         };
 
-        // --- AUTH ---
         window.auth = {
             login: async () => {
                 try {
                     await signInWithEmailAndPassword(auth, document.getElementById('email').value, document.getElementById('password').value);
                     ui.closeModal('loginModal');
-                    Swal.fire({icon:'success', title:'Welcome Admin', timer:1000, showConfirmButton:false});
+                    Swal.fire({icon:'success', title:'Mode Admin Aktif', timer:1000, showConfirmButton:false});
                 } catch (e) { Swal.fire('Gagal', 'Email/Password salah', 'error'); }
             },
             logout: async () => { await signOut(auth); location.reload(); }
         };
 
-        // --- IMAGES LOGIC (AUTOSAVE) ---
+        // --- AUTO SAVE IMAGES ---
         window.images = {
             currentId: null,
-            pendingFile: null,
             init: () => {
                 admin.loadImages();
                 if(currentUser) {
@@ -738,103 +694,65 @@
                         img.addEventListener('click', function(e) {
                             e.preventDefault(); e.stopPropagation();
                             window.images.currentId = this.id;
-                            
-                            // Reset UI
                             document.getElementById('editImgPreview').classList.add('hidden');
-                            document.getElementById('editImgPreview').src = '';
                             document.getElementById('imgFileInput').value = '';
                             document.getElementById('imgUrlInput').value = '';
-                            document.getElementById('saveStatus').innerHTML = ''; // Reset Status
-                            window.images.pendingFile = null;
-                            
-                            if(!window.images.currentId) return Swal.fire('Error', 'ID Gambar hilang. Coba refresh.', 'error');
+                            document.getElementById('saveStatus').innerHTML = '';
+                            if(!window.images.currentId) return;
                             ui.showImageModal();
                         });
                     });
                 }
             },
-            // Modified Save Function for Auto-Save
             save: async (directFile = null, directUrl = null) => {
                 const targetId = window.images.currentId;
                 if(!targetId) return;
-
-                // UI Status Update
+                
                 const statusEl = document.getElementById('saveStatus');
-                if(statusEl) statusEl.innerHTML = '<span class="text-svm-gold animate-pulse"><i class="fa-solid fa-spinner fa-spin"></i> Memproses & Menyimpan...</span>';
+                if(statusEl) statusEl.innerHTML = '<span class="text-svm-gold animate-pulse">Menyimpan otomatis...</span>';
 
                 try {
-                    let finalImageSrc = directUrl;
+                    let finalSrc = directUrl;
+                    if (directFile) finalSrc = await compressImage(directFile);
+                    else if (!directUrl) return;
 
-                    // Prioritize File (Compression)
-                    if (directFile) {
-                        finalImageSrc = await compressImage(directFile);
-                    } else if (!directUrl) {
-                         // Should not happen if called correctly, but safety net
-                         return;
-                    }
-                    
-                    // Update DOM Immediately
                     const imgEl = document.getElementById(targetId);
-                    if(imgEl) {
-                        imgEl.src = finalImageSrc;
-                        imgEl.style.opacity = 0.5;
-                        setTimeout(() => imgEl.style.opacity = 1, 300);
-                    }
-                    
-                    // Save to Firestore
-                    await setDoc(doc(db, 'site_images', targetId), { 
-                        base64: finalImageSrc, 
-                        updatedAt: new Date() 
-                    }, { merge: true }); 
-                    
-                    if(statusEl) statusEl.innerHTML = '<span class="text-green-500 font-bold"><i class="fa-solid fa-check"></i> Tersimpan Otomatis!</span>';
-                    
-                    // Auto close delay
-                    setTimeout(() => {
-                        ui.closeModal('imageModal');
-                        window.images.pendingFile = null; 
-                    }, 1000);
+                    if(imgEl) { imgEl.src = finalSrc; }
 
-                } catch(err) { 
-                    console.error("Save Image Error:", err);
-                    if(statusEl) statusEl.innerHTML = '<span class="text-red-500">Gagal: ' + err.message + '</span>';
-                }
+                    await setDoc(doc(db, 'site_images', targetId), { base64: finalSrc, updatedAt: new Date() }, { merge: true });
+                    
+                    if(statusEl) statusEl.innerHTML = '<span class="text-green-500">Tersimpan!</span>';
+                    setTimeout(() => { ui.closeModal('imageModal'); }, 800);
+                } catch(e) { if(statusEl) statusEl.innerText = "Gagal simpan."; }
             }
         };
 
-        // --- EVENTS FOR AUTO SAVE ---
+        // Auto Save Listener
         document.addEventListener('DOMContentLoaded', () => {
-            // URL Input Listener
             const urlInput = document.getElementById('imgUrlInput');
             if(urlInput) {
                 urlInput.addEventListener('input', (e) => {
                     const val = e.target.value.trim();
                     if(val.length > 10 && (val.startsWith('http') || val.startsWith('data:'))) {
-                        // Debounce slightly
                         clearTimeout(window.saveTimeout);
-                        window.saveTimeout = setTimeout(() => {
-                            window.images.save(null, val);
-                        }, 500);
+                        window.saveTimeout = setTimeout(() => window.images.save(null, val), 500);
                     }
                 });
             }
         });
 
-        // --- CATALOG ---
+        // --- CATALOG LOGIC ---
         const defaultCatalog = [
-            { id: "d1", name: "Snare Drum HTS 14\" Premium", category: "perkusi", price: "Hubungi Kami", description: "Shell Maple 7-ply, Aluminum rim. Suara tajam untuk kompetisi.", isBest: true, image: "https://images.unsplash.com/photo-1519892300165-cb5542fb47c7?q=80&w=400" },
-            { id: "d2", name: "Bass Drum 24\" Series", category: "perkusi", price: "Hubungi Kami", description: "Deep resonance sound. Ringan namun kokoh untuk siswa.", image: "https://images.unsplash.com/photo-1524230659092-07f99a75c013?q=80&w=400" },
-            { id: "d3", name: "Marching Bell / Lyra", category: "perkusi", price: "Hubungi Kami", description: "Bilah aluminium alloy, frame kokoh. Include harness.", image: "https://id-test-11.slatic.net/p/d9d201111663116631326262111.jpg" },
-            { id: "d4", name: "Pianika / Melodion", category: "brass", price: "Hubungi Kami", description: "Standar sekolah. Tersedia selang & tas hardcase.", image: "https://images.unsplash.com/photo-1629814361595-46f9061611e3?q=80&w=400" },
-            { id: "d5", name: "Trumpet Bb Gold Lacquer", category: "brass", price: "Hubungi Kami", description: "Valve stainless steel, intonasi presisi. Cocok untuk pemula-menengah.", isBest: true, image: "https://images.unsplash.com/photo-1573871669414-010dbf73ca84?q=80&w=400" },
-            { id: "d6", name: "Digital Flag Printing", category: "colorguard", price: "Rp 185.000", description: "Desain custom (Giant, Swing, Standard). Bahan berkualitas.", isBest: true, image: "https://images.unsplash.com/photo-1532986409605-7284cc37482f?q=80&w=400" },
-            { id: "d7", name: "Paket Unit SD Lengkap", category: "paket", price: "Tanya Harga", description: "30-40 Personil. Gratis pelatihan 3 bulan + setting alat.", isBest: true, image: "https://images.unsplash.com/photo-1508186762395-585802319246?q=80&w=400" }
+            { id: "d1", name: "Snare HTS Premium 14\"", category: "perkusi", price: "Hubungi Admin", description: "Shell Maple 7-ply. Suara tajam kompetisi.", isBest: true, image: "https://images.unsplash.com/photo-1519892300165-cb5542fb47c7?q=80&w=400" },
+            { id: "d2", name: "Marching Bell Lyra", category: "perkusi", price: "Hubungi Admin", description: "Aluminium alloy, frame kokoh + harness.", image: "https://id-test-11.slatic.net/p/d9d201111663116631326262111.jpg" },
+            { id: "d5", name: "Trumpet Bb Gold", category: "brass", price: "Hubungi Admin", description: "Valve stainless steel, intonasi presisi.", isBest: true, image: "https://images.unsplash.com/photo-1573871669414-010dbf73ca84?q=80&w=400" },
+            { id: "d6", name: "Digital Flag Custom", category: "colorguard", price: "Rp 185.000", description: "Desain custom (Giant, Swing, Standard).", isBest: true, image: "https://images.unsplash.com/photo-1532986409605-7284cc37482f?q=80&w=400" },
         ];
 
         window.catalog = {
             load: async () => {
                 const grid = document.getElementById('productGrid');
-                grid.innerHTML = '<div class="col-span-full py-20 flex justify-center"><div class="w-10 h-10 border-4 border-slate-200 border-t-svm-gold rounded-full animate-spin"></div></div>';
+                grid.innerHTML = '<div class="col-span-full py-10 flex justify-center"><i class="fa-solid fa-spinner fa-spin text-2xl text-svm-gold"></i></div>';
                 try {
                     const snap = await getDocs(collection(db, "products"));
                     productsCache = snap.empty ? defaultCatalog : [];
@@ -845,27 +763,23 @@
             render: (products) => {
                 const grid = document.getElementById('productGrid');
                 grid.innerHTML = '';
-                products.forEach((p, index) => {
-                    const adminBtns = currentUser ? `<button onclick="catalog.delete('${p.id}')" class="absolute top-3 right-3 bg-red-500 text-white w-8 h-8 rounded-full shadow-lg z-20 hover:scale-110 transition flex items-center justify-center"><i class="fa-solid fa-trash text-xs"></i></button>` : '';
-                    const bestBadge = p.isBest ? `<span class="absolute top-3 left-3 bg-gradient-to-r from-yellow-400 to-yellow-600 text-white text-[10px] font-bold px-3 py-1 rounded-full shadow-lg z-10 flex items-center gap-1"><i class="fa-solid fa-crown"></i> PREMIUM</span>` : '';
+                products.forEach((p) => {
+                    const adminBtns = currentUser ? `<button onclick="catalog.delete('${p.id}')" class="absolute top-2 right-2 bg-red-500 text-white w-6 h-6 rounded-full shadow z-20 hover:scale-110 flex items-center justify-center text-xs"><i class="fa-solid fa-trash"></i></button>` : '';
+                    const bestBadge = p.isBest ? `<span class="absolute top-2 left-2 bg-yellow-400 text-white text-[9px] font-bold px-2 py-0.5 rounded shadow z-10"><i class="fa-solid fa-star"></i> BEST</span>` : '';
                     
                     grid.innerHTML += `
-                        <div class="group bg-white rounded-2xl p-4 shadow-sm hover:shadow-2xl transition duration-500 relative border border-slate-100 flex flex-col h-full" data-aos="fade-up" data-aos-delay="${index * 50}">
-                            ${adminBtns}
-                            ${bestBadge}
-                            <div class="rounded-xl overflow-hidden bg-slate-50 aspect-square mb-5 relative group-hover:ring-2 ring-svm-gold/20 transition">
-                                <img src="${p.image || 'https://placehold.co/400'}" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
-                                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition duration-500"></div>
+                        <div class="group bg-white rounded-xl p-3 shadow-sm hover:shadow-lg transition duration-300 relative border border-slate-100 flex flex-col h-full">
+                            ${adminBtns} ${bestBadge}
+                            <div class="rounded-lg overflow-hidden bg-slate-50 aspect-square mb-3 relative">
+                                <img src="${p.image || 'https://placehold.co/400'}" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
                             </div>
                             <div class="flex-1 flex flex-col">
-                                <span class="text-[10px] font-bold text-svm-gold uppercase tracking-widest mb-1">${p.category}</span>
-                                <h3 class="font-serif font-bold text-svm-dark text-lg leading-tight mb-2 line-clamp-2 group-hover:text-svm-gold transition">${p.name}</h3>
-                                <p class="text-xs text-slate-400 mb-4 line-clamp-2 leading-relaxed">${p.description || 'Deskripsi produk belum tersedia.'}</p>
-                                <div class="mt-auto pt-4 border-t border-slate-50 flex items-center justify-between">
-                                    <p class="text-svm-dark font-bold text-sm">${p.price}</p>
-                                    <a href="https://wa.me/6283812113160?text=Halo%20SVM,%20saya%20tertarik%20produk%20${encodeURIComponent(p.name)}" target="_blank" class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center hover:bg-green-500 hover:text-white transition">
-                                        <i class="fa-brands fa-whatsapp"></i>
-                                    </a>
+                                <span class="text-[9px] font-bold text-svm-gold uppercase mb-1">${p.category}</span>
+                                <h3 class="font-bold text-svm-dark text-xs md:text-sm leading-tight mb-1 line-clamp-2">${p.name}</h3>
+                                <p class="text-[10px] text-slate-400 mb-2 line-clamp-2">${p.description || ''}</p>
+                                <div class="mt-auto pt-2 border-t border-slate-50 flex items-center justify-between">
+                                    <p class="text-svm-dark font-bold text-xs">${p.price}</p>
+                                    <a href="https://wa.me/6283812113160?text=Info%20${encodeURIComponent(p.name)}" target="_blank" class="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center hover:bg-green-500 hover:text-white transition text-xs"><i class="fa-brands fa-whatsapp"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -873,13 +787,10 @@
                 });
             },
             filter: (cat) => {
-                const buttons = document.querySelectorAll('#catalogTabs button');
-                buttons.forEach(b => {
-                    b.classList.remove('active-tab', 'text-svm-gold');
-                    b.classList.add('bg-white', 'text-slate-600');
+                document.querySelectorAll('#catalogTabs button').forEach(b => {
+                    b.classList.remove('active-tab', 'text-svm-gold'); b.classList.add('bg-white', 'text-slate-600');
                     if(b.textContent.toLowerCase().includes(cat) || (cat === 'all' && b.textContent === 'Semua')) {
-                         b.classList.add('active-tab', 'text-svm-gold');
-                         b.classList.remove('bg-white', 'text-slate-600');
+                         b.classList.add('active-tab', 'text-svm-gold'); b.classList.remove('bg-white', 'text-slate-600');
                     }
                 });
                 catalog.render(cat === 'all' ? productsCache : productsCache.filter(p => p.category === cat));
@@ -888,7 +799,7 @@
                 const k = document.getElementById('searchCatalog').value.toLowerCase();
                 catalog.render(productsCache.filter(p => p.name.toLowerCase().includes(k)));
             },
-            delete: async (id) => { if(currentUser && confirm('Hapus produk ini?')) { await deleteDoc(doc(db, "products", id)); catalog.load(); } },
+            delete: async (id) => { if(currentUser && confirm('Hapus?')) { await deleteDoc(doc(db, "products", id)); catalog.load(); } },
             saveProduct: async () => {
                 const data = {
                     name: document.getElementById('prodName').value,
@@ -910,13 +821,11 @@
                     const snap = await getDocs(collection(db, "videos"));
                     if (snap.empty) {
                         vidData = [
-                            {url:"https://www.youtube.com/watch?v=RxFHL83srDg", title:"Gema Syiar Vanguard - MIMAC 2024", desc:"Juara Umum Ensemble Color Guard Malaysia"},
-                            {url:"https://www.youtube.com/watch?v=x7mk3HH8n_o", title:"Konser SMAN 20 Batam", desc:"Konser Unrika Culture Fest"},
-                            {url:"https://www.youtube.com/watch?v=TL8uWmriYK4", title:"Drum Battle Final MIMAC 2024", desc:"Kompetisi Internasional"}
+                            {url:"https://www.youtube.com/watch?v=RxFHL83srDg", title:"MIMAC 2024 Champion", desc:"Color Guard Malaysia"},
+                            {url:"https://www.youtube.com/watch?v=x7mk3HH8n_o", title:"Konser SMAN 20", desc:"Culture Fest"},
+                            {url:"https://www.youtube.com/watch?v=TL8uWmriYK4", title:"Drum Battle", desc:"International Final"}
                         ];
-                    } else {
-                        vidData = snap.docs.map(d => ({id: d.id, ...d.data()}));
-                    }
+                    } else { vidData = snap.docs.map(d => ({id: d.id, ...d.data()})); }
                 } catch(e) { vidData = []; }
                 
                 grid.innerHTML = '';
@@ -924,34 +833,26 @@
                     let videoId = 'dQw4w9WgXcQ';
                     if (v.url.includes('youtu.be/')) videoId = v.url.split('youtu.be/')[1].split('?')[0];
                     else if (v.url.includes('v=')) videoId = v.url.split('v=')[1].split('&')[0];
-                    const thumb = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
-                    const delBtn = currentUser && v.id ? `<button onclick="videos.delete('${v.id}')" class="absolute top-2 right-2 bg-red-600 text-white w-8 h-8 rounded-full shadow-lg z-20 hover:bg-red-700 transition flex items-center justify-center"><i class="fa-solid fa-trash text-xs"></i></button>` : '';
+                    const thumb = `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
+                    const delBtn = currentUser ? `<button onclick="videos.delete('${v.id}')" class="absolute top-2 right-2 bg-red-600 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs"><i class="fa-solid fa-trash"></i></button>` : '';
                     
                     grid.innerHTML += `
-                        <div class="relative group block" data-aos="fade-up">
+                        <div class="relative group block rounded-xl overflow-hidden shadow-md">
                             ${delBtn}
                             <a href="${v.url}" target="_blank">
-                                <div class="relative rounded-2xl overflow-hidden aspect-video shadow-lg bg-slate-900 border border-slate-800">
-                                    <img src="${thumb}" class="w-full h-full object-cover opacity-80 group-hover:scale-110 transition duration-700 group-hover:opacity-100">
-                                    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition flex items-center justify-center">
-                                        <div class="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center group-hover:scale-110 transition">
-                                            <i class="fa-solid fa-play text-white pl-1"></i>
-                                        </div>
-                                    </div>
+                                <img src="${thumb}" class="w-full h-32 object-cover opacity-90 group-hover:opacity-100 transition">
+                                <div class="absolute inset-0 bg-black/20 flex items-center justify-center"><i class="fa-solid fa-play text-white text-2xl"></i></div>
+                                <div class="bg-white p-3">
+                                    <h3 class="font-bold text-xs text-svm-dark truncate">${v.title}</h3>
+                                    <p class="text-[10px] text-slate-500 truncate">${v.desc}</p>
                                 </div>
-                                <h3 class="mt-4 font-bold text-lg text-slate-800 group-hover:text-svm-gold transition font-serif leading-tight">${v.title}</h3>
-                                <p class="text-xs text-slate-500 mt-1">${v.desc}</p>
                             </a>
                         </div>
                     `;
                 });
             },
             add: async () => {
-                const data = {
-                    title: document.getElementById('vidTitle').value,
-                    url: document.getElementById('vidUrl').value,
-                    desc: document.getElementById('vidDesc').value
-                };
+                const data = { title: document.getElementById('vidTitle').value, url: document.getElementById('vidUrl').value, desc: document.getElementById('vidDesc').value };
                 if(data.url) { await addDoc(collection(db, "videos"), data); ui.closeModal('videoModal'); videos.load(); }
             },
             delete: async (id) => { if(confirm('Hapus?')) { await deleteDoc(doc(db, "videos", id)); videos.load(); } }
@@ -961,7 +862,7 @@
             load: async () => {
                 const list = document.getElementById('schoolList');
                 list.innerHTML = '';
-                const defaults = ["SMAN 20 Batam (Binaan)", "MTsN 1 Batam (Juara MIMAC)", "MIN 1 Batam", "SDN 06 Sei Beduk"];
+                const defaults = ["SMAN 20 Batam", "MTsN 1 Batam", "MIN 1 Batam", "SDN 06 Sei Beduk"];
                 try {
                     const snap = await getDocs(collection(db, "schools"));
                     if(snap.empty) defaults.forEach(s => schools.appendHTML(s));
@@ -969,7 +870,7 @@
                 } catch { defaults.forEach(s => schools.appendHTML(s)); }
             },
             appendHTML: (name, id) => {
-                const btn = currentUser ? `<button onclick="schools.remove('${id}')" class="text-red-300 ml-auto hover:text-white"><i class="fa-solid fa-trash text-xs"></i></button>` : '';
+                const btn = currentUser ? `<button onclick="schools.remove('${id}')" class="text-red-300 ml-auto text-xs"><i class="fa-solid fa-trash"></i></button>` : '';
                 document.getElementById('schoolList').innerHTML += `<li class="flex items-center text-slate-200 py-2 border-b border-white/5"><i class="fa-solid fa-check text-svm-gold mr-3 text-xs"></i> ${name} ${btn}</li>`;
             },
             remove: async (id) => { if(currentUser) { await deleteDoc(doc(db,"schools",id)); schools.load(); } }
@@ -980,7 +881,7 @@
                 const updates = {};
                 document.querySelectorAll('.editable').forEach(el => updates[el.id] = el.innerHTML);
                 await setDoc(doc(db, "config", "content"), updates);
-                Swal.fire('Saved', 'Teks berhasil disimpan', 'success');
+                Swal.fire({icon: 'success', title: 'Tersimpan!', timer: 800, showConfirmButton: false});
             },
             loadTextConfig: async () => {
                 try {
@@ -995,7 +896,7 @@
                         const img = document.getElementById(doc.id);
                         if(img && doc.data().base64) img.src = doc.data().base64;
                     });
-                } catch(e) { console.log("No custom images", e); }
+                } catch(e) {}
             },
             loadLinks: async () => {
                 try {
@@ -1008,20 +909,12 @@
             },
             editLink: async (elementId) => {
                 if(!currentUser) return;
-                const { value: url } = await Swal.fire({ 
-                    input: 'url', 
-                    inputLabel: 'Masukkan Link PDF / Google Drive', 
-                    inputPlaceholder: 'https://...',
-                    showCancelButton: true 
-                });
-                
+                const { value: url } = await Swal.fire({ input: 'url', inputLabel: 'Paste Link PDF / Google Drive', showCancelButton: true });
                 if (url) {
                     const linkEl = document.getElementById(elementId);
                     if(linkEl) linkEl.href = url;
-                    
-                    // Save link to Firestore
                     await setDoc(doc(db, 'site_links', elementId), { url: url }, { merge: true });
-                    Swal.fire('Berhasil', 'Link PDF disimpan!', 'success');
+                    Swal.fire({icon: 'success', title: 'Link Disimpan!', timer: 800, showConfirmButton: false});
                 }
             },
             addSchool: async () => {
@@ -1029,11 +922,10 @@
                 if(name) { await addDoc(collection(db,"schools"),{name}); schools.load(); }
             },
             createLink: async () => {
-                if(!activeEditableElement) return Swal.fire('Pilih Teks', 'Klik teks dulu.', 'warning');
-                const { value: url } = await Swal.fire({ input: 'url', inputLabel: 'Link URL', inputPlaceholder: 'https://...', showCancelButton: true });
+                if(!activeEditableElement) return;
+                const { value: url } = await Swal.fire({ input: 'url', inputLabel: 'Link URL', showCancelButton: true });
                 if (url) {
                     activeEditableElement.innerHTML = `<a href="${url}" target="_blank" class="text-svm-gold hover:underline">${activeEditableElement.innerText}</a>`;
-                    Swal.fire('Sukses', 'Klik tombol Simpan.', 'success');
                 }
             }
         };
@@ -1051,38 +943,23 @@
             const dz = document.getElementById(dzId);
             const fi = document.getElementById(inputId);
             if(!dz || !fi) return;
-            
             dz.onclick = () => fi.click();
             fi.onchange = (e) => processFile(e.target.files[0], previewId, valInputId, isGeneralImage);
-            
             dz.addEventListener('dragover', (e)=>{e.preventDefault(); dz.classList.add('bg-svm-gold/20')});
             dz.addEventListener('dragleave', ()=>{dz.classList.remove('bg-svm-gold/20')});
-            dz.addEventListener('drop', (e)=>{
-                e.preventDefault(); dz.classList.remove('bg-svm-gold/20');
-                processFile(e.dataTransfer.files[0], previewId, valInputId, isGeneralImage);
-            });
+            dz.addEventListener('drop', (e)=>{ e.preventDefault(); dz.classList.remove('bg-svm-gold/20'); processFile(e.dataTransfer.files[0], previewId, valInputId, isGeneralImage); });
         }
 
         async function processFile(f, previewId, valInputId, isGeneralImage) {
             if(!f || !f.type.startsWith('image/')) return;
+            if(isGeneralImage) { window.images.save(f, null); return; } // Auto save for site images
             
-            // AUTO SAVE TRIGGER FOR GENERAL IMAGE
-            if(isGeneralImage) {
-                window.images.save(f, null); // Pass file directly
-                return; // Stop preview here, let save function handle update
-            }
-
             const reader = new FileReader();
             reader.onload = (e) => {
                 const img = document.getElementById(previewId);
                 img.src = e.target.result;
                 img.classList.remove('hidden');
-                
-                if(valInputId) {
-                    compressImage(f).then(base64 => {
-                        document.getElementById(valInputId).value = base64;
-                    });
-                }
+                if(valInputId) compressImage(f).then(base64 => document.getElementById(valInputId).value = base64);
             };
             reader.readAsDataURL(f);
         }
@@ -1097,14 +974,9 @@
                 document.getElementById('btnLogin').classList.add('hidden');
                 document.getElementById('adminBadge').classList.remove('hidden');
                 document.getElementById('adminBadge').classList.add('flex');
-                
                 document.querySelectorAll('.editable').forEach(el => {
                     el.contentEditable = "true";
-                    el.addEventListener('click', function() {
-                        activeEditableElement = this;
-                        document.querySelectorAll('.editable').forEach(e => e.style.borderColor = '');
-                        this.style.borderColor = '#C5A059';
-                    });
+                    el.addEventListener('click', function() { activeEditableElement = this; });
                 });
                 document.querySelectorAll('.admin-only').forEach(el => el.classList.remove('hidden'));
                 setTimeout(images.init, 1000); 
@@ -1122,6 +994,7 @@
             admin.loadTextConfig();
             admin.loadImages();
             admin.loadLinks();
+            aiHelper.init();
         });
 
         window.router = {
@@ -1132,16 +1005,10 @@
             }
         };
         
-        // Sticky Nav Logic
         window.addEventListener('scroll', () => {
             const nav = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                nav.classList.add('py-2');
-                nav.classList.remove('py-4');
-            } else {
-                nav.classList.add('py-4');
-                nav.classList.remove('py-2');
-            }
+            if (window.scrollY > 50) { nav.classList.add('py-2'); nav.classList.remove('py-4'); } 
+            else { nav.classList.add('py-4'); nav.classList.remove('py-2'); }
         });
 
         setTimeout(() => catalog.filter('all'), 500);
@@ -1149,4 +1016,3 @@
     </script>
 </body>
 </html>
-
