@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pusat Alat Marching Band Batam & Kepri - PT. SVM (Official)</title>
     
-    <!-- SEO Meta Tags Super -->
-    <meta name="description" content="Distributor Resmi Alat Marching Band & Drumband Terbesar di Batam Kepulauan Riau. Jual Snare HTS, Brass, Seragam, & Jasa Pelatih Juara Internasional. Legalitas Lengkap, Bisa SIPLAH.">
-    <meta name="keywords" content="toko marching band batam, jual alat drumband batam, distributor hts kepri, jasa pelatih drumband batam, service alat marching band batam, seragam drumband tanjung pinang, toko musik batam, pengadaan alat sekolah kepri, sparepart drumband batam, marching band karimun, marching band bintan">
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Distributor Resmi Alat Marching Band & Drumband Terbesar di Batam Kepulauan Riau. Jual Snare HTS, Brass, Seragam, & Jasa Pelatih Juara Internasional. Legalitas Lengkap.">
+    <meta name="keywords" content="toko marching band batam, jual alat drumband batam, distributor hts kepri, jasa pelatih drumband batam, service alat marching band batam, color guard batam">
     <meta name="author" content="PT. Svara Vanguard Management">
     <meta name="robots" content="index, follow">
 
@@ -45,9 +45,6 @@
                             red: '#D90429'
                         }
                     },
-                    backgroundImage: {
-                        'music-pattern': "url('https://www.transparenttextures.com/patterns/cubes.png')",
-                    },
                     animation: {
                         'float-slow': 'float 8s ease-in-out infinite',
                         'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
@@ -74,18 +71,12 @@
 
         /* Glassmorphism Navigation */
         .glass-nav {
-            background: rgba(255, 255, 255, 0.85);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.5);
         }
         
-        /* Musical Wave Animation Background */
-        .wave-bg {
-            background: radial-gradient(circle at 50% 50%, rgba(197, 160, 89, 0.1) 0%, transparent 50%);
-            animation: pulse-slow 5s infinite;
-        }
-
         .active-tab { 
             background: #0B0F19; 
             color: #C5A059; 
@@ -249,58 +240,57 @@
             <div class="bg-svm-dark py-3 overflow-hidden mb-12 transform -skew-y-1">
                 <div class="max-w-7xl mx-auto px-4 flex justify-between items-center text-slate-400 text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] whitespace-nowrap gap-8 overflow-x-auto scrollbar-hide">
                     <span><i class="fa-solid fa-star text-svm-gold mr-1"></i> SMAN 20 Batam</span>
-                    <span><i class="fa-solid fa-star text-svm-gold mr-1"></i> SVMC</span>
-                    <span><i class="fa-solid fa-star text-svm-gold mr-1"></i> CK marching</span>
+                    <span><i class="fa-solid fa-star text-svm-gold mr-1"></i> MTsN 1 Batam</span>
+                    <span><i class="fa-solid fa-star text-svm-gold mr-1"></i> MIN 1 Batam</span>
                     <span><i class="fa-solid fa-trophy text-svm-gold mr-1"></i> MIMAC Champion</span>
                 </div>
             </div>
 
-            <!-- LEGALITAS & DOKUMEN (Thumbnails + Link) -->
+            <!-- LEGALITAS & DOKUMEN (No Preview Image, Only Text/Icon) -->
             <section id="legal-section" class="max-w-7xl mx-auto px-4 mb-20">
                 <div class="text-center mb-10" data-aos="fade-up">
                     <h2 class="font-serif text-2xl md:text-3xl font-bold text-svm-dark mb-2 editable" id="legal-title">Legalitas & Kompetensi</h2>
-                    <p class="text-xs md:text-sm text-slate-500 max-w-xl mx-auto editable" id="legal-sub">Transparansi dokumen legalitas perusahaan. Klik gambar untuk melihat file asli (PDF/Drive).</p>
+                    <p class="text-xs md:text-sm text-slate-500 max-w-xl mx-auto editable" id="legal-sub">Transparansi dokumen legalitas perusahaan. Klik pada kartu untuk melihat file asli (PDF/Drive).</p>
                 </div>
                 
                 <div class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
                     <!-- Doc 1 -->
-                    <div class="group relative bg-white p-3 md:p-4 rounded-2xl shadow-sm hover:shadow-xl border border-slate-100 transition duration-300" data-aos="fade-up" data-aos-delay="100">
-                        <div class="h-32 md:h-48 rounded-xl overflow-hidden mb-3 bg-slate-50 img-container relative border border-slate-100">
-                            <!-- Link Handler -->
-                            <a href="#" id="cert-link-1" target="_blank" class="absolute inset-0 z-10 flex items-center justify-center bg-svm-dark/0 group-hover:bg-svm-dark/40 transition">
-                                <span class="opacity-0 group-hover:opacity-100 bg-white text-svm-dark px-3 py-1 rounded-full text-[10px] font-bold shadow-lg transform scale-90 group-hover:scale-100 transition"><i class="fa-solid fa-eye"></i> Lihat PDF</span>
-                            </a>
-                            <img id="cert-img-1" src="https://via.placeholder.com/400x300.png?text=Preview+Izin+Usaha" class="w-full h-full object-cover editable-img">
-                        </div>
-                        <h4 class="font-bold text-sm md:text-base text-svm-dark editable" id="cert-title-1">Izin Usaha (NIB)</h4>
-                        <p class="text-[10px] text-slate-500 editable truncate" id="cert-desc-1">Resmi Kemenkumham & OSS</p>
-                        <button onclick="admin.editLink('cert-link-1')" class="admin-only hidden w-full mt-2 text-[10px] bg-slate-100 text-slate-600 py-1 rounded hover:bg-slate-200"><i class="fa-solid fa-link"></i> Edit Link PDF</button>
+                    <div class="relative group bg-white p-6 rounded-2xl shadow-sm hover:shadow-xl border border-slate-100 transition duration-300 text-center" data-aos="fade-up" data-aos-delay="100">
+                        <a href="#" id="cert-link-1" target="_blank" class="block">
+                            <div class="w-16 h-16 mx-auto bg-slate-100 rounded-full flex items-center justify-center text-slate-400 group-hover:bg-svm-dark group-hover:text-svm-gold transition duration-300 mb-4">
+                                <i class="fa-solid fa-file-contract text-2xl"></i>
+                            </div>
+                            <h4 class="font-bold text-sm md:text-base text-svm-dark editable" id="cert-title-1">Izin Usaha (NIB)</h4>
+                            <p class="text-[10px] text-slate-500 editable mt-1" id="cert-desc-1">Resmi Kemenkumham & OSS</p>
+                            <span class="inline-block mt-3 text-[10px] font-bold text-svm-gold border-b border-svm-gold">Lihat Dokumen</span>
+                        </a>
+                        <button onclick="admin.editLink('cert-link-1')" class="admin-only hidden absolute top-2 right-2 text-slate-300 hover:text-svm-dark"><i class="fa-solid fa-pen-to-square"></i></button>
                     </div>
 
                     <!-- Doc 2 -->
-                    <div class="group relative bg-white p-3 md:p-4 rounded-2xl shadow-sm hover:shadow-xl border border-slate-100 transition duration-300" data-aos="fade-up" data-aos-delay="200">
-                        <div class="h-32 md:h-48 rounded-xl overflow-hidden mb-3 bg-slate-50 img-container relative border border-slate-100">
-                            <a href="#" id="cert-link-2" target="_blank" class="absolute inset-0 z-10 flex items-center justify-center bg-svm-dark/0 group-hover:bg-svm-dark/40 transition">
-                                <span class="opacity-0 group-hover:opacity-100 bg-white text-svm-dark px-3 py-1 rounded-full text-[10px] font-bold shadow-lg transform scale-90 group-hover:scale-100 transition"><i class="fa-solid fa-eye"></i> Lihat PDF</span>
-                            </a>
-                            <img id="cert-img-2" src="https://via.placeholder.com/400x300.png?text=Preview+Sertifikat+Pelatih" class="w-full h-full object-cover editable-img">
-                        </div>
-                        <h4 class="font-bold text-sm md:text-base text-svm-dark editable" id="cert-title-2">Sertifikat Pelatih</h4>
-                        <p class="text-[10px] text-slate-500 editable truncate" id="cert-desc-2">Lisensi Internasional & MIMAC</p>
-                        <button onclick="admin.editLink('cert-link-2')" class="admin-only hidden w-full mt-2 text-[10px] bg-slate-100 text-slate-600 py-1 rounded hover:bg-slate-200"><i class="fa-solid fa-link"></i> Edit Link PDF</button>
+                    <div class="relative group bg-white p-6 rounded-2xl shadow-sm hover:shadow-xl border border-slate-100 transition duration-300 text-center" data-aos="fade-up" data-aos-delay="200">
+                        <a href="#" id="cert-link-2" target="_blank" class="block">
+                            <div class="w-16 h-16 mx-auto bg-slate-100 rounded-full flex items-center justify-center text-slate-400 group-hover:bg-svm-dark group-hover:text-svm-gold transition duration-300 mb-4">
+                                <i class="fa-solid fa-certificate text-2xl"></i>
+                            </div>
+                            <h4 class="font-bold text-sm md:text-base text-svm-dark editable" id="cert-title-2">Sertifikat Pelatih</h4>
+                            <p class="text-[10px] text-slate-500 editable mt-1" id="cert-desc-2">Lisensi Internasional</p>
+                            <span class="inline-block mt-3 text-[10px] font-bold text-svm-gold border-b border-svm-gold">Lihat Dokumen</span>
+                        </a>
+                        <button onclick="admin.editLink('cert-link-2')" class="admin-only hidden absolute top-2 right-2 text-slate-300 hover:text-svm-dark"><i class="fa-solid fa-pen-to-square"></i></button>
                     </div>
 
                     <!-- Doc 3 -->
-                    <div class="group relative bg-white p-3 md:p-4 rounded-2xl shadow-sm hover:shadow-xl border border-slate-100 transition duration-300" data-aos="fade-up" data-aos-delay="300">
-                        <div class="h-32 md:h-48 rounded-xl overflow-hidden mb-3 bg-slate-50 img-container relative border border-slate-100">
-                            <a href="#" id="cert-link-3" target="_blank" class="absolute inset-0 z-10 flex items-center justify-center bg-svm-dark/0 group-hover:bg-svm-dark/40 transition">
-                                <span class="opacity-0 group-hover:opacity-100 bg-white text-svm-dark px-3 py-1 rounded-full text-[10px] font-bold shadow-lg transform scale-90 group-hover:scale-100 transition"><i class="fa-solid fa-eye"></i> Lihat PDF</span>
-                            </a>
-                            <img id="cert-img-3" src="https://via.placeholder.com/400x300.png?text=Preview+Distributor" class="w-full h-full object-cover editable-img">
-                        </div>
-                        <h4 class="font-bold text-sm md:text-base text-svm-dark editable" id="cert-title-3">Surat Distributor</h4>
-                        <p class="text-[10px] text-slate-500 editable truncate" id="cert-desc-3">Penunjukan Resmi Pabrikan</p>
-                        <button onclick="admin.editLink('cert-link-3')" class="admin-only hidden w-full mt-2 text-[10px] bg-slate-100 text-slate-600 py-1 rounded hover:bg-slate-200"><i class="fa-solid fa-link"></i> Edit Link PDF</button>
+                    <div class="relative group bg-white p-6 rounded-2xl shadow-sm hover:shadow-xl border border-slate-100 transition duration-300 text-center" data-aos="fade-up" data-aos-delay="300">
+                        <a href="#" id="cert-link-3" target="_blank" class="block">
+                            <div class="w-16 h-16 mx-auto bg-slate-100 rounded-full flex items-center justify-center text-slate-400 group-hover:bg-svm-dark group-hover:text-svm-gold transition duration-300 mb-4">
+                                <i class="fa-solid fa-building-circle-check text-2xl"></i>
+                            </div>
+                            <h4 class="font-bold text-sm md:text-base text-svm-dark editable" id="cert-title-3">Surat Distributor</h4>
+                            <p class="text-[10px] text-slate-500 editable mt-1" id="cert-desc-3">Penunjukan Resmi Pabrikan</p>
+                            <span class="inline-block mt-3 text-[10px] font-bold text-svm-gold border-b border-svm-gold">Lihat Dokumen</span>
+                        </a>
+                        <button onclick="admin.editLink('cert-link-3')" class="admin-only hidden absolute top-2 right-2 text-slate-300 hover:text-svm-dark"><i class="fa-solid fa-pen-to-square"></i></button>
                     </div>
                 </div>
             </section>
@@ -338,10 +328,13 @@
                                 </li>
                             </ul>
                         </div>
-                        <div class="h-64 md:h-80 rounded-2xl overflow-hidden border-2 border-svm-gold/30 relative img-container" data-aos="fade-left">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-60 z-10"></div>
-                            <img id="feature-img" src="https://images.unsplash.com/photo-1514525253440-b393452e8d26?q=80&w=800" class="w-full h-full object-cover editable-img">
-                            <div class="absolute bottom-6 left-6 z-20">
+                        
+                        <!-- FOUNDER IMAGE (Fixed Z-Index for Editing) -->
+                        <div class="h-64 md:h-80 rounded-2xl overflow-hidden border-2 border-svm-gold/30 relative img-container group" data-aos="fade-left">
+                            <img id="feature-img" src="https://images.unsplash.com/photo-1514525253440-b393452e8d26?q=80&w=800" class="w-full h-full object-cover editable-img relative z-0">
+                            <!-- Gradient Overlay set to pointer-events-none so click passes to image -->
+                            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-80 z-10 pointer-events-none"></div>
+                            <div class="absolute bottom-6 left-6 z-20 pointer-events-none">
                                 <p class="font-serif text-xl italic text-white">"Musik adalah investasi karakter."</p>
                                 <p class="text-[10px] text-svm-gold font-bold mt-1 uppercase tracking-widest">- Arif, Founder</p>
                             </div>
@@ -370,9 +363,9 @@
         <!-- === PAGE 2: PELATIHAN === -->
         <div id="page-training" class="page-section hidden fade-in bg-white">
             <div class="h-[50vh] relative img-container">
-                <div class="absolute inset-0 bg-svm-dark/70 z-10"></div>
+                <div class="absolute inset-0 bg-svm-dark/70 z-10 pointer-events-none"></div>
                 <img id="training-bg-img" src="https://images.unsplash.com/photo-1511192336575-5a79af67a629?q=80&w=2000" class="w-full h-full object-cover editable-img">
-                <div class="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-4" data-aos="zoom-in">
+                <div class="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-4 pointer-events-none" data-aos="zoom-in">
                     <span class="text-svm-gold font-bold tracking-[0.2em] text-[10px] uppercase mb-2 border border-svm-gold/30 px-3 py-1 rounded-full backdrop-blur-sm">SVM Academy</span>
                     <h2 class="font-serif text-4xl md:text-6xl font-bold text-white mb-4 editable" id="training-title">School of Champions</h2>
                     <p class="text-slate-300 max-w-md text-sm md:text-base font-light leading-relaxed editable" id="training-desc">Membentuk karakter pemenang melalui kedisiplinan.</p>
@@ -445,6 +438,7 @@
                         <button onclick="catalog.filter('paket')" class="bg-white text-slate-600 px-4 py-1.5 rounded-full text-[10px] font-bold transition border border-slate-200 whitespace-nowrap">Paket</button>
                         <button onclick="catalog.filter('perkusi')" class="bg-white text-slate-600 px-4 py-1.5 rounded-full text-[10px] font-bold transition border border-slate-200 whitespace-nowrap">Perkusi</button>
                         <button onclick="catalog.filter('brass')" class="bg-white text-slate-600 px-4 py-1.5 rounded-full text-[10px] font-bold transition border border-slate-200 whitespace-nowrap">Brass</button>
+                        <button onclick="catalog.filter('colorguard')" class="bg-white text-slate-600 px-4 py-1.5 rounded-full text-[10px] font-bold transition border border-slate-200 whitespace-nowrap">Guard</button>
                     </div>
                     <div class="relative w-full md:w-48">
                         <i class="fa-solid fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 text-xs"></i>
@@ -538,7 +532,7 @@
         </div>
     </div>
 
-    <!-- Video & Product Modals (Simplified for brevity but fully functional) -->
+    <!-- Video & Product Modals -->
     <div id="videoModal" class="fixed inset-0 bg-svm-dark/80 backdrop-blur-md hidden items-center justify-center z-[80] p-4">
         <div class="bg-white p-6 rounded-3xl w-full max-w-sm shadow-2xl">
             <h2 class="text-lg font-bold mb-4">Tambah Video Youtube</h2>
@@ -630,20 +624,17 @@
 
         window.aiHelper = {
             init: () => {
-                // Auto rotate daily based on date
                 const today = new Date().getDate();
                 const quoteIndex = today % quotes.length;
                 const quoteEl = document.getElementById('dailyQuote');
                 if(quoteEl) quoteEl.innerText = `"${quotes[quoteIndex]}"`;
             },
             generateQuote: () => {
-                // Admin can random regenerate
                 if(!currentUser) return;
                 const random = Math.floor(Math.random() * quotes.length);
                 const quoteEl = document.getElementById('dailyQuote');
                 if(quoteEl) {
                     quoteEl.innerText = `"${quotes[random]}"`;
-                    // Optional: Save to DB logic here if needed
                     Swal.fire({icon: 'success', title: 'Kata Motivasi Diperbarui!', timer: 1000, showConfirmButton: false});
                 }
             }
@@ -727,7 +718,6 @@
             }
         };
 
-        // Auto Save Listener
         document.addEventListener('DOMContentLoaded', () => {
             const urlInput = document.getElementById('imgUrlInput');
             if(urlInput) {
@@ -1016,4 +1006,3 @@
     </script>
 </body>
 </html>
-
