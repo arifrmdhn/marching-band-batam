@@ -97,7 +97,7 @@
             border: 1px solid #C5A059;
         }
 
-        /* Text Gradients */
+        /* Text Gradients & Editor Safeguards */
         .text-gradient-gold, #home-title b, #home-title strong {
             background: linear-gradient(to right, #C5A059, #FDE68A, #C5A059);
             -webkit-background-clip: text;
@@ -106,6 +106,9 @@
             animation: shine 4s linear infinite;
         }
         @keyframes shine { to { background-position: 200% center; } }
+        
+        #home-title { line-height: 1.2; }
+        #home-title div { display: block; margin-top: 0.2em; } /* Safeguard for enter key in editor */
         
         /* ADMIN MODE STYLES */
         .editable { outline: none; transition: all 0.2s; position: relative; border-radius: 4px; }
@@ -131,7 +134,7 @@
 
         /* Responsive Fixes */
         @media (max-width: 768px) {
-            .hero-title { font-size: 2.5rem !important; line-height: 1.1 !important; }
+            .hero-title { font-size: 2.5rem !important; line-height: 1.2 !important; }
             .section-padding { padding-top: 3rem; padding-bottom: 3rem; }
         }
     </style>
@@ -195,8 +198,7 @@
                                 <span class="editable" id="hero-badge">Distributor & Pelatih Resmi</span>
                             </div>
                             
-                            <!-- ID DIKEMBALIKAN KE home-title AGAR DATA LAMA MUNCUL -->
-                            <!-- NOTE: Untuk membuat kata menjadi emas, BOLD kata tersebut di menu edit admin (Ctrl+B) -->
+                            <!-- BOLD (Ctrl+B) kata di admin untuk mengubahnya menjadi emas -->
                             <h1 class="editable hero-title font-serif text-4xl md:text-7xl font-bold leading-tight mb-4 text-svm-dark" id="home-title">
                                 Harmoni <br><b>Juara</b> <br>Kepulauan Riau.
                             </h1>
@@ -227,11 +229,12 @@
                             </div>
                         </div>
                         
-                        <!-- Hero Image Frame -->
+                        <!-- Hero Image Frame (DENGAN ONERROR FALLBACK) -->
                         <div class="order-1 lg:order-2 relative" data-aos="zoom-in" data-aos-duration="1000">
                             <div class="absolute inset-0 bg-svm-gold rounded-[2rem] rotate-3 opacity-20 blur-lg"></div>
                             <div class="relative rounded-[2rem] overflow-hidden shadow-2xl border-4 border-white img-container h-[300px] md:h-[500px]">
-                                <img id="hero-main-img" src="https://images.unsplash.com/photo-1544279762-2b638c4c3e80?q=80&w=1000" class="w-full h-full object-cover editable-img transform hover:scale-105 transition duration-1000">
+                                <!-- Jika URL di DB salah, gambar tidak akan rusak karena fallback onerror -->
+                                <img id="hero-main-img" src="https://images.unsplash.com/photo-1544279762-2b638c4c3e80?q=80&w=1000" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1544279762-2b638c4c3e80?q=80&w=1000';" class="w-full h-full object-cover editable-img transform hover:scale-105 transition duration-1000">
                                 
                                 <!-- Float Player -->
                                 <div class="absolute bottom-4 right-4 bg-white/90 backdrop-blur-md p-3 rounded-xl shadow-lg flex items-center gap-3 animate-float-slow max-w-[200px] pointer-events-none">
@@ -261,18 +264,18 @@
                 </div>
             </div>
 
-            <!-- LEGALITAS & DOKUMEN (No Preview Image, Only Text/Icon) -->
+            <!-- LEGALITAS & DOKUMEN (Icon Only, No Preview Image) -->
             <section id="legal-section" class="max-w-7xl mx-auto px-4 mb-20">
                 <div class="text-center mb-10" data-aos="fade-up">
                     <h2 class="font-serif text-2xl md:text-3xl font-bold text-svm-dark mb-2 editable" id="legal-title">Legalitas & Kompetensi</h2>
-                    <p class="text-xs md:text-sm text-slate-500 max-w-xl mx-auto editable" id="legal-sub">Transparansi dokumen legalitas perusahaan. Klik pada kartu untuk melihat file asli (PDF/Drive).</p>
+                    <p class="text-xs md:text-sm text-slate-500 max-w-xl mx-auto editable" id="legal-sub">Transparansi dokumen perusahaan kami. Klik pada kartu untuk melihat file asli (PDF/Drive).</p>
                 </div>
                 
                 <div class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
                     <!-- Doc 1 -->
                     <div class="relative group bg-white p-6 rounded-2xl shadow-sm hover:shadow-xl border border-slate-100 transition duration-300 text-center" data-aos="fade-up" data-aos-delay="100">
                         <a href="#" id="cert-link-1" target="_blank" class="block">
-                            <div class="w-16 h-16 mx-auto bg-slate-100 rounded-full flex items-center justify-center text-slate-400 group-hover:bg-svm-dark group-hover:text-svm-gold transition duration-300 mb-4">
+                            <div class="w-16 h-16 mx-auto bg-slate-50 border border-slate-100 rounded-full flex items-center justify-center text-slate-400 group-hover:bg-svm-dark group-hover:text-svm-gold transition duration-300 mb-4">
                                 <i class="fa-solid fa-file-contract text-2xl"></i>
                             </div>
                             <h4 class="font-bold text-sm md:text-base text-svm-dark editable" id="cert-title-1">Izin Usaha (NIB)</h4>
@@ -285,7 +288,7 @@
                     <!-- Doc 2 -->
                     <div class="relative group bg-white p-6 rounded-2xl shadow-sm hover:shadow-xl border border-slate-100 transition duration-300 text-center" data-aos="fade-up" data-aos-delay="200">
                         <a href="#" id="cert-link-2" target="_blank" class="block">
-                            <div class="w-16 h-16 mx-auto bg-slate-100 rounded-full flex items-center justify-center text-slate-400 group-hover:bg-svm-dark group-hover:text-svm-gold transition duration-300 mb-4">
+                            <div class="w-16 h-16 mx-auto bg-slate-50 border border-slate-100 rounded-full flex items-center justify-center text-slate-400 group-hover:bg-svm-dark group-hover:text-svm-gold transition duration-300 mb-4">
                                 <i class="fa-solid fa-certificate text-2xl"></i>
                             </div>
                             <h4 class="font-bold text-sm md:text-base text-svm-dark editable" id="cert-title-2">Sertifikat Pelatih</h4>
@@ -298,7 +301,7 @@
                     <!-- Doc 3 -->
                     <div class="relative group bg-white p-6 rounded-2xl shadow-sm hover:shadow-xl border border-slate-100 transition duration-300 text-center" data-aos="fade-up" data-aos-delay="300">
                         <a href="#" id="cert-link-3" target="_blank" class="block">
-                            <div class="w-16 h-16 mx-auto bg-slate-100 rounded-full flex items-center justify-center text-slate-400 group-hover:bg-svm-dark group-hover:text-svm-gold transition duration-300 mb-4">
+                            <div class="w-16 h-16 mx-auto bg-slate-50 border border-slate-100 rounded-full flex items-center justify-center text-slate-400 group-hover:bg-svm-dark group-hover:text-svm-gold transition duration-300 mb-4">
                                 <i class="fa-solid fa-building-circle-check text-2xl"></i>
                             </div>
                             <h4 class="font-bold text-sm md:text-base text-svm-dark editable" id="cert-title-3">Surat Distributor</h4>
@@ -309,15 +312,15 @@
                     </div>
                 </div>
 
-                <!-- DOWNLOAD AREA (RESTORED) -->
+                <!-- DOWNLOAD AREA -->
                 <div class="mt-12 bg-white rounded-2xl p-6 md:p-8 border border-slate-200 shadow-sm">
                     <h4 class="font-bold text-svm-dark mb-4 flex items-center gap-2"><i class="fa-solid fa-folder-open text-svm-gold"></i> Arsip Dokumen Resmi</h4>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <a href="#" id="doc-link-1" target="_blank" class="flex items-center gap-4 bg-slate-50 p-4 rounded-xl border border-slate-100 hover:border-svm-gold hover:shadow-md transition group relative">
                             <div class="w-10 h-10 bg-red-100 text-red-600 rounded-lg flex items-center justify-center shrink-0 group-hover:bg-red-600 group-hover:text-white transition"><i class="fa-solid fa-file-pdf text-lg"></i></div>
                             <div>
-                                <h5 class="font-bold text-sm text-svm-dark group-hover:text-svm-gold transition">Katalog Produk Terbaru.pdf</h5>
-                                <p class="text-[10px] text-slate-400">Pricelist & Spesifikasi Lengkap</p>
+                                <h5 class="font-bold text-sm text-svm-dark group-hover:text-svm-gold transition">Katalog & Pricelist.pdf</h5>
+                                <p class="text-[10px] text-slate-400">Harga Lengkap Semua Alat</p>
                             </div>
                             <button onclick="event.preventDefault(); admin.editLink('doc-link-1')" class="admin-only hidden absolute right-2 top-2 bg-slate-200 p-1.5 rounded hover:bg-slate-300 text-[10px]"><i class="fa-solid fa-pen"></i></button>
                         </a>
@@ -367,15 +370,13 @@
                             </ul>
                         </div>
                         
-                        <!-- FOUNDER IMAGE (Fixed Z-Index & Pointer Events) -->
+                        <!-- FOUNDER IMAGE (Fix Z-Index & Pointer Events agar foto bisa diklik Admin) -->
                         <div class="h-64 md:h-80 rounded-2xl overflow-hidden border-2 border-svm-gold/30 relative img-container group" data-aos="fade-left">
-                            <!-- Image at Z-10 so it catches clicks -->
-                            <img id="feature-img" src="https://images.unsplash.com/photo-1514525253440-b393452e8d26?q=80&w=800" class="w-full h-full object-cover editable-img relative z-10">
+                            <!-- Image di layer bawah (z-10) tetapi bisa diklik karena overlay pointer-events-none -->
+                            <img id="feature-img" src="https://images.unsplash.com/photo-1514525253440-b393452e8d26?q=80&w=800" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1514525253440-b393452e8d26?q=80&w=800';" class="w-full h-full object-cover editable-img relative z-10">
                             
-                            <!-- Overlay pointer-events-none to let clicks pass through -->
                             <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-80 z-20 pointer-events-none"></div>
                             
-                            <!-- Text pointer-events-none -->
                             <div class="absolute bottom-6 left-6 z-30 pointer-events-none">
                                 <p class="font-serif text-xl italic text-white">"Musik adalah investasi karakter."</p>
                                 <p class="text-[10px] text-svm-gold font-bold mt-1 uppercase tracking-widest">- Arif, Founder</p>
@@ -406,7 +407,7 @@
         <div id="page-training" class="page-section hidden fade-in bg-white">
             <div class="h-[50vh] relative img-container">
                 <div class="absolute inset-0 bg-svm-dark/70 z-10 pointer-events-none"></div>
-                <img id="training-bg-img" src="https://images.unsplash.com/photo-1511192336575-5a79af67a629?q=80&w=2000" class="w-full h-full object-cover editable-img">
+                <img id="training-bg-img" src="https://images.unsplash.com/photo-1511192336575-5a79af67a629?q=80&w=2000" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1511192336575-5a79af67a629?q=80&w=2000';" class="w-full h-full object-cover editable-img">
                 <div class="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-4 pointer-events-none" data-aos="zoom-in">
                     <span class="text-svm-gold font-bold tracking-[0.2em] text-[10px] uppercase mb-2 border border-svm-gold/30 px-3 py-1 rounded-full backdrop-blur-sm">SVM Academy</span>
                     <h2 class="font-serif text-4xl md:text-6xl font-bold text-white mb-4 editable" id="training-title">School of Champions</h2>
@@ -787,12 +788,23 @@
             }
         });
 
-        // --- CATALOG LOGIC ---
+        // --- CATALOG LOGIC (SMART MERGE) ---
+        // Katalog bawaan super lengkap agar web tidak pernah terlihat kosong
         const defaultCatalog = [
-            { id: "d1", name: "Snare HTS Premium 14\"", category: "perkusi", price: "Hubungi Admin", description: "Shell Maple 7-ply. Suara tajam kompetisi.", isBest: true, image: "https://images.unsplash.com/photo-1519892300165-cb5542fb47c7?q=80&w=400" },
-            { id: "d2", name: "Marching Bell Lyra", category: "perkusi", price: "Hubungi Admin", description: "Aluminium alloy, frame kokoh + harness.", image: "https://id-test-11.slatic.net/p/d9d201111663116631326262111.jpg" },
-            { id: "d5", name: "Trumpet Bb Gold", category: "brass", price: "Hubungi Admin", description: "Valve stainless steel, intonasi presisi.", isBest: true, image: "https://images.unsplash.com/photo-1573871669414-010dbf73ca84?q=80&w=400" },
-            { id: "d6", name: "Digital Flag Custom", category: "colorguard", price: "Rp 185.000", description: "Desain custom (Giant, Swing, Standard).", isBest: true, image: "https://images.unsplash.com/photo-1532986409605-7284cc37482f?q=80&w=400" },
+            { id: "d1", name: "Snare Drum HTS 14\" Premium", category: "perkusi", price: "Hubungi Admin", description: "Shell Maple 7-ply, Aluminum rim. Suara tajam untuk kompetisi.", isBest: true, image: "https://images.unsplash.com/photo-1519892300165-cb5542fb47c7?q=80&w=400" },
+            { id: "d2", name: "Bass Drum 24\" Series", category: "perkusi", price: "Hubungi Admin", description: "Deep resonance sound. Ringan namun kokoh untuk siswa.", image: "https://images.unsplash.com/photo-1524230659092-07f99a75c013?q=80&w=400" },
+            { id: "d3", name: "Tenor Drum & Multi Tenor", category: "perkusi", price: "Hubungi Admin", description: "Suara konsisten dan daya tahan tinggi untuk pertunjukan.", image: "https://images.unsplash.com/photo-1574623452334-1e0ac2b3ccb4?q=80&w=400" },
+            { id: "d4", name: "Marching Cymbals 14\"", category: "perkusi", price: "Hubungi Admin", description: "Bright crash sound. Cocok untuk aksen dinamis.", image: "https://images.unsplash.com/photo-1595064654929-16616a24683c?q=80&w=400" },
+            { id: "d5", name: "Marching Bell / Lyra", category: "perkusi", price: "Hubungi Admin", description: "Bilah aluminium alloy, frame kokoh. Include harness.", isBest: true, image: "https://id-test-11.slatic.net/p/d9d201111663116631326262111.jpg" },
+            { id: "d6", name: "Trumpet Bb Gold Lacquer", category: "brass", price: "Hubungi Admin", description: "Valve stainless steel, intonasi presisi.", isBest: true, image: "https://images.unsplash.com/photo-1573871669414-010dbf73ca84?q=80&w=400" },
+            { id: "d7", name: "Mellophone F", category: "brass", price: "Hubungi Admin", description: "Proyeksi suara kuat untuk mid-range brass.", image: "https://images.unsplash.com/photo-1580218177583-4ee10e54d5b2?q=80&w=400" },
+            { id: "d8", name: "Trombone Bb", category: "brass", price: "Hubungi Admin", description: "Slide mulus, material kuningan berkualitas.", image: "https://images.unsplash.com/photo-1580436856453-23910aee75d1?q=80&w=400" },
+            { id: "d9", name: "Sousaphone / Tuba", category: "brass", price: "Hubungi Admin", description: "Bass foundation yang solid dan resonan.", image: "https://images.unsplash.com/photo-1599557454846-95ff84224ee0?q=80&w=400" },
+            { id: "d10", name: "Digital Flag Custom", category: "colorguard", price: "Rp 185.000", description: "Desain custom (Giant, Swing, Standard). Bahan berkualitas.", isBest: true, image: "https://images.unsplash.com/photo-1532986409605-7284cc37482f?q=80&w=400" },
+            { id: "d11", name: "Rifle Color Guard", category: "colorguard", price: "Hubungi Admin", description: "Balance sempurna untuk spinning dan tossing.", image: "https://images.unsplash.com/photo-1522858547137-f1dcec554f55?q=80&w=400" },
+            { id: "d12", name: "Sabre Color Guard", category: "colorguard", price: "Hubungi Admin", description: "Bahan stainless/plastik kuat, aman untuk latihan.", image: "https://images.unsplash.com/photo-1589255655078-43d92ed0f2a7?q=80&w=400" },
+            { id: "d13", name: "Harness & Carrier", category: "paket", price: "Hubungi Admin", description: "Harness ergonomis, nyaman untuk pemain.", image: "https://images.unsplash.com/photo-1605335041306-0fa98d89e5fc?q=80&w=400" },
+            { id: "d14", name: "Paket Unit SD Lengkap", category: "paket", price: "Tanya Harga", description: "30-40 Personil. Gratis pelatihan 3 bulan + setting alat.", isBest: true, image: "https://images.unsplash.com/photo-1508186762395-585802319246?q=80&w=400" }
         ];
 
         window.catalog = {
@@ -801,8 +813,22 @@
                 grid.innerHTML = '<div class="col-span-full py-10 flex justify-center"><i class="fa-solid fa-spinner fa-spin text-2xl text-svm-gold"></i></div>';
                 try {
                     const snap = await getDocs(collection(db, "products"));
-                    productsCache = snap.empty ? defaultCatalog : [];
-                    snap.forEach(doc => productsCache.push({ id: doc.id, ...doc.data() }));
+                    let dbProducts = [];
+                    if (!snap.empty) {
+                        snap.forEach(doc => dbProducts.push({ id: doc.id, ...doc.data() }));
+                    }
+                    
+                    // SMART MERGE: Gabungkan data dari Database (jika ada) dengan data Bawaan (Default).
+                    // Data database akan selalu tampil di atas.
+                    let merged = [...dbProducts];
+                    defaultCatalog.forEach(dc => {
+                        // Jangan duplikat jika nama alat mirip
+                        if(!dbProducts.some(dp => dp.name.toLowerCase() === dc.name.toLowerCase())) {
+                            merged.push(dc);
+                        }
+                    });
+                    
+                    productsCache = merged;
                 } catch(e) { productsCache = defaultCatalog; }
                 catalog.render(productsCache);
             },
@@ -810,7 +836,10 @@
                 const grid = document.getElementById('productGrid');
                 grid.innerHTML = '';
                 products.forEach((p) => {
-                    const adminBtns = currentUser ? `<button onclick="catalog.delete('${p.id}')" class="absolute top-2 right-2 bg-red-500 text-white w-6 h-6 rounded-full shadow z-20 hover:scale-110 flex items-center justify-center text-xs"><i class="fa-solid fa-trash"></i></button>` : '';
+                    // Cek jika ini id dari database firebase (panjang acak), tampilkan tombol delete
+                    const isCustomProduct = p.id && p.id.length > 5; 
+                    const adminBtns = (currentUser && isCustomProduct) ? `<button onclick="catalog.delete('${p.id}')" class="absolute top-2 right-2 bg-red-500 text-white w-6 h-6 rounded-full shadow z-20 hover:scale-110 flex items-center justify-center text-xs"><i class="fa-solid fa-trash"></i></button>` : '';
+                    
                     const bestBadge = p.isBest ? `<span class="absolute top-2 left-2 bg-yellow-400 text-white text-[9px] font-bold px-2 py-0.5 rounded shadow z-10"><i class="fa-solid fa-star"></i> BEST</span>` : '';
                     
                     grid.innerHTML += `
@@ -847,7 +876,7 @@
                 const k = document.getElementById('searchCatalog').value.toLowerCase();
                 catalog.render(productsCache.filter(p => p.name.toLowerCase().includes(k)));
             },
-            delete: async (id) => { if(currentUser && confirm('Hapus?')) { await deleteDoc(doc(db, "products", id)); catalog.load(); } },
+            delete: async (id) => { if(currentUser && confirm('Hapus produk ini? (Hanya berlaku untuk produk yang Anda upload manual)')) { await deleteDoc(doc(db, "products", id)); catalog.load(); } },
             saveProduct: async () => {
                 const data = {
                     name: document.getElementById('prodName').value,
@@ -1000,7 +1029,7 @@
 
         async function processFile(f, previewId, valInputId, isGeneralImage) {
             if(!f || !f.type.startsWith('image/')) return;
-            if(isGeneralImage) { window.images.save(f, null); return; } // Auto save for site images
+            if(isGeneralImage) { window.images.save(f, null); return; } 
             
             const reader = new FileReader();
             reader.onload = (e) => {
