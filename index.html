@@ -650,14 +650,23 @@
         };
 
         let app, auth, db;
-        try { app = initializeApp(firebaseConfig); auth = getAuth(app); db = getFirestore(app); } catch(e) {}
+        try { 
+            app = initializeApp(firebaseConfig); 
+            auth = getAuth(app); 
+            db = getFirestore(app); 
+            console.log("Firebase Initialized Successfully");
+        } catch(e) {
+            console.error("Firebase Initialization Error:", e);
+            Swal.fire('Error Database', 'Gagal terhubung ke database. Fitur admin mungkin tidak berfungsi.', 'error');
+        }
 
         let currentUser = null;
         let productsCache = [];
         let activeEditableElement = null;
 
         // --- AI HELPER (MOTIVATION) ---
-        const quotes = [
+        // Jadikan quotes global agar bisa diakses oleh window.aiHelper
+        window.quotesList = [
             "Investasi alat musik adalah investasi karakter. Jadikan sekolah Anda pusat kreativitas Batam hari ini.",
             "Marching Band bukan sekadar musik, tapi tentang kedisiplinan dan kebanggaan sekolah.",
             "Alat berkualitas menciptakan harmoni yang sempurna. Upgrade unit Anda bersama SVM.",
@@ -668,16 +677,16 @@
         window.aiHelper = {
             init: () => {
                 const today = new Date().getDate();
-                const quoteIndex = today % quotes.length;
+                const quoteIndex = today % window.quotesList.length;
                 const quoteEl = document.getElementById('dailyQuote');
-                if(quoteEl) quoteEl.innerText = `"${quotes[quoteIndex]}"`;
+                if(quoteEl) quoteEl.innerText = `"${window.quotesList[quoteIndex]}"`;
             },
             generateQuote: () => {
                 if(!currentUser) return;
-                const random = Math.floor(Math.random() * quotes.length);
+                const random = Math.floor(Math.random() * window.quotesList.length);
                 const quoteEl = document.getElementById('dailyQuote');
                 if(quoteEl) {
-                    quoteEl.innerText = `"${quotes[random]}"`;
+                    quoteEl.innerText = `"${window.quotesList[random]}"`;
                     Swal.fire({icon: 'success', title: 'Kata Motivasi Diperbarui!', timer: 1000, showConfirmButton: false});
                 }
             }
@@ -941,60 +950,82 @@
                 list.innerHTML = '';
                 const defaults = ["SMAN 20 Batam", "MTsN 1 Batam", "MIN 1 Batam", "SDN 06 Sei Beduk"];
                 try {
+                    if(!db) return; // Prevent errors if DB failed to load
                     const snap = await getDocs(collection(db, "schools"));
                     if(snap.empty) defaults.forEach(s => schools.appendHTML(s));
                     else snap.forEach(doc => schools.appendHTML(doc.data().name, doc.id));
-                } catch { defaults.forEach(s => schools.appendHTML(s)); }
+                } catch(e) { 
+                    console.error("Error loading schools:", e);
+                    defaults.forEach(s => schools.appendHTML(s)); 
+                }
             },
             appendHTML: (name, id) => {
                 const btn = currentUser ? `<button onclick="schools.remove('${id}')" class="text-red-300 ml-auto text-xs"><i class="fa-solid fa-trash"></i></button>` : '';
                 document.getElementById('schoolList').innerHTML += `<li class="flex items-center text-slate-200 py-2 border-b border-white/5"><i class="fa-solid fa-check text-svm-gold mr-3 text-xs"></i> ${name} ${btn}</li>`;
             },
-            remove: async (id) => { if(currentUser) { await deleteDoc(doc(db,"schools",id)); schools.load(); } }
+            remove: async (id) => { if(currentUser && db) { await deleteDoc(doc(db,"schools",id)); schools.load(); } }
         };
 
         window.admin = {
             saveAllChanges: async () => {
+                if(!db) {
+                    Swal.fire('Error', 'Database tidak terhubung. Periksa koneksi internet atau konfigurasi Anda.', 'error');
+                    return;
+                }
+                Swal.fire({title: 'Menyimpan...', didOpen: () => Swal.showLoading(), allowOutsideClick: false});
                 const updates = {};
                 document.querySelectorAll('.editable').forEach(el => updates[el.id] = el.innerHTML);
-                await setDoc(doc(db, "config", "content"), updates);
-                Swal.fire({icon: 'success', title: 'Tersimpan!', timer: 800, showConfirmButton: false});
+                try {
+                    await setDoc(doc(db, "config", "content"), updates);
+                    Swal.fire({icon: 'success', title: 'Tersimpan!', timer: 1500, showConfirmButton: false});
+                } catch (e) {
+                    console.error("Error saving text:", e);
+                    Swal.fire('Gagal', 'Gagal menyimpan teks: ' + e.message, 'error');
+                }
             },
             loadTextConfig: async () => {
                 try {
+                    if(!db) return;
                     const d = await getDoc(doc(db, "config", "content"));
                     if(d.exists()) Object.entries(d.data()).forEach(([k,v]) => { if(document.getElementById(k)) document.getElementById(k).innerHTML = v; });
-                } catch {}
+                } catch(e) { console.error("Error loading text config:", e); }
             },
             loadImages: async () => {
                 try {
+                    if(!db) return;
                     const snap = await getDocs(collection(db, "site_images"));
                     snap.forEach(doc => {
                         const img = document.getElementById(doc.id);
                         if(img && doc.data().base64) img.src = doc.data().base64;
                     });
-                } catch(e) {}
+                } catch(e) { console.log("No custom images or error:", e); }
             },
             loadLinks: async () => {
                 try {
+                    if(!db) return;
                     const snap = await getDocs(collection(db, "site_links"));
                     snap.forEach(doc => {
                         const linkEl = document.getElementById(doc.id);
                         if(linkEl && doc.data().url) linkEl.href = doc.data().url;
                     });
-                } catch(e) {}
+                } catch(e) { console.log("Error loading links:", e);}
             },
             editLink: async (elementId) => {
-                if(!currentUser) return;
+                if(!currentUser || !db) return;
                 const { value: url } = await Swal.fire({ input: 'url', inputLabel: 'Paste Link PDF / Google Drive', showCancelButton: true });
                 if (url) {
                     const linkEl = document.getElementById(elementId);
                     if(linkEl) linkEl.href = url;
-                    await setDoc(doc(db, 'site_links', elementId), { url: url }, { merge: true });
-                    Swal.fire({icon: 'success', title: 'Link Disimpan!', timer: 800, showConfirmButton: false});
+                    try {
+                        await setDoc(doc(db, 'site_links', elementId), { url: url }, { merge: true });
+                        Swal.fire({icon: 'success', title: 'Link Disimpan!', timer: 800, showConfirmButton: false});
+                    } catch(e) {
+                         Swal.fire('Gagal', 'Gagal menyimpan link: ' + e.message, 'error');
+                    }
                 }
             },
             addSchool: async () => {
+                if(!db) return;
                 const {value:name} = await Swal.fire({input:'text', title:'Tambah Sekolah'});
                 if(name) { await addDoc(collection(db,"schools"),{name}); schools.load(); }
             },
