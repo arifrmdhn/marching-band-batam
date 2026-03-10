@@ -10,8 +10,8 @@
     <title>Pusat Alat Marching Band Batam & Kepri - PT. SVM (Official)</title>
     
     <!-- SEO Meta Tags Super -->
-    <meta name="description" content="Distributor Resmi Alat Marching Band & Drumband Terbesar di Batam Kepulauan Riau. Jual Snare HTS, Brass, Seragam, & Jasa Pelatih Juara Internasional. Legalitas Lengkap, Bisa SIPLAH.">
-    <meta name="keywords" content="toko marching band batam, jual alat drumband batam, distributor hts kepri, jasa pelatih drumband batam, service alat marching band batam, seragam drumband tanjung pinang, toko musik batam, pengadaan alat sekolah kepri, sparepart drumband batam, marching band karimun, marching band bintan">
+    <meta name="description" content="Distributor Resmi Alat Marching Band & Drumband Terbesar di Batam Kepulauan Riau. Menyediakan jasa kursus musik, arranger, dan pelatih juara internasional.">
+    <meta name="keywords" content="toko marching band batam, les musik batam, kursus trumpet batam, arranger marching band, distributor hts kepri, jasa pelatih drumband batam, service alat marching band batam, seragam drumband tanjung pinang, pengadaan alat sekolah kepri, sparepart drumband batam, marching band karimun, marching band bintan">
     <meta name="author" content="PT. Svara Vanguard Management">
     <meta name="robots" content="index, follow">
 
@@ -28,33 +28,36 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
 
     <!-- Config -->
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        serif: ['Playfair Display', 'serif'],
-                        display: ['Oswald', 'sans-serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
                     },
                     colors: {
                         svm: {
-                            dark: '#0B0F19', 
-                            navy: '#151E2E',
-                            gold: '#C5A059', 
-                            goldlight: '#E5C585',
-                            red: '#D90429'
+                            base: '#050505',    // Very dark background
+                            surface: '#111111', // Card background
+                            border: '#222222',  // Subtle borders
+                            gold: '#FFD700',    // Bright Premium Gold
+                            goldlight: '#FFEAA7',
+                            accent: '#3B82F6'   // Blue accent for some tech feel
                         }
                     },
                     backgroundImage: {
-                        'music-pattern': "url('https://www.transparenttextures.com/patterns/cubes.png')",
+                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                        'glow': 'conic-gradient(from 180deg at 50% 50%, #FFD70020 0deg, transparent 180deg, transparent 360deg)'
                     },
                     animation: {
                         'float-slow': 'float 8s ease-in-out infinite',
-                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'pulse-slow': 'pulse 6s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'spin-slow': 'spin 12s linear infinite',
                     },
                     keyframes: {
                         float: {
@@ -68,38 +71,39 @@
     </script>
 
     <style>
-        /* Modern Scrollbar */
+        /* Modern Dark Scrollbar */
         ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #0B0F19; }
-        ::-webkit-scrollbar-thumb { background: #C5A059; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: #E5C585; }
+        ::-webkit-scrollbar-track { background: #050505; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #FFD700; }
 
-        body { background-color: #F8FAFC; color: #1E293B; }
+        body { background-color: #050505; color: #E5E7EB; }
 
-        /* Glassmorphism Navigation */
+        /* Premium Glassmorphism */
         .glass-nav {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+            background: rgba(5, 5, 5, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.1);
         }
         
-        /* Musical Wave Animation Background */
-        .wave-bg {
-            background: radial-gradient(circle at 50% 50%, rgba(197, 160, 89, 0.1) 0%, transparent 50%);
-            animation: pulse-slow 5s infinite;
+        .glass-card {
+            background: rgba(17, 17, 17, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .active-tab { 
-            background: #0B0F19; 
-            color: #C5A059; 
-            box-shadow: 0 4px 15px -3px rgba(0, 0, 0, 0.3);
-            border: 1px solid #C5A059;
+            background: #FFD700; 
+            color: #050505 !important; 
+            font-weight: bold;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
         }
 
-        /* Text Gradients & Editor Safeguards */
-        .text-gradient-gold, #home-title b, #home-title strong {
-            background: linear-gradient(to right, #C5A059, #FDE68A, #C5A059);
+        /* Gold Text Gradients */
+        .text-gradient-gold {
+            background: linear-gradient(to right, #FFD700, #FFF5C3, #FFD700);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-size: 200% auto;
@@ -107,70 +111,89 @@
         }
         @keyframes shine { to { background-position: 200% center; } }
         
-        #home-title { line-height: 1.2; }
-        #home-title div, #home-title span { display: block; margin-top: 0.1em; } 
-        
-        /* ADMIN MODE STYLES */
-        .editable { outline: none; transition: all 0.2s; position: relative; border-radius: 4px; }
-        body.admin-mode .editable { border: 1px dashed rgba(197, 160, 89, 0.5); cursor: text; padding: 2px; }
-        body.admin-mode .editable:hover::after {
-            content: '✎ Edit'; position: absolute; top: -15px; right: 0; background: #C5A059; color: white; font-size: 9px; padding: 2px 6px; border-radius: 2px; pointer-events: none; z-index: 50;
+        #home-title { line-height: 1.1; }
+        #home-title b, #home-title strong {
+             background: linear-gradient(to right, #FFD700, #FFF5C3, #FFD700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: shine 4s linear infinite;
+            font-weight: 800;
         }
         
-        /* Image Editing & Files */
-        body.admin-mode .editable-img { cursor: pointer; border: 3px solid #C5A059 !important; z-index: 10; }
+        /* ADMIN MODE STYLES (Dark Theme Adapted) */
+        .editable { outline: none; transition: all 0.2s; position: relative; border-radius: 4px; }
+        body.admin-mode .editable { border: 1px dashed rgba(255, 215, 0, 0.3); cursor: text; padding: 2px; }
+        body.admin-mode .editable:hover { background: rgba(255, 215, 0, 0.05); }
+        body.admin-mode .editable:hover::after {
+            content: '✎ Edit'; position: absolute; top: -15px; right: 0; background: #FFD700; color: #050505; font-size: 9px; padding: 2px 6px; border-radius: 2px; pointer-events: none; z-index: 50; font-weight: bold;
+        }
+        
+        body.admin-mode .editable-img { cursor: pointer; border: 2px solid #FFD700 !important; z-index: 10; opacity: 0.8;}
+        body.admin-mode .editable-img:hover { opacity: 1; }
         body.admin-mode .img-container:hover::before {
-            content: '📸 GANTI FILE/FOTO'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            background: rgba(0,0,0,0.8); color: #C5A059; padding: 8px 12px; border-radius: 8px; 
-            font-size: 10px; font-weight: bold; pointer-events: none; z-index: 20; text-align: center;
+            content: '📸 GANTI GAMBAR'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.9); color: #FFD700; padding: 10px 16px; border-radius: 8px; 
+            font-size: 10px; font-weight: bold; pointer-events: none; z-index: 20; text-align: center; border: 1px solid #FFD700;
         }
 
-        /* Link Editing Button */
         .edit-link-btn { display: none; }
         body.admin-mode .edit-link-btn { display: inline-flex; }
 
         #adminToolbar { display: none !important; }
         body.admin-mode #adminToolbar { display: flex !important; }
 
+        /* Sound Wave Animation SVG styling */
+        .sound-wave line {
+            transform-origin: bottom;
+            animation: bounce 1s infinite alternate;
+        }
+        @keyframes bounce {
+            0% { transform: scaleY(0.2); }
+            100% { transform: scaleY(1); }
+        }
+
         /* Responsive Fixes */
         @media (max-width: 768px) {
-            .hero-title { font-size: 2.5rem !important; line-height: 1.2 !important; }
+            .hero-title { font-size: 2.2rem !important; }
         }
     </style>
 </head>
-<body class="font-sans antialiased overflow-x-hidden bg-slate-50">
+<body class="font-sans antialiased overflow-x-hidden selection:bg-svm-gold selection:text-svm-base">
 
     <!-- NAVBAR -->
-    <nav id="navbar" class="fixed w-full top-0 z-50 transition-all duration-300 py-2 md:py-4">
+    <nav id="navbar" class="fixed w-full top-0 z-50 transition-all duration-300 py-3 md:py-5">
         <div class="max-w-7xl mx-auto px-4 md:px-8">
-            <div class="glass-nav rounded-full px-4 md:px-6 py-2 md:py-3 flex justify-between items-center shadow-lg shadow-gray-200/50">
+            <div class="glass-nav rounded-2xl px-5 py-3 flex justify-between items-center shadow-2xl">
                 <!-- Logo -->
                 <div class="flex items-center gap-3 cursor-pointer group" onclick="router.navigate('home')">
-                    <div class="bg-svm-dark text-svm-gold p-2 rounded-full group-hover:rotate-12 transition duration-300">
-                        <i class="fa-solid fa-music text-lg"></i>
+                    <div class="relative w-10 h-10 flex items-center justify-center">
+                        <div class="absolute inset-0 border-2 border-svm-gold rounded-full border-t-transparent animate-spin-slow"></div>
+                        <i class="fa-solid fa-compact-disc text-svm-gold text-xl group-hover:rotate-180 transition duration-700"></i>
                     </div>
                     <div>
-                        <h1 class="font-display font-bold text-lg md:text-xl leading-none tracking-tight text-svm-dark">SVM<span class="text-svm-gold">.ID</span></h1>
+                        <h1 class="font-display font-bold text-xl tracking-tight text-white">SVM<span class="text-svm-gold">.ID</span></h1>
                     </div>
                 </div>
                 
                 <!-- Desktop Menu -->
-                <div class="hidden md:flex items-center gap-1 bg-slate-100/50 rounded-full p-1 border border-white">
-                    <button onclick="router.navigate('home')" class="px-5 py-2 rounded-full text-xs font-bold text-slate-600 hover:bg-white hover:text-svm-dark transition uppercase tracking-wide">Beranda</button>
-                    <button onclick="router.navigate('training')" class="px-5 py-2 rounded-full text-xs font-bold text-slate-600 hover:bg-white hover:text-svm-dark transition uppercase tracking-wide">Pelatihan</button>
-                    <button onclick="router.navigate('catalog')" class="px-5 py-2 rounded-full text-xs font-bold text-slate-600 hover:bg-white hover:text-svm-dark transition uppercase tracking-wide">Katalog</button>
+                <div class="hidden md:flex items-center gap-6">
+                    <button onclick="router.navigate('home')" class="text-sm font-medium text-gray-300 hover:text-svm-gold transition tracking-wide">Beranda</button>
+                    <button onclick="router.navigate('services')" class="text-sm font-medium text-gray-300 hover:text-svm-gold transition tracking-wide flex items-center gap-1">Layanan <span class="bg-svm-gold text-svm-base text-[8px] font-bold px-1.5 py-0.5 rounded">NEW</span></button>
+                    <button onclick="router.navigate('training')" class="text-sm font-medium text-gray-300 hover:text-svm-gold transition tracking-wide">Academy</button>
+                    <button onclick="router.navigate('catalog')" class="text-sm font-medium text-gray-300 hover:text-svm-gold transition tracking-wide">Katalog</button>
                 </div>
 
                 <!-- Action -->
-                <div class="flex items-center gap-2 md:gap-3">
-                    <button onclick="window.open('https://wa.me/6283812113160', '_blank')" class="hidden md:flex bg-svm-dark hover:bg-slate-800 text-white px-5 py-2 rounded-full text-xs font-bold transition shadow-lg items-center gap-2">
-                        <span>Konsultasi</span> <i class="fa-solid fa-whatsapp"></i>
+                <div class="flex items-center gap-3">
+                    <button onclick="window.open('https://wa.me/6283812113160', '_blank')" class="hidden md:flex bg-svm-gold hover:bg-yellow-400 text-svm-base px-6 py-2.5 rounded-full text-xs font-bold transition shadow-[0_0_15px_rgba(255,215,0,0.3)] items-center gap-2">
+                        <span>Konsultasi</span> <i class="fa-solid fa-arrow-right"></i>
                     </button>
-                    <button id="btnLogin" onclick="ui.showLoginModal()" class="w-8 h-8 flex items-center justify-center rounded-full text-slate-400 hover:text-svm-dark transition" title="Admin">
-                        <i class="fa-solid fa-lock text-xs"></i>
+                    <button id="btnLogin" onclick="ui.showLoginModal()" class="w-8 h-8 flex items-center justify-center rounded-full text-gray-500 hover:text-white transition" title="Admin">
+                        <i class="fa-solid fa-fingerprint text-sm"></i>
                     </button>
-                    <div id="adminBadge" class="hidden items-center gap-2 bg-red-600 text-white px-3 py-1 rounded-full text-[10px] font-bold shadow-lg cursor-default tracking-wider">
-                        ADMIN
+                    <div id="adminBadge" class="hidden items-center gap-2 bg-red-600 text-white px-3 py-1 rounded-full text-[9px] font-bold shadow-lg cursor-default tracking-widest uppercase">
+                        <span class="w-1.5 h-1.5 bg-white rounded-full animate-pulse"></span> ADMIN
                     </div>
                 </div>
             </div>
@@ -183,68 +206,73 @@
         <!-- === PAGE 1: BERANDA === -->
         <div id="page-home" class="page-section">
             
-            <!-- Hero Section -->
-            <section class="relative pt-28 md:pt-36 pb-10 md:pb-20 px-4 overflow-hidden">
-                <!-- Background Accents -->
-                <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-svm-gold/10 rounded-full blur-3xl -z-10 translate-x-1/3 -translate-y-1/3 animate-pulse-slow"></div>
-                <div class="absolute bottom-0 left-0 w-[300px] h-[300px] bg-blue-100 rounded-full blur-3xl -z-10 -translate-x-1/3 translate-y-1/3"></div>
+            <!-- Hero Section Premium Dark -->
+            <section class="relative pt-32 md:pt-40 pb-16 md:pb-24 px-4 overflow-hidden">
+                <!-- Dark Themed Accents -->
+                <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-svm-gold/5 rounded-full blur-[100px] -z-10 translate-x-1/4 -translate-y-1/4 animate-pulse-slow"></div>
+                <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-500/5 rounded-full blur-[100px] -z-10 -translate-x-1/4 translate-y-1/4"></div>
                 
-                <div class="max-w-7xl mx-auto">
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
+                <div class="max-w-7xl mx-auto relative z-10">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 items-center">
                         <div class="order-2 lg:order-1 text-center lg:text-left" data-aos="fade-up">
-                            <div class="inline-flex items-center gap-2 bg-white border border-slate-200 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest mb-6 text-svm-gold shadow-sm">
-                                <i class="fa-solid fa-star animate-spin-slow"></i>
-                                <span class="editable" id="hero-badge">Distributor & Pelatih Resmi</span>
+                            
+                            <div class="inline-flex items-center gap-2 bg-svm-surface border border-svm-border px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] mb-6 text-gray-400">
+                                <i class="fa-solid fa-circle-check text-svm-gold"></i>
+                                <span class="editable" id="hero-badge">Official Distributor & Music Studio</span>
                             </div>
                             
-                            <!-- Struktur ID dikembalikan agar sinkron dengan database lama -->
-                            <h1 class="editable hero-title font-serif text-4xl md:text-7xl font-bold leading-tight mb-4 text-svm-dark" id="home-title">
-                                Harmoni <br><b>Juara</b> <br>Kepulauan Riau.
+                            <!-- Judul Langsung Jelas Sesuai Perintah -->
+                            <h1 class="editable hero-title font-display text-4xl md:text-6xl font-bold leading-tight mb-6 text-white" id="home-title">
+                                Distributor Alat <br><b>Marching Band</b> <br>Terbesar di Kepri.
                             </h1>
                             
-                            <p class="editable text-sm md:text-lg text-slate-500 mb-8 leading-relaxed font-light" id="home-desc">
-                                Jangan biarkan talenta siswa terpendam karena alat rusak. Kami hadirkan solusi alat marching band berstandar internasional dengan garansi servis penuh.
+                            <p class="editable text-sm md:text-base text-gray-400 mb-8 leading-relaxed font-light max-w-lg mx-auto lg:mx-0" id="home-desc">
+                                Solusi end-to-end untuk kebutuhan musik sekolah Anda. Dari pengadaan alat, servis teknisi, hingga layanan pelatih juara internasional.
                             </p>
                             
-                            <!-- DAILY MOTIVATION (AI) -->
-                            <div class="bg-gradient-to-r from-svm-dark to-slate-900 p-4 rounded-xl mb-8 shadow-xl text-white relative overflow-hidden group">
-                                <div class="absolute top-0 right-0 text-6xl text-white/5 font-serif italic pr-4">"</div>
-                                <p id="dailyQuote" class="text-xs md:text-sm font-medium italic relative z-10 leading-relaxed">
+                            <!-- DAILY MOTIVATION (AI) - Dark Elegant Card -->
+                            <div class="glass-card p-5 rounded-2xl mb-8 relative overflow-hidden group border-l-4 border-l-svm-gold">
+                                <div class="absolute -right-4 -top-4 text-8xl text-white/5 font-serif italic pointer-events-none">"</div>
+                                <p id="dailyQuote" class="text-xs md:text-sm font-medium italic relative z-10 text-gray-300 leading-relaxed">
                                     "Investasi alat musik adalah investasi karakter. Jadikan sekolah Anda pusat kreativitas Batam hari ini."
                                 </p>
-                                <div class="mt-2 flex justify-between items-center">
-                                    <span class="text-[10px] text-svm-gold uppercase tracking-widest font-bold">Motivation of the Day</span>
-                                    <button onclick="aiHelper.generateQuote()" class="admin-only hidden text-[10px] bg-white/10 hover:bg-white/20 px-2 py-1 rounded transition"><i class="fa-solid fa-wand-magic-sparkles text-yellow-400 mr-1"></i> AI Magic</button>
+                                <div class="mt-4 flex justify-between items-center border-t border-white/5 pt-3">
+                                    <span class="text-[9px] text-svm-gold uppercase tracking-[0.2em] font-bold flex items-center gap-1"><i class="fa-solid fa-bolt text-svm-gold"></i> AI Insight</span>
+                                    <button onclick="aiHelper.generateQuote()" class="admin-only hidden text-[9px] bg-white/5 hover:bg-white/10 px-2 py-1 rounded transition border border-white/10 text-gray-300"><i class="fa-solid fa-rotate mr-1"></i> Ganti Teks</button>
                                 </div>
                             </div>
 
-                            <div class="flex flex-wrap justify-center lg:justify-start gap-3">
-                                <button onclick="router.navigate('catalog')" class="bg-svm-dark hover:bg-slate-800 text-white px-6 py-3 rounded-full font-bold transition shadow-lg shadow-slate-900/20 flex items-center gap-2 text-sm">
-                                    <span>Cek Katalog</span> <i class="fa-solid fa-arrow-right"></i>
+                            <div class="flex flex-wrap justify-center lg:justify-start gap-4">
+                                <button onclick="router.navigate('catalog')" class="bg-svm-gold hover:bg-yellow-400 text-svm-base px-8 py-3.5 rounded-full font-bold transition shadow-[0_0_20px_rgba(255,215,0,0.2)] flex items-center gap-2 text-sm">
+                                    <span>Jelajahi Produk</span> <i class="fa-solid fa-arrow-right"></i>
                                 </button>
-                                <button onclick="document.getElementById('legal-section').scrollIntoView()" class="bg-white border border-slate-200 text-slate-600 px-6 py-3 rounded-full font-bold transition hover:bg-slate-50 text-sm flex items-center gap-2">
-                                    <i class="fa-solid fa-shield-halved text-svm-gold"></i> Legalitas
+                                <button onclick="router.navigate('services')" class="glass-card text-white px-8 py-3.5 rounded-full font-bold transition hover:bg-white/5 text-sm flex items-center gap-2">
+                                    Lihat Layanan Kami
                                 </button>
                             </div>
                         </div>
                         
-                        <!-- Hero Image Frame (DENGAN ONERROR FALLBACK) -->
-                        <div class="order-1 lg:order-2 relative" data-aos="zoom-in" data-aos-duration="1000">
-                            <div class="absolute inset-0 bg-svm-gold rounded-[2rem] rotate-3 opacity-20 blur-lg"></div>
-                            <div class="relative rounded-[2rem] overflow-hidden shadow-2xl border-4 border-white img-container h-[300px] md:h-[500px]">
-                                <!-- Jika URL di DB salah, gambar tidak akan rusak karena fallback onerror -->
-                                <img id="hero-main-img" src="https://images.unsplash.com/photo-1544279762-2b638c4c3e80?q=80&w=1000" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1544279762-2b638c4c3e80?q=80&w=1000';" class="w-full h-full object-cover editable-img transform hover:scale-105 transition duration-1000">
+                        <!-- Hero Image Frame Premium Dark -->
+                        <div class="order-1 lg:order-2 relative" data-aos="zoom-in" data-aos-duration="1200">
+                            <!-- Background glow -->
+                            <div class="absolute inset-0 bg-svm-gold rounded-[2rem] opacity-10 blur-2xl"></div>
+                            
+                            <div class="relative rounded-[2rem] overflow-hidden border border-white/10 bg-svm-surface img-container h-[350px] md:h-[550px] shadow-2xl">
+                                <img id="hero-main-img" src="https://images.unsplash.com/photo-1519892300165-cb5542fb47c7?q=80&w=1000" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1544279762-2b638c4c3e80?q=80&w=1000';" class="w-full h-full object-cover editable-img transform hover:scale-105 transition duration-1000 opacity-90">
                                 
-                                <!-- Float Player -->
-                                <div class="absolute bottom-4 right-4 bg-white/90 backdrop-blur-md p-3 rounded-xl shadow-lg flex items-center gap-3 animate-float-slow max-w-[200px] pointer-events-none">
-                                    <div class="w-8 h-8 bg-svm-dark rounded-full flex items-center justify-center text-white text-xs">
-                                        <i class="fa-solid fa-music"></i>
+                                <div class="absolute inset-0 bg-gradient-to-t from-svm-base via-transparent to-transparent pointer-events-none"></div>
+                                
+                                <!-- Floating Audio Visualizer -->
+                                <div class="absolute bottom-6 right-6 glass-card p-4 rounded-2xl flex items-center gap-4 pointer-events-none border border-white/10">
+                                    <div class="flex gap-1 items-end h-8">
+                                        <div class="w-1.5 bg-svm-gold rounded-t animate-[bounce_1s_infinite_alternate]" style="height: 40%"></div>
+                                        <div class="w-1.5 bg-svm-gold rounded-t animate-[bounce_1.2s_infinite_alternate]" style="height: 80%"></div>
+                                        <div class="w-1.5 bg-svm-gold rounded-t animate-[bounce_0.8s_infinite_alternate]" style="height: 100%"></div>
+                                        <div class="w-1.5 bg-svm-gold rounded-t animate-[bounce_1.5s_infinite_alternate]" style="height: 60%"></div>
                                     </div>
                                     <div>
-                                        <p class="text-[10px] font-bold text-svm-dark">Sound of Victory</p>
-                                        <div class="w-20 h-1 bg-gray-200 rounded-full mt-1 overflow-hidden">
-                                            <div class="w-2/3 h-full bg-svm-gold rounded-full"></div>
-                                        </div>
+                                        <p class="text-[10px] font-bold text-white uppercase tracking-widest">Premium Quality</p>
+                                        <p class="text-[9px] text-gray-400">Guaranteed Audio</p>
                                     </div>
                                 </div>
                             </div>
@@ -253,164 +281,200 @@
                 </div>
             </section>
 
-            <!-- Marquee Clients -->
-            <div class="bg-svm-dark py-3 overflow-hidden mb-12 transform -skew-y-1">
-                <div class="max-w-7xl mx-auto px-4 flex justify-between items-center text-slate-400 text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] whitespace-nowrap gap-8 overflow-x-auto scrollbar-hide">
-                    <span><i class="fa-solid fa-star text-svm-gold mr-1"></i> SMAN 20 Batam</span>
-                    <span><i class="fa-solid fa-star text-svm-gold mr-1"></i> MTsN 1 Batam</span>
-                    <span><i class="fa-solid fa-star text-svm-gold mr-1"></i> MIN 1 Batam</span>
-                    <span><i class="fa-solid fa-trophy text-svm-gold mr-1"></i> MIMAC Champion</span>
+            <!-- Marquee Clients Dark -->
+            <div class="border-y border-white/5 bg-svm-surface/50 py-4 overflow-hidden mb-20 backdrop-blur-sm">
+                <div class="max-w-7xl mx-auto px-4 flex justify-between items-center text-gray-500 text-[10px] md:text-xs font-bold uppercase tracking-[0.25em] whitespace-nowrap gap-8 overflow-x-auto scrollbar-hide">
+                    <span><i class="fa-solid fa-check text-svm-gold mr-2"></i> E-CATALOG READY</span>
+                    <span><i class="fa-solid fa-check text-svm-gold mr-2"></i> SIPLAH BliBli</span>
+                    <span><i class="fa-solid fa-check text-svm-gold mr-2"></i> LPSE KEPRI</span>
+                    <span><i class="fa-solid fa-trophy text-svm-gold mr-2"></i> MIMAC CHAMPION</span>
                 </div>
             </div>
 
-            <!-- LEGALITAS & DOKUMEN (Icon Only, No Preview Image) -->
-            <section id="legal-section" class="max-w-7xl mx-auto px-4 mb-20">
-                <div class="text-center mb-10" data-aos="fade-up">
-                    <h2 class="font-serif text-2xl md:text-3xl font-bold text-svm-dark mb-2 editable" id="legal-title">Legalitas & Kompetensi</h2>
-                    <p class="text-xs md:text-sm text-slate-500 max-w-xl mx-auto editable" id="legal-sub">Transparansi dokumen perusahaan kami. Klik pada kartu untuk melihat file asli (PDF/Drive).</p>
+            <!-- LAYANAN KAMI (NEW SECTION) -->
+            <section class="max-w-7xl mx-auto px-4 mb-32 relative">
+                <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[300px] bg-blue-900/5 blur-[120px] pointer-events-none"></div>
+                
+                <div class="text-center mb-16" data-aos="fade-up">
+                    <span class="text-svm-gold text-[10px] font-bold uppercase tracking-[0.3em] mb-2 block">Our Expertise</span>
+                    <h2 class="font-display text-3xl md:text-4xl font-bold text-white mb-4 editable" id="serv-title">Layanan & Jasa Musik</h2>
+                    <p class="text-sm text-gray-400 max-w-2xl mx-auto editable" id="serv-sub">Lebih dari sekadar menjual alat, SVM adalah pusat pengembangan musik komprehensif untuk instansi Anda.</p>
                 </div>
                 
-                <div class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
-                    <!-- Doc 1 -->
-                    <div class="relative group bg-white p-6 rounded-2xl shadow-sm hover:shadow-xl border border-slate-100 transition duration-300 text-center" data-aos="fade-up" data-aos-delay="100">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Jasa 1 -->
+                    <div class="glass-card p-6 rounded-2xl hover:-translate-y-2 transition duration-300 group cursor-pointer" onclick="router.navigate('services')" data-aos="fade-up" data-aos-delay="0">
+                        <div class="w-12 h-12 rounded-xl bg-svm-gold/10 flex items-center justify-center text-svm-gold mb-5 group-hover:scale-110 transition">
+                            <i class="fa-solid fa-drum text-xl"></i>
+                        </div>
+                        <h4 class="font-bold text-white mb-2">Penjualan Alat</h4>
+                        <p class="text-xs text-gray-400 leading-relaxed">Distributor resmi Snare HTS, Brass, Perkusi, dan sparepart standar lomba.</p>
+                    </div>
+
+                    <!-- Jasa 2 -->
+                    <div class="glass-card p-6 rounded-2xl hover:-translate-y-2 transition duration-300 group cursor-pointer" onclick="router.navigate('services')" data-aos="fade-up" data-aos-delay="100">
+                        <div class="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-400 mb-5 group-hover:scale-110 transition">
+                            <i class="fa-solid fa-chalkboard-user text-xl"></i>
+                        </div>
+                        <h4 class="font-bold text-white mb-2">Les Privat & Teori</h4>
+                        <p class="text-xs text-gray-400 leading-relaxed">Bimbingan teori musik dasar, partitur, dan les privat alat musik tiup (Trumpet, dll).</p>
+                    </div>
+
+                    <!-- Jasa 3 -->
+                    <div class="glass-card p-6 rounded-2xl hover:-translate-y-2 transition duration-300 group cursor-pointer" onclick="router.navigate('services')" data-aos="fade-up" data-aos-delay="200">
+                        <div class="w-12 h-12 rounded-xl bg-purple-500/10 flex items-center justify-center text-purple-400 mb-5 group-hover:scale-110 transition">
+                            <i class="fa-solid fa-music text-xl"></i>
+                        </div>
+                        <h4 class="font-bold text-white mb-2">Arrangement Musik</h4>
+                        <p class="text-xs text-gray-400 leading-relaxed">Jasa komposer/arranger untuk Marching Band, Mars Sekolah, Paduan Suara, & Orkestra.</p>
+                    </div>
+
+                    <!-- Jasa 4 -->
+                    <div class="glass-card p-6 rounded-2xl hover:-translate-y-2 transition duration-300 group cursor-pointer" onclick="router.navigate('training')" data-aos="fade-up" data-aos-delay="300">
+                        <div class="w-12 h-12 rounded-xl bg-green-500/10 flex items-center justify-center text-green-400 mb-5 group-hover:scale-110 transition">
+                            <i class="fa-solid fa-users text-xl"></i>
+                        </div>
+                        <h4 class="font-bold text-white mb-2">Pelatihan Tim</h4>
+                        <p class="text-xs text-gray-400 leading-relaxed">Pelatih bersertifikat untuk membentuk tim ekstrakurikuler sekolah Anda menjadi juara.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- LEGALITAS & DOKUMEN (Dark Theme) -->
+            <section id="legal-section" class="max-w-7xl mx-auto px-4 mb-24">
+                <div class="text-center mb-12" data-aos="fade-up">
+                    <h2 class="font-display text-2xl md:text-3xl font-bold text-white mb-2 editable" id="legal-title">Legalitas Perusahaan</h2>
+                    <p class="text-xs md:text-sm text-gray-400 max-w-xl mx-auto editable" id="legal-sub">Transparansi dokumen resmi SVM. Klik untuk melihat file asli (PDF/Drive).</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+                    <div class="relative group glass-card p-6 rounded-2xl border-t border-t-white/10 hover:border-svm-gold transition duration-300 text-center" data-aos="fade-up" data-aos-delay="100">
                         <a href="#" id="cert-link-1" target="_blank" class="block">
-                            <div class="w-16 h-16 mx-auto bg-slate-50 border border-slate-100 rounded-full flex items-center justify-center text-slate-400 group-hover:bg-svm-dark group-hover:text-svm-gold transition duration-300 mb-4">
+                            <div class="w-16 h-16 mx-auto bg-svm-base rounded-full flex items-center justify-center text-gray-500 group-hover:text-svm-gold transition duration-300 mb-4 border border-white/5 group-hover:border-svm-gold/30">
                                 <i class="fa-solid fa-file-contract text-2xl"></i>
                             </div>
-                            <h4 class="font-bold text-sm md:text-base text-svm-dark editable" id="cert-title-1">Izin Usaha (NIB)</h4>
-                            <p class="text-[10px] text-slate-500 editable mt-1" id="cert-desc-1">Resmi Kemenkumham & OSS</p>
-                            <span class="inline-block mt-3 text-[10px] font-bold text-svm-gold border-b border-svm-gold">Lihat Dokumen</span>
+                            <h4 class="font-bold text-sm md:text-base text-white editable" id="cert-title-1">Izin Usaha (NIB)</h4>
+                            <p class="text-[10px] text-gray-400 editable mt-1" id="cert-desc-1">Resmi Kemenkumham & OSS</p>
+                            <span class="inline-block mt-4 text-[9px] uppercase tracking-widest font-bold text-svm-gold">Lihat Dokumen <i class="fa-solid fa-arrow-right text-[8px] ml-1"></i></span>
                         </a>
-                        <button onclick="admin.editLink('cert-link-1')" class="admin-only hidden absolute top-2 right-2 text-slate-300 hover:text-svm-dark"><i class="fa-solid fa-pen-to-square"></i></button>
+                        <button onclick="admin.editLink('cert-link-1')" class="admin-only hidden absolute top-3 right-3 text-gray-500 hover:text-white bg-svm-base p-1.5 rounded-lg border border-white/10"><i class="fa-solid fa-link text-xs"></i></button>
                     </div>
 
-                    <!-- Doc 2 -->
-                    <div class="relative group bg-white p-6 rounded-2xl shadow-sm hover:shadow-xl border border-slate-100 transition duration-300 text-center" data-aos="fade-up" data-aos-delay="200">
+                    <div class="relative group glass-card p-6 rounded-2xl border-t border-t-white/10 hover:border-svm-gold transition duration-300 text-center" data-aos="fade-up" data-aos-delay="200">
                         <a href="#" id="cert-link-2" target="_blank" class="block">
-                            <div class="w-16 h-16 mx-auto bg-slate-50 border border-slate-100 rounded-full flex items-center justify-center text-slate-400 group-hover:bg-svm-dark group-hover:text-svm-gold transition duration-300 mb-4">
+                            <div class="w-16 h-16 mx-auto bg-svm-base rounded-full flex items-center justify-center text-gray-500 group-hover:text-svm-gold transition duration-300 mb-4 border border-white/5 group-hover:border-svm-gold/30">
                                 <i class="fa-solid fa-certificate text-2xl"></i>
                             </div>
-                            <h4 class="font-bold text-sm md:text-base text-svm-dark editable" id="cert-title-2">Sertifikat Pelatih</h4>
-                            <p class="text-[10px] text-slate-500 editable mt-1" id="cert-desc-2">Lisensi Internasional</p>
-                            <span class="inline-block mt-3 text-[10px] font-bold text-svm-gold border-b border-svm-gold">Lihat Dokumen</span>
+                            <h4 class="font-bold text-sm md:text-base text-white editable" id="cert-title-2">Sertifikat Pelatih</h4>
+                            <p class="text-[10px] text-gray-400 editable mt-1" id="cert-desc-2">Lisensi Internasional</p>
+                            <span class="inline-block mt-4 text-[9px] uppercase tracking-widest font-bold text-svm-gold">Lihat Dokumen <i class="fa-solid fa-arrow-right text-[8px] ml-1"></i></span>
                         </a>
-                        <button onclick="admin.editLink('cert-link-2')" class="admin-only hidden absolute top-2 right-2 text-slate-300 hover:text-svm-dark"><i class="fa-solid fa-pen-to-square"></i></button>
+                        <button onclick="admin.editLink('cert-link-2')" class="admin-only hidden absolute top-3 right-3 text-gray-500 hover:text-white bg-svm-base p-1.5 rounded-lg border border-white/10"><i class="fa-solid fa-link text-xs"></i></button>
                     </div>
 
-                    <!-- Doc 3 -->
-                    <div class="relative group bg-white p-6 rounded-2xl shadow-sm hover:shadow-xl border border-slate-100 transition duration-300 text-center" data-aos="fade-up" data-aos-delay="300">
+                    <div class="relative group glass-card p-6 rounded-2xl border-t border-t-white/10 hover:border-svm-gold transition duration-300 text-center" data-aos="fade-up" data-aos-delay="300">
                         <a href="#" id="cert-link-3" target="_blank" class="block">
-                            <div class="w-16 h-16 mx-auto bg-slate-50 border border-slate-100 rounded-full flex items-center justify-center text-slate-400 group-hover:bg-svm-dark group-hover:text-svm-gold transition duration-300 mb-4">
+                            <div class="w-16 h-16 mx-auto bg-svm-base rounded-full flex items-center justify-center text-gray-500 group-hover:text-svm-gold transition duration-300 mb-4 border border-white/5 group-hover:border-svm-gold/30">
                                 <i class="fa-solid fa-building-circle-check text-2xl"></i>
                             </div>
-                            <h4 class="font-bold text-sm md:text-base text-svm-dark editable" id="cert-title-3">Surat Distributor</h4>
-                            <p class="text-[10px] text-slate-500 editable mt-1" id="cert-desc-3">Penunjukan Resmi Pabrikan</p>
-                            <span class="inline-block mt-3 text-[10px] font-bold text-svm-gold border-b border-svm-gold">Lihat Dokumen</span>
+                            <h4 class="font-bold text-sm md:text-base text-white editable" id="cert-title-3">Surat Distributor</h4>
+                            <p class="text-[10px] text-gray-400 editable mt-1" id="cert-desc-3">Penunjukan Resmi Pabrikan</p>
+                            <span class="inline-block mt-4 text-[9px] uppercase tracking-widest font-bold text-svm-gold">Lihat Dokumen <i class="fa-solid fa-arrow-right text-[8px] ml-1"></i></span>
                         </a>
-                        <button onclick="admin.editLink('cert-link-3')" class="admin-only hidden absolute top-2 right-2 text-slate-300 hover:text-svm-dark"><i class="fa-solid fa-pen-to-square"></i></button>
+                        <button onclick="admin.editLink('cert-link-3')" class="admin-only hidden absolute top-3 right-3 text-gray-500 hover:text-white bg-svm-base p-1.5 rounded-lg border border-white/10"><i class="fa-solid fa-link text-xs"></i></button>
                     </div>
                 </div>
 
-                <!-- DOWNLOAD AREA -->
-                <div class="mt-12 bg-white rounded-2xl p-6 md:p-8 border border-slate-200 shadow-sm">
-                    <h4 class="font-bold text-svm-dark mb-4 flex items-center gap-2"><i class="fa-solid fa-folder-open text-svm-gold"></i> Arsip Dokumen Resmi</h4>
+                <!-- DOWNLOAD AREA DARK -->
+                <div class="mt-8 glass-card rounded-2xl p-6 md:p-8 border border-white/5">
+                    <h4 class="font-bold text-white mb-4 flex items-center gap-2"><i class="fa-solid fa-folder-open text-svm-gold"></i> Download Dokumen Publik</h4>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <a href="#" id="doc-link-1" target="_blank" class="flex items-center gap-4 bg-slate-50 p-4 rounded-xl border border-slate-100 hover:border-svm-gold hover:shadow-md transition group relative">
-                            <div class="w-10 h-10 bg-red-100 text-red-600 rounded-lg flex items-center justify-center shrink-0 group-hover:bg-red-600 group-hover:text-white transition"><i class="fa-solid fa-file-pdf text-lg"></i></div>
+                        <a href="#" id="doc-link-1" target="_blank" class="flex items-center gap-4 bg-svm-base p-4 rounded-xl border border-white/5 hover:border-svm-gold/50 transition group relative">
+                            <div class="w-10 h-10 bg-red-500/10 text-red-500 rounded-lg flex items-center justify-center shrink-0 group-hover:bg-red-500 group-hover:text-white transition"><i class="fa-solid fa-file-pdf text-lg"></i></div>
                             <div>
-                                <h5 class="font-bold text-sm text-svm-dark group-hover:text-svm-gold transition">Katalog & Pricelist.pdf</h5>
-                                <p class="text-[10px] text-slate-400">Harga Lengkap Semua Alat</p>
+                                <h5 class="font-bold text-sm text-gray-200 group-hover:text-svm-gold transition">Katalog & Pricelist.pdf</h5>
+                                <p class="text-[10px] text-gray-500 mt-0.5">Harga Lengkap Semua Alat</p>
                             </div>
-                            <button onclick="event.preventDefault(); admin.editLink('doc-link-1')" class="admin-only hidden absolute right-2 top-2 bg-slate-200 p-1.5 rounded hover:bg-slate-300 text-[10px]"><i class="fa-solid fa-pen"></i></button>
+                            <button onclick="event.preventDefault(); admin.editLink('doc-link-1')" class="admin-only hidden absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-white"><i class="fa-solid fa-pen text-xs"></i></button>
                         </a>
-                        <a href="#" id="doc-link-2" target="_blank" class="flex items-center gap-4 bg-slate-50 p-4 rounded-xl border border-slate-100 hover:border-svm-gold hover:shadow-md transition group relative">
-                            <div class="w-10 h-10 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center shrink-0 group-hover:bg-blue-600 group-hover:text-white transition"><i class="fa-solid fa-file-pdf text-lg"></i></div>
+                        <a href="#" id="doc-link-2" target="_blank" class="flex items-center gap-4 bg-svm-base p-4 rounded-xl border border-white/5 hover:border-svm-gold/50 transition group relative">
+                            <div class="w-10 h-10 bg-blue-500/10 text-blue-400 rounded-lg flex items-center justify-center shrink-0 group-hover:bg-blue-500 group-hover:text-white transition"><i class="fa-solid fa-file-pdf text-lg"></i></div>
                             <div>
-                                <h5 class="font-bold text-sm text-svm-dark group-hover:text-svm-gold transition">Company Profile SVM.pdf</h5>
-                                <p class="text-[10px] text-slate-400">Portofolio & Pengalaman</p>
+                                <h5 class="font-bold text-sm text-gray-200 group-hover:text-svm-gold transition">Company Profile SVM.pdf</h5>
+                                <p class="text-[10px] text-gray-500 mt-0.5">Portofolio & Pengalaman</p>
                             </div>
-                            <button onclick="event.preventDefault(); admin.editLink('doc-link-2')" class="admin-only hidden absolute right-2 top-2 bg-slate-200 p-1.5 rounded hover:bg-slate-300 text-[10px]"><i class="fa-solid fa-pen"></i></button>
+                            <button onclick="event.preventDefault(); admin.editLink('doc-link-2')" class="admin-only hidden absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-white"><i class="fa-solid fa-pen text-xs"></i></button>
                         </a>
                     </div>
                 </div>
             </section>
 
-            <!-- WHY US -->
-            <section class="bg-slate-900 py-16 text-white relative overflow-hidden">
-                <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-20"></div>
+            <!-- WHY US / YOUTUBE SECTION COMBO -->
+            <section class="py-20 relative border-t border-white/5 bg-svm-surface">
                 <div class="max-w-7xl mx-auto px-4 relative z-10">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-                        <div data-aos="fade-right">
-                            <h2 class="font-serif text-2xl md:text-4xl font-bold mb-4">Mengapa Sekolah <br><span class="text-svm-gold">Memilih SVM?</span></h2>
-                            <p class="text-slate-400 text-sm mb-8 leading-relaxed">Kami memahami bahwa sekolah membutuhkan alat yang awet dan layanan purna jual yang jelas, bukan sekadar barang murah yang cepat rusak.</p>
-                            
-                            <ul class="space-y-4 text-sm">
-                                <li class="flex gap-3">
-                                    <i class="fa-solid fa-check-circle text-svm-gold mt-1"></i>
-                                    <div>
-                                        <strong class="block text-white">Lifetime Support Teknisi</strong>
-                                        <span class="text-slate-500 text-xs">Rusak? Teknisi kami datang ke sekolah.</span>
-                                    </div>
-                                </li>
-                                <li class="flex gap-3">
-                                    <i class="fa-solid fa-check-circle text-svm-gold mt-1"></i>
-                                    <div>
-                                        <strong class="block text-white">Harga Nego & Transparan</strong>
-                                        <span class="text-slate-500 text-xs">Sesuai RAPBS sekolah & administrasi pajak beres.</span>
-                                    </div>
-                                </li>
-                                <li class="flex gap-3">
-                                    <i class="fa-solid fa-check-circle text-svm-gold mt-1"></i>
-                                    <div>
-                                        <strong class="block text-white">Kurikulum Juara</strong>
-                                        <span class="text-slate-500 text-xs">Gratis konsultasi materi pelatihan 3 bulan pertama.</span>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                        
-                        <!-- FOUNDER IMAGE (Fix Z-Index & Pointer Events agar foto bisa diklik Admin) -->
-                        <div class="h-64 md:h-80 rounded-2xl overflow-hidden border-2 border-svm-gold/30 relative img-container group" data-aos="fade-left">
-                            <!-- Image di layer bawah (z-10) tetapi bisa diklik karena overlay pointer-events-none -->
-                            <img id="feature-img" src="https://images.unsplash.com/photo-1514525253440-b393452e8d26?q=80&w=800" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1514525253440-b393452e8d26?q=80&w=800';" class="w-full h-full object-cover editable-img relative z-10">
-                            
-                            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-80 z-20 pointer-events-none"></div>
-                            
-                            <div class="absolute bottom-6 left-6 z-30 pointer-events-none">
-                                <p class="font-serif text-xl italic text-white">"Musik adalah investasi karakter."</p>
-                                <p class="text-[10px] text-svm-gold font-bold mt-1 uppercase tracking-widest">- Arif, Founder</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- YOUTUBE & ACTIVITIES -->
-            <section class="py-16 bg-white relative">
-                <div class="max-w-7xl mx-auto px-4">
-                    <div class="flex justify-between items-end mb-8">
+                    <div class="flex justify-between items-end mb-10">
                         <div>
-                            <h2 class="font-serif text-2xl font-bold text-svm-dark mb-1 editable" id="yt-title">Galeri Kegiatan</h2>
-                            <p class="text-xs text-slate-500 editable" id="yt-desc">Latihan & Kompetisi.</p>
+                            <span class="text-svm-gold text-[10px] font-bold uppercase tracking-[0.3em] mb-2 block">Our Journey</span>
+                            <h2 class="font-display text-2xl md:text-3xl font-bold text-white mb-1 editable" id="yt-title">Galeri & Aktivitas</h2>
+                            <p class="text-xs text-gray-400 editable" id="yt-desc">Latihan, Kompetisi, dan Musik.</p>
                         </div>
-                        <button onclick="ui.showVideoModal()" class="admin-only hidden bg-red-600 text-white rounded-full w-8 h-8 hover:bg-red-700 transition flex items-center justify-center shadow-lg"><i class="fa-solid fa-plus text-xs"></i></button>
+                        <button onclick="ui.showVideoModal()" class="admin-only hidden bg-red-600 text-white rounded-full px-4 py-2 hover:bg-red-700 transition flex items-center text-xs font-bold gap-2"><i class="fa-solid fa-plus"></i> Video</button>
                     </div>
-                    <div id="videoGrid" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div id="videoGrid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <!-- JS Loaded -->
                     </div>
                 </div>
             </section>
         </div>
 
-        <!-- === PAGE 2: PELATIHAN === -->
-        <div id="page-training" class="page-section hidden fade-in bg-white">
+        <!-- === PAGE 2: LAYANAN (NEW) === -->
+        <div id="page-services" class="page-section hidden fade-in">
+            <div class="pt-32 pb-16 px-4 text-center border-b border-white/5 relative overflow-hidden">
+                <div class="absolute top-0 right-1/2 translate-x-1/2 w-[600px] h-[300px] bg-blue-500/10 blur-[100px] rounded-full pointer-events-none"></div>
+                <h2 class="font-display text-3xl md:text-5xl font-bold text-white mb-4 relative z-10">Professional Services</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto text-sm leading-relaxed relative z-10">Kami adalah musisi dan pendidik. SVM siap membantu mengembangkan potensi musikalitas individu maupun grup.</p>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-4 py-16">
+                <div class="space-y-12">
+                    <!-- Service 1: Privat -->
+                    <div class="glass-card p-6 md:p-10 rounded-3xl flex flex-col md:flex-row gap-8 items-center" data-aos="fade-up">
+                        <div class="w-full md:w-1/3 aspect-square rounded-2xl overflow-hidden img-container relative">
+                            <img id="serv-img-1" src="https://images.unsplash.com/photo-1573871669414-010dbf73ca84?q=80&w=600" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1573871669414-010dbf73ca84?q=80&w=600';" class="w-full h-full object-cover editable-img">
+                        </div>
+                        <div class="w-full md:w-2/3">
+                            <span class="text-blue-400 text-[10px] font-bold uppercase tracking-widest mb-2 block">Pendidikan Musik</span>
+                            <h3 class="font-display text-2xl font-bold text-white mb-4 editable" id="srv-1-title">Les Privat Teori & Alat Tiup (Brass)</h3>
+                            <p class="text-gray-400 text-sm leading-relaxed mb-6 editable" id="srv-1-desc">Ingin menguasai Trumpet, Trombone, atau alat musik dasar lainnya? Kami menyediakan instruktur berpengalaman. Tidak hanya praktik, Anda juga akan diajarkan membaca partitur dan teori musik yang benar.</p>
+                            <button onclick="window.open('https://wa.me/6283812113160?text=Halo%20SVM,%20saya%20ingin%20info%20les%20privat%20musik', '_blank')" class="bg-white/10 hover:bg-white/20 text-white px-6 py-2.5 rounded-full text-xs font-bold transition border border-white/10">Tanya Biaya Les</button>
+                        </div>
+                    </div>
+
+                    <!-- Service 2: Arranger -->
+                    <div class="glass-card p-6 md:p-10 rounded-3xl flex flex-col md:flex-row-reverse gap-8 items-center" data-aos="fade-up">
+                        <div class="w-full md:w-1/3 aspect-square rounded-2xl overflow-hidden img-container relative">
+                            <img id="serv-img-2" src="https://images.unsplash.com/photo-1507838153414-b4b713384a76?q=80&w=600" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1507838153414-b4b713384a76?q=80&w=600';" class="w-full h-full object-cover editable-img">
+                        </div>
+                        <div class="w-full md:w-2/3 text-left md:text-right">
+                            <span class="text-purple-400 text-[10px] font-bold uppercase tracking-widest mb-2 block">Studio & Produksi</span>
+                            <h3 class="font-display text-2xl font-bold text-white mb-4 editable" id="srv-2-title">Arrangement & Composing Musik</h3>
+                            <p class="text-gray-400 text-sm leading-relaxed mb-6 editable" id="srv-2-desc">Membuat musik yang megah dan sesuai untuk kebutuhan sekolah. Kami menerima pembuatan aransemen untuk Marching Band, Mars Sekolah, Paduan Suara, Orkestra, Musik Band, hingga jasa penulisan partitur (Transcript).</p>
+                            <button onclick="window.open('https://wa.me/6283812113160?text=Halo%20SVM,%20saya%20butuh%20jasa%20aransemen/partitur', '_blank')" class="bg-white/10 hover:bg-white/20 text-white px-6 py-2.5 rounded-full text-xs font-bold transition border border-white/10">Konsultasi Arranger</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- === PAGE 3: PELATIHAN (ACADEMY) === -->
+        <div id="page-training" class="page-section hidden fade-in">
             <div class="h-[50vh] relative img-container">
-                <div class="absolute inset-0 bg-svm-dark/70 z-10 pointer-events-none"></div>
+                <div class="absolute inset-0 bg-svm-base/80 z-10 pointer-events-none"></div>
                 <img id="training-bg-img" src="https://images.unsplash.com/photo-1511192336575-5a79af67a629?q=80&w=2000" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1511192336575-5a79af67a629?q=80&w=2000';" class="w-full h-full object-cover editable-img">
                 <div class="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-4 pointer-events-none" data-aos="zoom-in">
-                    <span class="text-svm-gold font-bold tracking-[0.2em] text-[10px] uppercase mb-2 border border-svm-gold/30 px-3 py-1 rounded-full backdrop-blur-sm">SVM Academy</span>
-                    <h2 class="font-serif text-4xl md:text-6xl font-bold text-white mb-4 editable" id="training-title">School of Champions</h2>
-                    <p class="text-slate-300 max-w-md text-sm md:text-base font-light leading-relaxed editable" id="training-desc">Membentuk karakter pemenang melalui kedisiplinan.</p>
+                    <span class="text-svm-gold font-bold tracking-[0.3em] text-[10px] uppercase mb-4 border border-svm-gold/30 px-4 py-1.5 rounded-full backdrop-blur-sm bg-black/30">Training Center</span>
+                    <h2 class="font-display text-4xl md:text-6xl font-bold text-white mb-4 editable" id="training-title">School of Champions</h2>
+                    <p class="text-gray-300 max-w-md text-sm md:text-base font-light leading-relaxed editable" id="training-desc">Membentuk karakter pemenang melalui kedisiplinan dan kurikulum teruji.</p>
                 </div>
             </div>
 
@@ -418,214 +482,236 @@
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <!-- Curriculum -->
                     <div class="md:col-span-2 space-y-4">
-                        <h3 class="font-display text-xl font-bold text-svm-dark mb-4 border-l-4 border-svm-gold pl-3">Kurikulum Berjenjang</h3>
+                        <h3 class="font-display text-xl font-bold text-white mb-6 border-l-4 border-svm-gold pl-3">Kurikulum Binaan SVM</h3>
                         
-                        <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 hover:border-svm-gold transition duration-300 group">
-                            <div class="flex gap-4">
-                                <div class="font-display text-3xl font-bold text-slate-200 group-hover:text-svm-gold transition">01</div>
+                        <div class="glass-card p-6 rounded-2xl hover:border-svm-gold/50 transition duration-300 group">
+                            <div class="flex gap-5 items-start">
+                                <div class="font-display text-3xl font-bold text-gray-700 group-hover:text-svm-gold transition">01</div>
                                 <div>
-                                    <h4 class="font-bold text-sm md:text-base text-svm-dark editable" id="curr-1-title">Basic Fundamental</h4>
-                                    <p class="text-xs text-slate-500 leading-relaxed mt-1 editable" id="curr-1-desc">Pondasi utama. Fokus pada fisik, PBB, dan teknik dasar.</p>
+                                    <h4 class="font-bold text-sm md:text-base text-white editable" id="curr-1-title">Basic Fundamental</h4>
+                                    <p class="text-xs text-gray-400 leading-relaxed mt-2 editable" id="curr-1-desc">Pondasi utama fisik, PBB, dan pengenalan teknik dasar alat.</p>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 hover:border-svm-gold transition duration-300 group">
-                            <div class="flex gap-4">
-                                <div class="font-display text-3xl font-bold text-slate-200 group-hover:text-svm-gold transition">02</div>
+                        <div class="glass-card p-6 rounded-2xl hover:border-svm-gold/50 transition duration-300 group">
+                            <div class="flex gap-5 items-start">
+                                <div class="font-display text-3xl font-bold text-gray-700 group-hover:text-svm-gold transition">02</div>
                                 <div>
-                                    <h4 class="font-bold text-sm md:text-base text-svm-dark editable" id="curr-2-title">Music & Harmony</h4>
-                                    <p class="text-xs text-slate-500 leading-relaxed mt-1 editable" id="curr-2-desc">Not balok, lagu, intonasi dan tuning presisi.</p>
+                                    <h4 class="font-bold text-sm md:text-base text-white editable" id="curr-2-title">Music & Harmony</h4>
+                                    <p class="text-xs text-gray-400 leading-relaxed mt-2 editable" id="curr-2-desc">Penguasaan partitur lagu, sinkronisasi intonasi, dan balance nada.</p>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 hover:border-svm-gold transition duration-300 group">
-                            <div class="flex gap-4">
-                                <div class="font-display text-3xl font-bold text-slate-200 group-hover:text-svm-gold transition">03</div>
+                        <div class="glass-card p-6 rounded-2xl hover:border-svm-gold/50 transition duration-300 group">
+                            <div class="flex gap-5 items-start">
+                                <div class="font-display text-3xl font-bold text-gray-700 group-hover:text-svm-gold transition">03</div>
                                 <div>
-                                    <h4 class="font-bold text-sm md:text-base text-svm-dark editable" id="curr-3-title">Display & Visual</h4>
-                                    <p class="text-xs text-slate-500 leading-relaxed mt-1 editable" id="curr-3-desc">Formasi lapangan (drill) dan koreografi color guard.</p>
+                                    <h4 class="font-bold text-sm md:text-base text-white editable" id="curr-3-title">Display & Visual</h4>
+                                    <p class="text-xs text-gray-400 leading-relaxed mt-2 editable" id="curr-3-desc">Pembuatan formasi lapangan (Drill) yang dinamis terintegrasi gerakan Color Guard.</p>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Schools List -->
-                    <div class="bg-svm-navy text-white p-6 rounded-2xl relative overflow-hidden h-fit">
-                        <div class="absolute top-0 right-0 w-32 h-32 bg-svm-gold rounded-full mix-blend-overlay filter blur-3xl opacity-20"></div>
+                    <div class="bg-gradient-to-b from-svm-surface to-svm-base border border-white/5 p-6 rounded-2xl relative overflow-hidden h-fit">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-svm-gold rounded-full mix-blend-overlay filter blur-3xl opacity-10"></div>
                         <div class="flex justify-between items-center mb-6 relative z-10">
-                            <h3 class="font-display text-lg font-bold text-svm-gold">Sekolah Binaan</h3>
-                            <button onclick="admin.addSchool()" class="admin-only hidden text-[10px] bg-white text-svm-dark px-2 py-1 rounded hover:bg-slate-200">+ Edit</button>
+                            <h3 class="font-display text-sm font-bold text-svm-gold uppercase tracking-widest">Sekolah Binaan</h3>
+                            <button onclick="admin.addSchool()" class="admin-only hidden text-[10px] bg-white/10 text-white px-2 py-1 rounded hover:bg-white/20 border border-white/10">+ Edit</button>
                         </div>
-                        <ul id="schoolList" class="space-y-3 relative z-10 text-xs font-light text-slate-300"><!-- JS Generated --></ul>
+                        <ul id="schoolList" class="space-y-3 relative z-10 text-xs font-light text-gray-300"><!-- JS Generated --></ul>
                     </div>
                 </div>
             </section>
         </div>
 
-        <!-- === PAGE 3: KATALOG === -->
-        <div id="page-catalog" class="page-section hidden fade-in bg-white">
-            <div class="pt-28 pb-8 bg-slate-50 px-4 mb-4">
-                <div class="max-w-7xl mx-auto text-center">
-                    <h2 class="font-serif text-2xl md:text-4xl font-bold text-svm-dark mb-2">Katalog Premium</h2>
-                    <p class="text-xs text-slate-500">Standar kompetisi nasional & internasional.</p>
-                </div>
+        <!-- === PAGE 4: KATALOG === -->
+        <div id="page-catalog" class="page-section hidden fade-in">
+            <div class="pt-32 pb-8 px-4 text-center">
+                <h2 class="font-display text-3xl md:text-5xl font-bold text-white mb-2">Exclusive Catalog</h2>
+                <p class="text-xs text-gray-400">Peralatan standar kompetisi. Kualitas bergaransi.</p>
             </div>
 
-            <div class="sticky top-16 md:top-20 z-30 bg-white/90 backdrop-blur-md border-b border-slate-100 py-3 px-4 mb-8">
+            <!-- Sticky Filter Bar -->
+            <div class="sticky top-16 md:top-20 z-30 glass-nav py-3 px-4 mb-8 border-y border-white/5 shadow-2xl">
                 <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-3">
                     <div class="flex overflow-x-auto gap-2 w-full md:w-auto pb-1 scrollbar-hide" id="catalogTabs">
-                        <button onclick="catalog.filter('all', this)" class="active-tab px-4 py-1.5 rounded-full text-[10px] font-bold transition border whitespace-nowrap">Semua</button>
-                        <button onclick="catalog.filter('paket', this)" class="bg-white text-slate-600 px-4 py-1.5 rounded-full text-[10px] font-bold transition border border-slate-200 whitespace-nowrap">Paket</button>
-                        <button onclick="catalog.filter('perkusi', this)" class="bg-white text-slate-600 px-4 py-1.5 rounded-full text-[10px] font-bold transition border border-slate-200 whitespace-nowrap">Perkusi</button>
-                        <button onclick="catalog.filter('brass', this)" class="bg-white text-slate-600 px-4 py-1.5 rounded-full text-[10px] font-bold transition border border-slate-200 whitespace-nowrap">Brass</button>
-                        <button onclick="catalog.filter('colorguard', this)" class="bg-white text-slate-600 px-4 py-1.5 rounded-full text-[10px] font-bold transition border border-slate-200 whitespace-nowrap">Guard</button>
+                        <button onclick="catalog.filter('all', this)" class="active-tab bg-svm-surface text-gray-400 border border-white/10 px-5 py-2 rounded-full text-[10px] uppercase tracking-widest transition whitespace-nowrap">Semua</button>
+                        <button onclick="catalog.filter('paket', this)" class="bg-svm-surface text-gray-400 border border-white/10 hover:border-svm-gold/50 px-5 py-2 rounded-full text-[10px] uppercase tracking-widest transition whitespace-nowrap">Paket</button>
+                        <button onclick="catalog.filter('perkusi', this)" class="bg-svm-surface text-gray-400 border border-white/10 hover:border-svm-gold/50 px-5 py-2 rounded-full text-[10px] uppercase tracking-widest transition whitespace-nowrap">Perkusi</button>
+                        <button onclick="catalog.filter('brass', this)" class="bg-svm-surface text-gray-400 border border-white/10 hover:border-svm-gold/50 px-5 py-2 rounded-full text-[10px] uppercase tracking-widest transition whitespace-nowrap">Brass</button>
+                        <button onclick="catalog.filter('colorguard', this)" class="bg-svm-surface text-gray-400 border border-white/10 hover:border-svm-gold/50 px-5 py-2 rounded-full text-[10px] uppercase tracking-widest transition whitespace-nowrap">Guard</button>
                     </div>
-                    <div class="relative w-full md:w-48">
-                        <i class="fa-solid fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 text-xs"></i>
-                        <input type="text" id="searchCatalog" onkeyup="catalog.search()" placeholder="Cari alat..." class="bg-slate-100 border-none rounded-full pl-8 pr-4 py-2 text-xs w-full focus:ring-1 focus:ring-svm-gold transition">
+                    <div class="relative w-full md:w-64">
+                        <i class="fa-solid fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500 text-xs"></i>
+                        <input type="text" id="searchCatalog" onkeyup="catalog.search()" placeholder="Cari Snare, Trumpet..." class="bg-svm-base border border-white/10 rounded-full pl-9 pr-4 py-2.5 text-xs w-full focus:border-svm-gold outline-none text-white transition placeholder-gray-600">
                     </div>
                 </div>
             </div>
 
             <div class="max-w-7xl mx-auto px-4 pb-24">
-                <button onclick="ui.showProductModal()" class="admin-only hidden w-full py-4 border-2 border-dashed border-slate-200 rounded-xl text-slate-400 font-bold mb-8 hover:border-svm-gold hover:text-svm-gold transition bg-slate-50 text-xs">
-                    + Tambah Produk Baru
+                <button onclick="ui.showProductModal()" class="admin-only hidden w-full py-5 border-2 border-dashed border-svm-gold/30 rounded-2xl text-svm-gold font-bold mb-8 hover:bg-svm-gold/5 transition bg-svm-surface text-xs uppercase tracking-widest">
+                    + Upload Produk Baru
                 </button>
-                <div id="productGrid" class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6"><!-- JS Rendered --></div>
+                <div id="productGrid" class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6"><!-- JS Rendered --></div>
             </div>
         </div>
 
     </main>
 
     <!-- FOOTER (Bottom Nav for Mobile) -->
-    <div class="md:hidden fixed bottom-0 w-full bg-white/90 backdrop-blur-md border-t border-slate-200 flex justify-around py-3 z-40 text-[10px] font-bold text-slate-400 safe-area-pb">
-        <button onclick="router.navigate('home')" class="flex flex-col items-center gap-1 active:text-svm-gold"><i class="fa-solid fa-home text-lg"></i> Home</button>
-        <button onclick="router.navigate('training')" class="flex flex-col items-center gap-1 active:text-svm-gold"><i class="fa-solid fa-graduation-cap text-lg"></i> Academy</button>
-        <button onclick="router.navigate('catalog')" class="flex flex-col items-center gap-1 active:text-svm-gold"><i class="fa-solid fa-store text-lg"></i> Shop</button>
+    <div class="md:hidden fixed bottom-0 w-full glass-nav flex justify-around py-3 z-40 text-[10px] font-bold text-gray-500 safe-area-pb border-t border-white/10">
+        <button onclick="router.navigate('home')" class="flex flex-col items-center gap-1.5 active:text-svm-gold"><i class="fa-solid fa-house text-lg"></i> Home</button>
+        <button onclick="router.navigate('services')" class="flex flex-col items-center gap-1.5 active:text-svm-gold"><i class="fa-solid fa-compact-disc text-lg"></i> Servis</button>
+        <button onclick="router.navigate('training')" class="flex flex-col items-center gap-1.5 active:text-svm-gold"><i class="fa-solid fa-graduation-cap text-lg"></i> Akademi</button>
+        <button onclick="router.navigate('catalog')" class="flex flex-col items-center gap-1.5 active:text-svm-gold"><i class="fa-solid fa-store text-lg"></i> Shop</button>
     </div>
 
     <!-- MAIN FOOTER -->
-    <footer class="bg-svm-dark text-white pt-16 pb-24 md:pb-8 border-t-4 border-svm-gold">
-        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8 mb-12 text-center md:text-left">
+    <footer class="bg-[#020202] text-white pt-16 pb-24 md:pb-8 border-t border-white/5 relative overflow-hidden">
+        <div class="absolute bottom-0 right-0 w-64 h-64 bg-svm-gold/5 blur-[100px] pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
             <div class="md:col-span-1">
-                <h3 class="font-display font-bold text-2xl mb-4">SVM <span class="text-svm-gold">CORP.</span></h3>
-                <p class="editable text-slate-400 text-xs leading-relaxed mb-6 font-light" id="footer-desc">Solusi alat musik & pelatihan terbaik di Kepulauan Riau.</p>
-                <div class="flex justify-center md:justify-start gap-3">
-                    <a href="https://wa.me/6283812113160" class="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center hover:bg-green-600 transition text-white text-xs"><i class="fa-brands fa-whatsapp"></i></a>
-                    <a href="#" class="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center hover:bg-pink-600 transition text-white text-xs"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#" class="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center hover:bg-red-600 transition text-white text-xs"><i class="fa-brands fa-youtube"></i></a>
+                <h3 class="font-display font-bold text-2xl mb-4 text-white">SVM<span class="text-svm-gold">.</span></h3>
+                <p class="editable text-gray-500 text-xs leading-relaxed mb-6" id="footer-desc">Solusi alat musik, servis teknisi, kursus privat, arranger, & pelatihan terbaik di Kepulauan Riau.</p>
+                <div class="flex gap-3">
+                    <a href="https://wa.me/6283812113160" target="_blank" class="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center hover:bg-svm-gold hover:text-svm-base transition text-gray-400 text-sm"><i class="fa-brands fa-whatsapp"></i></a>
+                    <a href="#" class="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center hover:bg-svm-gold hover:text-svm-base transition text-gray-400 text-sm"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="w-9 h-9 rounded-full bg-white/5 flex items-center justify-center hover:bg-svm-gold hover:text-svm-base transition text-gray-400 text-sm"><i class="fa-brands fa-youtube"></i></a>
                 </div>
             </div>
             
             <div class="md:col-span-1">
-                <h4 class="font-bold mb-4 text-xs uppercase tracking-wider text-svm-gold">Lokasi</h4>
-                <div class="rounded-xl overflow-hidden border border-white/20 h-32 w-full bg-slate-800">
+                <h4 class="font-bold mb-4 text-[10px] uppercase tracking-[0.2em] text-gray-400">Headquarters</h4>
+                <div class="rounded-xl overflow-hidden border border-white/5 h-28 w-full bg-svm-base grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition duration-500">
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.002879220142!2d104.03262877496546!3d1.1584165988305037!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31d9896471d9bf61%3A0x3ba836b339405c33!2smarching%20band%20batam%20SVM!5e0!3m2!1sid!2sid" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                 </div>
             </div>
 
             <div>
-                <h4 class="font-bold mb-4 text-xs uppercase tracking-wider text-svm-gold">Kontak</h4>
-                <ul class="space-y-3 text-xs text-slate-400 font-light">
-                    <li class="flex gap-3 justify-center md:justify-start"><i class="fa-solid fa-location-dot mt-1 text-svm-gold"></i> <span class="editable" id="footer-addr">Bengkong, Batam, Kepri</span></li>
-                    <li class="flex gap-3 justify-center md:justify-start"><i class="fa-brands fa-whatsapp mt-1 text-svm-gold"></i> <span class="editable" id="footer-wa">0838-1211-3160</span></li>
+                <h4 class="font-bold mb-4 text-[10px] uppercase tracking-[0.2em] text-gray-400">Menu Utama</h4>
+                <ul class="space-y-3 text-xs text-gray-500">
+                    <li><button onclick="router.navigate('home')" class="hover:text-svm-gold transition">Beranda</button></li>
+                    <li><button onclick="router.navigate('services')" class="hover:text-svm-gold transition">Jasa & Servis</button></li>
+                    <li><button onclick="router.navigate('catalog')" class="hover:text-svm-gold transition">Katalog Alat</button></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-bold mb-4 text-[10px] uppercase tracking-[0.2em] text-gray-400">Hubungi Kami</h4>
+                <ul class="space-y-4 text-xs text-gray-500">
+                    <li class="flex gap-3 items-start"><i class="fa-solid fa-location-dot mt-0.5 text-svm-gold"></i> <span class="editable leading-relaxed" id="footer-addr">Komplek YKB Blok A No 11, Bengkong, Batam</span></li>
+                    <li class="flex gap-3"><i class="fa-brands fa-whatsapp mt-0.5 text-svm-gold"></i> <span class="editable" id="footer-wa">0838-1211-3160</span></li>
                 </ul>
             </div>
         </div>
-        <div class="text-center text-[10px] text-slate-600 pt-6 border-t border-white/5 uppercase tracking-widest">&copy; 2026 PT. SVM.</div>
+        <div class="text-center text-[9px] text-gray-700 pt-6 border-t border-white/5 uppercase tracking-widest relative z-10">&copy; 2026 PT. SVARA VANGUARD MANAGEMENT.</div>
     </footer>
 
-    <!-- === MODALS === -->
+    <!-- === MODALS & TOOLS === -->
     
-    <!-- Admin Toolbar -->
-    <div id="adminToolbar" class="fixed bottom-20 md:bottom-6 left-1/2 transform -translate-x-1/2 bg-svm-dark/90 backdrop-blur-md text-white px-4 py-2 rounded-full shadow-2xl z-50 items-center gap-4 hidden border border-white/20">
-        <span class="text-[10px] font-bold text-svm-gold">ADMIN</span>
-        <div class="h-4 w-px bg-white/20"></div>
-        <button onclick="admin.createLink()" class="hover:text-blue-400 text-lg transition" title="Link WA"><i class="fa-solid fa-link"></i></button>
-        <button onclick="ui.showVideoModal()" class="hover:text-red-400 text-lg transition" title="YouTube"><i class="fa-brands fa-youtube"></i></button>
-        <button onclick="admin.saveAllChanges()" class="hover:text-green-400 text-lg transition" title="Save Text"><i class="fa-solid fa-save"></i></button>
-        <button onclick="ui.showProductModal()" class="hover:text-yellow-400 text-lg transition" title="Add Product"><i class="fa-solid fa-plus-circle"></i></button>
-        <button onclick="aiHelper.generateQuote()" class="hover:text-purple-400 text-lg transition" title="AI Assistant"><i class="fa-solid fa-wand-magic-sparkles"></i></button>
-        <div class="h-4 w-px bg-white/20"></div>
-        <button onclick="auth.logout()" class="hover:text-red-500 text-lg transition" title="Logout"><i class="fa-solid fa-power-off"></i></button>
+    <!-- Admin Toolbar Dark Premium -->
+    <div id="adminToolbar" class="fixed bottom-20 md:bottom-8 left-1/2 transform -translate-x-1/2 bg-[#111] text-white px-5 py-2.5 rounded-full shadow-[0_10px_30px_rgba(0,0,0,0.8)] z-50 items-center gap-5 hidden border border-white/10">
+        <span class="text-[9px] font-bold text-svm-gold uppercase tracking-[0.2em]"><i class="fa-solid fa-shield text-[10px]"></i> ADMIN</span>
+        <div class="h-5 w-px bg-white/10"></div>
+        <button onclick="admin.createLink()" class="hover:text-svm-accent text-lg transition" title="Buat Link WA"><i class="fa-solid fa-link"></i></button>
+        <button onclick="ui.showVideoModal()" class="hover:text-red-500 text-lg transition" title="Tambah Video YouTube"><i class="fa-brands fa-youtube"></i></button>
+        <button onclick="admin.saveAllChanges()" class="hover:text-green-400 text-lg transition" title="Simpan Teks"><i class="fa-solid fa-floppy-disk"></i></button>
+        <button onclick="ui.showProductModal()" class="hover:text-svm-gold text-lg transition" title="Tambah Katalog"><i class="fa-solid fa-box-open"></i></button>
+        <div class="h-5 w-px bg-white/10"></div>
+        <button onclick="auth.logout()" class="hover:text-red-600 text-lg transition" title="Logout"><i class="fa-solid fa-power-off"></i></button>
     </div>
 
-    <!-- Image Upload Modal (AUTO SAVE) -->
-    <div id="imageModal" class="fixed inset-0 bg-svm-dark/80 backdrop-blur-md hidden items-center justify-center z-[80] p-4 transition-all duration-300">
-        <div class="bg-white p-6 rounded-3xl w-full max-w-sm shadow-2xl relative overflow-hidden">
-            <button onclick="ui.closeModal('imageModal')" class="absolute top-4 right-4 text-slate-300 hover:text-red-500"><i class="fa-solid fa-times"></i></button>
-            <h2 class="text-lg font-display font-bold mb-4 text-center text-svm-dark">Update File / Foto</h2>
+    <!-- Image Upload Modal (Auto Save Dark) -->
+    <div id="imageModal" class="fixed inset-0 bg-black/90 backdrop-blur-sm hidden items-center justify-center z-[80] p-4">
+        <div class="bg-svm-surface border border-white/10 p-6 rounded-3xl w-full max-w-sm shadow-2xl relative">
+            <button onclick="ui.closeModal('imageModal')" class="absolute top-4 right-4 text-gray-500 hover:text-white"><i class="fa-solid fa-times text-lg"></i></button>
+            <h2 class="text-sm font-display font-bold mb-5 text-center text-white uppercase tracking-widest">Update Visual</h2>
             
-            <div id="imgDropZone" class="h-32 rounded-xl border-2 border-dashed border-svm-gold bg-yellow-50/50 flex flex-col items-center justify-center cursor-pointer hover:bg-yellow-50 transition mb-4 relative">
-                <img id="editImgPreview" class="absolute inset-0 w-full h-full object-contain hidden bg-white p-2 rounded-xl">
-                <i class="fa-solid fa-cloud-arrow-up text-3xl text-svm-gold mb-2"></i>
-                <p class="text-[10px] text-slate-500 font-bold uppercase tracking-wide">Pilih File dari HP/Laptop</p>
+            <div id="imgDropZone" class="h-32 rounded-xl border border-dashed border-svm-gold/30 bg-svm-gold/5 flex flex-col items-center justify-center cursor-pointer hover:bg-svm-gold/10 transition mb-5 relative">
+                <img id="editImgPreview" class="absolute inset-0 w-full h-full object-contain hidden bg-svm-surface p-2 rounded-xl">
+                <i class="fa-solid fa-cloud-arrow-up text-2xl text-svm-gold mb-2"></i>
+                <p class="text-[9px] text-gray-400 uppercase tracking-widest font-bold">Upload dari HP/PC</p>
                 <input type="file" id="imgFileInput" class="absolute inset-0 opacity-0 cursor-pointer" accept="image/*">
             </div>
             
-            <div class="text-center text-[10px] text-slate-400 mb-2 font-bold">- ATAU TEMPEL LINK -</div>
+            <div class="flex items-center gap-3 mb-5">
+                <div class="h-px bg-white/10 flex-1"></div>
+                <span class="text-[9px] text-gray-500 uppercase tracking-widest">ATAU URL</span>
+                <div class="h-px bg-white/10 flex-1"></div>
+            </div>
             
-            <input type="text" id="imgUrlInput" class="w-full bg-slate-50 border border-slate-200 p-3 rounded-xl text-xs focus:ring-2 focus:ring-svm-gold outline-none mb-2" placeholder="Paste Link Google Drive / Gambar disini...">
+            <input type="text" id="imgUrlInput" class="w-full bg-svm-base border border-white/10 p-3 rounded-xl text-xs focus:border-svm-gold outline-none mb-2 text-white placeholder-gray-600" placeholder="Paste Link Google Drive/Web...">
+            <p class="text-[8px] text-gray-500 text-center mb-2">*Gambar akan tersimpan otomatis</p>
             
             <input type="hidden" id="targetImgId">
-            <p id="saveStatus" class="text-[10px] text-center text-slate-400 font-bold h-4"></p>
+            <p id="saveStatus" class="text-[10px] text-center font-bold h-4 mt-2 text-svm-gold"></p>
         </div>
     </div>
 
-    <!-- Video & Product Modals -->
-    <div id="videoModal" class="fixed inset-0 bg-svm-dark/80 backdrop-blur-md hidden items-center justify-center z-[80] p-4">
-        <div class="bg-white p-6 rounded-3xl w-full max-w-sm shadow-2xl">
-            <h2 class="text-lg font-bold mb-4">Tambah Video Youtube</h2>
-            <input type="text" id="vidTitle" class="w-full border p-2 rounded-lg text-xs mb-2" placeholder="Judul">
-            <input type="text" id="vidUrl" class="w-full border p-2 rounded-lg text-xs mb-2" placeholder="Link Youtube">
-            <input type="text" id="vidDesc" class="w-full border p-2 rounded-lg text-xs mb-4" placeholder="Deskripsi">
-            <button onclick="videos.add()" class="w-full bg-red-600 text-white py-2 rounded-lg font-bold text-xs">Simpan Video</button>
-            <button onclick="ui.closeModal('videoModal')" class="w-full mt-2 text-slate-400 text-xs">Batal</button>
+    <!-- Video Modal Dark -->
+    <div id="videoModal" class="fixed inset-0 bg-black/90 backdrop-blur-sm hidden items-center justify-center z-[80] p-4">
+        <div class="bg-svm-surface border border-white/10 p-6 rounded-3xl w-full max-w-sm shadow-2xl">
+            <h2 class="text-sm font-bold mb-5 uppercase tracking-widest text-white"><i class="fa-brands fa-youtube text-red-500 mr-2"></i>Tambah Video</h2>
+            <input type="text" id="vidTitle" class="w-full bg-svm-base border border-white/10 p-3 rounded-xl text-xs mb-3 text-white outline-none focus:border-svm-gold" placeholder="Judul Video">
+            <input type="text" id="vidUrl" class="w-full bg-svm-base border border-white/10 p-3 rounded-xl text-xs mb-3 text-white outline-none focus:border-svm-gold" placeholder="Link YouTube">
+            <input type="text" id="vidDesc" class="w-full bg-svm-base border border-white/10 p-3 rounded-xl text-xs mb-5 text-white outline-none focus:border-svm-gold" placeholder="Keterangan singkat">
+            <button onclick="videos.add()" class="w-full bg-red-600 hover:bg-red-700 text-white py-3 rounded-xl font-bold text-xs uppercase tracking-widest transition">Simpan Video</button>
+            <button onclick="ui.closeModal('videoModal')" class="w-full mt-3 text-gray-500 hover:text-white text-[10px] uppercase tracking-widest">Batal</button>
         </div>
     </div>
 
-    <div id="productModal" class="fixed inset-0 bg-svm-dark/80 backdrop-blur-md hidden items-center justify-center z-[80] p-4">
-        <div class="bg-white p-6 rounded-3xl w-full max-w-md max-h-[90vh] overflow-y-auto shadow-2xl">
-            <h2 class="text-lg font-bold mb-4">Edit Katalog</h2>
+    <!-- Product Modal Dark -->
+    <div id="productModal" class="fixed inset-0 bg-black/90 backdrop-blur-sm hidden items-center justify-center z-[80] p-4">
+        <div class="bg-svm-surface border border-white/10 p-6 rounded-3xl w-full max-w-md max-h-[90vh] overflow-y-auto shadow-2xl scrollbar-hide">
+            <h2 class="text-sm font-bold mb-5 uppercase tracking-widest text-svm-gold border-b border-white/10 pb-3">Upload Produk</h2>
             <input type="hidden" id="prodId">
-            <div class="grid grid-cols-2 gap-4">
-                <div id="dropZone" class="h-32 border-2 border-dashed border-slate-300 rounded-xl flex items-center justify-center relative bg-slate-50 cursor-pointer">
-                    <p class="text-[10px] text-slate-400">Upload Foto</p>
-                    <img id="imgPreview" class="absolute inset-0 w-full h-full object-contain hidden bg-white p-1">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-4">
+                <div id="dropZone" class="h-32 border border-dashed border-white/20 rounded-xl flex flex-col items-center justify-center relative bg-svm-base cursor-pointer hover:border-svm-gold/50 transition">
+                    <i class="fa-solid fa-camera text-xl text-gray-600 mb-2"></i>
+                    <p class="text-[9px] text-gray-500 uppercase tracking-widest">Upload Foto</p>
+                    <img id="imgPreview" class="absolute inset-0 w-full h-full object-contain hidden bg-svm-base p-1 rounded-xl">
                     <input type="file" id="fileInput" class="absolute inset-0 opacity-0 cursor-pointer" accept="image/*">
                     <input type="hidden" id="prodImageBase64">
                 </div>
-                <div class="space-y-2">
-                    <input type="text" id="prodName" class="w-full border p-2 rounded-lg text-xs" placeholder="Nama Produk">
-                    <input type="text" id="prodPrice" class="w-full border p-2 rounded-lg text-xs" placeholder="Harga">
-                    <select id="prodCategory" class="w-full border p-2 rounded-lg text-xs">
-                        <option value="paket">Paket Sekolah</option>
-                        <option value="perkusi">Perkusi</option>
-                        <option value="brass">Brass</option>
+                <div class="space-y-3">
+                    <input type="text" id="prodName" class="w-full bg-svm-base border border-white/10 p-2.5 rounded-lg text-xs text-white outline-none focus:border-svm-gold" placeholder="Nama Produk">
+                    <input type="text" id="prodPrice" class="w-full bg-svm-base border border-white/10 p-2.5 rounded-lg text-xs text-white outline-none focus:border-svm-gold" placeholder="Harga (ex: Rp 1.500.000)">
+                    <select id="prodCategory" class="w-full bg-svm-base border border-white/10 p-2.5 rounded-lg text-xs text-gray-300 outline-none focus:border-svm-gold">
+                        <option value="paket">Paket Alat</option>
+                        <option value="perkusi">Perkusi (Drum)</option>
+                        <option value="brass">Alat Tiup (Brass)</option>
                         <option value="colorguard">Color Guard</option>
                     </select>
                 </div>
             </div>
-            <textarea id="prodDesc" class="w-full border p-2 rounded-lg text-xs mt-2" rows="2" placeholder="Deskripsi"></textarea>
-            <div class="flex items-center gap-2 mt-2">
-                <input type="checkbox" id="prodBest"> <label for="prodBest" class="text-xs">Best Seller?</label>
+            <textarea id="prodDesc" class="w-full bg-svm-base border border-white/10 p-3 rounded-lg text-xs text-white outline-none focus:border-svm-gold mb-3" rows="3" placeholder="Deskripsi spesifikasi alat..."></textarea>
+            <div class="flex items-center gap-3 p-3 bg-svm-gold/10 rounded-lg border border-svm-gold/20">
+                <input type="checkbox" id="prodBest" class="w-4 h-4 rounded text-svm-gold bg-svm-base border-white/20"> 
+                <label for="prodBest" class="text-xs text-svm-gold font-bold">Tandai sebagai Produk Premium (Best Seller)</label>
             </div>
-            <button onclick="catalog.saveProduct()" class="w-full bg-svm-dark text-white py-2 rounded-lg font-bold text-xs mt-4">Simpan Produk</button>
-            <button onclick="ui.closeModal('productModal')" class="w-full mt-2 text-slate-400 text-xs">Batal</button>
+            <button onclick="catalog.saveProduct()" class="w-full bg-svm-gold hover:bg-yellow-400 text-svm-base py-3.5 rounded-xl font-bold text-xs uppercase tracking-widest mt-5 transition">Publish Katalog</button>
+            <button onclick="ui.closeModal('productModal')" class="w-full mt-3 text-gray-500 hover:text-white text-[10px] uppercase tracking-widest">Batal</button>
         </div>
     </div>
 
-    <!-- Login Modal -->
-    <div id="loginModal" class="fixed inset-0 bg-svm-dark/90 backdrop-blur-sm hidden items-center justify-center z-[60] p-4">
-        <div class="bg-white p-8 rounded-3xl w-full max-w-sm shadow-2xl animate-float">
-            <h2 class="text-xl font-bold mb-6 text-center">Admin Access</h2>
-            <input type="email" id="email" class="w-full border p-3 rounded-xl mb-3 text-sm" placeholder="Email">
-            <input type="password" id="password" class="w-full border p-3 rounded-xl mb-6 text-sm" placeholder="Password">
-            <div class="flex gap-2">
-                <button onclick="ui.closeModal('loginModal')" class="flex-1 py-2 text-slate-500 text-sm">Batal</button>
-                <button onclick="auth.login()" class="flex-1 py-2 bg-svm-dark text-white rounded-xl font-bold text-sm">Masuk</button>
+    <!-- Login Modal Dark -->
+    <div id="loginModal" class="fixed inset-0 bg-black/90 backdrop-blur-sm hidden items-center justify-center z-[60] p-4">
+        <div class="bg-svm-surface border border-white/10 p-8 rounded-3xl w-full max-w-sm shadow-2xl animate-float">
+            <div class="text-center mb-6">
+                <div class="w-12 h-12 bg-svm-base rounded-full border border-svm-gold/30 flex items-center justify-center mx-auto mb-3 text-svm-gold text-xl">
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+                <h2 class="text-sm uppercase tracking-[0.2em] font-bold text-white">System Login</h2>
+            </div>
+            <input type="email" id="email" class="w-full bg-svm-base border border-white/10 p-3.5 rounded-xl mb-3 text-xs text-white outline-none focus:border-svm-gold" placeholder="Email Admin">
+            <input type="password" id="password" class="w-full bg-svm-base border border-white/10 p-3.5 rounded-xl mb-6 text-xs text-white outline-none focus:border-svm-gold" placeholder="Password">
+            <div class="flex flex-col gap-2">
+                <button onclick="auth.login()" class="w-full py-3 bg-white text-svm-base rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-gray-200 transition shadow-lg">Masuk</button>
+                <button onclick="ui.closeModal('loginModal')" class="w-full py-2 text-gray-500 text-[10px] uppercase tracking-widest hover:text-white">Batal</button>
             </div>
         </div>
     </div>
@@ -637,7 +723,7 @@
         import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
         import { getFirestore, collection, getDocs, addDoc, deleteDoc, doc, updateDoc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-        AOS.init({ once: true, offset: 20, duration: 600 });
+        AOS.init({ once: true, offset: 10, duration: 600 });
 
         const firebaseConfig = {
             apiKey: "AIzaSyAo_DL6ge2m7KXz67vcDA4fA4LabqE00uk",
@@ -653,10 +739,8 @@
             app = initializeApp(firebaseConfig); 
             auth = getAuth(app); 
             db = getFirestore(app); 
-            console.log("Firebase Initialized Successfully");
         } catch(e) {
-            console.error("Firebase Initialization Error:", e);
-            Swal.fire('Error Database', 'Gagal terhubung ke database. Fitur admin mungkin tidak berfungsi.', 'error');
+            console.error("Firebase Error:", e);
         }
 
         let currentUser = null;
@@ -665,11 +749,12 @@
 
         // --- AI HELPER (MOTIVATION) ---
         window.quotesList = [
-            "Investasi alat musik adalah investasi karakter. Jadikan sekolah Anda pusat kreativitas Batam hari ini.",
-            "Marching Band bukan sekadar musik, tapi tentang kedisiplinan dan kebanggaan sekolah.",
-            "Alat berkualitas menciptakan harmoni yang sempurna. Upgrade unit Anda bersama SVM.",
-            "Prestasi lahir dari persiapan yang matang. Lengkapi fasilitas sekolah Anda sekarang.",
-            "Musik menyatukan perbedaan. Biarkan siswa Anda bersinar di panggung kompetisi."
+            "Musik adalah senam otak terbaik. Pastikan siswa Anda difasilitasi dengan alat musik yang memadai.",
+            "Harmoni tercipta dari alat yang berkualitas dan latihan tanpa henti. SVM siap mensupport keduanya.",
+            "Visual tanpa instrumen yang baik bagaikan film tanpa suara. Upgrade brass line Anda bersama kami.",
+            "Dari lapangan sekolah menuju panggung internasional. Perjalanan juara dimulai dari perlengkapan yang tepat.",
+            "Disiplin, fokus, dan team-work. Mari bentuk karakter siswa melalui ekstrakurikuler marching band terbaik di Batam.",
+            "Jangan biarkan bakat musikalitas siswa terhambat oleh alat yang rusak. Berikan yang terbaik untuk masa depan mereka."
         ];
 
         window.aiHelper = {
@@ -684,8 +769,12 @@
                 const random = Math.floor(Math.random() * window.quotesList.length);
                 const quoteEl = document.getElementById('dailyQuote');
                 if(quoteEl) {
-                    quoteEl.innerText = `"${window.quotesList[random]}"`;
-                    Swal.fire({icon: 'success', title: 'Kata Motivasi Diperbarui!', timer: 1000, showConfirmButton: false});
+                    quoteEl.style.opacity = 0;
+                    setTimeout(() => {
+                        quoteEl.innerText = `"${window.quotesList[random]}"`;
+                        quoteEl.style.opacity = 1;
+                        Swal.fire({icon: 'success', title: 'Kata AI Diperbarui!', timer: 1000, background: '#111', color: '#fff', showConfirmButton: false});
+                    }, 300);
                 }
             }
         };
@@ -717,8 +806,8 @@
                 try {
                     await signInWithEmailAndPassword(auth, document.getElementById('email').value, document.getElementById('password').value);
                     ui.closeModal('loginModal');
-                    Swal.fire({icon:'success', title:'Mode Admin Aktif', timer:1000, showConfirmButton:false});
-                } catch (e) { Swal.fire('Gagal', 'Email/Password salah', 'error'); }
+                    Swal.fire({icon:'success', title:'Login Berhasil', background: '#111', color: '#fff', timer:1000, showConfirmButton:false});
+                } catch (e) { Swal.fire({icon:'error', background: '#111', color: '#fff', title:'Gagal', text:'Email/Password salah'}); }
             },
             logout: async () => { await signOut(auth); location.reload(); }
         };
@@ -750,33 +839,26 @@
                 if(!targetId) return;
                 
                 const statusEl = document.getElementById('saveStatus');
-                if(statusEl) statusEl.innerHTML = '<span class="text-svm-gold animate-pulse">Menyimpan otomatis...</span>';
+                if(statusEl) statusEl.innerHTML = '<span class="text-svm-gold animate-pulse"><i class="fa-solid fa-compact-disc fa-spin mr-1"></i> Menyimpan otomatis...</span>';
 
                 try {
                     let finalSrc = directUrl;
                     
                     if (directFile) {
                         finalSrc = await compressImage(directFile);
-                    } 
-                    else if (directUrl) {
+                    } else if (directUrl) {
                         if (finalSrc.includes('drive.google.com/file/d/')) {
                             const match = finalSrc.match(/\/d\/(.*?)\//);
-                            if (match && match[1]) {
-                                finalSrc = `https://drive.google.com/uc?export=view&id=${match[1]}`;
-                            }
+                            if (match && match[1]) finalSrc = `https://drive.google.com/uc?export=view&id=${match[1]}`;
                         }
-                    } else {
-                        return;
-                    }
+                    } else return;
 
                     const imgEl = document.getElementById(targetId);
-                    if(imgEl) { imgEl.src = finalSrc; }
+                    if(imgEl) imgEl.src = finalSrc;
 
-                    if(db) {
-                        await setDoc(doc(db, 'site_images', targetId), { base64: finalSrc, updatedAt: new Date() }, { merge: true });
-                    }
+                    if(db) await setDoc(doc(db, 'site_images', targetId), { base64: finalSrc, updatedAt: new Date() }, { merge: true });
                     
-                    if(statusEl) statusEl.innerHTML = '<span class="text-green-500">Tersimpan!</span>';
+                    if(statusEl) statusEl.innerHTML = '<span class="text-green-500">Visual Tersimpan!</span>';
                     setTimeout(() => { ui.closeModal('imageModal'); }, 800);
                 } catch(e) { if(statusEl) statusEl.innerText = "Gagal simpan."; }
             }
@@ -795,28 +877,22 @@
             }
         });
 
-        // --- CATALOG LOGIC (SMART MERGE - ANTI CRASH) ---
+        // --- CATALOG LOGIC (SMART MERGE & ERROR PROOF) ---
         const defaultCatalog = [
-            { id: "d1", name: "Snare Drum HTS 14\" Premium", category: "perkusi", price: "Hubungi Admin", description: "Shell Maple 7-ply, Aluminum rim. Suara tajam untuk kompetisi.", isBest: true, image: "https://images.unsplash.com/photo-1519892300165-cb5542fb47c7?q=80&w=400" },
-            { id: "d2", name: "Bass Drum 24\" Series", category: "perkusi", price: "Hubungi Admin", description: "Deep resonance sound. Ringan namun kokoh untuk siswa.", image: "https://images.unsplash.com/photo-1524230659092-07f99a75c013?q=80&w=400" },
+            { id: "d1", name: "Snare Drum HTS Premium 14\"", category: "perkusi", price: "Hubungi Admin", description: "Shell Maple 7-ply. Suara tajam untuk kompetisi internasional.", isBest: true, image: "https://images.unsplash.com/photo-1519892300165-cb5542fb47c7?q=80&w=400" },
+            { id: "d2", name: "Bass Drum 24\" Series", category: "perkusi", price: "Hubungi Admin", description: "Deep resonance sound. Ringan namun kokoh untuk siswa sekolah.", image: "https://images.unsplash.com/photo-1524230659092-07f99a75c013?q=80&w=400" },
             { id: "d3", name: "Tenor Drum & Multi Tenor", category: "perkusi", price: "Hubungi Admin", description: "Suara konsisten dan daya tahan tinggi untuk pertunjukan.", image: "https://images.unsplash.com/photo-1574623452334-1e0ac2b3ccb4?q=80&w=400" },
-            { id: "d4", name: "Marching Cymbals 14\"", category: "perkusi", price: "Hubungi Admin", description: "Bright crash sound. Cocok untuk aksen dinamis.", image: "https://images.unsplash.com/photo-1595064654929-16616a24683c?q=80&w=400" },
-            { id: "d5", name: "Marching Bell / Lyra", category: "perkusi", price: "Hubungi Admin", description: "Bilah aluminium alloy, frame kokoh. Include harness.", isBest: true, image: "https://id-test-11.slatic.net/p/d9d201111663116631326262111.jpg" },
-            { id: "d6", name: "Trumpet Bb Gold Lacquer", category: "brass", price: "Hubungi Admin", description: "Valve stainless steel, intonasi presisi.", isBest: true, image: "https://images.unsplash.com/photo-1573871669414-010dbf73ca84?q=80&w=400" },
-            { id: "d7", name: "Mellophone F", category: "brass", price: "Hubungi Admin", description: "Proyeksi suara kuat untuk mid-range brass.", image: "https://images.unsplash.com/photo-1580218177583-4ee10e54d5b2?q=80&w=400" },
-            { id: "d8", name: "Trombone Bb", category: "brass", price: "Hubungi Admin", description: "Slide mulus, material kuningan berkualitas.", image: "https://images.unsplash.com/photo-1580436856453-23910aee75d1?q=80&w=400" },
-            { id: "d9", name: "Sousaphone / Tuba", category: "brass", price: "Hubungi Admin", description: "Bass foundation yang solid dan resonan.", image: "https://images.unsplash.com/photo-1599557454846-95ff84224ee0?q=80&w=400" },
-            { id: "d10", name: "Digital Flag Custom", category: "colorguard", price: "Rp 185.000", description: "Desain custom (Giant, Swing, Standard). Bahan berkualitas.", isBest: true, image: "https://images.unsplash.com/photo-1532986409605-7284cc37482f?q=80&w=400" },
-            { id: "d11", name: "Rifle Color Guard", category: "colorguard", price: "Hubungi Admin", description: "Balance sempurna untuk spinning dan tossing.", image: "https://images.unsplash.com/photo-1522858547137-f1dcec554f55?q=80&w=400" },
-            { id: "d12", name: "Sabre Color Guard", category: "colorguard", price: "Hubungi Admin", description: "Bahan stainless/plastik kuat, aman untuk latihan.", image: "https://images.unsplash.com/photo-1589255655078-43d92ed0f2a7?q=80&w=400" },
-            { id: "d13", name: "Harness & Carrier", category: "paket", price: "Hubungi Admin", description: "Harness ergonomis, nyaman untuk pemain.", image: "https://images.unsplash.com/photo-1605335041306-0fa98d89e5fc?q=80&w=400" },
-            { id: "d14", name: "Paket Unit SD Lengkap", category: "paket", price: "Tanya Harga", description: "30-40 Personil. Gratis pelatihan 3 bulan + setting alat.", isBest: true, image: "https://images.unsplash.com/photo-1508186762395-585802319246?q=80&w=400" }
+            { id: "d4", name: "Marching Bell / Lyra", category: "perkusi", price: "Hubungi Admin", description: "Bilah aluminium alloy, frame kokoh. Include harness ringan.", isBest: true, image: "https://id-test-11.slatic.net/p/d9d201111663116631326262111.jpg" },
+            { id: "d5", name: "Trumpet Bb Gold Lacquer", category: "brass", price: "Hubungi Admin", description: "Valve stainless steel, intonasi presisi tinggi.", isBest: true, image: "https://images.unsplash.com/photo-1573871669414-010dbf73ca84?q=80&w=400" },
+            { id: "d6", name: "Mellophone F", category: "brass", price: "Hubungi Admin", description: "Proyeksi suara kuat untuk mid-range brass.", image: "https://images.unsplash.com/photo-1580218177583-4ee10e54d5b2?q=80&w=400" },
+            { id: "d7", name: "Digital Flag Custom", category: "colorguard", price: "Rp 185.000", description: "Desain printing custom (Giant, Swing, Standard).", isBest: true, image: "https://images.unsplash.com/photo-1532986409605-7284cc37482f?q=80&w=400" },
+            { id: "d8", name: "Paket Alat Marching SD Lengkap", category: "paket", price: "Tanya Harga", description: "Paket 30-40 personil. Gratis pendampingan kurikulum 3 bulan.", isBest: true, image: "https://images.unsplash.com/photo-1508186762395-585802319246?q=80&w=400" }
         ];
 
         window.catalog = {
             load: async () => {
                 const grid = document.getElementById('productGrid');
-                grid.innerHTML = '<div class="col-span-full py-10 flex justify-center"><i class="fa-solid fa-spinner fa-spin text-2xl text-svm-gold"></i></div>';
+                grid.innerHTML = '<div class="col-span-full py-12 flex justify-center"><i class="fa-solid fa-compact-disc fa-spin text-3xl text-svm-gold"></i></div>';
                 try {
                     let dbProducts = [];
                     if(db) {
@@ -824,10 +900,10 @@
                         if (!snap.empty) {
                             snap.forEach(doc => {
                                 const data = doc.data();
-                                // SAFE MAP: Handle missing/different column names safely
+                                // SAFE MAP: Mencegah error "undefined"
                                 dbProducts.push({ 
                                     id: doc.id, 
-                                    name: data.name || 'Produk Tanpa Nama',
+                                    name: data.name || 'Produk SVM',
                                     category: (data.category || 'lainnya').toLowerCase(),
                                     price: data.price || data.prices || 'Hubungi Admin',
                                     description: data.description || data.desc || '',
@@ -840,51 +916,41 @@
                     
                     let merged = [...dbProducts];
                     defaultCatalog.forEach(dc => {
-                        // Check duplicate safely
-                        const isDuplicate = dbProducts.some(dp => {
-                            const dpName = (dp.name || "").toLowerCase().trim();
-                            const dcName = (dc.name || "").toLowerCase().trim();
-                            return dpName === dcName;
-                        });
-                        if(!isDuplicate) {
-                            merged.push(dc);
-                        }
+                        const isDuplicate = dbProducts.some(dp => (dp.name||"").toLowerCase() === (dc.name||"").toLowerCase());
+                        if(!isDuplicate) merged.push(dc);
                     });
                     
                     productsCache = merged;
-                } catch(e) { 
-                    console.error("Error loading products:", e);
-                    productsCache = defaultCatalog; 
-                }
+                } catch(e) { productsCache = defaultCatalog; }
                 catalog.render(productsCache);
             },
             render: (products) => {
                 const grid = document.getElementById('productGrid');
                 grid.innerHTML = '';
                 if(products.length === 0) {
-                    grid.innerHTML = '<div class="col-span-full text-center text-slate-500 py-10">Tidak ada produk ditemukan.</div>';
+                    grid.innerHTML = '<div class="col-span-full text-center text-gray-500 py-10 text-xs">Katalog kosong.</div>';
                     return;
                 }
                 
                 products.forEach((p) => {
                     const isCustomProduct = p.id && p.id.length > 5; 
-                    const adminBtns = (currentUser && isCustomProduct) ? `<button onclick="catalog.delete('${p.id}')" class="absolute top-2 right-2 bg-red-500 text-white w-6 h-6 rounded-full shadow z-20 hover:scale-110 flex items-center justify-center text-xs"><i class="fa-solid fa-trash"></i></button>` : '';
-                    
-                    const bestBadge = p.isBest ? `<span class="absolute top-2 left-2 bg-yellow-400 text-white text-[9px] font-bold px-2 py-0.5 rounded shadow z-10"><i class="fa-solid fa-star"></i> BEST</span>` : '';
+                    const adminBtns = (currentUser && isCustomProduct) ? `<button onclick="catalog.delete('${p.id}')" class="absolute top-3 right-3 bg-red-600 text-white w-7 h-7 rounded-full shadow-lg z-20 hover:scale-110 flex items-center justify-center text-[10px]"><i class="fa-solid fa-trash"></i></button>` : '';
+                    const bestBadge = p.isBest ? `<span class="absolute top-3 left-3 bg-svm-gold text-svm-base text-[8px] uppercase tracking-widest font-bold px-3 py-1 rounded shadow-lg z-10"><i class="fa-solid fa-crown mr-1"></i> Premium</span>` : '';
 
                     grid.innerHTML += `
-                        <div class="group bg-white rounded-xl p-3 shadow-sm hover:shadow-lg transition duration-300 relative border border-slate-100 flex flex-col h-full">
+                        <div class="group glass-card p-3 shadow-lg hover:shadow-[0_0_20px_rgba(255,215,0,0.15)] transition duration-500 relative border border-white/5 rounded-2xl flex flex-col h-full">
                             ${adminBtns} ${bestBadge}
-                            <div class="rounded-lg overflow-hidden bg-slate-50 aspect-square mb-3 relative">
-                                <img src="${p.image || 'https://placehold.co/400'}" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                            <div class="rounded-xl overflow-hidden bg-svm-base aspect-square mb-4 relative">
+                                <img src="${p.image || 'https://placehold.co/400x400/111/444?text=SVM'}" class="w-full h-full object-cover group-hover:scale-110 transition duration-700 opacity-90">
+                                <div class="absolute inset-0 bg-gradient-to-t from-svm-surface to-transparent opacity-80"></div>
                             </div>
-                            <div class="flex-1 flex flex-col">
-                                <span class="text-[9px] font-bold text-svm-gold uppercase mb-1">${p.category}</span>
-                                <h3 class="font-bold text-svm-dark text-xs md:text-sm leading-tight mb-1 line-clamp-2">${p.name}</h3>
-                                <p class="text-[10px] text-slate-400 mb-2 line-clamp-2">${p.description}</p>
-                                <div class="mt-auto pt-2 border-t border-slate-50 flex items-center justify-between">
-                                    <p class="text-svm-dark font-bold text-xs">${p.price}</p>
-                                    <a href="https://wa.me/6283812113160?text=Info%20${encodeURIComponent(p.name)}" target="_blank" class="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center hover:bg-green-500 hover:text-white transition text-xs"><i class="fa-brands fa-whatsapp"></i></a>
+                            <div class="flex-1 flex flex-col px-1">
+                                <span class="text-[8px] font-bold text-svm-gold uppercase tracking-[0.2em] mb-1.5">${p.category}</span>
+                                <h3 class="font-display font-bold text-white text-sm leading-snug mb-2 line-clamp-2 group-hover:text-svm-gold transition">${p.name}</h3>
+                                <p class="text-[10px] text-gray-400 mb-4 line-clamp-2 leading-relaxed">${p.description}</p>
+                                <div class="mt-auto pt-3 border-t border-white/10 flex items-center justify-between">
+                                    <p class="text-white font-bold text-xs">${p.price}</p>
+                                    <a href="https://wa.me/6283812113160?text=Halo%20SVM,%20saya%20tertarik%20produk%20${encodeURIComponent(p.name)}" target="_blank" class="w-7 h-7 rounded-full bg-white/10 flex items-center justify-center hover:bg-svm-gold hover:text-svm-base transition text-xs text-white"><i class="fa-brands fa-whatsapp"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -894,19 +960,18 @@
             filter: (cat, btn) => {
                 if(btn) {
                     document.querySelectorAll('#catalogTabs button').forEach(b => {
-                        b.classList.remove('active-tab', 'text-svm-gold'); b.classList.add('bg-white', 'text-slate-600');
+                        b.classList.remove('active-tab'); b.classList.add('bg-svm-surface', 'text-gray-400');
                     });
-                    btn.classList.add('active-tab', 'text-svm-gold');
-                    btn.classList.remove('bg-white', 'text-slate-600');
+                    btn.classList.add('active-tab');
+                    btn.classList.remove('bg-svm-surface', 'text-gray-400');
                 }
-                
                 catalog.render(cat === 'all' ? productsCache : productsCache.filter(p => (p.category || "").toLowerCase().includes(cat.toLowerCase())));
             },
             search: () => {
                 const k = document.getElementById('searchCatalog').value.toLowerCase();
                 catalog.render(productsCache.filter(p => (p.name || "").toLowerCase().includes(k)));
             },
-            delete: async (id) => { if(currentUser && db && confirm('Hapus produk ini? (Hanya berlaku untuk produk yang Anda upload manual)')) { await deleteDoc(doc(db, "products", id)); catalog.load(); } },
+            delete: async (id) => { if(currentUser && db && confirm('Hapus produk permanen?')) { await deleteDoc(doc(db, "products", id)); catalog.load(); } },
             saveProduct: async () => {
                 if(!db) return;
                 const data = {
@@ -917,7 +982,12 @@
                     image: document.getElementById('prodImageBase64').value,
                     isBest: document.getElementById('prodBest').checked
                 };
-                if(data.name) { await addDoc(collection(db, "products"), data); ui.closeModal('productModal'); catalog.load(); }
+                if(data.name) { 
+                    Swal.fire({title:'Menyimpan...', background: '#111', color: '#fff', didOpen: () => Swal.showLoading()});
+                    await addDoc(collection(db, "products"), data); 
+                    ui.closeModal('productModal'); catalog.load(); 
+                    Swal.close();
+                }
             }
         };
 
@@ -930,32 +1000,38 @@
                     const snap = await getDocs(collection(db, "videos"));
                     if (snap.empty) {
                         vidData = [
-                            {url:"https://www.youtube.com/watch?v=RxFHL83srDg", title:"MIMAC 2024 Champion", desc:"Color Guard Malaysia"},
-                            {url:"https://www.youtube.com/watch?v=x7mk3HH8n_o", title:"Konser SMAN 20", desc:"Culture Fest"},
-                            {url:"https://www.youtube.com/watch?v=TL8uWmriYK4", title:"Drum Battle", desc:"International Final"}
+                            {url:"https://www.youtube.com/watch?v=RxFHL83srDg", title:"MIMAC 2024 Champion", desc:"Penampilan Tim Color Guard Indonesia di Malaysia"},
+                            {url:"https://www.youtube.com/watch?v=x7mk3HH8n_o", title:"Konser Musik SMAN 20", desc:"Culture Fest Symphony"},
+                            {url:"https://www.youtube.com/watch?v=TL8uWmriYK4", title:"Drum Battle Final", desc:"Adu teknik dan ketahanan pukulan perkusi"}
                         ];
                     } else { vidData = snap.docs.map(d => ({id: d.id, ...d.data()})); }
-                } catch(e) { vidData = []; console.error("Error loading videos:", e); }
+                } catch(e) { vidData = []; }
                 
                 grid.innerHTML = '';
-                vidData.forEach(v => {
+                vidData.forEach((v, idx) => {
                     let videoId = 'dQw4w9WgXcQ';
                     const url = v.url || '';
                     if (url.includes('youtu.be/')) videoId = url.split('youtu.be/')[1].split('?')[0];
                     else if (url.includes('v=')) videoId = url.split('v=')[1].split('&')[0];
                     
                     const thumb = `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
-                    const delBtn = currentUser ? `<button onclick="videos.delete('${v.id}')" class="absolute top-2 right-2 bg-red-600 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs"><i class="fa-solid fa-trash"></i></button>` : '';
+                    const delBtn = currentUser ? `<button onclick="videos.delete('${v.id}')" class="absolute top-2 right-2 bg-red-600 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs z-20"><i class="fa-solid fa-trash"></i></button>` : '';
                     
                     grid.innerHTML += `
-                        <div class="relative group block rounded-xl overflow-hidden shadow-md" data-aos="fade-up">
+                        <div class="relative group block rounded-2xl overflow-hidden glass-card" data-aos="fade-up" data-aos-delay="${idx*100}">
                             ${delBtn}
                             <a href="${url}" target="_blank">
-                                <img src="${thumb}" class="w-full h-32 object-cover opacity-90 group-hover:opacity-100 transition">
-                                <div class="absolute inset-0 bg-black/20 flex items-center justify-center"><i class="fa-solid fa-play text-white text-2xl"></i></div>
-                                <div class="bg-white p-3">
-                                    <h3 class="font-bold text-xs text-svm-dark truncate">${v.title}</h3>
-                                    <p class="text-[10px] text-slate-500 truncate">${v.desc}</p>
+                                <div class="relative h-40 overflow-hidden">
+                                    <img src="${thumb}" class="w-full h-full object-cover opacity-70 group-hover:scale-110 group-hover:opacity-100 transition duration-700">
+                                    <div class="absolute inset-0 bg-svm-base/40 group-hover:bg-svm-base/10 transition flex items-center justify-center">
+                                        <div class="w-12 h-12 rounded-full border border-svm-gold/50 flex items-center justify-center group-hover:scale-125 group-hover:bg-svm-gold group-hover:text-svm-base transition text-svm-gold shadow-[0_0_15px_rgba(255,215,0,0.3)]">
+                                            <i class="fa-solid fa-play ml-1"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="p-4 border-t border-white/5">
+                                    <h3 class="font-bold text-sm text-white truncate mb-1 group-hover:text-svm-gold transition">${v.title}</h3>
+                                    <p class="text-[10px] text-gray-500 truncate">${v.desc}</p>
                                 </div>
                             </a>
                         </div>
@@ -967,7 +1043,7 @@
                 const data = { title: document.getElementById('vidTitle').value, url: document.getElementById('vidUrl').value, desc: document.getElementById('vidDesc').value };
                 if(data.url) { await addDoc(collection(db, "videos"), data); ui.closeModal('videoModal'); videos.load(); }
             },
-            delete: async (id) => { if(currentUser && db && confirm('Hapus?')) { await deleteDoc(doc(db, "videos", id)); videos.load(); } }
+            delete: async (id) => { if(currentUser && db && confirm('Hapus Video?')) { await deleteDoc(doc(db, "videos", id)); videos.load(); } }
         };
 
         window.schools = {
@@ -980,42 +1056,33 @@
                     const snap = await getDocs(collection(db, "schools"));
                     if(snap.empty) defaults.forEach(s => schools.appendHTML(s));
                     else snap.forEach(doc => schools.appendHTML(doc.data().name, doc.id));
-                } catch(e) { 
-                    console.error("Error loading schools:", e);
-                    defaults.forEach(s => schools.appendHTML(s)); 
-                }
+                } catch(e) { defaults.forEach(s => schools.appendHTML(s)); }
             },
             appendHTML: (name, id) => {
                 if(!name) return;
-                const btn = currentUser ? `<button onclick="schools.remove('${id}')" class="text-red-300 ml-auto text-xs"><i class="fa-solid fa-trash"></i></button>` : '';
-                document.getElementById('schoolList').innerHTML += `<li class="flex items-center text-slate-200 py-2 border-b border-white/5"><i class="fa-solid fa-check text-svm-gold mr-3 text-xs"></i> ${name} ${btn}</li>`;
+                const btn = currentUser ? `<button onclick="schools.remove('${id}')" class="text-red-500 ml-auto hover:text-white"><i class="fa-solid fa-times"></i></button>` : '';
+                document.getElementById('schoolList').innerHTML += `<li class="flex items-center text-gray-300 py-2 border-b border-white/5"><i class="fa-solid fa-shield-halved text-svm-gold/50 mr-3 text-xs"></i> ${name} ${btn}</li>`;
             },
             remove: async (id) => { if(currentUser && db) { await deleteDoc(doc(db,"schools",id)); schools.load(); } }
         };
 
         window.admin = {
             saveAllChanges: async () => {
-                if(!db) {
-                    Swal.fire('Error', 'Database tidak terhubung. Periksa konfigurasi Anda.', 'error');
-                    return;
-                }
-                Swal.fire({title: 'Menyimpan...', didOpen: () => Swal.showLoading(), allowOutsideClick: false});
+                if(!db) return Swal.fire('Error', 'Database tidak terhubung.', 'error');
+                Swal.fire({title: 'Menyimpan Konfigurasi...', background: '#111', color: '#fff', didOpen: () => Swal.showLoading(), allowOutsideClick: false});
                 const updates = {};
                 document.querySelectorAll('.editable').forEach(el => updates[el.id] = el.innerHTML);
                 try {
                     await setDoc(doc(db, "config", "content"), updates);
-                    Swal.fire({icon: 'success', title: 'Tersimpan!', timer: 1500, showConfirmButton: false});
-                } catch (e) {
-                    console.error("Error saving text:", e);
-                    Swal.fire('Gagal', 'Gagal menyimpan teks: ' + e.message, 'error');
-                }
+                    Swal.fire({icon: 'success', title: 'Web Tersimpan!', background: '#111', color: '#fff', timer: 1500, showConfirmButton: false});
+                } catch (e) { Swal.fire('Gagal', e.message, 'error'); }
             },
             loadTextConfig: async () => {
                 try {
                     if(!db) return;
                     const d = await getDoc(doc(db, "config", "content"));
                     if(d.exists()) Object.entries(d.data()).forEach(([k,v]) => { if(document.getElementById(k)) document.getElementById(k).innerHTML = v; });
-                } catch(e) { console.error("Error loading text config:", e); }
+                } catch(e) {}
             },
             loadImages: async () => {
                 try {
@@ -1025,7 +1092,7 @@
                         const img = document.getElementById(doc.id);
                         if(img && doc.data().base64) img.src = doc.data().base64;
                     });
-                } catch(e) { console.log("No custom images or error:", e); }
+                } catch(e) {}
             },
             loadLinks: async () => {
                 try {
@@ -1035,33 +1102,29 @@
                         const linkEl = document.getElementById(doc.id);
                         if(linkEl && doc.data().url) linkEl.href = doc.data().url;
                     });
-                } catch(e) { console.log("Error loading links:", e);}
+                } catch(e) {}
             },
             editLink: async (elementId) => {
                 if(!currentUser || !db) return;
-                const { value: url } = await Swal.fire({ input: 'url', inputLabel: 'Paste Link PDF / Google Drive', showCancelButton: true });
+                const { value: url } = await Swal.fire({ input: 'url', inputLabel: 'Paste Link Dokumen', background: '#111', color: '#fff', showCancelButton: true });
                 if (url) {
                     const linkEl = document.getElementById(elementId);
                     if(linkEl) linkEl.href = url;
                     try {
                         await setDoc(doc(db, 'site_links', elementId), { url: url }, { merge: true });
-                        Swal.fire({icon: 'success', title: 'Link Disimpan!', timer: 800, showConfirmButton: false});
-                    } catch(e) {
-                         Swal.fire('Gagal', 'Gagal menyimpan link: ' + e.message, 'error');
-                    }
+                        Swal.fire({icon: 'success', title: 'Tautan Disimpan!', background: '#111', color: '#fff', timer: 800, showConfirmButton: false});
+                    } catch(e) {}
                 }
             },
             addSchool: async () => {
                 if(!db) return;
-                const {value:name} = await Swal.fire({input:'text', title:'Tambah Sekolah'});
+                const {value:name} = await Swal.fire({input:'text', title:'Tambah Sekolah', background: '#111', color: '#fff'});
                 if(name) { await addDoc(collection(db,"schools"),{name}); schools.load(); }
             },
             createLink: async () => {
-                if(!activeEditableElement) return;
-                const { value: url } = await Swal.fire({ input: 'url', inputLabel: 'Link URL', showCancelButton: true });
-                if (url) {
-                    activeEditableElement.innerHTML = `<a href="${url}" target="_blank" class="text-svm-gold hover:underline">${activeEditableElement.innerText}</a>`;
-                }
+                if(!activeEditableElement) return Swal.fire({title: 'Klik teks yang ingin dijadikan link.', background: '#111', color: '#fff', icon:'info'});
+                const { value: url } = await Swal.fire({ input: 'url', inputLabel: 'Tautkan URL ke teks', background: '#111', color: '#fff', showCancelButton: true });
+                if (url) activeEditableElement.innerHTML = `<a href="${url}" target="_blank" class="text-svm-gold hover:underline">${activeEditableElement.innerText}</a>`;
             }
         };
 
@@ -1073,16 +1136,16 @@
             closeModal: (id) => document.getElementById(id).classList.add('hidden')
         };
 
-        // --- FILE HANDLER & AUTO SAVE ---
+        // --- DRAG DROP UTILS ---
         function setupDropZone(dzId, inputId, previewId, valInputId, isGeneralImage = false) {
             const dz = document.getElementById(dzId);
             const fi = document.getElementById(inputId);
             if(!dz || !fi) return;
             dz.onclick = () => fi.click();
             fi.onchange = (e) => processFile(e.target.files[0], previewId, valInputId, isGeneralImage);
-            dz.addEventListener('dragover', (e)=>{e.preventDefault(); dz.classList.add('bg-svm-gold/20')});
-            dz.addEventListener('dragleave', ()=>{dz.classList.remove('bg-svm-gold/20')});
-            dz.addEventListener('drop', (e)=>{ e.preventDefault(); dz.classList.remove('bg-svm-gold/20'); processFile(e.dataTransfer.files[0], previewId, valInputId, isGeneralImage); });
+            dz.addEventListener('dragover', (e)=>{e.preventDefault(); dz.classList.add('bg-svm-gold/10')});
+            dz.addEventListener('dragleave', ()=>{dz.classList.remove('bg-svm-gold/10')});
+            dz.addEventListener('drop', (e)=>{ e.preventDefault(); dz.classList.remove('bg-svm-gold/10'); processFile(e.dataTransfer.files[0], previewId, valInputId, isGeneralImage); });
         }
 
         async function processFile(f, previewId, valInputId, isGeneralImage) {
@@ -1136,18 +1199,22 @@
             navigate: (pageId) => {
                 document.querySelectorAll('.page-section').forEach(el => el.classList.add('hidden'));
                 document.getElementById(`page-${pageId}`).classList.remove('hidden');
-                window.scrollTo(0,0);
+                window.scrollTo({top: 0, behavior: 'smooth'});
             }
         };
         
         window.addEventListener('scroll', () => {
             const nav = document.getElementById('navbar');
-            if (window.scrollY > 50) { nav.classList.add('py-2'); nav.classList.remove('py-4'); } 
-            else { nav.classList.add('py-4'); nav.classList.remove('py-2'); }
+            if (window.scrollY > 20) { 
+                nav.classList.add('py-2'); nav.classList.remove('py-3', 'md:py-5'); 
+                nav.querySelector('.glass-nav').classList.add('shadow-svm-gold/10', 'bg-svm-base/95');
+            } else { 
+                nav.classList.add('py-3', 'md:py-5'); nav.classList.remove('py-2'); 
+                nav.querySelector('.glass-nav').classList.remove('shadow-svm-gold/10', 'bg-svm-base/95');
+            }
         });
 
-        setTimeout(() => catalog.filter('all'), 500);
-        router.navigate('home');
+        setTimeout(() => catalog.filter('all', document.querySelector('#catalogTabs button')), 500);
     </script>
 </body>
 </html>
