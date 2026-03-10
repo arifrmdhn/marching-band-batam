@@ -3,6 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- LOGO DI TAB BROWSER (FAVICON) -->
+    <link rel="icon" type="image/png" href="image_503df5.png">
+    
     <title>Pusat Alat Marching Band Batam & Kepri - PT. SVM (Official)</title>
     
     <!-- SEO Meta Tags Super -->
@@ -94,7 +98,7 @@
         }
 
         /* Text Gradients */
-        .text-gradient-gold {
+        .text-gradient-gold, #home-title b, #home-title strong {
             background: linear-gradient(to right, #C5A059, #FDE68A, #C5A059);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -190,11 +194,13 @@
                                 <i class="fa-solid fa-star animate-spin-slow"></i>
                                 <span class="editable" id="hero-badge">Distributor & Pelatih Resmi</span>
                             </div>
-                            <h1 class="hero-title font-serif text-4xl md:text-7xl font-bold leading-tight mb-4 text-svm-dark">
-                                <span class="editable" id="home-title-1">Harmoni</span> <br>
-                                <span class="text-gradient-gold editable" id="home-title-2">Juara</span> <br>
-                                <span class="editable" id="home-title-3">Kepulauan Riau.</span>
+                            
+                            <!-- ID DIKEMBALIKAN KE home-title AGAR DATA LAMA MUNCUL -->
+                            <!-- NOTE: Untuk membuat kata menjadi emas, BOLD kata tersebut di menu edit admin (Ctrl+B) -->
+                            <h1 class="editable hero-title font-serif text-4xl md:text-7xl font-bold leading-tight mb-4 text-svm-dark" id="home-title">
+                                Harmoni <br><b>Juara</b> <br>Kepulauan Riau.
                             </h1>
+                            
                             <p class="editable text-sm md:text-lg text-slate-500 mb-8 leading-relaxed font-light" id="home-desc">
                                 Jangan biarkan talenta siswa terpendam karena alat rusak. Kami hadirkan solusi alat marching band berstandar internasional dengan garansi servis penuh.
                             </p>
@@ -228,7 +234,7 @@
                                 <img id="hero-main-img" src="https://images.unsplash.com/photo-1544279762-2b638c4c3e80?q=80&w=1000" class="w-full h-full object-cover editable-img transform hover:scale-105 transition duration-1000">
                                 
                                 <!-- Float Player -->
-                                <div class="absolute bottom-4 right-4 bg-white/90 backdrop-blur-md p-3 rounded-xl shadow-lg flex items-center gap-3 animate-float-slow max-w-[200px]">
+                                <div class="absolute bottom-4 right-4 bg-white/90 backdrop-blur-md p-3 rounded-xl shadow-lg flex items-center gap-3 animate-float-slow max-w-[200px] pointer-events-none">
                                     <div class="w-8 h-8 bg-svm-dark rounded-full flex items-center justify-center text-white text-xs">
                                         <i class="fa-solid fa-music"></i>
                                     </div>
@@ -318,7 +324,7 @@
                         <a href="#" id="doc-link-2" target="_blank" class="flex items-center gap-4 bg-slate-50 p-4 rounded-xl border border-slate-100 hover:border-svm-gold hover:shadow-md transition group relative">
                             <div class="w-10 h-10 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center shrink-0 group-hover:bg-blue-600 group-hover:text-white transition"><i class="fa-solid fa-file-pdf text-lg"></i></div>
                             <div>
-                                <h5 class="font-bold text-sm text-svm-dark group-hover:text-svm-gold transition">Proposal Kepelatihan Marching Band.pdf</h5>
+                                <h5 class="font-bold text-sm text-svm-dark group-hover:text-svm-gold transition">Company Profile SVM.pdf</h5>
                                 <p class="text-[10px] text-slate-400">Portofolio & Pengalaman</p>
                             </div>
                             <button onclick="event.preventDefault(); admin.editLink('doc-link-2')" class="admin-only hidden absolute right-2 top-2 bg-slate-200 p-1.5 rounded hover:bg-slate-300 text-[10px]"><i class="fa-solid fa-pen"></i></button>
@@ -547,7 +553,7 @@
     </div>
 
     <!-- Image Upload Modal (AUTO SAVE) -->
-    <div id="imageModal" class="fixed inset-0 bg-svm-dark/80 backdrop-blur-md hidden items-center justify-center z-[80] p-4">
+    <div id="imageModal" class="fixed inset-0 bg-svm-dark/80 backdrop-blur-md hidden items-center justify-center z-[80] p-4 transition-all duration-300">
         <div class="bg-white p-6 rounded-3xl w-full max-w-sm shadow-2xl relative overflow-hidden">
             <button onclick="ui.closeModal('imageModal')" class="absolute top-4 right-4 text-slate-300 hover:text-red-500"><i class="fa-solid fa-times"></i></button>
             <h2 class="text-lg font-display font-bold mb-4 text-center text-svm-dark">Update File / Foto</h2>
@@ -709,7 +715,7 @@
             logout: async () => { await signOut(auth); location.reload(); }
         };
 
-        // --- AUTO SAVE IMAGES ---
+        // --- AUTO SAVE IMAGES (DENGAN FIX GOOGLE DRIVE) ---
         window.images = {
             currentId: null,
             init: () => {
@@ -740,8 +746,22 @@
 
                 try {
                     let finalSrc = directUrl;
-                    if (directFile) finalSrc = await compressImage(directFile);
-                    else if (!directUrl) return;
+                    
+                    // JIKA PAKAI FILE UPLOAD
+                    if (directFile) {
+                        finalSrc = await compressImage(directFile);
+                    } 
+                    // JIKA PAKAI LINK (AUTO CONVERT GOOGLE DRIVE)
+                    else if (directUrl) {
+                        if (finalSrc.includes('drive.google.com/file/d/')) {
+                            const match = finalSrc.match(/\/d\/(.*?)\//);
+                            if (match && match[1]) {
+                                finalSrc = `https://drive.google.com/uc?export=view&id=${match[1]}`;
+                            }
+                        }
+                    } else {
+                        return;
+                    }
 
                     const imgEl = document.getElementById(targetId);
                     if(imgEl) { imgEl.src = finalSrc; }
@@ -816,7 +836,6 @@
                 document.querySelectorAll('#catalogTabs button').forEach(b => {
                     b.classList.remove('active-tab', 'text-svm-gold'); b.classList.add('bg-white', 'text-slate-600');
                 });
-                // Highlight clicked button
                 if(btn) {
                     btn.classList.add('active-tab', 'text-svm-gold');
                     btn.classList.remove('bg-white', 'text-slate-600');
@@ -1045,4 +1064,3 @@
     </script>
 </body>
 </html>
-
