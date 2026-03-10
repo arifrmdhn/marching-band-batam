@@ -108,7 +108,7 @@
         @keyframes shine { to { background-position: 200% center; } }
         
         #home-title { line-height: 1.2; }
-        #home-title div { display: block; margin-top: 0.2em; } /* Safeguard for enter key in editor */
+        #home-title div, #home-title span { display: block; margin-top: 0.1em; } 
         
         /* ADMIN MODE STYLES */
         .editable { outline: none; transition: all 0.2s; position: relative; border-radius: 4px; }
@@ -135,7 +135,6 @@
         /* Responsive Fixes */
         @media (max-width: 768px) {
             .hero-title { font-size: 2.5rem !important; line-height: 1.2 !important; }
-            .section-padding { padding-top: 3rem; padding-bottom: 3rem; }
         }
     </style>
 </head>
@@ -186,7 +185,6 @@
             
             <!-- Hero Section -->
             <section class="relative pt-28 md:pt-36 pb-10 md:pb-20 px-4 overflow-hidden">
-                <!-- Background Accents -->
                 <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-svm-gold/10 rounded-full blur-3xl -z-10 translate-x-1/3 -translate-y-1/3 animate-pulse-slow"></div>
                 <div class="absolute bottom-0 left-0 w-[300px] h-[300px] bg-blue-100 rounded-full blur-3xl -z-10 -translate-x-1/3 translate-y-1/3"></div>
                 
@@ -198,9 +196,11 @@
                                 <span class="editable" id="hero-badge">Distributor & Pelatih Resmi</span>
                             </div>
                             
-                            <!-- BOLD (Ctrl+B) kata di admin untuk mengubahnya menjadi emas -->
-                            <h1 class="editable hero-title font-serif text-4xl md:text-7xl font-bold leading-tight mb-4 text-svm-dark" id="home-title">
-                                Harmoni <br><b>Juara</b> <br>Kepulauan Riau.
+                            <!-- Struktur ID dikembalikan agar sinkron dengan database lama -->
+                            <h1 class="hero-title font-serif text-4xl md:text-7xl font-bold leading-tight mb-4 text-svm-dark" id="home-title">
+                                <span class="editable" id="home-title-1">Harmoni</span>
+                                <span class="text-gradient-gold editable" id="home-title-2">Juara</span>
+                                <span class="editable" id="home-title-3">Kepulauan Riau.</span>
                             </h1>
                             
                             <p class="editable text-sm md:text-lg text-slate-500 mb-8 leading-relaxed font-light" id="home-desc">
@@ -851,6 +851,10 @@
                     
                     const bestBadge = p.isBest ? `<span class="absolute top-2 left-2 bg-yellow-400 text-white text-[9px] font-bold px-2 py-0.5 rounded shadow z-10"><i class="fa-solid fa-star"></i> BEST</span>` : '';
                     
+                    // Robust field mapping to support old/new schema
+                    const itemDesc = p.description || p.desc || 'Deskripsi produk belum tersedia.';
+                    const itemPrice = p.price || p.prices || 'Hubungi Admin';
+
                     grid.innerHTML += `
                         <div class="group bg-white rounded-xl p-3 shadow-sm hover:shadow-lg transition duration-300 relative border border-slate-100 flex flex-col h-full">
                             ${adminBtns} ${bestBadge}
@@ -860,9 +864,9 @@
                             <div class="flex-1 flex flex-col">
                                 <span class="text-[9px] font-bold text-svm-gold uppercase mb-1">${p.category}</span>
                                 <h3 class="font-bold text-svm-dark text-xs md:text-sm leading-tight mb-1 line-clamp-2">${p.name}</h3>
-                                <p class="text-[10px] text-slate-400 mb-2 line-clamp-2">${p.description || ''}</p>
+                                <p class="text-[10px] text-slate-400 mb-2 line-clamp-2">${itemDesc}</p>
                                 <div class="mt-auto pt-2 border-t border-slate-50 flex items-center justify-between">
-                                    <p class="text-svm-dark font-bold text-xs">${p.price}</p>
+                                    <p class="text-svm-dark font-bold text-xs">${itemPrice}</p>
                                     <a href="https://wa.me/6283812113160?text=Info%20${encodeURIComponent(p.name)}" target="_blank" class="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center hover:bg-green-500 hover:text-white transition text-xs"><i class="fa-brands fa-whatsapp"></i></a>
                                 </div>
                             </div>
@@ -904,6 +908,7 @@
                 const grid = document.getElementById('videoGrid');
                 let vidData = [];
                 try {
+                    if(!db) return;
                     const snap = await getDocs(collection(db, "videos"));
                     if (snap.empty) {
                         vidData = [
@@ -912,7 +917,7 @@
                             {url:"https://www.youtube.com/watch?v=TL8uWmriYK4", title:"Drum Battle", desc:"International Final"}
                         ];
                     } else { vidData = snap.docs.map(d => ({id: d.id, ...d.data()})); }
-                } catch(e) { vidData = []; }
+                } catch(e) { vidData = []; console.error("Error loading videos:", e); }
                 
                 grid.innerHTML = '';
                 vidData.forEach(v => {
@@ -1060,7 +1065,7 @@
 
         async function processFile(f, previewId, valInputId, isGeneralImage) {
             if(!f || !f.type.startsWith('image/')) return;
-            if(isGeneralImage) { window.images.save(f, null); return; } 
+            if(isGeneralImage) { window.images.save(f, null); return; } // Auto save for site images
             
             const reader = new FileReader();
             reader.onload = (e) => {
